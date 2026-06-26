@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <title>Healthia Family Privacy Policy</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f9fb;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --primary: #0e7490;
+      --danger: #991b1b;
+      --accent: #d97b6b;
+      --control-bg: #ffffff;
+      --control-border: #cbd5e1;
+      --control-active-bg: #d97b6b;
+      --control-active-text: #ffffff;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0b1220;
+      --surface: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #cbd5e1;
+      --border: #475569;
+      --primary: #22d3ee;
+      --danger: #f87171;
+      --accent: #e8927f;
+      --control-bg: #1e293b;
+      --control-border: #475569;
+      --control-active-bg: #e8927f;
+      --control-active-text: #0b1220;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --bg: #0b1220;
+        --surface: #1e293b;
+        --text: #f8fafc;
+        --text-muted: #cbd5e1;
+        --border: #475569;
+        --primary: #22d3ee;
+        --danger: #f87171;
+        --accent: #e8927f;
+        --control-bg: #1e293b;
+        --control-border: #475569;
+        --control-active-bg: #e8927f;
+        --control-active-text: #0b1220;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+      font-size: 17px; line-height: 1.65;
+    }
+    main { max-width: 720px; margin: 0 auto; padding: 16px 24px 96px; }
+    h1 { font-size: 26px; line-height: 1.4; margin: 0 0 8px; }
+    h2 { font-size: 21px; line-height: 1.4; margin: 36px 0 12px; padding-top: 24px; border-top: 1px solid var(--border); }
+    h2:first-of-type { border-top: none; padding-top: 0; }
+    h3 { font-size: 18px; line-height: 1.4; margin: 24px 0 8px; }
+    p, li { font-size: 17px; }
+    p { margin: 12px 0; }
+    ul, ol { padding-left: 24px; margin: 12px 0; }
+    li { margin: 6px 0; }
+    .meta { color: var(--text-muted); font-size: 15px; margin: 0 0 24px; }
+    .callout { background: var(--surface); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 20px 0; border-radius: 6px; }
+    .callout.warn { border-left-color: var(--danger); }
+    .callout.primary { border-left-color: var(--primary); }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 15px; }
+    th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: var(--surface); font-weight: 600; }
+    .toc { background: var(--surface); padding: 16px 20px; border-radius: 8px; margin: 24px 0 32px; }
+    .toc h2 { border: none; padding: 0; margin: 0 0 8px; font-size: 17px; }
+    .toc ol { margin: 0; padding-left: 22px; }
+    .toc li { margin: 4px 0; font-size: 15px; }
+    a { color: var(--primary); text-decoration: underline; }
+    .controls { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .seg { display: inline-flex; border: 1px solid var(--control-border); border-radius: 8px; overflow: hidden; }
+    .seg button { font: inherit; font-size: 14px; cursor: pointer; padding: 6px 12px; border: none; background: var(--control-bg); color: var(--text); min-height: 36px; }
+    .seg button + button { border-left: 1px solid var(--control-border); }
+    .seg button[aria-pressed="true"] { background: var(--control-active-bg); color: var(--control-active-text); font-weight: 600; }
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"] { display: block; }
+    html[data-lang="ko"] [data-lang-block="ko"] { display: block; }
+    html:not([data-lang]) [data-lang-block="en"] { display: block; }
+  </style>
+</head>
+<body>
+  <div class="controls" role="toolbar" aria-label="Language and theme">
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en">EN</button>
+      <button type="button" data-set-lang="ko">한국어</button>
+    </div>
+    <div class="seg" role="group" aria-label="Theme">
+      <button type="button" data-set-theme="light" title="Light">☀</button>
+      <button type="button" data-set-theme="dark" title="Dark">🌙</button>
+      <button type="button" data-set-theme="system" title="System">Auto</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ===================== ENGLISH ===================== -->
+    <article data-lang-block="en">
+    <h1>Healthia Family Privacy Policy</h1>
+    <p class="meta">Applies to: Healthia Family (caregiver app) · Effective: June 21, 2026 · Last updated: June 21, 2026</p>
+
+    <div class="callout primary">
+      <p><strong>About this policy.</strong> The Healthia Family app lets you support a linked senior — view brief health summaries, see optional location information, and receive emergency alerts. This policy explains how we handle <em>your</em> caregiver data and how access to a senior's data works. The senior is the data subject for their own information and is governed by the separate <a href="./senior-privacy-policy.html">Senior Privacy Policy</a>.</p>
+    </div>
+
+    <div class="toc" role="navigation" aria-label="Table of contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#en-who">Who we are</a></li>
+        <li><a href="#en-info">Information about you (the caregiver)</a></li>
+        <li><a href="#en-senior-data">Access to the linked senior's data</a></li>
+        <li><a href="#en-emergency">Emergency alerts and location</a></li>
+        <li><a href="#en-purposes">Purposes</a></li>
+        <li><a href="#en-sharing">Service providers</a></li>
+        <li><a href="#en-sale">Do Not Sell or Share notice</a></li>
+        <li><a href="#en-confidentiality">Confidentiality obligation</a></li>
+        <li><a href="#en-push">Push notifications</a></li>
+        <li><a href="#en-retention">Retention</a></li>
+        <li><a href="#en-rights">Your rights</a></li>
+        <li><a href="#en-bipa">Biometric notice (IL BIPA)</a></li>
+        <li><a href="#en-security">Security</a></li>
+        <li><a href="#en-international">International transfers</a></li>
+        <li><a href="#en-changes">Changes</a></li>
+        <li><a href="#en-contact">Contact</a></li>
+      </ol>
+    </div>
+
+    <h2 id="en-who">1. Who we are</h2>
+    <p>Healthia ("we", "us") operates this app and acts as the Controller of your caregiver information. For data of the linked senior, we act as a Processor under instructions defined by the senior's consents.</p>
+    <p>Contact: <a href="mailto:privacy@healthia.app">privacy@healthia.app</a></p>
+
+    <h2 id="en-info">2. Information about you (the caregiver)</h2>
+    <table>
+      <thead><tr><th>Category</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Identifiers</td><td>Phone number, email address, sign-in provider identifiers (Sign in with Apple / Google), account ID, device IDs, push tokens</td></tr>
+        <tr><td>Personal information</td><td>Display name, relationship label (e.g., "son", "daughter")</td></tr>
+        <tr><td>Internet / electronic activity</td><td>App usage logs, feature timestamps</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="en-senior-data">3. Access to the linked senior's data</h2>
+    <p>Once a senior accepts your family link, you can see basic relational facts (their display name, the fact that you are linked). All health activity visibility is gated by a consent the senior grants in their app: <em>Share health activities with family</em>.</p>
+
+    <h3>3.1 When the senior's health-sharing consent is ON</h3>
+    <ul>
+      <li><strong>Meals</strong> — time, type (breakfast / lunch / dinner / snack), photo (if uploaded), AI nutrition analysis (food name, calories, caution notes)</li>
+      <li><strong>Exercise</strong> — type and duration (minutes)</li>
+      <li><strong>Medication</strong> — registered medications (name, dose, schedule), intake events, photos of pill bottles / prescriptions</li>
+      <li><strong>Hydration</strong> — water intake events</li>
+      <li><strong>Sleep</strong> — sleep start / end timestamps (including measurements the senior imported from a connected health app)</li>
+      <li><strong>Recent activity timestamp</strong></li>
+      <li><strong>AI-generated daily summary</strong> of the senior's day, when available</li>
+    </ul>
+
+    <h3>3.2 Optional location and emergency information</h3>
+    <ul>
+      <li><strong>Activity area</strong> — a generalized last-7-days activity area (rounded to roughly 1–2&nbsp;km blocks) is visible only if the senior also grants the separate <em>Share activity area with family</em> consent.</li>
+      <li><strong>Emergency location</strong> — see section 4.</li>
+    </ul>
+
+    <h3>3.3 When the senior's consent is OFF or withdrawn</h3>
+    <p>The family app will display a clear notice that the senior has not granted access, and the related categories are <strong>hidden server-side</strong> (row-level-security-enforced, not just client filtering). The change is effective on the next data refresh.</p>
+
+    <h3>3.4 You access this data through the senior's consent</h3>
+    <p>You have no independent right to retain, export, or share the senior's data. If the senior withdraws a sharing consent, the family link itself is unaffected (you remain linked), but the corresponding data visibility is removed.</p>
+
+    <h2 id="en-emergency">4. Emergency alerts and location</h2>
+    <div class="callout warn">
+      <p>This app is <strong>not an emergency response service</strong>. Emergency alerts are best-effort and not guaranteed. In an emergency, call 911 (US) or your local emergency number.</p>
+    </div>
+    <p>If the senior has enabled emergency location sharing and places a 911 call from their app, you may receive a push alert. The alert notification contains the senior's name only. When you open the alert, the app retrieves the senior's precise location for that single emergency from our server (under row-level security) so you can help. You should use this information only to assist the senior in that emergency. Only the senior's most recent emergency location is stored, and it is automatically deleted after 7 days.</p>
+
+    <h2 id="en-purposes">5. Purposes of use</h2>
+    <ul>
+      <li>Display the senior's status and care events to support their well-being</li>
+      <li>Receive emergency alerts and view the senior's emergency location (when shared)</li>
+      <li>Receive push notifications about events the senior has approved sharing</li>
+      <li>Show AI-generated summaries to help you support the senior</li>
+      <li>Help the senior recover their account at a new number when authorized (verification by SMS code and your confirmation)</li>
+      <li>Legal compliance, fraud prevention, and security auditing</li>
+    </ul>
+
+    <h2 id="en-sharing">6. Service providers</h2>
+    <table>
+      <thead><tr><th>Recipient</th><th>Data sent</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Apple Push / Google FCM</td><td>Push token, notification payload</td><td>Notification delivery (including emergency alerts).</td></tr>
+        <tr><td>Supabase (infrastructure)</td><td>Caregiver profile, link records</td><td>Service operation, with row-level security.</td></tr>
+        <tr><td>Google Vertex AI (Gemini)</td><td>Inputs for the senior's daily summary</td><td>Generating the AI summary shown to you. Enterprise terms — no model training.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Video calling.</strong> Video calling is not offered in the current version of the app. We do not route any video or audio to a video-calling provider.</p>
+
+    <h2 id="en-sale">7. Do Not Sell or Share notice</h2>
+    <div class="callout primary">
+      <p><strong>We do not sell or share your caregiver data, nor the senior's data, for advertising.</strong> Protection applies automatically.</p>
+    </div>
+
+    <h2 id="en-confidentiality">8. Confidentiality obligation</h2>
+    <div class="callout warn">
+      <p><strong>You must keep the senior's data confidential.</strong> Do not share it with persons unrelated to the senior's care without the senior's prior consent. Misuse of the senior's data violates these Terms and may also violate state privacy laws applicable to the senior (e.g., WA MHMDA, CMIA, and the FTC Act §5).</p>
+    </div>
+
+    <h2 id="en-push">9. Push notifications</h2>
+    <p>You receive push notifications only for events the senior has approved sharing (e.g., emergency alerts, reminder completion, link approvals). Push delivery is governed by the optional <em>Receive notifications</em> consent. You may disable notifications in-app or in the OS settings at any time. Disabling does not affect the link itself, but you may miss emergency alerts.</p>
+
+    <h2 id="en-retention">10. Retention</h2>
+    <ul>
+      <li>Active retention while your caregiver account is in use.</li>
+      <li>After 24 months of inactivity we will notify and deactivate.</li>
+      <li>Account deletion: caregiver data removed within 30 days. Senior data access ceases immediately upon unlink — we do not retain copies on your device.</li>
+    </ul>
+
+    <h2 id="en-rights">11. Your rights</h2>
+    <p>You have the same set of rights (Know, Delete, Correct, Portability, Limit SPI, Opt-Out of Sale, Opt-Out of ADM, Non-Discrimination, Appeal, Authorized Agent) over <em>your own caregiver data</em> as set out in the <a href="./senior-privacy-policy.html#en-rights">Senior Privacy Policy</a>. You do not have rights of access, correction, or deletion over the senior's data via the family app — please direct the senior to exercise those rights from their own app.</p>
+
+    <h2 id="en-bipa">12. Biometric notice (Illinois BIPA)</h2>
+    <p>We do not generate or store voiceprints or other biometric identifiers from your audio or video.</p>
+
+    <h2 id="en-security">13. Security</h2>
+    <p>We implement reasonable technical and administrative safeguards (encryption in transit and at rest, row-level security, access control, audits) consistent with the NY SHIELD Act and industry standards.</p>
+
+    <h2 id="en-international">14. International transfers</h2>
+    <p>The service operates in multiple countries including the United States. Information may be transferred internationally; the higher of local law or this policy applies.</p>
+
+    <h2 id="en-changes">15. Changes to this policy</h2>
+    <p>Material changes are notified in-app and by email at least 7 days before effective date. Significant scope changes require renewed consent.</p>
+
+    <h2 id="en-contact">16. Contact</h2>
+    <ul>
+      <li>Privacy contact: privacy@healthia.app</li>
+      <li>Rights requests: privacy@healthia.app (subject line: [Rights Request])</li>
+      <li>Mail: (address to be added upon business registration)</li>
+    </ul>
+    </article>
+
+    <!-- ===================== 한국어 ===================== -->
+    <article data-lang-block="ko">
+    <h1>Healthia Family 개인정보처리방침</h1>
+    <p class="meta">적용 대상: Healthia Family(보호자 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 6월 21일</p>
+
+    <div class="callout primary">
+      <p><strong>본 방침 안내.</strong> Healthia Family 앱은 연결된 시니어를 돌볼 수 있게 합니다 — 간단한 건강 요약 보기, 선택적 위치 정보 확인, 응급 알림 수신. 본 방침은 <em>보호자</em> 데이터의 처리 방식과 시니어 데이터 접근 방식을 설명합니다. 시니어 본인 정보의 정보주체는 시니어이며, 별도의 <a href="./senior-privacy-policy.html">시니어 개인정보처리방침</a>이 적용됩니다.</p>
+    </div>
+
+    <div class="toc" role="navigation" aria-label="목차">
+      <h2>목차</h2>
+      <ol>
+        <li><a href="#ko-who">회사 정보</a></li>
+        <li><a href="#ko-info">보호자 본인 정보</a></li>
+        <li><a href="#ko-senior-data">연결된 시니어 데이터 접근</a></li>
+        <li><a href="#ko-emergency">응급 알림 및 위치</a></li>
+        <li><a href="#ko-purposes">이용 목적</a></li>
+        <li><a href="#ko-sharing">서비스 제공자(수탁자)</a></li>
+        <li><a href="#ko-sale">판매·공유 금지 고지</a></li>
+        <li><a href="#ko-confidentiality">기밀 유지 의무</a></li>
+        <li><a href="#ko-push">푸시 알림</a></li>
+        <li><a href="#ko-retention">보유 기간</a></li>
+        <li><a href="#ko-rights">이용자의 권리</a></li>
+        <li><a href="#ko-bipa">생체정보 고지(IL BIPA)</a></li>
+        <li><a href="#ko-security">보안</a></li>
+        <li><a href="#ko-international">국외 이전</a></li>
+        <li><a href="#ko-changes">변경</a></li>
+        <li><a href="#ko-contact">문의</a></li>
+      </ol>
+    </div>
+
+    <h2 id="ko-who">1. 회사 정보</h2>
+    <p>Healthia("당사")는 본 앱을 운영하며 보호자 정보의 처리자(Controller)입니다. 연결된 시니어의 데이터에 대해서는 시니어의 동의로 정의된 지시에 따라 수탁자(Processor)로서 처리합니다.</p>
+    <p>문의: <a href="mailto:privacy@healthia.app">privacy@healthia.app</a></p>
+
+    <h2 id="ko-info">2. 보호자 본인 정보</h2>
+    <table>
+      <thead><tr><th>분류</th><th>예시</th></tr></thead>
+      <tbody>
+        <tr><td>식별자</td><td>전화번호, 이메일 주소, 소셜 로그인 식별자(Apple/Google 로그인), 계정 ID, 기기 ID, 푸시 토큰</td></tr>
+        <tr><td>개인정보</td><td>닉네임, 관계 라벨(예: "아들", "딸")</td></tr>
+        <tr><td>인터넷/전자적 활동</td><td>앱 사용 로그, 기능 사용 시각</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="ko-senior-data">3. 연결된 시니어 데이터 접근</h2>
+    <p>시니어가 가족 연결을 수락하면, 기본적인 관계 정보(닉네임, 연결되어 있다는 사실)를 볼 수 있습니다. 모든 건강 활동의 노출은 시니어가 자신의 앱에서 부여하는 <em>가족과 건강 활동 공유</em> 동의로 통제됩니다.</p>
+
+    <h3>3.1 시니어의 건강 공유 동의가 켜져 있을 때</h3>
+    <ul>
+      <li><strong>식사</strong> — 시각, 종류(아침/점심/저녁/간식), 사진(업로드 시), AI 영양 분석(음식명, 칼로리, 주의 메모)</li>
+      <li><strong>운동</strong> — 종류와 시간(분)</li>
+      <li><strong>복약</strong> — 등록 약(이름, 용량, 일정), 복용 기록, 약통/처방전 사진</li>
+      <li><strong>수분</strong> — 물 섭취 기록</li>
+      <li><strong>수면</strong> — 수면 시작/종료 시각(시니어가 건강 앱에서 가져온 측정값 포함)</li>
+      <li><strong>최근 활동 시각</strong></li>
+      <li>가능한 경우 시니어 하루에 대한 <strong>AI 생성 요약</strong></li>
+    </ul>
+
+    <h3>3.2 선택적 위치 및 응급 정보</h3>
+    <ul>
+      <li><strong>활동 영역</strong> — 최근 7일의 일반화된 활동 영역(약 1~2&nbsp;km 블록 단위로 반올림)은 시니어가 별도의 <em>가족과 활동 영역 공유</em> 동의를 부여한 경우에만 표시됩니다.</li>
+      <li><strong>응급 위치</strong> — 4항 참조.</li>
+    </ul>
+
+    <h3>3.3 시니어의 동의가 꺼져 있거나 철회된 경우</h3>
+    <p>가족 앱은 시니어가 접근을 허용하지 않았음을 명확히 안내하며, 관련 항목은 <strong>서버에서 숨겨집니다</strong>(클라이언트 필터링이 아닌 행 수준 보안으로 강제). 변경은 다음 새로고침 시 반영됩니다.</p>
+
+    <h3>3.4 시니어의 동의를 통해서만 접근</h3>
+    <p>보호자는 시니어 데이터를 독자적으로 보관·내보내기·공유할 권리가 없습니다. 시니어가 공유 동의를 철회해도 가족 연결 자체는 유지되지만, 해당 데이터의 노출은 제거됩니다.</p>
+
+    <h2 id="ko-emergency">4. 응급 알림 및 위치</h2>
+    <div class="callout warn">
+      <p>본 앱은 <strong>응급 대응 서비스가 아닙니다</strong>. 응급 알림은 최선의 노력일 뿐 보장되지 않습니다. 응급 상황에서는 911(미국) 또는 현지 응급번호로 전화하세요.</p>
+    </div>
+    <p>시니어가 응급 위치 공유를 켜둔 상태에서 자신의 앱으로 911을 발신하면, 보호자에게 푸시 알림이 올 수 있습니다. 알림에는 시니어 이름만 담깁니다. 알림을 열면, 앱이 해당 1회 응급에 한해 시니어의 정밀 위치를 당사 서버에서(행 수준 보안으로) 가져와 보여줍니다. 이 정보는 해당 응급에서 시니어를 돕는 용도로만 사용해야 합니다. 시니어의 응급 위치는 가장 최근 1건만 보관되며 7일 후 자동 삭제됩니다.</p>
+
+    <h2 id="ko-purposes">5. 이용 목적</h2>
+    <ul>
+      <li>시니어의 상태와 케어 이벤트를 표시하여 안녕 지원</li>
+      <li>응급 알림 수신 및 (공유 시) 시니어 응급 위치 확인</li>
+      <li>시니어가 공유를 승인한 이벤트에 대한 푸시 알림 수신</li>
+      <li>시니어 돌봄을 돕기 위한 AI 생성 요약 표시</li>
+      <li>위임받은 경우, 새 번호로의 계정 복구 지원(SMS 코드 검증 및 보호자 확인)</li>
+      <li>법규 준수, 부정 방지, 보안 감사</li>
+    </ul>
+
+    <h2 id="ko-sharing">6. 서비스 제공자(수탁자)</h2>
+    <table>
+      <thead><tr><th>수신자</th><th>전송 데이터</th><th>목적</th></tr></thead>
+      <tbody>
+        <tr><td>Apple Push / Google FCM</td><td>푸시 토큰, 알림 페이로드</td><td>알림 전달(응급 알림 포함).</td></tr>
+        <tr><td>Supabase(인프라)</td><td>보호자 프로필, 연결 기록</td><td>서비스 운영, 행 수준 보안 적용.</td></tr>
+        <tr><td>Google Vertex AI (Gemini)</td><td>시니어 하루 요약 생성 입력</td><td>보호자에게 보여줄 AI 요약 생성. 엔터프라이즈 약관 — 모델 학습 없음.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>화상통화.</strong> 현재 버전에서는 화상통화를 제공하지 않습니다. 어떠한 영상·음성도 화상통화 제공자로 전송하지 않습니다.</p>
+
+    <h2 id="ko-sale">7. 판매·공유 금지 고지</h2>
+    <div class="callout primary">
+      <p><strong>당사는 보호자 데이터나 시니어 데이터를 광고 목적으로 판매·공유하지 않습니다.</strong> 보호가 자동 적용됩니다.</p>
+    </div>
+
+    <h2 id="ko-confidentiality">8. 기밀 유지 의무</h2>
+    <div class="callout warn">
+      <p><strong>시니어 데이터를 기밀로 유지해야 합니다.</strong> 시니어의 사전 동의 없이 돌봄과 무관한 사람과 공유하지 마세요. 시니어 데이터 오용은 본 약관 위반이며, 시니어에게 적용되는 주(州) 프라이버시법(예: WA MHMDA, CMIA, FTC Act §5)도 위반할 수 있습니다.</p>
+    </div>
+
+    <h2 id="ko-push">9. 푸시 알림</h2>
+    <p>시니어가 공유를 승인한 이벤트(예: 응급 알림, 알림 완료, 연결 승인)에 대해서만 푸시 알림을 받습니다. 푸시 전달은 선택 항목인 <em>알림 수신</em> 동의로 통제됩니다. 앱 또는 OS 설정에서 언제든 알림을 끌 수 있습니다. 끄더라도 연결 자체에는 영향이 없으나, 응급 알림을 놓칠 수 있습니다.</p>
+
+    <h2 id="ko-retention">10. 보유 기간</h2>
+    <ul>
+      <li>보호자 계정 이용 중에는 활성 보유.</li>
+      <li>24개월 미사용 시 통지 후 비활성화.</li>
+      <li>계정 삭제: 보호자 데이터는 30일 이내 삭제. 연결 해제 시 시니어 데이터 접근은 즉시 중단되며, 기기에 사본을 보관하지 않습니다.</li>
+    </ul>
+
+    <h2 id="ko-rights">11. 이용자의 권리</h2>
+    <p><em>보호자 본인 데이터</em>에 대해 <a href="./senior-privacy-policy.html#ko-rights">시니어 개인정보처리방침</a>에 기재된 것과 동일한 권리(알 권리, 삭제, 정정, 이동, SPI 제한, 판매 옵트아웃, 자동화 의사결정 옵트아웃, 차별 금지, 이의제기, 대리인)를 가집니다. 가족 앱을 통해 시니어 데이터에 대한 접근·정정·삭제 권리는 갖지 않으며, 해당 권리는 시니어가 자신의 앱에서 행사하도록 안내해 주세요.</p>
+
+    <h2 id="ko-bipa">12. 생체정보 고지(일리노이 BIPA)</h2>
+    <p>당사는 보호자의 음성·영상으로부터 음성 지문 등 생체 식별자를 생성·저장하지 않습니다.</p>
+
+    <h2 id="ko-security">13. 보안</h2>
+    <p>당사는 전송·저장 시 암호화, 행 수준 보안, 접근 통제, 감사 등 합리적인 기술적·관리적 보호조치를 NY SHIELD Act 및 업계 표준에 부합하게 적용합니다.</p>
+
+    <h2 id="ko-international">14. 국외 이전</h2>
+    <p>본 서비스는 미국을 포함한 여러 국가에서 운영됩니다. 정보가 국외로 이전될 수 있으며, 그 경우 현지법과 본 방침 중 더 높은 보호가 적용됩니다.</p>
+
+    <h2 id="ko-changes">15. 방침 변경</h2>
+    <p>중대한 변경은 시행일 최소 7일 전 앱 내 및 이메일로 통지합니다. 중대한 범위 변경은 재동의가 필요합니다.</p>
+
+    <h2 id="ko-contact">16. 문의</h2>
+    <ul>
+      <li>개인정보 문의: privacy@healthia.app</li>
+      <li>권리 요청: privacy@healthia.app (제목: [Rights Request])</li>
+      <li>주소: (사업자 등록 후 추가 예정)</li>
+    </ul>
+    </article>
+  </main>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var params = new URLSearchParams(location.search);
+      var store = {
+        get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+        set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+      };
+      function setActive(attr, value) {
+        var nodes = document.querySelectorAll('[' + attr + ']');
+        for (var i = 0; i < nodes.length; i++) {
+          nodes[i].setAttribute('aria-pressed', nodes[i].getAttribute(attr) === value ? 'true' : 'false');
+        }
+      }
+      function applyTheme(mode) {
+        if (mode === 'light' || mode === 'dark') root.setAttribute('data-theme', mode);
+        else root.removeAttribute('data-theme');
+        setActive('data-set-theme', mode);
+      }
+      var qpTheme = params.get('theme');
+      var themeMode = (qpTheme === 'light' || qpTheme === 'dark' || qpTheme === 'system')
+        ? qpTheme : (store.get('healthia-doc-theme') || 'system');
+      applyTheme(themeMode);
+      function browserLang() { return (navigator.language || 'en').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en'; }
+      function applyLang(l) { root.setAttribute('data-lang', l); root.setAttribute('lang', l); setActive('data-set-lang', l); }
+      var qpLang = params.get('lang');
+      var lang = (qpLang === 'ko' || qpLang === 'en') ? qpLang : (store.get('healthia-doc-lang') || browserLang());
+      applyLang(lang);
+      function wire(attr, key, apply) {
+        var nodes = document.querySelectorAll('[' + attr + ']');
+        for (var i = 0; i < nodes.length; i++) {
+          (function (node) { node.addEventListener('click', function () { var v = node.getAttribute(attr); store.set(key, v); apply(v); }); })(nodes[i]);
+        }
+      }
+      wire('data-set-theme', 'healthia-doc-theme', applyTheme);
+      wire('data-set-lang', 'healthia-doc-lang', applyLang);
+    })();
+  </script>
+</body>
+</html>
