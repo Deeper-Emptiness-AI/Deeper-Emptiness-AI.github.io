@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <title>Account Deletion Request</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f9fb;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --primary: #0e7490;
+      --danger: #991b1b;
+      --accent: #d97b6b;
+      --control-bg: #ffffff;
+      --control-border: #cbd5e1;
+      --control-active-bg: #d97b6b;
+      --control-active-text: #ffffff;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0b1220;
+      --surface: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #cbd5e1;
+      --border: #475569;
+      --primary: #22d3ee;
+      --danger: #f87171;
+      --accent: #e8927f;
+      --control-bg: #1e293b;
+      --control-border: #475569;
+      --control-active-bg: #e8927f;
+      --control-active-text: #0b1220;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --bg: #0b1220;
+        --surface: #1e293b;
+        --text: #f8fafc;
+        --text-muted: #cbd5e1;
+        --border: #475569;
+        --primary: #22d3ee;
+        --danger: #f87171;
+        --accent: #e8927f;
+        --control-bg: #1e293b;
+        --control-border: #475569;
+        --control-active-bg: #e8927f;
+        --control-active-text: #0b1220;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg); color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+      font-size: 17px; line-height: 1.65;
+    }
+    main { max-width: 720px; margin: 0 auto; padding: 16px 24px 96px; }
+    h1 { font-size: 26px; line-height: 1.4; margin: 0 0 8px; }
+    h2 { font-size: 21px; line-height: 1.4; margin: 36px 0 12px; padding-top: 24px; border-top: 1px solid var(--border); }
+    h2:first-of-type { border-top: none; padding-top: 0; }
+    p, li { font-size: 17px; }
+    p { margin: 12px 0; }
+    ul, ol { padding-left: 24px; margin: 12px 0; }
+    li { margin: 6px 0; }
+    .meta { color: var(--text-muted); font-size: 15px; margin: 0 0 24px; }
+    .callout { background: var(--surface); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 20px 0; border-radius: 6px; }
+    .callout.warn { border-left-color: var(--danger); }
+    .callout.primary { border-left-color: var(--primary); }
+    a { color: var(--primary); text-decoration: underline; }
+
+    .controls { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--border); }
+    .seg { display: inline-flex; border: 1px solid var(--control-border); border-radius: 8px; overflow: hidden; }
+    .seg button { font: inherit; font-size: 14px; cursor: pointer; padding: 6px 12px; border: none; background: var(--control-bg); color: var(--text); min-height: 36px; }
+    .seg button + button { border-left: 1px solid var(--control-border); }
+    .seg button[aria-pressed="true"] { background: var(--control-active-bg); color: var(--control-active-text); font-weight: 600; }
+
+    /* form */
+    .field { margin: 20px 0; }
+    label { display: block; font-weight: 600; font-size: 15px; margin: 0 0 6px; }
+    .hint { color: var(--text-muted); font-size: 14px; margin: 4px 0 0; }
+    select, input[type="text"], textarea {
+      width: 100%; font: inherit; font-size: 16px; color: var(--text);
+      background: var(--control-bg); border: 1px solid var(--control-border);
+      border-radius: 8px; padding: 12px 14px; min-height: 48px;
+    }
+    textarea { min-height: 96px; resize: vertical; }
+    select:focus, input:focus, textarea:focus { outline: 2px solid var(--primary); outline-offset: 1px; }
+    .submit {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 100%; font: inherit; font-size: 17px; font-weight: 700; cursor: pointer;
+      background: var(--danger); color: #ffffff; border: 1px solid var(--danger);
+      border-radius: 10px; padding: 14px 20px; min-height: 52px; margin-top: 8px;
+    }
+    .submit:hover { opacity: 0.92; }
+    .submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .error { color: var(--danger); font-size: 14px; margin: 6px 0 0; display: none; }
+    .status { font-size: 15px; margin: 14px 0 0; display: none; }
+    .status.show { display: block; }
+    .status.ok { color: var(--primary); }
+    .status.fail { color: var(--danger); }
+    .field.invalid .error { display: block; }
+    .field.invalid select, .field.invalid input, .field.invalid textarea { border-color: var(--danger); }
+
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"] { display: block; }
+    html[data-lang="ko"] [data-lang-block="ko"] { display: block; }
+    html:not([data-lang]) [data-lang-block="en"] { display: block; }
+    [data-lang-inline] { display: none; }
+    html[data-lang="en"] [data-lang-inline="en"] { display: inline; }
+    html[data-lang="ko"] [data-lang-inline="ko"] { display: inline; }
+    html:not([data-lang]) [data-lang-inline="en"] { display: inline; }
+    [data-lang-opt] { display: none; }
+    html[data-lang="ko"] [data-lang-opt="ko"] { display: block; }
+    html[data-lang="en"] [data-lang-opt="en"] { display: block; }
+    html:not([data-lang]) [data-lang-opt="en"] { display: block; }
+  </style>
+</head>
+<body>
+  <div class="controls" role="toolbar" aria-label="Language and theme">
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en">EN</button>
+      <button type="button" data-set-lang="ko">한국어</button>
+    </div>
+    <div class="seg" role="group" aria-label="Theme">
+      <button type="button" data-set-theme="light" title="Light">☀</button>
+      <button type="button" data-set-theme="dark" title="Dark">🌙</button>
+      <button type="button" data-set-theme="system" title="System">Auto</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ===================== ENGLISH ===================== -->
+    <article data-lang-block="en">
+      <h1>Account Deletion Request</h1>
+      <p class="meta">Last updated: July 9, 2026</p>
+
+      <div class="callout primary">
+        <p>Use this form to request deletion of your account and associated personal data. Select your app, enter the login ID (email or phone number) you use to sign in, and submit. Your request is sent by email to our privacy team for verification and processing.</p>
+      </div>
+
+      <div class="callout warn">
+        <p><strong>This action is permanent.</strong> Once verified, your account and personal data are deleted within 30 days and cannot be recovered. We may retain a minimal amount of data where required by law (e.g., transaction or legal records).</p>
+      </div>
+    </article>
+
+    <!-- ===================== KOREAN ===================== -->
+    <article data-lang-block="ko">
+      <h1>계정 삭제 요청</h1>
+      <p class="meta">최종 업데이트: 2026년 7월 9일</p>
+
+      <div class="callout primary">
+        <p>이 양식으로 계정 및 관련 개인정보의 삭제를 요청할 수 있습니다. 사용하는 앱을 선택하고, 로그인에 사용하는 로그인 ID(이메일 또는 전화번호)를 입력한 뒤 제출하세요. 요청은 본인 확인 및 처리를 위해 개인정보 담당팀에게 이메일로 전송됩니다.</p>
+      </div>
+
+      <div class="callout warn">
+        <p><strong>이 작업은 되돌릴 수 없습니다.</strong> 본인 확인 후 계정과 개인정보는 30일 이내에 삭제되며 복구할 수 없습니다. 법령상 보관이 요구되는 최소한의 데이터(예: 거래·법적 기록)는 보관될 수 있습니다.</p>
+      </div>
+    </article>
+
+    <!-- ===================== FORM (shared) ===================== -->
+    <form id="deletion-form" novalidate>
+      <div class="field" id="field-app">
+        <label for="app">
+          <span data-lang-inline="en">App</span>
+          <span data-lang-inline="ko">앱</span>
+        </label>
+        <select id="app" name="app" required>
+          <option value="" data-lang-opt="en">— Select an app —</option>
+          <option value="" data-lang-opt="ko">— 앱을 선택하세요 —</option>
+          <!-- App options are populated by APPS[] below for easy extension -->
+        </select>
+        <p class="error">
+          <span data-lang-inline="en">Please select an app.</span>
+          <span data-lang-inline="ko">앱을 선택해 주세요.</span>
+        </p>
+      </div>
+
+      <div class="field" id="field-login">
+        <label for="login">
+          <span data-lang-inline="en">Login ID (email or phone number)</span>
+          <span data-lang-inline="ko">로그인 ID (이메일 또는 전화번호)</span>
+        </label>
+        <input type="text" id="login" name="login" autocomplete="off"
+               inputmode="email" autocapitalize="off" spellcheck="false"
+               placeholder="you@example.com" required />
+        <p class="hint">
+          <span data-lang-inline="en">Enter the exact ID you use to sign in, so we can locate your account.</span>
+          <span data-lang-inline="ko">계정을 찾을 수 있도록, 로그인에 사용하는 ID를 정확히 입력해 주세요.</span>
+        </p>
+        <p class="error">
+          <span data-lang-inline="en">Please enter your login ID.</span>
+          <span data-lang-inline="ko">로그인 ID를 입력해 주세요.</span>
+        </p>
+      </div>
+
+      <div class="field" id="field-reason">
+        <label for="reason">
+          <span data-lang-inline="en">Reason (optional)</span>
+          <span data-lang-inline="ko">사유 (선택)</span>
+        </label>
+        <textarea id="reason" name="reason"
+                  placeholder=""></textarea>
+      </div>
+
+      <button type="submit" class="submit">
+        <span data-lang-inline="en">Submit deletion request</span>
+        <span data-lang-inline="ko">삭제 요청 보내기</span>
+      </button>
+
+      <p class="status" id="form-status" role="status" aria-live="polite"></p>
+
+      <p class="hint" style="margin-top:16px;">
+        <span data-lang-inline="en">Submitting sends your request directly to our privacy team. If it does not go through, please email us at <a href="mailto:hello@deeperemptinessai.com">hello@deeperemptinessai.com</a>.</span>
+        <span data-lang-inline="ko">제출하면 요청이 개인정보 담당팀에게 바로 전송됩니다. 전송이 안 되면 <a href="mailto:hello@deeperemptinessai.com">hello@deeperemptinessai.com</a> 으로 메일을 보내주세요.</span>
+      </p>
+    </form>
+  </main>
+
+  <script>
+    (function () {
+      // Edge Function endpoint — sends the request email server-side via Resend.
+      // The anon (publishable) key is safe to embed; it grants no privileged access.
+      var FN_URL = 'https://lqvmxgernsgjlighiaip.supabase.co/functions/v1/account-deletion-request';
+      var ANON_KEY = 'sb_publishable_QvmMay5ngpp44K8CmXvGCA_Cd-jAGUs';
+
+      // Extensible app registry — add future services here (one entry per app).
+      var APPS = [
+        { value: 'healthia', label: 'Healthya' },
+        { value: 'healthia-family', label: 'Healthya Family' }
+      ];
+
+      var root = document.documentElement;
+      var params = new URLSearchParams(location.search);
+      var store = {
+        get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+        set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+      };
+      function setActive(attr, value) {
+        var nodes = document.querySelectorAll('[' + attr + ']');
+        for (var i = 0; i < nodes.length; i++) {
+          nodes[i].setAttribute('aria-pressed', nodes[i].getAttribute(attr) === value ? 'true' : 'false');
+        }
+      }
+      function applyTheme(mode) {
+        if (mode === 'light' || mode === 'dark') root.setAttribute('data-theme', mode);
+        else root.removeAttribute('data-theme');
+        setActive('data-set-theme', mode);
+      }
+      var qpTheme = params.get('theme');
+      var themeMode = (qpTheme === 'light' || qpTheme === 'dark' || qpTheme === 'system')
+        ? qpTheme : (store.get('healthia-doc-theme') || 'system');
+      applyTheme(themeMode);
+
+      function browserLang() { return (navigator.language || 'en').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en'; }
+      function applyLang(l) { root.setAttribute('data-lang', l); root.setAttribute('lang', l); setActive('data-set-lang', l); }
+      var qpLang = params.get('lang');
+      var lang = (qpLang === 'ko' || qpLang === 'en') ? qpLang : (store.get('healthia-doc-lang') || browserLang());
+      applyLang(lang);
+
+      function wire(attr, key, apply) {
+        var nodes = document.querySelectorAll('[' + attr + ']');
+        for (var i = 0; i < nodes.length; i++) {
+          (function (node) { node.addEventListener('click', function () { var v = node.getAttribute(attr); store.set(key, v); apply(v); }); })(nodes[i]);
+        }
+      }
+      wire('data-set-theme', 'healthia-doc-theme', applyTheme);
+      wire('data-set-lang', 'healthia-doc-lang', applyLang);
+
+      // Populate app options from APPS[] (kept after the localized placeholders).
+      var appSelect = document.getElementById('app');
+      for (var i = 0; i < APPS.length; i++) {
+        var opt = document.createElement('option');
+        opt.value = APPS[i].value;
+        opt.textContent = APPS[i].label;
+        appSelect.appendChild(opt);
+      }
+
+      function labelForApp(value) {
+        for (var i = 0; i < APPS.length; i++) { if (APPS[i].value === value) return APPS[i].label; }
+        return value;
+      }
+      function setInvalid(fieldId, invalid) {
+        var f = document.getElementById(fieldId);
+        if (invalid) f.classList.add('invalid'); else f.classList.remove('invalid');
+      }
+
+      var form = document.getElementById('deletion-form');
+      var submitBtn = form.querySelector('.submit');
+      var statusEl = document.getElementById('form-status');
+
+      var MESSAGES = {
+        en: {
+          sending: 'Sending your request…',
+          ok: 'Your request has been sent. Our privacy team will verify and process it. You can close this page.',
+          rate: 'Too many requests. Please try again later.',
+          fail: 'We could not send your request. Please email us directly at hello@deeperemptinessai.com.'
+        },
+        ko: {
+          sending: '요청을 전송하는 중…',
+          ok: '요청이 전송되었습니다. 개인정보 담당팀이 본인 확인 후 처리합니다. 이 페이지를 닫으셔도 됩니다.',
+          rate: '요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.',
+          fail: '요청을 전송하지 못했습니다. hello@deeperemptinessai.com 으로 직접 메일을 보내주세요.'
+        }
+      };
+      function msg(key) {
+        var l = root.getAttribute('data-lang') === 'ko' ? 'ko' : 'en';
+        return MESSAGES[l][key];
+      }
+      function showStatus(kind, text) {
+        statusEl.textContent = text;
+        statusEl.className = 'status show ' + (kind === 'ok' ? 'ok' : 'fail');
+      }
+      function clearStatus() { statusEl.className = 'status'; statusEl.textContent = ''; }
+      function setBusy(busy) {
+        submitBtn.disabled = busy;
+        if (busy) { statusEl.textContent = msg('sending'); statusEl.className = 'status show'; }
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var app = appSelect.value;
+        var login = document.getElementById('login').value.trim();
+        var reason = document.getElementById('reason').value.trim();
+
+        var ok = true;
+        setInvalid('field-app', !app);
+        setInvalid('field-login', !login);
+        if (!app || !login) ok = false;
+        if (!ok) { clearStatus(); return; }
+
+        var lang = root.getAttribute('data-lang') === 'ko' ? 'ko' : 'en';
+        setBusy(true);
+
+        fetch(FN_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', apikey: ANON_KEY },
+          body: JSON.stringify({ app: app, login: login, reason: reason, lang: lang })
+        }).then(function (res) {
+          if (res.ok) {
+            form.reset();
+            showStatus('ok', msg('ok'));
+            return;
+          }
+          if (res.status === 429) { showStatus('fail', msg('rate')); return; }
+          showStatus('fail', msg('fail'));
+        }).catch(function () {
+          showStatus('fail', msg('fail'));
+        }).then(function () {
+          submitBtn.disabled = false;
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
