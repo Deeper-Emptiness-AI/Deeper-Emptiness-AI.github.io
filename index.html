@@ -4,502 +4,888 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Healthya · Your Voice, Your Health</title>
-  <meta name="description" content="The AI-powered senior health companion that listens, responds, and cares. Launching Summer 2026." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta name="description" content="Healthya is a voice-first AI health companion for older adults. It listens, remembers, and helps with meals, medications, and daily well-being — with a companion app for the whole family. Available now on iOS and Android." />
+  <meta name="theme-color" content="#0E7490" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Healthya · Your Voice, Your Health" />
+  <meta property="og:description" content="A voice-first AI health companion for older adults — and the family who cares for them." />
+
+  <!-- Pretendard (matches the in-app typeface) with a graceful system fallback -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+
   <style>
+    /* ===================================================================
+       Design tokens — mirrors the app's "Modern Bento Calm" system
+       Primary: Medical Teal #0E7490 · Solid accent: Mint #1B8B66
+       Pastel tint surfaces: warm / mint / sky / lilac
+       =================================================================== */
     :root {
-      --sage:     #4a7c59;
-      --sage-lt:  #6fa882;
-      --sage-dk:  #2e5038;
-      --cream:    #faf7f2;
-      --warm:     #f0ebe1;
-      --charcoal: #1c1f1a;
-      --muted:    #5c6359;
-      --accent:   #c8622a;
-      --border:   rgba(74,124,89,.18);
+      --bg:            #FFFFFF;
+      --surface:       #F7F8FA;
+      --card:          #FFFFFF;
+      --text:          #0F172A;
+      --text-muted:    #475569;
+      --text-soft:     #64748B;
+      --border:        rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.14);
+
+      --primary:       #0E7490;   /* Medical Teal */
+      --primary-dark:  #164E63;
+      --mint:          #1B8B66;   /* solid action green */
+      --mint-dark:     #157253;
+      --coral:         #B8604E;   /* family accent */
+
+      /* pastel tint surfaces (light) */
+      --warm-bg:  #FFF1ED; --warm-ink:  #7C2A1E; --warm-accent:  #B8604E;
+      --mint-bg:  #E8F7F0; --mint-ink:  #064E3B; --mint-accent:  #1B8B66;
+      --sky-bg:   #EBF2F9; --sky-ink:   #0B3D7A; --sky-accent:   #2563B8;
+      --lilac-bg: #F1ECFA; --lilac-ink: #3A1B7A; --lilac-accent: #6849C7;
+
+      --shadow-card:  0 7px 20px rgba(15, 23, 42, 0.07);
+      --shadow-hero:  0 14px 40px rgba(15, 23, 42, 0.12);
+      --nav-bg: rgba(255, 255, 255, 0.82);
     }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg:            #0B1220;
+      --surface:       #16191F;
+      --card:          #1B1E25;
+      --text:          #F8FAFC;
+      --text-muted:    #94A3B8;
+      --text-soft:     #94A3B8;
+      --border:        rgba(255, 255, 255, 0.10);
+      --border-strong: rgba(255, 255, 255, 0.18);
+
+      --primary:       #22D3EE;
+      --primary-dark:  #0E7490;
+      --mint:          #34D399;
+      --mint-dark:     #0F8A5E;
+      --coral:         #E8927F;
+
+      --warm-bg:  #3A1E18; --warm-ink:  #FCE4DE; --warm-accent:  #E8927F;
+      --mint-bg:  #14322A; --mint-ink:  #D6F2E3; --mint-accent:  #7DD8B0;
+      --sky-bg:   #1B2E47; --sky-ink:   #BCD7F5; --sky-accent:   #5C9EE3;
+      --lilac-bg: #2A1F4A; --lilac-ink: #E5DAF6; --lilac-accent: #9F87E8;
+
+      --shadow-card:  0 8px 24px rgba(0, 0, 0, 0.40);
+      --shadow-hero:  0 16px 48px rgba(0, 0, 0, 0.55);
+      --nav-bg: rgba(11, 18, 32, 0.80);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --bg:#0B1220; --surface:#16191F; --card:#1B1E25;
+        --text:#F8FAFC; --text-muted:#94A3B8; --text-soft:#94A3B8;
+        --border:rgba(255,255,255,0.10); --border-strong:rgba(255,255,255,0.18);
+        --primary:#22D3EE; --primary-dark:#0E7490; --mint:#34D399; --mint-dark:#0F8A5E; --coral:#E8927F;
+        --warm-bg:#3A1E18; --warm-ink:#FCE4DE; --warm-accent:#E8927F;
+        --mint-bg:#14322A; --mint-ink:#D6F2E3; --mint-accent:#7DD8B0;
+        --sky-bg:#1B2E47; --sky-ink:#BCD7F5; --sky-accent:#5C9EE3;
+        --lilac-bg:#2A1F4A; --lilac-ink:#E5DAF6; --lilac-accent:#9F87E8;
+        --shadow-card:0 8px 24px rgba(0,0,0,0.40); --shadow-hero:0 16px 48px rgba(0,0,0,0.55);
+        --nav-bg:rgba(11,18,32,0.80);
+        color-scheme: dark;
+      }
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      background: var(--cream);
-      color: var(--charcoal);
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 300;
-      line-height: 1.65;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont,
+                   'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
+    a { color: inherit; text-decoration: none; }
+    .accent { color: var(--primary); }
+
+    /* ── CONTROLS (lang + theme), mirrors legal docs ── */
+    .controls {
+      position: fixed; top: 74px; right: 16px; z-index: 90;
+      display: flex; gap: 8px;
+    }
+    .seg {
+      display: inline-flex; border: 1px solid var(--border-strong);
+      border-radius: 999px; overflow: hidden;
+      background: var(--nav-bg); backdrop-filter: blur(12px);
+    }
+    .seg button {
+      font: inherit; font-size: 13px; cursor: pointer;
+      padding: 7px 12px; border: none; background: transparent; color: var(--text-muted);
+      min-height: 36px; transition: background .2s, color .2s;
+    }
+    .seg button + button { border-left: 1px solid var(--border); }
+    .seg button[aria-pressed="true"] { background: var(--primary); color: #fff; font-weight: 600; }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 20px 48px;
-      background: rgba(250,247,242,.88);
-      backdrop-filter: blur(12px);
+      padding: 16px 40px;
+      background: var(--nav-bg); backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
-    .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 22px;
-      color: var(--sage-dk);
-      text-decoration: none;
-      letter-spacing: -.3px;
+    .nav-logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -.4px; }
+    .nav-mark {
+      width: 30px; height: 30px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--primary), var(--mint));
+      display: inline-flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 17px;
+      box-shadow: 0 3px 10px rgba(14,116,144,.35);
     }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 32px; list-style: none; }
-    .nav-links a {
-      font-size: 14px; font-weight: 400; color: var(--muted);
-      text-decoration: none; letter-spacing: .3px;
-      transition: color .2s;
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a { font-size: 14.5px; color: var(--text-muted); transition: color .2s; }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      padding: 9px 18px; border-radius: 999px;
+      background: var(--primary); color: #fff !important; font-weight: 600; font-size: 14px;
+      transition: transform .15s, background .2s;
     }
-    .nav-links a:hover { color: var(--sage-dk); }
+    .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    @media (max-width: 820px) { .nav-links .nav-only-wide { display: none; } }
+
+    /* ── LAYOUT ── */
+    section { padding: 96px 40px; max-width: 1160px; margin: 0 auto; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 12.5px; font-weight: 600; letter-spacing: .6px; text-transform: uppercase;
+      color: var(--primary); margin-bottom: 18px;
+    }
+    .eyebrow::before { content: ''; width: 22px; height: 2px; border-radius: 2px; background: var(--mint); }
+    h1 {
+      font-size: clamp(40px, 6.2vw, 68px); line-height: 1.06; letter-spacing: -1.2px;
+      font-weight: 700; margin-bottom: 22px;
+    }
+    h2 { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; letter-spacing: -.8px; font-weight: 700; }
+    .section-head { max-width: 640px; margin-bottom: 52px; }
+    .section-head p { margin-top: 16px; font-size: 17.5px; color: var(--text-muted); }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 140px 48px 80px;
-      position: relative;
-      overflow: hidden;
+      position: relative; padding-top: 148px; padding-bottom: 72px;
+      display: grid; grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: center;
     }
     .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
+      position: absolute; inset: -10% -20% auto -20%; height: 640px; z-index: -1;
       background:
-        radial-gradient(ellipse 70% 60% at 80% 30%, rgba(111,168,130,.18) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 10% 80%, rgba(200,98,42,.08) 0%, transparent 60%);
+        radial-gradient(ellipse 46% 52% at 78% 16%, rgba(27,139,102,.16), transparent 70%),
+        radial-gradient(ellipse 50% 55% at 8% 8%, rgba(14,116,144,.14), transparent 68%);
     }
-    /* Organic decorative ring */
-    .hero-ring {
-      position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
-      width: 620px; height: 620px; border-radius: 50%;
-      border: 1px solid rgba(74,124,89,.15);
-      z-index: 0;
-    }
-    .hero-ring::before {
-      content: '';
-      position: absolute; inset: 40px; border-radius: 50%;
-      border: 1px solid rgba(74,124,89,.10);
-    }
-    .hero-ring::after {
-      content: '';
-      position: absolute; inset: 100px; border-radius: 50%;
-      border: 1px solid rgba(74,124,89,.06);
-    }
-
-    .hero-content { position: relative; z-index: 1; max-width: 640px; }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 500; letter-spacing: 1.8px;
-      text-transform: uppercase; color: var(--sage);
-      margin-bottom: 24px;
-      opacity: 0; animation: fadeUp .8s .1s forwards;
-    }
-    .hero-eyebrow::before {
-      content: ''; width: 28px; height: 1px; background: var(--sage);
-    }
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(44px, 6vw, 72px);
-      line-height: 1.1;
-      color: var(--sage-dk);
-      letter-spacing: -.5px;
-      margin-bottom: 24px;
-      opacity: 0; animation: fadeUp .8s .2s forwards;
-    }
-    h1 em {
-      font-style: italic;
-      color: var(--accent);
-    }
-    .hero-sub {
-      font-size: 18px; color: var(--muted); max-width: 480px; line-height: 1.7;
-      margin-bottom: 40px;
-      opacity: 0; animation: fadeUp .8s .35s forwards;
-    }
-    .hero-cta {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      opacity: 0; animation: fadeUp .8s .5s forwards;
-    }
+    .hero-sub { font-size: 19px; color: var(--text-muted); max-width: 520px; margin-bottom: 32px; }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--sage-dk); color: var(--cream);
-      padding: 14px 28px; border-radius: 50px;
-      font-size: 15px; font-weight: 500; text-decoration: none;
-      transition: background .2s, transform .15s;
+      background: var(--mint); color: #fff; padding: 15px 28px; border-radius: 999px;
+      font-size: 15.5px; font-weight: 600;
+      box-shadow: 0 8px 20px rgba(27,139,102,.30); transition: transform .15s, background .2s;
     }
-    .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
-    .btn-outline {
+    .btn-primary:hover { background: var(--mint-dark); transform: translateY(-2px); }
+    .btn-ghost {
       display: inline-flex; align-items: center; gap: 8px;
-      border: 1px solid var(--sage-dk); color: var(--sage-dk);
-      padding: 14px 28px; border-radius: 50px;
-      font-size: 15px; font-weight: 400; text-decoration: none;
-      transition: background .2s;
+      border: 1.5px solid var(--border-strong); color: var(--text); padding: 15px 26px;
+      border-radius: 999px; font-size: 15.5px; font-weight: 600; transition: border-color .2s, background .2s;
     }
-    .btn-outline:hover { background: rgba(74,124,89,.08); }
+    .btn-ghost:hover { border-color: var(--primary); background: var(--surface); }
+    .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 12.5px; font-weight: 500; color: var(--text-muted);
+      padding: 7px 13px; border: 1px solid var(--border); border-radius: 999px; background: var(--card);
+    }
+    .chip svg { width: 14px; height: 14px; color: var(--mint); flex-shrink: 0; }
 
-    .hero-badges {
-      display: flex; gap: 24px; flex-wrap: wrap; margin-top: 56px;
-      opacity: 0; animation: fadeUp .8s .65s forwards;
+    /* Hero device mock — a small "bento" preview built in pure CSS */
+    .hero-mock {
+      justify-self: center; width: 100%; max-width: 380px;
+      border-radius: 34px; padding: 22px; background: var(--card);
+      border: 1px solid var(--border); box-shadow: var(--shadow-hero);
+      display: grid; gap: 14px;
     }
-    .badge {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 12px; font-weight: 500; letter-spacing: .4px;
-      color: var(--muted);
+    .mock-hero-card {
+      border-radius: 24px; padding: 20px; background: linear-gradient(140deg, var(--primary), var(--primary-dark));
+      color: #fff;
     }
-    .badge-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--sage);
+    .mock-hero-card .greet { font-size: 13px; opacity: .85; }
+    .mock-hero-card .line { font-size: 20px; font-weight: 700; margin-top: 4px; letter-spacing: -.4px; }
+    .mock-voice { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .mock-voice .orb {
+      width: 44px; height: 44px; border-radius: 999px; flex-shrink: 0;
+      background: rgba(255,255,255,.18); display: flex; align-items: center; justify-content: center; font-size: 20px;
+    }
+    .mock-bars { display: flex; align-items: center; gap: 4px; height: 26px; }
+    .mock-bars i { width: 4px; border-radius: 2px; background: rgba(255,255,255,.7); animation: eq 1.1s ease-in-out infinite; }
+    .mock-bars i:nth-child(1){height:40%;animation-delay:0s}
+    .mock-bars i:nth-child(2){height:80%;animation-delay:.15s}
+    .mock-bars i:nth-child(3){height:55%;animation-delay:.3s}
+    .mock-bars i:nth-child(4){height:100%;animation-delay:.45s}
+    .mock-bars i:nth-child(5){height:65%;animation-delay:.6s}
+    .mock-bars i:nth-child(6){height:35%;animation-delay:.75s}
+    @keyframes eq { 0%,100%{transform:scaleY(.5)} 50%{transform:scaleY(1)} }
+    .mock-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .mock-tile { border-radius: 20px; padding: 15px; }
+    .mock-tile .t-emoji { font-size: 22px; }
+    .mock-tile .t-label { font-size: 12.5px; font-weight: 600; margin-top: 8px; }
+    .mock-tile .t-value { font-size: 12px; margin-top: 2px; opacity: .8; }
+    .t-warm  { background: var(--warm-bg);  color: var(--warm-ink); }
+    .t-mint  { background: var(--mint-bg);  color: var(--mint-ink); }
+    .t-sky   { background: var(--sky-bg);   color: var(--sky-ink); }
+    .t-lilac { background: var(--lilac-bg); color: var(--lilac-ink); }
+
+    /* ── WHO ── */
+    .who { background: var(--surface); max-width: none; }
+    .who-inner { max-width: 1160px; margin: 0 auto; }
+    .who-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+    .who-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+      padding: 32px 28px; box-shadow: var(--shadow-card); transition: transform .2s, box-shadow .2s;
+    }
+    .who-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hero); }
+    .who-badge {
+      width: 52px; height: 52px; border-radius: 15px; display: flex; align-items: center;
+      justify-content: center; font-size: 26px; margin-bottom: 18px;
+    }
+    .who-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .who-card p { font-size: 15px; color: var(--text-muted); }
+
+    /* ── FEATURES (bento) ── */
+    .bento {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; grid-auto-flow: dense;
+    }
+    .cell {
+      border-radius: 26px; padding: 26px; border: 1px solid transparent;
+      box-shadow: var(--shadow-card); position: relative; overflow: hidden;
+      transition: transform .2s;
+    }
+    .cell:hover { transform: translateY(-3px); }
+    .cell .c-emoji { font-size: 30px; }
+    .cell h3 { font-size: 18px; font-weight: 700; margin: 14px 0 7px; }
+    .cell p { font-size: 14.5px; opacity: .92; }
+    .cell.wide { grid-column: span 2; }
+    .cell.tall { grid-row: span 2; }
+    .cell .c-emoji, .cell h3 { position: relative; z-index: 1; }
+    .c-warm  { background: var(--warm-bg);  color: var(--warm-ink); }
+    .c-warm h3, .c-warm p { color: var(--warm-ink); }
+    .c-mint  { background: var(--mint-bg);  color: var(--mint-ink); }
+    .c-sky   { background: var(--sky-bg);   color: var(--sky-ink); }
+    .c-lilac { background: var(--lilac-bg); color: var(--lilac-ink); }
+    .c-plain { background: var(--card); color: var(--text); border-color: var(--border); }
+    .c-plain p { color: var(--text-muted); }
+    @media (max-width: 900px) { .bento { grid-template-columns: repeat(2, 1fr); } .cell.wide { grid-column: span 2; } .cell.tall { grid-row: span 1; } }
+    @media (max-width: 560px) { .bento { grid-template-columns: 1fr; } .cell.wide { grid-column: span 1; } }
+
+    /* ── PRIVACY ── */
+    .privacy { background: var(--primary-dark); color: #fff; max-width: none; }
+    :root:not([data-theme]) .privacy, :root[data-theme="light"] .privacy { --card: rgba(255,255,255,.07); }
+    .privacy-inner { max-width: 1160px; margin: 0 auto; }
+    .privacy h2 { color: #fff; }
+    .privacy .section-head p { color: rgba(255,255,255,.72); }
+    .privacy .eyebrow { color: #7DD8B0; }
+    .privacy .eyebrow::before { background: #7DD8B0; }
+    .privacy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .privacy-item {
+      padding: 24px; border: 1px solid rgba(255,255,255,.16); border-radius: 20px;
+      background: rgba(255,255,255,.05);
+    }
+    .privacy-item .p-check {
+      width: 34px; height: 34px; border-radius: 999px; background: rgba(125,216,176,.22);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 14px; color: #7DD8B0;
+    }
+    .privacy-item .p-check svg { width: 18px; height: 18px; }
+    .privacy-item h3 { font-size: 15.5px; font-weight: 600; margin-bottom: 6px; }
+    .privacy-item p { font-size: 13.5px; color: rgba(255,255,255,.68); line-height: 1.55; }
+    .privacy-note {
+      margin-top: 28px; font-size: 13.5px; color: rgba(255,255,255,.6);
+      border-left: 3px solid #7DD8B0; padding-left: 14px; max-width: 720px;
     }
 
-    /* ── SECTION SHARED ── */
-    section { padding: 96px 48px; }
-    .section-label {
-      font-size: 11px; font-weight: 500; letter-spacing: 2px;
-      text-transform: uppercase; color: var(--sage);
-      margin-bottom: 16px;
+    /* ── FAMILY ── */
+    .family-band {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+      background: var(--warm-bg); border-radius: 32px; padding: 48px; margin: 0 40px;
     }
-    .section-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(30px, 4vw, 44px);
-      color: var(--sage-dk); line-height: 1.2;
-      margin-bottom: 16px;
+    .family-band .eyebrow { color: var(--warm-accent); }
+    .family-band .eyebrow::before { background: var(--warm-accent); }
+    .family-band h2 { color: var(--warm-ink); }
+    .family-band p { color: var(--warm-ink); opacity: .85; margin-top: 14px; font-size: 16px; }
+    .family-list { list-style: none; margin-top: 22px; display: grid; gap: 12px; }
+    .family-list li { display: flex; gap: 11px; align-items: flex-start; font-size: 15px; color: var(--warm-ink); }
+    .family-list svg { width: 20px; height: 20px; color: var(--warm-accent); flex-shrink: 0; margin-top: 1px; }
+    .family-visual {
+      justify-self: center; width: 100%; max-width: 340px; aspect-ratio: 4/5;
+      border-radius: 28px; background: var(--card); box-shadow: var(--shadow-hero);
+      border: 1px solid var(--border); display: grid; place-content: center; gap: 12px; padding: 28px; text-align: center;
     }
-    .section-sub {
-      font-size: 17px; color: var(--muted); max-width: 520px;
-      line-height: 1.7; margin-bottom: 56px;
-    }
-
-    /* ── WHO IS IT FOR ── */
-    .for { background: var(--warm); }
-    .for-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
-    .for-card {
-      background: var(--cream); border-radius: 16px;
-      padding: 36px 32px;
-      border: 1px solid var(--border);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .for-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(46,80,56,.1); }
-    .for-icon { font-size: 32px; margin-bottom: 16px; }
-    .for-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 22px; color: var(--sage-dk);
-      margin-bottom: 10px;
-    }
-    .for-card p { font-size: 15px; color: var(--muted); line-height: 1.6; }
-
-    /* ── FEATURES ── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      overflow: hidden;
-    }
-    .feature-cell {
-      background: var(--cream);
-      padding: 32px 28px;
-      transition: background .2s;
-    }
-    .feature-cell:hover { background: var(--warm); }
-    .feature-icon { font-size: 26px; margin-bottom: 14px; }
-    .feature-cell h3 {
-      font-size: 16px; font-weight: 500; color: var(--charcoal);
-      margin-bottom: 8px;
-    }
-    .feature-cell p { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-    /* ── TRUST ── */
-    .trust { background: var(--sage-dk); color: var(--cream); }
-    .trust .section-title { color: var(--cream); }
-    .trust .section-sub { color: rgba(250,247,242,.65); }
-    .trust .section-label { color: var(--sage-lt); }
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px;
-    }
-    .trust-item {
-      padding: 28px;
-      border: 1px solid rgba(111,168,130,.25);
-      border-radius: 12px;
-    }
-    .trust-item .check {
-      width: 32px; height: 32px; border-radius: 50%;
-      background: rgba(111,168,130,.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; margin-bottom: 14px;
-    }
-    .trust-item h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; }
-    .trust-item p { font-size: 13px; color: rgba(250,247,242,.6); line-height: 1.5; }
+    .family-visual .fv-emoji { font-size: 54px; }
+    .family-visual .fv-title { font-weight: 700; font-size: 17px; color: var(--text); }
+    .family-visual .fv-desc { font-size: 13.5px; color: var(--text-muted); }
+    @media (max-width: 820px) { .family-band { grid-template-columns: 1fr; padding: 36px 28px; } }
 
     /* ── LAUNCH ── */
-    .launch {
-      text-align: center;
-      background: linear-gradient(135deg, var(--warm) 0%, var(--cream) 100%);
+    .launch { text-align: center; }
+    .launch-card {
+      max-width: 720px; margin: 0 auto; border-radius: 32px; padding: 56px 40px;
+      background: linear-gradient(140deg, var(--primary), var(--mint));
+      color: #fff; box-shadow: var(--shadow-hero);
     }
-    .launch-inner { max-width: 560px; margin: 0 auto; }
-    .launch .section-title { margin-bottom: 12px; }
-    .launch .section-sub { margin: 0 auto 40px; }
-    .launch-note {
-      font-size: 13px; color: var(--muted); margin-top: 20px;
-    }
+    .launch-card h2 { color: #fff; }
+    .launch-card p { color: rgba(255,255,255,.88); margin: 14px auto 28px; max-width: 480px; font-size: 17px; }
+    .launch-card .btn-primary { background: #fff; color: var(--primary-dark); box-shadow: 0 8px 20px rgba(0,0,0,.18); }
+    .launch-card .btn-primary:hover { background: #f0fdfa; }
+    .launch-note { margin-top: 18px; font-size: 13px; color: rgba(255,255,255,.72); }
 
-    /* ── LEGAL NAV ── */
-    .legal-nav {
-      background: var(--warm);
-      border-top: 1px solid var(--border);
-      padding: 48px;
+    /* ── LEGAL ── */
+    .legal { background: var(--surface); max-width: none; }
+    .legal-inner { max-width: 1160px; margin: 0 auto; }
+    .legal-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+    .legal-group-head { display: flex; align-items: center; gap: 11px; margin-bottom: 15px; }
+    .lg-badge {
+      width: 34px; height: 34px; border-radius: 11px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
     }
-    .legal-nav h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px; color: var(--sage-dk);
-      margin-bottom: 20px;
+    .lg-badge svg { width: 18px; height: 18px; }
+    .lg-badge.i-mint { background: var(--mint-bg); color: var(--mint-accent); }
+    .lg-badge.i-warm { background: var(--warm-bg); color: var(--warm-accent); }
+    .lg-label { font-size: 13px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--text-muted); }
+    .legal-cards { display: grid; gap: 12px; }
+    .legal-card {
+      display: flex; align-items: center; gap: 15px; padding: 18px 20px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+      box-shadow: var(--shadow-card);
+      transition: transform .18s, box-shadow .18s, border-color .18s;
     }
-    .legal-links {
-      display: flex; flex-wrap: wrap; gap: 12px;
+    .legal-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hero); border-color: var(--border-strong); }
+    .legal-ico {
+      width: 44px; height: 44px; border-radius: 13px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
     }
-    .legal-link {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 10px 18px;
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 14px; color: var(--sage-dk);
-      text-decoration: none; font-weight: 400;
-      transition: background .2s, border-color .2s;
+    .legal-ico svg { width: 20px; height: 20px; }
+    .legal-ico.i-mint { background: var(--mint-bg); color: var(--mint-accent); }
+    .legal-ico.i-warm { background: var(--warm-bg); color: var(--warm-accent); }
+    .l-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .l-title { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -.2px; }
+    .l-sub { font-size: 12.5px; color: var(--text-soft); margin-top: 3px; }
+    .l-arrow { flex-shrink: 0; color: var(--text-soft); transition: transform .18s, color .18s; }
+    .l-arrow svg { width: 18px; height: 18px; display: block; }
+    .legal-card:hover .l-arrow { transform: translateX(3px); color: var(--primary); }
+    .legal-shared {
+      margin-top: 22px; padding-top: 26px; border-top: 1px solid var(--border);
     }
-    .legal-link:hover { background: var(--sage-dk); color: var(--cream); border-color: var(--sage-dk); }
-    .legal-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .legal-card.danger { background: transparent; border-style: dashed; box-shadow: none; }
+    .legal-card.danger:hover { border-color: var(--coral); box-shadow: var(--shadow-card); }
+    .legal-card.danger .legal-ico { background: rgba(184,96,78,.12); color: var(--coral); }
+    .legal-card.danger:hover .l-arrow { color: var(--coral); }
+    @media (max-width: 720px) { .legal-groups { grid-template-columns: 1fr; gap: 24px; } }
 
     /* ── FOOTER ── */
     footer {
-      padding: 32px 48px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px;
-      font-size: 13px; color: var(--muted);
+      padding: 34px 40px; border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      font-size: 13.5px; color: var(--text-muted);
+      max-width: 1160px; margin: 0 auto;
     }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--sage-dk); }
+    footer a:hover { color: var(--primary); }
 
-    /* ── ANIMATIONS ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .7s, transform .7s;
-    }
+    /* ── reveal ── */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s, transform .7s; }
     .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; scroll-behavior: auto !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
 
-    /* ── RESPONSIVE ── */
+    /* ── responsive ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; padding-top: 128px; }
+      .hero-mock { grid-row: 1; max-width: 340px; margin-bottom: 8px; }
+    }
     @media (max-width: 680px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      .hero { padding: 120px 20px 60px; }
-      section { padding: 64px 20px; }
-      .legal-nav { padding: 40px 20px; }
-      footer { padding: 24px 20px; flex-direction: column; text-align: center; }
+      nav { padding: 14px 20px; }
+      .nav-links { gap: 16px; }
+      section { padding: 68px 20px; }
+      .family-band { margin: 0 20px; }
+      footer { padding: 26px 20px; flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
 
+  <!-- Language + theme controls (consistent with the legal pages) -->
+  <div class="controls" role="toolbar" aria-label="Language and theme">
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en">EN</button>
+      <button type="button" data-set-lang="ko">한국어</button>
+    </div>
+  </div>
+
   <nav>
-    <a class="nav-logo" href="/">Health<span>ya</span></a>
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#who">Who it's for</a></li>
-      <li><a href="#trust">Privacy & Safety</a></li>
-      <li><a href="#legal">Legal</a></li>
-    </ul>
+    <a class="nav-logo" href="/">
+      <span class="nav-mark">H</span>
+      <span>Health<span class="accent">ya</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="#features" class="nav-only-wide" data-i18n="nav_features">Features</a>
+      <a href="#who" class="nav-only-wide" data-i18n="nav_who">Who it's for</a>
+      <a href="#privacy" class="nav-only-wide" data-i18n="nav_privacy">Privacy</a>
+      <a href="#legal" class="nav-only-wide" data-i18n="nav_legal">Legal</a>
+      <a href="#launch" class="nav-cta" data-i18n="nav_cta">Get the app</a>
+    </div>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-ring"></div>
+    <div class="hero-bg" aria-hidden="true"></div>
     <div class="hero-content">
-      <p class="hero-eyebrow">AI Senior Health Companion · Launching Summer 2026</p>
-      <h1>Your Voice,<br><em>Your Health</em></h1>
-      <p class="hero-sub">The AI companion that listens, responds, and cares — designed for seniors, built for the whole family.</p>
+      <p class="eyebrow" data-i18n="hero_eyebrow">AI Health Companion · Now available</p>
+      <h1><span data-i18n="hero_title_1">Your voice.</span><br><span class="accent" data-i18n="hero_title_2">Your health, cared for.</span></h1>
+      <p class="hero-sub" data-i18n="hero_sub">Healthya is a voice-first AI companion for older adults — it listens, remembers, and helps with meals, medications, and everyday well-being. With a companion app that keeps family gently in the loop.</p>
       <div class="hero-cta">
-        <a href="mailto:hello@healthia.app" class="btn-primary">Get Early Access</a>
-        <a href="#features" class="btn-outline">See Features</a>
+        <a href="#launch" class="btn-primary" data-i18n="hero_cta_primary">Get the app</a>
+        <a href="#features" class="btn-ghost" data-i18n="hero_cta_secondary">See features</a>
       </div>
-      <div class="hero-badges">
-        <div class="badge"><span class="badge-dot"></span>HIPAA Ready</div>
-        <div class="badge"><span class="badge-dot"></span>CCPA Compliant</div>
-        <div class="badge"><span class="badge-dot"></span>E911 Integrated</div>
-        <div class="badge"><span class="badge-dot"></span>US Data Centers</div>
+      <div class="hero-chips">
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_ads">No ads · no data sales</span></div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_consent">You control every share</span></div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_us">US data residency</span></div>
+        <div class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_ccpa">CCPA / CPRA</span></div>
+      </div>
+    </div>
+
+    <!-- pure-CSS app preview -->
+    <div class="hero-mock" aria-hidden="true">
+      <div class="mock-hero-card">
+        <div class="greet" data-i18n="mock_greet">Good morning</div>
+        <div class="line" data-i18n="mock_line">How are you feeling today?</div>
+        <div class="mock-voice">
+          <div class="orb">🎙️</div>
+          <div class="mock-bars"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </div>
+      </div>
+      <div class="mock-grid">
+        <div class="mock-tile t-warm"><div class="t-emoji">💊</div><div class="t-label" data-i18n="mock_med">Medication</div><div class="t-value" data-i18n="mock_med_v">2 of 3 taken</div></div>
+        <div class="mock-tile t-mint"><div class="t-emoji">🍽️</div><div class="t-label" data-i18n="mock_meal">Breakfast</div><div class="t-value" data-i18n="mock_meal_v">Logged · 420 kcal</div></div>
+        <div class="mock-tile t-sky"><div class="t-emoji">💧</div><div class="t-label" data-i18n="mock_water">Hydration</div><div class="t-value" data-i18n="mock_water_v">4 cups</div></div>
+        <div class="mock-tile t-lilac"><div class="t-emoji">😴</div><div class="t-label" data-i18n="mock_sleep">Sleep</div><div class="t-value" data-i18n="mock_sleep_v">7h 20m</div></div>
       </div>
     </div>
   </section>
 
-  <!-- WHO IS IT FOR -->
-  <section class="for" id="who">
-    <div class="reveal">
-      <p class="section-label">Who it's for</p>
-      <h2 class="section-title">Three people.<br>One app.</h2>
-      <p class="section-sub">Peace of mind for the whole family — whether you're the senior, the adult child, or a care professional.</p>
-    </div>
-    <div class="for-grid reveal">
-      <div class="for-card">
-        <div class="for-icon">👴</div>
-        <h3>Seniors (65+)</h3>
-        <p>Manage health independently with voice commands — no tech experience needed. Just say "Hey Healthy."</p>
+  <!-- WHO -->
+  <section class="who" id="who">
+    <div class="who-inner">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="who_eyebrow">Who it's for</p>
+        <h2 data-i18n="who_title">One app, three people, less worry.</h2>
+        <p data-i18n="who_sub">Peace of mind for the whole family — whether you're the older adult, the adult child, or a care team supporting them.</p>
       </div>
-      <div class="for-card">
-        <div class="for-icon">👩</div>
-        <h3>Adult Children</h3>
-        <p>Stay informed about Mom or Dad's health without constant phone calls, through a real-time family dashboard.</p>
-      </div>
-      <div class="for-card">
-        <div class="for-icon">🏥</div>
-        <h3>Care Facilities & Insurers</h3>
-        <p>Reduce hospitalizations through proactive senior health monitoring and daily health summaries.</p>
+      <div class="who-grid reveal">
+        <div class="who-card">
+          <div class="who-badge t-mint">🧓</div>
+          <h3 data-i18n="who1_t">Older adults</h3>
+          <p data-i18n="who1_p">Manage the day just by talking — no typing, no menus to learn. Meals, medications, and check-ins, all by voice.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-badge t-warm">👨‍👩‍👧</div>
+          <h3 data-i18n="who2_t">Adult children</h3>
+          <p data-i18n="who2_p">Stay reassured without constant calls. The family app shows brief, consented summaries and sends emergency alerts.</p>
+        </div>
+        <div class="who-card">
+          <div class="who-badge t-sky">🏥</div>
+          <h3 data-i18n="who3_t">Care teams &amp; plans</h3>
+          <p data-i18n="who3_p">Support healthier routines with daily summaries and gentle, proactive nudges — always under the person's control.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FEATURES -->
   <section id="features">
-    <div class="reveal">
-      <p class="section-label">Features</p>
-      <h2 class="section-title">Everything you need<br>to stay healthy</h2>
-      <p class="section-sub">All features accessible in all three modes — voice, chat, or touch.</p>
+    <div class="section-head reveal">
+      <p class="eyebrow" data-i18n="feat_eyebrow">Features</p>
+      <h2 data-i18n="feat_title">Everything, by voice, chat, or touch.</h2>
+      <p data-i18n="feat_sub">Every feature works three ways — speak to it, type to it, or tap. Nothing is locked behind a keyboard.</p>
     </div>
-    <div class="features-grid reveal">
-      <div class="feature-cell">
-        <div class="feature-icon">🍽️</div>
-        <h3>Meal Tracking</h3>
-        <p>Snap a photo — AI instantly analyzes calories, nutrients, and suggests healthier alternatives.</p>
+    <div class="bento reveal">
+      <div class="cell c-mint wide tall">
+        <div class="c-emoji">🎙️</div>
+        <h3 data-i18n="f_voice_t">Voice-first companion</h3>
+        <p data-i18n="f_voice_p">Talk naturally about your day, ask health questions, or just chat. Healthya remembers your context and follows up like a good companion — warm, patient, never rushed.</p>
       </div>
-      <div class="feature-cell">
-        <div class="feature-icon">💊</div>
-        <h3>Medication Reminders</h3>
-        <p>Photo-scan your pill bottle for instant drug information, set reminders, and track daily adherence.</p>
+      <div class="cell c-warm">
+        <div class="c-emoji">🍽️</div>
+        <h3 data-i18n="f_meal_t">Meal tracking</h3>
+        <p data-i18n="f_meal_p">Snap a photo — AI reads the food, estimates nutrition, and suggests a balanced next meal.</p>
       </div>
-      <div class="feature-cell">
-        <div class="feature-icon">🤖</div>
-        <h3>AI Companion Chat</h3>
-        <p>Talk about how you're feeling, ask health questions, or just have a friendly conversation.</p>
+      <div class="cell c-sky">
+        <div class="c-emoji">💊</div>
+        <h3 data-i18n="f_med_t">Medication reminders</h3>
+        <p data-i18n="f_med_p">Scan a pill bottle or prescription for drug info, then get reminders and daily adherence tracking.</p>
       </div>
-      <div class="feature-cell">
-        <div class="feature-icon">🏃</div>
-        <h3>Exercise Guidance</h3>
-        <p>Senior-appropriate workout plans with step-by-step guidance, calibrated to your fitness level.</p>
+      <div class="cell c-lilac">
+        <div class="c-emoji">🌅</div>
+        <h3 data-i18n="f_brief_t">Morning briefing</h3>
+        <p data-i18n="f_brief_p">A daily start with weather, headlines, and today's appointments — plus weekly and monthly recaps.</p>
       </div>
-      <div class="feature-cell">
-        <div class="feature-icon">💧</div>
-        <h3>Hydration Tracker</h3>
-        <p>Track daily water intake by tap, voice, or chat. Gentle reminders throughout the day.</p>
+      <div class="cell c-plain">
+        <div class="c-emoji">💧</div>
+        <h3 data-i18n="f_hydra_t">Hydration &amp; exercise</h3>
+        <p data-i18n="f_hydra_p">Gentle water reminders and light activity tracking that fit into an ordinary day.</p>
       </div>
-      <div class="feature-cell">
-        <div class="feature-icon">📊</div>
-        <h3>Daily Health Summary</h3>
-        <p>Every morning, a personalized overview of yesterday's health and recommendations for today.</p>
+      <div class="cell c-warm">
+        <div class="c-emoji">📅</div>
+        <h3 data-i18n="f_cal_t">Calendar &amp; appointments</h3>
+        <p data-i18n="f_cal_p">Add appointments by voice and see them alongside the day's plan.</p>
       </div>
-      <div class="feature-cell">
-        <div class="feature-icon">👨‍👩‍👧</div>
-        <h3>Family Dashboard</h3>
-        <p>Share health data with family members and enjoy video calls — all inside one app.</p>
+      <div class="cell c-sky">
+        <div class="c-emoji">⌚</div>
+        <h3 data-i18n="f_health_t">Connected health apps</h3>
+        <p data-i18n="f_health_p">Optionally read sleep, steps, and activity from Apple Health or Google Health Connect — read-only.</p>
       </div>
-      <div class="feature-cell">
-        <div class="feature-icon">🚨</div>
-        <h3>Emergency SOS</h3>
-        <p>One touch or voice command instantly contacts 911 and sends your location to emergency contacts.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRUST -->
-  <section class="trust" id="trust">
-    <div class="reveal">
-      <p class="section-label">Privacy & Safety</p>
-      <h2 class="section-title">Built for trust.</h2>
-      <p class="section-sub">Health data deserves the highest protection. Healthya is designed with compliance built in from day one.</p>
-    </div>
-    <div class="trust-grid reveal">
-      <div class="trust-item">
-        <div class="check">✅</div>
-        <h3>HIPAA Ready</h3>
-        <p>Health data protected with Business Associate Agreements in place with all AI providers.</p>
-      </div>
-      <div class="trust-item">
-        <div class="check">✅</div>
-        <h3>CCPA Compliant</h3>
-        <p>Full California Consumer Privacy Act compliance with in-app consent flows.</p>
-      </div>
-      <div class="trust-item">
-        <div class="check">✅</div>
-        <h3>E911 Integrated</h3>
-        <p>Emergency messaging meets US wireless carrier standards for real emergency response.</p>
-      </div>
-      <div class="trust-item">
-        <div class="check">✅</div>
-        <h3>US Data Centers</h3>
-        <p>All user data stored exclusively in US-region cloud infrastructure. Your data stays in the US.</p>
+      <div class="cell c-plain wide">
+        <div class="c-emoji">🚑</div>
+        <h3 data-i18n="f_sos_t">Emergency help</h3>
+        <p data-i18n="f_sos_p">First-aid reference and a one-tap 911 dialer — the app opens your phone's dialer and you place the call. If you choose, family can get an alert with your location. Healthya is not an emergency response service.</p>
       </div>
     </div>
   </section>
 
-  <!-- LAUNCH CTA -->
+  <!-- FAMILY BAND -->
+  <div class="family-band reveal" id="family">
+    <div>
+      <p class="eyebrow" data-i18n="fam_eyebrow">The family app</p>
+      <h2 data-i18n="fam_title">Close, without hovering.</h2>
+      <p data-i18n="fam_sub">A separate companion app lets a linked family member support an older adult — only ever seeing what the senior has consented to share.</p>
+      <ul class="family-list">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam1">Brief, read-only health summaries — never the raw conversations.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam2">Optional generalized activity area — never a live location trail.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam3">Emergency alerts when the senior places a 911 call.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam4">Every share is turned on — and can be turned off — by the senior.</span></li>
+      </ul>
+    </div>
+    <div class="family-visual" aria-hidden="true">
+      <div class="fv-emoji">💛</div>
+      <div class="fv-title" data-i18n="fam_vt">Mom is doing well today</div>
+      <div class="fv-desc" data-i18n="fam_vd">Breakfast logged · medication on track · active this morning</div>
+    </div>
+  </div>
+
+  <!-- PRIVACY -->
+  <section class="privacy" id="privacy">
+    <div class="privacy-inner">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="priv_eyebrow">Privacy &amp; safety</p>
+        <h2 data-i18n="priv_title">Health data, treated like it matters.</h2>
+        <p data-i18n="priv_sub">Privacy is built in from the first screen — with clear consent, strong safeguards, and no advertising business hiding underneath.</p>
+      </div>
+      <div class="privacy-grid reveal">
+        <div class="privacy-item">
+          <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3 data-i18n="p1_t">No ads, no data sales</h3>
+          <p data-i18n="p1_p">We never sell or share your personal information for advertising, and never work with data brokers.</p>
+        </div>
+        <div class="privacy-item">
+          <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3 data-i18n="p2_t">You control every share</h3>
+          <p data-i18n="p2_p">Health sharing, location, and emergency alerts are each opt-in — toggle any of them on or off at any time.</p>
+        </div>
+        <div class="privacy-item">
+          <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3 data-i18n="p3_t">Health-app data stays read-only</h3>
+          <p data-i18n="p3_p">Data from Apple Health or Google Health Connect is read-only, never sold, and never used for ads.</p>
+        </div>
+        <div class="privacy-item">
+          <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3 data-i18n="p4_t">US data residency</h3>
+          <p data-i18n="p4_p">Data is stored in US-region infrastructure with encryption and per-user row-level isolation.</p>
+        </div>
+        <div class="privacy-item">
+          <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3 data-i18n="p5_t">Built around US privacy law</h3>
+          <p data-i18n="p5_p">Designed for CCPA / CPRA, Washington's My Health My Data Act, Illinois BIPA, and related state laws.</p>
+        </div>
+        <div class="privacy-item">
+          <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3 data-i18n="p6_t">Delete anytime</h3>
+          <p data-i18n="p6_p">Delete your account in-app or from the web, and your data is removed within 30 days.</p>
+        </div>
+      </div>
+      <p class="privacy-note" data-i18n="priv_note">Healthya supports daily well-being and is not a medical service or an emergency response service. It does not diagnose, treat, or replace professional medical care. In an emergency, call 911 or your local emergency number.</p>
+    </div>
+  </section>
+
+  <!-- LAUNCH -->
   <section class="launch" id="launch">
-    <div class="launch-inner reveal">
-      <p class="section-label">Coming Summer 2026</p>
-      <h2 class="section-title">Ready to get started?</h2>
-      <p class="section-sub">Launching on iOS and Android. Free to try, easy to use, designed for you.</p>
-      <a href="mailto:hello@healthia.app" class="btn-primary">Contact Us · hello@healthia.app</a>
-      <p class="launch-note">Developed by Deeper Emptiness AI · Launching Summer 2026</p>
+    <div class="launch-card reveal">
+      <p class="eyebrow" style="color:rgba(255,255,255,.85)" data-i18n="launch_eyebrow">Now available</p>
+      <h2 data-i18n="launch_title">Ready when you are.</h2>
+      <p data-i18n="launch_sub">Available now on iOS and Android. Free to start, simple to use, and designed for real life.</p>
+      <a href="mailto:hello@healthia.app" class="btn-primary" data-i18n="launch_cta">Contact us · hello@healthia.app</a>
+      <p class="launch-note" data-i18n="launch_note">Developed by Deeper Emptiness AI</p>
     </div>
   </section>
 
-  <!-- LEGAL LINKS -->
-  <div class="legal-nav" id="legal">
-    <h2>Legal Documents</h2>
-    <div class="legal-links">
-      <a href="senior-privacy-policy/" class="legal-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-        Senior App · Privacy Policy
-      </a>
-      <a href="senior-terms-of-service/" class="legal-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-        Senior App · Terms of Service
-      </a>
-      <a href="family-privacy-policy/" class="legal-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-        Family App · Privacy Policy
-      </a>
-      <a href="family-terms-of-service/" class="legal-link">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-        Family App · Terms of Service
-      </a>
+  <!-- LEGAL -->
+  <div class="legal" id="legal">
+    <div class="legal-inner">
+      <div class="section-head reveal">
+        <p class="eyebrow" data-i18n="legal_eyebrow">Legal</p>
+        <h2 data-i18n="legal_title">Legal &amp; privacy documents</h2>
+        <p data-i18n="legal_sub">Full policies for both apps, plus how to request account deletion.</p>
+      </div>
+      <div class="legal-groups reveal">
+        <div class="legal-group">
+          <div class="legal-group-head">
+            <span class="lg-badge i-mint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </span>
+            <span class="lg-label" data-i18n="legal_g_senior">Senior app</span>
+          </div>
+          <div class="legal-cards">
+            <a href="senior-privacy-policy/" class="legal-card">
+              <span class="legal-ico i-mint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              </span>
+              <span class="l-body">
+                <span class="l-title" data-i18n="legal_privacy">Privacy Policy</span>
+                <span class="l-sub" data-i18n="legal_privacy_s">How your data is handled</span>
+              </span>
+              <span class="l-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </a>
+            <a href="senior-terms-of-service/" class="legal-card">
+              <span class="legal-ico i-mint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+              </span>
+              <span class="l-body">
+                <span class="l-title" data-i18n="legal_terms">Terms of Service</span>
+                <span class="l-sub" data-i18n="legal_terms_s">Rules for using the app</span>
+              </span>
+              <span class="l-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="legal-group">
+          <div class="legal-group-head">
+            <span class="lg-badge i-warm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </span>
+            <span class="lg-label" data-i18n="legal_g_family">Family app</span>
+          </div>
+          <div class="legal-cards">
+            <a href="family-privacy-policy/" class="legal-card">
+              <span class="legal-ico i-warm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              </span>
+              <span class="l-body">
+                <span class="l-title" data-i18n="legal_privacy">Privacy Policy</span>
+                <span class="l-sub" data-i18n="legal_privacy_s">How your data is handled</span>
+              </span>
+              <span class="l-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </a>
+            <a href="family-terms-of-service/" class="legal-card">
+              <span class="legal-ico i-warm">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+              </span>
+              <span class="l-body">
+                <span class="l-title" data-i18n="legal_terms">Terms of Service</span>
+                <span class="l-sub" data-i18n="legal_terms_s">Rules for using the app</span>
+              </span>
+              <span class="l-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="legal-shared reveal">
+        <a href="account-deletion/" class="legal-card danger">
+          <span class="legal-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+          </span>
+          <span class="l-body">
+            <span class="l-title" data-i18n="legal_del">Request account deletion</span>
+            <span class="l-sub" data-i18n="legal_del_s">Applies to both apps · removes your account and data</span>
+          </span>
+          <span class="l-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </a>
+      </div>
     </div>
   </div>
 
   <footer>
-    <span>© 2026 Deeper Emptiness AI · Healthya</span>
-    <span>
-      <a href="mailto:hello@healthia.app">hello@healthia.app</a>
-    </span>
+    <span data-i18n="footer_copy">© 2026 Deeper Emptiness AI · Healthya</span>
+    <span><a href="mailto:hello@healthia.app">hello@healthia.app</a></span>
   </footer>
 
   <script>
-    // Scroll reveal
-    const observer = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); }),
-      { threshold: 0.1 }
-    );
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    /* ---------- i18n dictionary (EN / KO) ---------- */
+    var I18N = {
+      en: {
+        nav_features:"Features", nav_who:"Who it's for", nav_privacy:"Privacy", nav_legal:"Legal", nav_cta:"Get the app",
+        hero_eyebrow:"AI Health Companion · Now available",
+        hero_title_1:"Your voice.", hero_title_2:"Your health, cared for.",
+        hero_sub:"Healthya is a voice-first AI companion for older adults — it listens, remembers, and helps with meals, medications, and everyday well-being. With a companion app that keeps family gently in the loop.",
+        hero_cta_primary:"Get the app", hero_cta_secondary:"See features",
+        chip_ads:"No ads · no data sales", chip_consent:"You control every share", chip_us:"US data residency", chip_ccpa:"CCPA / CPRA",
+        mock_greet:"Good morning", mock_line:"How are you feeling today?",
+        mock_med:"Medication", mock_med_v:"2 of 3 taken", mock_meal:"Breakfast", mock_meal_v:"Logged · 420 kcal",
+        mock_water:"Hydration", mock_water_v:"4 cups", mock_sleep:"Sleep", mock_sleep_v:"7h 20m",
+        who_eyebrow:"Who it's for", who_title:"One app, three people, less worry.",
+        who_sub:"Peace of mind for the whole family — whether you're the older adult, the adult child, or a care team supporting them.",
+        who1_t:"Older adults", who1_p:"Manage the day just by talking — no typing, no menus to learn. Meals, medications, and check-ins, all by voice.",
+        who2_t:"Adult children", who2_p:"Stay reassured without constant calls. The family app shows brief, consented summaries and sends emergency alerts.",
+        who3_t:"Care teams & plans", who3_p:"Support healthier routines with daily summaries and gentle, proactive nudges — always under the person's control.",
+        feat_eyebrow:"Features", feat_title:"Everything, by voice, chat, or touch.",
+        feat_sub:"Every feature works three ways — speak to it, type to it, or tap. Nothing is locked behind a keyboard.",
+        f_voice_t:"Voice-first companion", f_voice_p:"Talk naturally about your day, ask health questions, or just chat. Healthya remembers your context and follows up like a good companion — warm, patient, never rushed.",
+        f_meal_t:"Meal tracking", f_meal_p:"Snap a photo — AI reads the food, estimates nutrition, and suggests a balanced next meal.",
+        f_med_t:"Medication reminders", f_med_p:"Scan a pill bottle or prescription for drug info, then get reminders and daily adherence tracking.",
+        f_brief_t:"Morning briefing", f_brief_p:"A daily start with weather, headlines, and today's appointments — plus weekly and monthly recaps.",
+        f_hydra_t:"Hydration & exercise", f_hydra_p:"Gentle water reminders and light activity tracking that fit into an ordinary day.",
+        f_cal_t:"Calendar & appointments", f_cal_p:"Add appointments by voice and see them alongside the day's plan.",
+        f_health_t:"Connected health apps", f_health_p:"Optionally read sleep, steps, and activity from Apple Health or Google Health Connect — read-only.",
+        f_sos_t:"Emergency help", f_sos_p:"First-aid reference and a one-tap 911 dialer — the app opens your phone's dialer and you place the call. If you choose, family can get an alert with your location. Healthya is not an emergency response service.",
+        fam_eyebrow:"The family app", fam_title:"Close, without hovering.",
+        fam_sub:"A separate companion app lets a linked family member support an older adult — only ever seeing what the senior has consented to share.",
+        fam1:"Brief, read-only health summaries — never the raw conversations.",
+        fam2:"Optional generalized activity area — never a live location trail.",
+        fam3:"Emergency alerts when the senior places a 911 call.",
+        fam4:"Every share is turned on — and can be turned off — by the senior.",
+        fam_vt:"Mom is doing well today", fam_vd:"Breakfast logged · medication on track · active this morning",
+        priv_eyebrow:"Privacy & safety", priv_title:"Health data, treated like it matters.",
+        priv_sub:"Privacy is built in from the first screen — with clear consent, strong safeguards, and no advertising business hiding underneath.",
+        p1_t:"No ads, no data sales", p1_p:"We never sell or share your personal information for advertising, and never work with data brokers.",
+        p2_t:"You control every share", p2_p:"Health sharing, location, and emergency alerts are each opt-in — toggle any of them on or off at any time.",
+        p3_t:"Health-app data stays read-only", p3_p:"Data from Apple Health or Google Health Connect is read-only, never sold, and never used for ads.",
+        p4_t:"US data residency", p4_p:"Data is stored in US-region infrastructure with encryption and per-user row-level isolation.",
+        p5_t:"Built around US privacy law", p5_p:"Designed for CCPA / CPRA, Washington's My Health My Data Act, Illinois BIPA, and related state laws.",
+        p6_t:"Delete anytime", p6_p:"Delete your account in-app or from the web, and your data is removed within 30 days.",
+        priv_note:"Healthya supports daily well-being and is not a medical service or an emergency response service. It does not diagnose, treat, or replace professional medical care. In an emergency, call 911 or your local emergency number.",
+        launch_eyebrow:"Now available", launch_title:"Ready when you are.",
+        launch_sub:"Available now on iOS and Android. Free to start, simple to use, and designed for real life.",
+        launch_cta:"Contact us · hello@healthia.app", launch_note:"Developed by Deeper Emptiness AI",
+        legal_eyebrow:"Legal", legal_title:"Legal & privacy documents", legal_sub:"Full policies for both apps, plus how to request account deletion.",
+        legal_g_senior:"Senior app", legal_g_family:"Family app",
+        legal_privacy:"Privacy Policy", legal_privacy_s:"How your data is handled",
+        legal_terms:"Terms of Service", legal_terms_s:"Rules for using the app",
+        legal_del:"Request account deletion", legal_del_s:"Applies to both apps · removes your account and data",
+        footer_copy:"© 2026 Deeper Emptiness AI · Healthya"
+      },
+      ko: {
+        nav_features:"기능", nav_who:"대상", nav_privacy:"개인정보", nav_legal:"약관", nav_cta:"앱 다운로드",
+        hero_eyebrow:"AI 건강 동반자 · 지금 이용 가능",
+        hero_title_1:"당신의 목소리로,", hero_title_2:"건강을 돌봅니다.",
+        hero_sub:"Healthya는 시니어를 위한 음성 우선 AI 동반자입니다. 이야기를 듣고, 기억하고, 식사·복약·일상 건강을 함께 챙깁니다. 가족이 부드럽게 함께할 수 있는 별도 앱도 있습니다.",
+        hero_cta_primary:"앱 다운로드", hero_cta_secondary:"기능 보기",
+        chip_ads:"광고 없음 · 데이터 판매 없음", chip_consent:"모든 공유는 본인이 결정", chip_us:"미국 내 데이터 보관", chip_ccpa:"CCPA / CPRA",
+        mock_greet:"좋은 아침이에요", mock_line:"오늘 기분은 어떠세요?",
+        mock_med:"복약", mock_med_v:"3개 중 2개 복용", mock_meal:"아침", mock_meal_v:"기록됨 · 420 kcal",
+        mock_water:"수분", mock_water_v:"4잔", mock_sleep:"수면", mock_sleep_v:"7시간 20분",
+        who_eyebrow:"이런 분들을 위해", who_title:"하나의 앱, 세 사람, 줄어드는 걱정.",
+        who_sub:"시니어 본인이든, 자녀든, 돌봄 팀이든 — 온 가족의 마음이 놓입니다.",
+        who1_t:"시니어", who1_p:"말만 하면 하루가 정리됩니다. 타이핑도, 배워야 할 메뉴도 없이 식사·복약·안부를 음성으로.",
+        who2_t:"자녀", who2_p:"자주 전화하지 않아도 안심할 수 있어요. 가족 앱은 동의된 짧은 요약을 보여주고 응급 알림을 보냅니다.",
+        who3_t:"돌봄 팀·보험", who3_p:"하루 요약과 부드러운 선제 알림으로 건강한 습관을 지원합니다 — 언제나 본인의 통제 아래에서.",
+        feat_eyebrow:"기능", feat_title:"음성으로, 채팅으로, 터치로.",
+        feat_sub:"모든 기능이 세 가지 방식으로 작동합니다 — 말하거나, 입력하거나, 누르거나. 키보드 뒤에 갇힌 기능은 없습니다.",
+        f_voice_t:"음성 우선 동반자", f_voice_p:"하루 이야기를 나누고, 건강을 묻고, 그냥 수다를 떨어도 좋아요. Healthya는 맥락을 기억하고 좋은 친구처럼 이어서 물어봅니다 — 따뜻하고, 서두르지 않게.",
+        f_meal_t:"식사 기록", f_meal_p:"사진 한 장이면 AI가 음식을 읽고 영양을 추정해 균형 잡힌 다음 끼니를 제안합니다.",
+        f_med_t:"복약 알림", f_med_p:"약통이나 처방전을 스캔해 약 정보를 확인하고, 알림과 하루 복용 관리를 받습니다.",
+        f_brief_t:"오늘의 브리핑", f_brief_p:"날씨·주요 뉴스·오늘의 약속으로 하루를 시작하고, 주간·월간 정리도 함께.",
+        f_hydra_t:"수분 & 운동", f_hydra_p:"부드러운 물 알림과 일상에 자연스럽게 녹아드는 가벼운 활동 기록.",
+        f_cal_t:"캘린더 & 약속", f_cal_p:"약속을 음성으로 추가하고 하루 계획과 함께 확인하세요.",
+        f_health_t:"건강 앱 연동", f_health_p:"선택 시 Apple 건강 또는 Google Health Connect에서 수면·걸음·활동을 읽어옵니다 — 읽기 전용.",
+        f_sos_t:"응급 지원", f_sos_p:"응급처치 안내와 원탭 911 발신 — 앱이 전화 다이얼러를 열어주면 통화는 본인이 직접 누릅니다. 원하시면 가족에게 위치가 담긴 알림이 갑니다. Healthya는 응급 대응 서비스가 아닙니다.",
+        fam_eyebrow:"가족 앱", fam_title:"가까이, 그러나 부담 없이.",
+        fam_sub:"별도의 가족 앱으로 연결된 가족이 시니어를 도울 수 있습니다 — 시니어가 공유에 동의한 것만 볼 수 있어요.",
+        fam1:"짧은 읽기 전용 건강 요약 — 대화 원문은 절대 보이지 않습니다.",
+        fam2:"선택적인 일반화된 활동 영역 — 실시간 동선은 아닙니다.",
+        fam3:"시니어가 911을 발신할 때 오는 응급 알림.",
+        fam4:"모든 공유는 시니어가 켜고 — 언제든 끌 수 있습니다.",
+        fam_vt:"오늘 어머니는 잘 지내고 계세요", fam_vd:"아침 식사 기록 · 복약 정상 · 오전에 활동적",
+        priv_eyebrow:"개인정보 & 안전", priv_title:"건강 데이터, 소중히 다룹니다.",
+        priv_sub:"개인정보 보호는 첫 화면부터 설계되어 있습니다 — 명확한 동의, 강력한 보호, 그리고 뒤에 숨은 광고 사업은 없습니다.",
+        p1_t:"광고 없음, 데이터 판매 없음", p1_p:"광고 목적으로 개인정보를 판매·공유하지 않으며, 데이터 브로커와 거래하지 않습니다.",
+        p2_t:"모든 공유는 본인이 결정", p2_p:"건강 공유·위치·응급 알림은 각각 옵트인입니다 — 언제든 켜고 끌 수 있습니다.",
+        p3_t:"건강 앱 데이터는 읽기 전용", p3_p:"Apple 건강 또는 Google Health Connect 데이터는 읽기 전용이며, 판매되거나 광고에 쓰이지 않습니다.",
+        p4_t:"미국 내 데이터 보관", p4_p:"데이터는 암호화와 사용자별 행 수준 격리로 미국 리전 인프라에 저장됩니다.",
+        p5_t:"미국 프라이버시법 기준 설계", p5_p:"CCPA / CPRA, 워싱턴 My Health My Data Act, 일리노이 BIPA 및 관련 주법을 고려해 설계했습니다.",
+        p6_t:"언제든 삭제", p6_p:"앱이나 웹에서 계정을 삭제하면 데이터는 30일 이내 삭제됩니다.",
+        priv_note:"Healthya는 일상 건강을 돕는 서비스이며 의료 서비스나 응급 대응 서비스가 아닙니다. 진단·치료하거나 전문 의료를 대체하지 않습니다. 응급 상황에서는 911 또는 현지 응급번호로 전화하세요.",
+        launch_eyebrow:"지금 이용 가능", launch_title:"준비되시면, 언제든.",
+        launch_sub:"iOS와 Android에서 지금 이용할 수 있습니다. 무료로 시작하고, 쉽게 쓰고, 실제 삶을 위해 만들었습니다.",
+        launch_cta:"문의 · hello@healthia.app", launch_note:"Deeper Emptiness AI 개발",
+        legal_eyebrow:"약관", legal_title:"약관 & 개인정보 문서", legal_sub:"두 앱의 전체 방침과 계정 삭제 요청 방법입니다.",
+        legal_g_senior:"시니어 앱", legal_g_family:"가족 앱",
+        legal_privacy:"개인정보처리방침", legal_privacy_s:"데이터를 어떻게 다루는지",
+        legal_terms:"이용약관", legal_terms_s:"앱 이용 규칙",
+        legal_del:"계정 삭제 요청", legal_del_s:"두 앱 공통 · 계정과 데이터 삭제",
+        footer_copy:"© 2026 Deeper Emptiness AI · Healthya"
+      }
+    };
+
+    (function () {
+      var root = document.documentElement;
+      var params = new URLSearchParams(location.search);
+      var store = {
+        get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+        set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+      };
+      function setActive(attr, value) {
+        var nodes = document.querySelectorAll('[' + attr + ']');
+        for (var i = 0; i < nodes.length; i++) {
+          nodes[i].setAttribute('aria-pressed', nodes[i].getAttribute(attr) === value ? 'true' : 'false');
+        }
+      }
+
+      /* Theme always follows the device (prefers-color-scheme); no manual override. */
+      root.removeAttribute('data-theme');
+
+      /* Language: ?lang= > saved > navigator > en */
+      function browserLang() { return (navigator.language || 'en').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en'; }
+      function applyLang(l) {
+        root.setAttribute('lang', l);
+        setActive('data-set-lang', l);
+        var dict = I18N[l] || I18N.en;
+        var nodes = document.querySelectorAll('[data-i18n]');
+        for (var i = 0; i < nodes.length; i++) {
+          var key = nodes[i].getAttribute('data-i18n');
+          if (dict[key] != null) nodes[i].textContent = dict[key];
+        }
+        var desc = { en: "Healthya is a voice-first AI health companion for older adults, with a companion app for family. Available now on iOS and Android.",
+                     ko: "Healthya는 시니어를 위한 음성 우선 AI 건강 동반자이며, 가족을 위한 별도 앱을 제공합니다. iOS와 Android에서 지금 이용 가능." };
+        var m = document.querySelector('meta[name="description"]'); if (m) m.setAttribute('content', desc[l] || desc.en);
+      }
+      var qpLang = params.get('lang');
+      var lang = (qpLang === 'ko' || qpLang === 'en') ? qpLang : (store.get('healthia-doc-lang') || browserLang());
+      applyLang(lang);
+
+      /* Manual toggles */
+      function wire(attr, key, apply) {
+        var nodes = document.querySelectorAll('[' + attr + ']');
+        for (var i = 0; i < nodes.length; i++) {
+          (function (node) {
+            node.addEventListener('click', function () {
+              var v = node.getAttribute(attr); store.set(key, v); apply(v);
+            });
+          })(nodes[i]);
+        }
+      }
+      wire('data-set-lang', 'healthia-doc-lang', applyLang);
+
+      /* Scroll reveal */
+      var observer = new IntersectionObserver(
+        function (entries) { entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('in'); }); },
+        { threshold: 0.12 }
+      );
+      document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+    })();
   </script>
 </body>
 </html>
