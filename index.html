@@ -8,10 +8,18 @@
   <meta name="theme-color" content="#0E7490" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#0B1220" media="(prefers-color-scheme: dark)" />
 
+  <!-- Favicon -->
+  <link rel="icon" href="favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/icon_apple.png" />
+  <link rel="apple-touch-icon" href="assets/icon_apple.png" />
+
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Healthya · Your Voice, Your Health" />
   <meta property="og:description" content="A voice-first AI health companion for older adults — and the family who cares for them." />
+  <meta property="og:image" content="assets/icon_apple.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:image" content="assets/icon_apple.png" />
 
   <!-- Pretendard (matches the in-app typeface) with a graceful system fallback -->
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
@@ -25,6 +33,7 @@
        Pastel tint surfaces: warm / mint / sky / lilac
        =================================================================== */
     :root {
+      --nav-h:         68px;   /* fixed nav bar height — controls offset derives from this */
       --bg:            #FFFFFF;
       --surface:       #F7F8FA;
       --card:          #FFFFFF;
@@ -109,7 +118,7 @@
 
     /* ── CONTROLS (lang + theme), mirrors legal docs ── */
     .controls {
-      position: fixed; top: 74px; right: 16px; z-index: 90;
+      position: fixed; top: calc(var(--nav-h) + 8px); right: 16px; z-index: 90;
       display: flex; gap: 8px;
     }
     .seg {
@@ -128,19 +137,14 @@
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: var(--nav-h); box-sizing: border-box;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 40px;
+      padding: 0 40px;
       background: var(--nav-bg); backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
     }
     .nav-logo { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: -.4px; }
-    .nav-mark {
-      width: 30px; height: 30px; border-radius: 9px;
-      background: linear-gradient(135deg, var(--primary), var(--mint));
-      display: inline-flex; align-items: center; justify-content: center;
-      color: #fff; font-size: 17px;
-      box-shadow: 0 3px 10px rgba(14,116,144,.35);
-    }
+    .nav-wordmark { height: 60px; width: auto; display: block; }
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a { font-size: 14.5px; color: var(--text-muted); transition: color .2s; }
     .nav-links a:hover { color: var(--primary); }
@@ -402,12 +406,44 @@
     }
 
     /* ── responsive ── */
+    /* ── STORE MODAL (app picker) ── */
+    .store-modal {
+      position: fixed; inset: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+    }
+    .store-modal[hidden] { display: none; }
+    .store-backdrop { position: absolute; inset: 0; background: rgba(8,15,30,.55); backdrop-filter: blur(4px); }
+    .store-dialog {
+      position: relative; z-index: 1; width: 100%; max-width: 440px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 22px;
+      padding: 28px 24px; box-shadow: 0 24px 60px rgba(0,0,0,.28);
+    }
+    .store-x {
+      position: absolute; top: 12px; right: 14px; width: 34px; height: 34px;
+      background: transparent; border: none; font-size: 24px; line-height: 1;
+      color: var(--text-muted); cursor: pointer; border-radius: 999px;
+    }
+    .store-x:hover { background: var(--surface); color: var(--text); }
+    .store-dialog h2 { font-size: 22px; margin: 2px 0 6px; }
+    .store-sub { color: var(--text-muted); font-size: 15px; margin-bottom: 20px; }
+    .store-options { display: grid; gap: 14px; }
+    .store-card {
+      text-align: left; display: grid; gap: 5px; padding: 18px;
+      border: 1.5px solid var(--border-strong); border-radius: 16px;
+      background: var(--surface); cursor: pointer; font: inherit;
+      transition: border-color .2s, transform .15s, background .2s;
+    }
+    .store-card:hover { border-color: var(--primary); transform: translateY(-2px); }
+    .store-card-name { font-size: 17px; font-weight: 700; color: var(--text); }
+    .store-card-desc { font-size: 14px; color: var(--text-muted); line-height: 1.45; }
+    .store-card-cta { font-size: 13.5px; font-weight: 600; color: var(--primary); margin-top: 4px; }
+
     @media (max-width: 900px) {
       .hero { grid-template-columns: 1fr; padding-top: 128px; }
       .hero-mock { grid-row: 1; max-width: 340px; margin-bottom: 8px; }
     }
     @media (max-width: 680px) {
-      nav { padding: 14px 20px; }
+      nav { padding: 0 20px; }
       .nav-links { gap: 16px; }
       section { padding: 68px 20px; }
       .family-band { margin: 0 20px; }
@@ -427,17 +463,38 @@
 
   <nav>
     <a class="nav-logo" href="/">
-      <span class="nav-mark">H</span>
-      <span>Health<span class="accent">ya</span></span>
+      <img class="nav-wordmark" src="assets/banner.webp" alt="Healthya · Senior Wellness Companion" />
     </a>
     <div class="nav-links">
       <a href="#features" class="nav-only-wide" data-i18n="nav_features">Features</a>
       <a href="#who" class="nav-only-wide" data-i18n="nav_who">Who it's for</a>
       <a href="#privacy" class="nav-only-wide" data-i18n="nav_privacy">Privacy</a>
       <a href="#legal" class="nav-only-wide" data-i18n="nav_legal">Legal</a>
-      <a href="#launch" class="nav-cta" data-i18n="nav_cta">Get the app</a>
+      <a href="#launch" class="nav-cta" data-i18n="nav_cta" data-store-trigger>Get the app</a>
     </div>
   </nav>
+
+  <!-- Store picker modal (opens on "Get the app") -->
+  <div class="store-modal" id="storeModal" hidden>
+    <div class="store-backdrop" data-store-close></div>
+    <div class="store-dialog" role="dialog" aria-modal="true" aria-labelledby="storeModalTitle">
+      <button class="store-x" type="button" data-store-close aria-label="Close">&times;</button>
+      <h2 id="storeModalTitle" data-i18n="store_title">Get the app</h2>
+      <p class="store-sub" data-i18n="store_sub">Choose the app that's right for you.</p>
+      <div class="store-options">
+        <button class="store-card" type="button" data-store-app="senior">
+          <span class="store-card-name" data-i18n="store_senior_name">Healthya</span>
+          <span class="store-card-desc" data-i18n="store_senior_desc">For seniors. Your voice-first health companion — talk, get reminders, and stay well every day.</span>
+          <span class="store-card-cta" data-store-cta></span>
+        </button>
+        <button class="store-card" type="button" data-store-app="family">
+          <span class="store-card-name" data-i18n="store_family_name">Healthya Family</span>
+          <span class="store-card-desc" data-i18n="store_family_desc">For family members. Gently stay in the loop and support your loved one's well-being.</span>
+          <span class="store-card-cta" data-store-cta></span>
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- HERO -->
   <section class="hero">
@@ -447,7 +504,7 @@
       <h1><span data-i18n="hero_title_1">Your voice.</span><br><span class="accent" data-i18n="hero_title_2">Your health, cared for.</span></h1>
       <p class="hero-sub" data-i18n="hero_sub">Healthya is a voice-first AI companion for older adults — it listens, remembers, and helps with meals, medications, and everyday well-being. With a companion app that keeps family gently in the loop.</p>
       <div class="hero-cta">
-        <a href="#launch" class="btn-primary" data-i18n="hero_cta_primary">Get the app</a>
+        <a href="#launch" class="btn-primary" data-i18n="hero_cta_primary" data-store-trigger>Get the app</a>
         <a href="#features" class="btn-ghost" data-i18n="hero_cta_secondary">See features</a>
       </div>
       <div class="hero-chips">
@@ -770,6 +827,9 @@
         launch_eyebrow:"Now available", launch_title:"Ready when you are.",
         launch_sub:"Available now on iOS and Android. Free to start, simple to use, and designed for real life.",
         launch_cta:"Contact us · hello@healthia.app", launch_note:"Developed by Deeper Emptiness AI",
+        store_title:"Get the app", store_sub:"Choose the app that's right for you.",
+        store_senior_name:"Healthya", store_senior_desc:"For seniors. Your voice-first health companion — talk, get reminders, and stay well every day.",
+        store_family_name:"Healthya Family", store_family_desc:"For family members. Gently stay in the loop and support your loved one's well-being.",
         legal_eyebrow:"Legal", legal_title:"Legal & privacy documents", legal_sub:"Full policies for both apps, plus how to request account deletion.",
         legal_g_senior:"Senior app", legal_g_family:"Family app",
         legal_privacy:"Privacy Policy", legal_privacy_s:"How your data is handled",
@@ -821,6 +881,9 @@
         launch_eyebrow:"지금 이용 가능", launch_title:"준비되시면, 언제든.",
         launch_sub:"iOS와 Android에서 지금 이용할 수 있습니다. 무료로 시작하고, 쉽게 쓰고, 실제 삶을 위해 만들었습니다.",
         launch_cta:"문의 · hello@healthia.app", launch_note:"Deeper Emptiness AI 개발",
+        store_title:"앱 다운로드", store_sub:"본인에게 맞는 앱을 선택하세요.",
+        store_senior_name:"Healthya", store_senior_desc:"시니어용. 음성으로 함께하는 건강 동반자 — 대화하고, 알림을 받고, 매일 건강을 챙깁니다.",
+        store_family_name:"Healthya Family", store_family_desc:"가족용. 사랑하는 분의 일상을 부드럽게 살피고 건강을 함께 응원합니다.",
         legal_eyebrow:"약관", legal_title:"약관 & 개인정보 문서", legal_sub:"두 앱의 전체 방침과 계정 삭제 요청 방법입니다.",
         legal_g_senior:"시니어 앱", legal_g_family:"가족 앱",
         legal_privacy:"개인정보처리방침", legal_privacy_s:"데이터를 어떻게 다루는지",
@@ -878,6 +941,58 @@
         }
       }
       wire('data-set-lang', 'healthia-doc-lang', applyLang);
+
+      /* ---------- Store picker (device-aware app download) ----------
+         Play Store URLs derive from the package name; App Store URLs use the
+         app's numeric id. Update these if a store listing ever changes. */
+      var STORE = {
+        senior: {
+          ios:     'https://apps.apple.com/app/id6783849123',
+          android: 'https://play.google.com/store/apps/details?id=com.deeperemptinessai.healthia'
+        },
+        family: {
+          ios:     'https://apps.apple.com/app/id6782605872',
+          android: 'https://play.google.com/store/apps/details?id=com.deeperemptinessai.healthiafamily'
+        }
+      };
+      var STORE_CTA = {
+        en: { ios: 'Open App Store →', android: 'Open Google Play →', other: 'View in store →' },
+        ko: { ios: 'App Store 열기 →', android: 'Google Play 열기 →', other: '스토어에서 보기 →' }
+      };
+      function detectPlatform() {
+        var ua = navigator.userAgent || navigator.vendor || '';
+        if (/android/i.test(ua)) return 'android';
+        if (/iPad|iPhone|iPod/i.test(ua)) return 'ios';
+        if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return 'ios'; /* iPadOS */
+        return 'other';
+      }
+      function currentLang() { return root.getAttribute('lang') === 'ko' ? 'ko' : 'en'; }
+      var modal = document.getElementById('storeModal');
+      function refreshStoreCta() {
+        var p = detectPlatform();
+        var dict = STORE_CTA[currentLang()] || STORE_CTA.en;
+        var label = dict[p] || dict.other;
+        document.querySelectorAll('[data-store-cta]').forEach(function (el) { el.textContent = label; });
+      }
+      function openModal() { refreshStoreCta(); modal.hidden = false; document.body.style.overflow = 'hidden'; }
+      function closeModal() { modal.hidden = true; document.body.style.overflow = ''; }
+      function openStore(appKey) {
+        var app = STORE[appKey]; if (!app) return;
+        var p = detectPlatform();
+        var url = app[p] || app.ios; /* desktop / unknown → App Store */
+        window.open(url, '_blank', 'noopener');
+        closeModal();
+      }
+      document.querySelectorAll('[data-store-trigger]').forEach(function (el) {
+        el.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+      });
+      document.querySelectorAll('[data-store-app]').forEach(function (el) {
+        el.addEventListener('click', function () { openStore(el.getAttribute('data-store-app')); });
+      });
+      document.querySelectorAll('[data-store-close]').forEach(function (el) {
+        el.addEventListener('click', closeModal);
+      });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
 
       /* Scroll reveal */
       var observer = new IntersectionObserver(
