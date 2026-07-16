@@ -980,8 +980,16 @@
         var app = STORE[appKey]; if (!app) return;
         var p = detectPlatform();
         var url = app[p] || app.ios; /* desktop / unknown → App Store */
-        window.open(url, '_blank', 'noopener');
         closeModal();
+        if (p === 'other') {
+          /* desktop: open in a new tab, keep the landing page */
+          var w = window.open(url, '_blank');
+          if (w) { w.opener = null; }
+        } else {
+          /* mobile: navigate the current tab so iOS/Android hands off to the store app.
+             A features-string popup (window.open) is blocked by Safari → blank white tab. */
+          window.location.href = url;
+        }
       }
       document.querySelectorAll('[data-store-trigger]').forEach(function (el) {
         el.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
