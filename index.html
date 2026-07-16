@@ -431,6 +431,7 @@
       text-align: left; display: grid; gap: 5px; padding: 18px;
       border: 1.5px solid var(--border-strong); border-radius: 16px;
       background: var(--surface); cursor: pointer; font: inherit;
+      color: inherit; text-decoration: none;
       transition: border-color .2s, transform .15s, background .2s;
     }
     .store-card:hover { border-color: var(--primary); transform: translateY(-2px); }
@@ -482,16 +483,16 @@
       <h2 id="storeModalTitle" data-i18n="store_title">Get the app</h2>
       <p class="store-sub" data-i18n="store_sub">Choose the app that's right for you.</p>
       <div class="store-options">
-        <button class="store-card" type="button" data-store-app="senior">
+        <a class="store-card" data-store-app="senior" href="#">
           <span class="store-card-name" data-i18n="store_senior_name">Healthya</span>
           <span class="store-card-desc" data-i18n="store_senior_desc">For seniors. Your voice-first health companion — talk, get reminders, and stay well every day.</span>
           <span class="store-card-cta" data-store-cta></span>
-        </button>
-        <button class="store-card" type="button" data-store-app="family">
+        </a>
+        <a class="store-card" data-store-app="family" href="#">
           <span class="store-card-name" data-i18n="store_family_name">Healthya Family</span>
           <span class="store-card-desc" data-i18n="store_family_desc">For family members. Gently stay in the loop and support your loved one's well-being.</span>
           <span class="store-card-cta" data-store-cta></span>
-        </button>
+        </a>
       </div>
     </div>
   </div>
@@ -968,34 +969,32 @@
       }
       function currentLang() { return root.getAttribute('lang') === 'ko' ? 'ko' : 'en'; }
       var modal = document.getElementById('storeModal');
-      function refreshStoreCta() {
+      /* Point each card at the right store URL and set its label for THIS device.
+         The cards are real <a> anchors: on iOS a genuine anchor tap triggers the
+         App Store universal link (JS-set location.href does NOT — it just loads the
+         apps.apple.com web page → blank). Desktop opens the listing in a new tab. */
+      function refreshStore() {
         var p = detectPlatform();
+        var storeKey = (p === 'other') ? 'ios' : p; /* desktop / unknown → App Store */
         var dict = STORE_CTA[currentLang()] || STORE_CTA.en;
         var label = dict[p] || dict.other;
-        document.querySelectorAll('[data-store-cta]').forEach(function (el) { el.textContent = label; });
+        document.querySelectorAll('[data-store-app]').forEach(function (a) {
+          var app = STORE[a.getAttribute('data-store-app')];
+          if (app) { a.setAttribute('href', app[storeKey] || app.ios); }
+          if (p === 'other') { a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener'); }
+          else { a.removeAttribute('target'); a.removeAttribute('rel'); }
+          var cta = a.querySelector('[data-store-cta]');
+          if (cta) { cta.textContent = label; }
+        });
       }
-      function openModal() { refreshStoreCta(); modal.hidden = false; document.body.style.overflow = 'hidden'; }
+      function openModal() { refreshStore(); modal.hidden = false; document.body.style.overflow = 'hidden'; }
       function closeModal() { modal.hidden = true; document.body.style.overflow = ''; }
-      function openStore(appKey) {
-        var app = STORE[appKey]; if (!app) return;
-        var p = detectPlatform();
-        var url = app[p] || app.ios; /* desktop / unknown → App Store */
-        closeModal();
-        if (p === 'other') {
-          /* desktop: open in a new tab, keep the landing page */
-          var w = window.open(url, '_blank');
-          if (w) { w.opener = null; }
-        } else {
-          /* mobile: navigate the current tab so iOS/Android hands off to the store app.
-             A features-string popup (window.open) is blocked by Safari → blank white tab. */
-          window.location.href = url;
-        }
-      }
       document.querySelectorAll('[data-store-trigger]').forEach(function (el) {
         el.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
       });
+      /* Let the anchor's native navigation happen (do NOT preventDefault); just close the overlay. */
       document.querySelectorAll('[data-store-app]').forEach(function (el) {
-        el.addEventListener('click', function () { openStore(el.getAttribute('data-store-app')); });
+        el.addEventListener('click', function () { closeModal(); });
       });
       document.querySelectorAll('[data-store-close]').forEach(function (el) {
         el.addEventListener('click', closeModal);
