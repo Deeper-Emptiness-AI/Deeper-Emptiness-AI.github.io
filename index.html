@@ -944,43 +944,45 @@
       wire('data-set-lang', 'healthia-doc-lang', applyLang);
 
       /* ---------- Store picker (device-aware app download) ----------
-         Play Store URLs derive from the package name; App Store URLs use the
-         app's numeric id. Update these if a store listing ever changes. */
+         Identifiers only. We build native store-app deep links so the App Store /
+         Play Store *app* opens directly (itms-apps:// , market:// , macappstore://),
+         which launches even when the listing isn't published yet. Only unknown
+         desktop OSes fall back to the https web listing in a new tab. */
       var STORE = {
-        senior: {
-          ios:     'https://apps.apple.com/app/id6783849123',
-          android: 'https://play.google.com/store/apps/details?id=com.deeperemptinessai.healthia'
-        },
-        family: {
-          ios:     'https://apps.apple.com/app/id6782605872',
-          android: 'https://play.google.com/store/apps/details?id=com.deeperemptinessai.healthiafamily'
-        }
+        senior: { appleId: '6783849123', androidPkg: 'com.deeperemptinessai.healthia' },
+        family: { appleId: '6782605872', androidPkg: 'com.deeperemptinessai.healthiafamily' }
       };
+      function storeUrl(app, p) {
+        if (p === 'android') return 'market://details?id=' + app.androidPkg;
+        if (p === 'ios')     return 'itms-apps://apps.apple.com/app/id' + app.appleId;
+        if (p === 'mac')     return 'macappstore://apps.apple.com/app/id' + app.appleId;
+        return 'https://apps.apple.com/app/id' + app.appleId; /* other desktop → web */
+      }
       var STORE_CTA = {
-        en: { ios: 'Open App Store →', android: 'Open Google Play →', other: 'View in store →' },
-        ko: { ios: 'App Store 열기 →', android: 'Google Play 열기 →', other: '스토어에서 보기 →' }
+        en: { ios:'Open App Store →', mac:'Open App Store →', android:'Open Google Play →', other:'View in store →' },
+        ko: { ios:'App Store 열기 →', mac:'App Store 열기 →', android:'Google Play 열기 →', other:'스토어에서 보기 →' }
       };
       function detectPlatform() {
         var ua = navigator.userAgent || navigator.vendor || '';
         if (/android/i.test(ua)) return 'android';
         if (/iPad|iPhone|iPod/i.test(ua)) return 'ios';
         if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return 'ios'; /* iPadOS */
+        if (/Macintosh|Mac OS X/i.test(ua) || navigator.platform === 'MacIntel') return 'mac';
         return 'other';
       }
       function currentLang() { return root.getAttribute('lang') === 'ko' ? 'ko' : 'en'; }
       var modal = document.getElementById('storeModal');
-      /* Point each card at the right store URL and set its label for THIS device.
-         The cards are real <a> anchors: on iOS a genuine anchor tap triggers the
-         App Store universal link (JS-set location.href does NOT — it just loads the
-         apps.apple.com web page → blank). Desktop opens the listing in a new tab. */
+      /* Point each card at the right store link and label for THIS device. Cards are
+         real <a> anchors so a genuine tap fires the native scheme (JS-set location.href
+         is unreliable for app hand-off). Native schemes open in place; only the desktop
+         web fallback opens a new tab. */
       function refreshStore() {
         var p = detectPlatform();
-        var storeKey = (p === 'other') ? 'ios' : p; /* desktop / unknown → App Store */
         var dict = STORE_CTA[currentLang()] || STORE_CTA.en;
         var label = dict[p] || dict.other;
         document.querySelectorAll('[data-store-app]').forEach(function (a) {
           var app = STORE[a.getAttribute('data-store-app')];
-          if (app) { a.setAttribute('href', app[storeKey] || app.ios); }
+          if (app) { a.setAttribute('href', storeUrl(app, p)); }
           if (p === 'other') { a.setAttribute('target', '_blank'); a.setAttribute('rel', 'noopener'); }
           else { a.removeAttribute('target'); a.removeAttribute('rel'); }
           var cta = a.querySelector('[data-store-cta]');
