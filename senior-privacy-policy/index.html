@@ -130,7 +130,7 @@
     <!-- ===================== ENGLISH ===================== -->
     <article data-lang-block="en">
     <h1>Healthya Privacy Policy</h1>
-    <p class="meta">Applies to: Healthya (senior app) · Effective: June 21, 2026 · Last updated: July 9, 2026 · Consent version: 2026-06-21</p>
+    <p class="meta">Applies to: Healthya (senior app) · Effective: June 21, 2026 · Last updated: July 17, 2026 · Consent version: 2026-07-17</p>
 
     <div class="callout">
       <p><strong>At a glance.</strong> Healthya is an AI companion app supporting older adults with daily health and conversation. This policy explains what we collect, with whom we share it, and how you can exercise your rights. We do not sell or share your personal information for advertising.</p>
@@ -176,7 +176,7 @@
         <tr><td>Geolocation — approximate (optional)</td><td>City / district level only, used for local personalization (e.g., weather-based conversation). We do not store precise coordinates for this purpose. Optionally, a generalized "activity area" (last 7 days, rounded to roughly 1–2&nbsp;km blocks) may be shared with your linked family.</td></tr>
         <tr><td>Geolocation — precise (optional, emergency only)</td><td>Your precise location captured <strong>once</strong>, at the moment you place a 911 call, and shared with your linked family so they can help. See section 7.</td></tr>
         <tr><td>Audio / visual (optional)</td><td>Microphone signal (real-time only, not stored); meal and medication / prescription photos you choose to upload</td></tr>
-        <tr><td>Health &amp; fitness from connected health apps (optional)</td><td>Read-only sleep times, steps, distance, active energy, and workout sessions imported from Apple Health or Google Health Connect. See section 8.</td></tr>
+        <tr><td>Health &amp; fitness from connected health apps (optional)</td><td>Read-only measurements imported from Apple Health or Google Health Connect: sleep and sleep stages, steps, distance, active energy, and workout sessions; vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate); blood sugar and weight; fitness and gait (VO2 max, heart rate variability, walking steadiness / speed); and mental wellness (mindfulness sessions and mood). See section 8.</td></tr>
         <tr><td>Health activity records</td><td>Meal logs (time, type, optional photo / nutrition analysis), exercise (duration, type), medication (name, dose, schedule, intake), hydration (intake events), sleep (start / end times)</td></tr>
         <tr><td>Self-reported health</td><td>Symptoms, mood, emotion notes</td></tr>
         <tr><td>AI memory</td><td>Distilled one-line "moments" from conversation, encrypted verbatim quotes, and semantic embeddings used so the assistant can remember your context</td></tr>
@@ -243,10 +243,11 @@
       <li><strong>Exercise</strong> — type and duration (minutes)</li>
       <li><strong>Medication</strong> — registered medications (name, dose, schedule), intake events, photos of pill bottles / prescriptions you uploaded</li>
       <li><strong>Hydration</strong> — water intake events</li>
-      <li><strong>Sleep</strong> — sleep start / end timestamps (including measurements imported from a connected health app, if enabled)</li>
+      <li><strong>Sleep</strong> — sleep start / end timestamps and sleep stages (including measurements imported from a connected health app, if enabled)</li>
+      <li><strong>Device health metrics</strong> (if you connected a health app) — steps, distance, active energy, vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate), blood sugar / weight, and fitness / gait measurements imported from Apple Health or Google Health Connect</li>
       <li><strong>Recent activity timestamp</strong> — when you were last active in the app</li>
     </ul>
-    <p>Free-form conversation content, AI memory, learned preferences, voice signals, and consent history are <strong>never</strong> shared with family.</p>
+    <p><strong>Mental-wellness data</strong> (mindfulness minutes and self-logged mood imported from a connected health app) is <strong>never</strong> shared with family — it is redacted server-side even when health-sharing consent is on. Free-form conversation content, AI memory, learned preferences, voice signals, and consent history are also <strong>never</strong> shared with family.</p>
 
     <h3>6.3 Optional location sharing with family</h3>
     <ul>
@@ -282,10 +283,14 @@
     <h2 id="en-health-apps">8. Connected health apps (Apple Health / Google Health Connect)</h2>
     <p>If you enable <em>Connect health app</em> (optional), Healthya reads the following from Apple Health (iOS) or Google Health Connect (Android), with your separate OS-level permission:</p>
     <ul>
-      <li>Sleep start / end times and total sleep minutes</li>
-      <li>Steps and walking / running distance</li>
+      <li>Sleep start / end times, total sleep minutes, and sleep stages (deep / REM), where available</li>
+      <li>Steps, walking / running distance, and floors climbed</li>
       <li>Active energy (calories)</li>
       <li>Workout sessions (type, start time, duration)</li>
+      <li>Vital signs — heart rate, resting heart rate, blood pressure, oxygen saturation, body temperature, respiratory rate</li>
+      <li>Blood sugar (glucose) and body weight</li>
+      <li>Fitness and gait — VO2 max, heart rate variability, walking steadiness, walking speed, six-minute walk distance (some are iOS-only, imported where available)</li>
+      <li>Mental wellness — mindfulness session minutes and self-logged mood (Apple Health State of Mind). This category is used only in your own app and is <strong>never</strong> shared with family (see section 6.2)</li>
     </ul>
     <p><strong>Read-only.</strong> Healthya only reads this data; it never writes back to your health app. We use it solely to make your in-app daily summary reflect your real measurements.</p>
     <p><strong>Apple / Google requirement.</strong> Data obtained from Apple Health or Google Health Connect is never used for advertising or marketing, is never sold, and is never shared with data brokers. It is stored under your account with row-level security. You can turn the connection off at any time in <em>Settings</em>; on withdrawal, the imported health metrics are deleted (within 30 days).</p>
@@ -346,7 +351,7 @@
     <h3>13.1 Categories collected</h3>
     <ul>
       <li>Meal, medication, hydration, sleep, and exercise records and photos</li>
-      <li>Sleep / steps / activity imported from a connected health app (optional)</li>
+      <li>Sleep, steps, activity, vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate), blood sugar, weight, fitness / gait, and mental-wellness measurements (mindfulness, mood) imported from a connected health app (optional)</li>
       <li>Inferred physical / emotional state from conversation</li>
       <li>Pill bottle and prescription photos (if uploaded)</li>
       <li>Voice signals (real-time processing, not stored)</li>
@@ -401,7 +406,7 @@
     <!-- ===================== 한국어 ===================== -->
     <article data-lang-block="ko">
     <h1>Healthya 개인정보처리방침</h1>
-    <p class="meta">적용 대상: Healthya(시니어 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 7월 9일 · 동의 버전: 2026-06-21</p>
+    <p class="meta">적용 대상: Healthya(시니어 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 7월 17일 · 동의 버전: 2026-07-17</p>
 
     <div class="callout">
       <p><strong>핵심 요약.</strong> Healthya는 어르신의 일상 건강과 대화를 돕는 AI 동반자 앱입니다. 본 방침은 어떤 정보를 수집하고, 누구와 공유하며, 어떻게 권리를 행사할 수 있는지 설명합니다. 저희는 광고 목적으로 개인정보를 판매하거나 공유하지 않습니다.</p>
@@ -447,7 +452,7 @@
         <tr><td>위치 — 대략(선택)</td><td>시·구 단위만 사용하며 지역 맞춤(예: 날씨 기반 대화)에 활용합니다. 이 목적으로 정밀 좌표를 저장하지 않습니다. 선택 시, 최근 7일의 일반화된 "활동 영역"(약 1~2&nbsp;km 블록 단위로 반올림)을 연결된 가족에게 공유할 수 있습니다.</td></tr>
         <tr><td>위치 — 정밀(선택, 응급 전용)</td><td>911 발신 순간에 <strong>1회</strong> 캡처되는 정밀 위치로, 가족이 도울 수 있도록 연결된 가족에게 공유됩니다. 7항 참조.</td></tr>
         <tr><td>음성/영상(선택)</td><td>마이크 신호(실시간 처리만, 저장 안 함); 직접 업로드한 식사·약/처방전 사진</td></tr>
-        <tr><td>건강 앱에서 가져온 건강·운동 정보(선택)</td><td>Apple 건강 또는 Google Health Connect에서 읽어오는 수면 시각, 걸음 수, 거리, 활동 칼로리, 운동 세션(읽기 전용). 8항 참조.</td></tr>
+        <tr><td>건강 앱에서 가져온 건강·운동 정보(선택)</td><td>Apple 건강 또는 Google Health Connect에서 읽어오는 측정값(읽기 전용): 수면·수면 단계, 걸음 수, 거리, 활동 칼로리, 운동 세션; 활력징후(심박·혈압·산소·체온·호흡수); 혈당·체중; 체력·보행(VO2max·심박변이도·보행 안정성/속도); 정신건강(마음챙김·기분). 8항 참조.</td></tr>
         <tr><td>건강 활동 기록</td><td>식사 기록(시각, 종류, 선택 사진/영양 분석), 운동(시간, 종류), 복약(이름, 용량, 일정, 복용), 수분(섭취), 수면(시작/종료 시각)</td></tr>
         <tr><td>본인 보고 건강정보</td><td>증상, 기분, 감정 메모</td></tr>
         <tr><td>AI 기억</td><td>대화에서 추출한 한 줄 "순간", 암호화된 사용자 발화 인용, 맥락 기억을 위한 의미 임베딩</td></tr>
@@ -514,10 +519,11 @@
       <li><strong>운동</strong> — 종류와 시간(분)</li>
       <li><strong>복약</strong> — 등록 약(이름, 용량, 일정), 복용 기록, 업로드한 약통/처방전 사진</li>
       <li><strong>수분</strong> — 물 섭취 기록</li>
-      <li><strong>수면</strong> — 수면 시작/종료 시각(연동 시 건강 앱에서 가져온 측정값 포함)</li>
+      <li><strong>수면</strong> — 수면 시작/종료 시각 및 수면 단계(연동 시 건강 앱에서 가져온 측정값 포함)</li>
+      <li><strong>기기 건강 지표</strong>(건강 앱을 연동한 경우) — Apple 건강 또는 Google Health Connect에서 가져온 걸음 수·거리·활동 칼로리, 활력징후(심박·혈압·산소·체온·호흡수), 혈당·체중, 체력·보행 측정값</li>
       <li><strong>최근 활동 시각</strong> — 마지막으로 앱을 사용한 시점</li>
     </ul>
-    <p>자유 형식 대화 내용, AI 기억, 학습된 선호, 음성 신호, 동의 이력은 <strong>절대</strong> 가족과 공유되지 않습니다.</p>
+    <p><strong>정신건강 데이터</strong>(건강 앱에서 가져온 마음챙김 시간과 본인이 기록한 기분)는 건강 공유 동의가 켜져 있어도 서버에서 제거되어 <strong>절대</strong> 가족과 공유되지 않습니다. 자유 형식 대화 내용, AI 기억, 학습된 선호, 음성 신호, 동의 이력 또한 <strong>절대</strong> 가족과 공유되지 않습니다.</p>
 
     <h3>6.3 가족과의 선택적 위치 공유</h3>
     <ul>
@@ -553,10 +559,14 @@
     <h2 id="ko-health-apps">8. 건강 앱 연동(Apple 건강 / Google Health Connect)</h2>
     <p><em>건강 앱 연동</em>(선택)을 켜면, Healthya는 OS의 별도 권한을 받아 Apple 건강(iOS) 또는 Google Health Connect(Android)에서 다음을 읽어옵니다.</p>
     <ul>
-      <li>수면 시작/종료 시각 및 총 수면 시간(분)</li>
-      <li>걸음 수와 걷기/달리기 거리</li>
+      <li>수면 시작/종료 시각, 총 수면 시간(분), 수면 단계(깊은 수면/REM, 가능한 경우)</li>
+      <li>걸음 수, 걷기/달리기 거리, 오른 층수</li>
       <li>활동 칼로리</li>
       <li>운동 세션(종류, 시작 시각, 시간)</li>
+      <li>활력징후 — 심박수, 안정 시 심박수, 혈압, 산소포화도, 체온, 호흡수</li>
+      <li>혈당과 체중</li>
+      <li>체력·보행 — VO2max, 심박변이도, 보행 안정성, 보행 속도, 6분 보행 거리(일부는 iOS 전용, 가능한 경우에만 가져옴)</li>
+      <li>정신건강 — 마음챙김 시간(분)과 본인이 기록한 기분(Apple 건강 State of Mind). 이 항목은 본인 앱에서만 사용되며 <strong>절대</strong> 가족과 공유되지 않습니다(6.2항 참조)</li>
     </ul>
     <p><strong>읽기 전용.</strong> Healthya는 이 데이터를 읽기만 하며, 건강 앱에 다시 쓰지 않습니다. 앱 내 하루 요약이 실제 측정값을 반영하도록 하는 용도로만 사용합니다.</p>
     <p><strong>Apple/Google 정책 요건.</strong> Apple 건강 또는 Google Health Connect에서 얻은 데이터는 광고·마케팅에 사용되지 않고, 판매되지 않으며, 데이터 브로커와 공유되지 않습니다. 행 수준 보안으로 본인 계정에 저장됩니다. <em>설정</em>에서 언제든 연동을 끌 수 있으며, 철회 시 가져온 건강 측정값은 삭제됩니다(30일 이내).</p>
@@ -617,7 +627,7 @@
     <h3>13.1 수집 항목</h3>
     <ul>
       <li>식사, 복약, 수분, 수면, 운동 기록 및 사진</li>
-      <li>연동한 건강 앱에서 가져온 수면/걸음/활동(선택)</li>
+      <li>연동한 건강 앱에서 가져온 수면·걸음·활동, 활력징후(심박·혈압·산소·체온·호흡수), 혈당·체중, 체력·보행, 정신건강 측정값(마음챙김·기분)(선택)</li>
       <li>대화로부터 추론된 신체/감정 상태</li>
       <li>약통·처방전 사진(업로드 시)</li>
       <li>음성 신호(실시간 처리, 저장 안 함)</li>
