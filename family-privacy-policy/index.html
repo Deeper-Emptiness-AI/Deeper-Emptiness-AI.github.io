@@ -106,7 +106,7 @@
     <!-- ===================== ENGLISH ===================== -->
     <article data-lang-block="en">
     <h1>Healthya Family Privacy Policy</h1>
-    <p class="meta">Applies to: Healthya Family (caregiver app) · Effective: June 21, 2026 · Last updated: July 17, 2026</p>
+    <p class="meta">Applies to: Healthya Family (caregiver app) · Effective: June 21, 2026 · Last updated: August 1, 2026</p>
 
     <div class="callout primary">
       <p><strong>About this policy.</strong> The Healthya Family app lets you support a linked senior — view brief health summaries, see optional location information, and receive emergency alerts. This policy explains how we handle <em>your</em> caregiver data and how access to a senior's data works. The senior is the data subject for their own information and is governed by the separate <a href="../senior-privacy-policy/">Senior Privacy Policy</a>.</p>
@@ -196,9 +196,11 @@
     <table>
       <thead><tr><th>Recipient</th><th>Data sent</th><th>Purpose</th></tr></thead>
       <tbody>
-        <tr><td>Apple Push / Google FCM</td><td>Push token, notification payload</td><td>Notification delivery (including emergency alerts).</td></tr>
+        <tr><td>Expo Push (relaying to Apple APNs / Google FCM)</td><td>Push token, notification payload</td><td>Notification delivery (including emergency alerts).</td></tr>
         <tr><td>Supabase (infrastructure)</td><td>Caregiver profile, link records</td><td>Service operation, with row-level security.</td></tr>
         <tr><td>Google Vertex AI (Gemini)</td><td>Inputs for the senior's daily summary</td><td>Generating the AI summary shown to you. Enterprise terms — no model training.</td></tr>
+        <tr><td>Twilio (Verify)</td><td>Phone number, one-time verification code</td><td>SMS verification for sign-in and to help a senior recover their account at a new number.</td></tr>
+        <tr><td>Resend</td><td>Email address and request details</td><td>Sending account and rights-request notification emails.</td></tr>
       </tbody>
     </table>
     <p><strong>Video calling.</strong> Video calling is not offered in the current version of the app. We do not route any video or audio to a video-calling provider.</p>
@@ -224,7 +226,7 @@
     </ul>
 
     <h2 id="en-rights">11. Your rights</h2>
-    <p>You have the same set of rights (Know, Delete, Correct, Portability, Limit SPI, Opt-Out of Sale, Opt-Out of ADM, Non-Discrimination, Appeal, Authorized Agent) over <em>your own caregiver data</em> as set out in the <a href="../senior-privacy-policy/#en-rights">Senior Privacy Policy</a>. You do not have rights of access, correction, or deletion over the senior's data via the family app — please direct the senior to exercise those rights from their own app.</p>
+    <p>You have the same set of rights (Know, Delete, Correct, Portability, Limit SPI, Opt-Out of Sale, Opt-Out of ADM, Non-Discrimination, Appeal, Authorized Agent) over <em>your own caregiver data</em> as set out in the <a href="../senior-privacy-policy/#en-rights">Senior Privacy Policy</a>. You do not have rights of access, correction, or deletion over the senior's data via the family app — please direct the senior to exercise those rights from their own app. Because the Family app does not include an in-app data export, exercise your own rights (including the Right to Know) by email at hello@healthia.app with the subject line [Rights Request]; we verify your identity and respond within 45 days.</p>
 
     <h2 id="en-bipa">12. Biometric notice (Illinois BIPA)</h2>
     <p>We do not generate or store voiceprints or other biometric identifiers from your audio or video.</p>
@@ -249,7 +251,7 @@
     <!-- ===================== 한국어 ===================== -->
     <article data-lang-block="ko">
     <h1>Healthya Family 개인정보처리방침</h1>
-    <p class="meta">적용 대상: Healthya Family(보호자 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 7월 17일</p>
+    <p class="meta">적용 대상: Healthya Family(보호자 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 8월 1일</p>
 
     <div class="callout primary">
       <p><strong>본 방침 안내.</strong> Healthya Family 앱은 연결된 시니어를 돌볼 수 있게 합니다 — 간단한 건강 요약 보기, 선택적 위치 정보 확인, 응급 알림 수신. 본 방침은 <em>보호자</em> 데이터의 처리 방식과 시니어 데이터 접근 방식을 설명합니다. 시니어 본인 정보의 정보주체는 시니어이며, 별도의 <a href="../senior-privacy-policy/">시니어 개인정보처리방침</a>이 적용됩니다.</p>
@@ -339,9 +341,11 @@
     <table>
       <thead><tr><th>수신자</th><th>전송 데이터</th><th>목적</th></tr></thead>
       <tbody>
-        <tr><td>Apple Push / Google FCM</td><td>푸시 토큰, 알림 페이로드</td><td>알림 전달(응급 알림 포함).</td></tr>
+        <tr><td>Expo Push(Apple APNs / Google FCM로 중계)</td><td>푸시 토큰, 알림 페이로드</td><td>알림 전달(응급 알림 포함).</td></tr>
         <tr><td>Supabase(인프라)</td><td>보호자 프로필, 연결 기록</td><td>서비스 운영, 행 수준 보안 적용.</td></tr>
         <tr><td>Google Vertex AI (Gemini)</td><td>시니어 하루 요약 생성 입력</td><td>보호자에게 보여줄 AI 요약 생성. 엔터프라이즈 약관 — 모델 학습 없음.</td></tr>
+        <tr><td>Twilio(Verify)</td><td>전화번호, 일회용 인증 코드</td><td>로그인 및 시니어의 새 번호 계정 복구 지원을 위한 SMS 인증.</td></tr>
+        <tr><td>Resend</td><td>이메일 주소 및 요청 내용</td><td>계정 및 권리 요청 관련 안내 이메일 발송.</td></tr>
       </tbody>
     </table>
     <p><strong>화상통화.</strong> 현재 버전에서는 화상통화를 제공하지 않습니다. 어떠한 영상·음성도 화상통화 제공자로 전송하지 않습니다.</p>
@@ -367,7 +371,7 @@
     </ul>
 
     <h2 id="ko-rights">11. 이용자의 권리</h2>
-    <p><em>보호자 본인 데이터</em>에 대해 <a href="../senior-privacy-policy/#ko-rights">시니어 개인정보처리방침</a>에 기재된 것과 동일한 권리(알 권리, 삭제, 정정, 이동, SPI 제한, 판매 옵트아웃, 자동화 의사결정 옵트아웃, 차별 금지, 이의제기, 대리인)를 가집니다. 가족 앱을 통해 시니어 데이터에 대한 접근·정정·삭제 권리는 갖지 않으며, 해당 권리는 시니어가 자신의 앱에서 행사하도록 안내해 주세요.</p>
+    <p><em>보호자 본인 데이터</em>에 대해 <a href="../senior-privacy-policy/#ko-rights">시니어 개인정보처리방침</a>에 기재된 것과 동일한 권리(알 권리, 삭제, 정정, 이동, SPI 제한, 판매 옵트아웃, 자동화 의사결정 옵트아웃, 차별 금지, 이의제기, 대리인)를 가집니다. 가족 앱을 통해 시니어 데이터에 대한 접근·정정·삭제 권리는 갖지 않으며, 해당 권리는 시니어가 자신의 앱에서 행사하도록 안내해 주세요. 가족 앱에는 인앱 데이터 내보내기 기능이 없으므로, 본인 권리(알 권리 포함)는 hello@healthia.app으로 제목 [Rights Request] 이메일을 보내 행사해 주세요. 신원 확인 후 45일 이내 처리합니다.</p>
 
     <h2 id="ko-bipa">12. 생체정보 고지(일리노이 BIPA)</h2>
     <p>당사는 보호자의 음성·영상으로부터 음성 지문 등 생체 식별자를 생성·저장하지 않습니다.</p>

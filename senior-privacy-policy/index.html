@@ -111,6 +111,11 @@
     html[data-lang="en"] [data-lang-block="en"] { display: block; }
     html[data-lang="ko"] [data-lang-block="ko"] { display: block; }
     html:not([data-lang]) [data-lang-block="en"] { display: block; }
+
+    /* 앱 전용 요소(예: 데이터 다운로드 링크) — 기본 숨김(fail-closed). 앱 웹뷰가
+       주입하는 html[data-inapp="1"] 일 때만 노출. 공개 웹에서는 절대 보이지 않는다. */
+    .app-only { display: none; }
+    html[data-inapp="1"] .app-only { display: block; }
   </style>
 </head>
 <body>
@@ -130,7 +135,7 @@
     <!-- ===================== ENGLISH ===================== -->
     <article data-lang-block="en">
     <h1>Healthya Privacy Policy</h1>
-    <p class="meta">Applies to: Healthya (senior app) · Effective: June 21, 2026 · Last updated: July 17, 2026 · Consent version: 2026-07-17</p>
+    <p class="meta">Applies to: Healthya (senior app) · Effective: June 21, 2026 · Last updated: August 1, 2026 · Consent version: 2026-07-17</p>
 
     <div class="callout">
       <p><strong>At a glance.</strong> Healthya is an AI companion app supporting older adults with daily health and conversation. This policy explains what we collect, with whom we share it, and how you can exercise your rights. We do not sell or share your personal information for advertising.</p>
@@ -173,12 +178,13 @@
         <tr><td>Identifiers</td><td>Phone number, email address, sign-in provider identifiers (Sign in with Apple / Google), account (user) ID, device IDs, push tokens</td></tr>
         <tr><td>Personal information (Cal. Civ. Code §1798.80)</td><td>Display name, birth year, gender (optional, only if you choose to provide it)</td></tr>
         <tr><td>Internet / electronic activity</td><td>App usage logs, feature timestamps, crash / performance reports</td></tr>
-        <tr><td>Geolocation — approximate (optional)</td><td>City / district level only, used for local personalization (e.g., weather-based conversation). We do not store precise coordinates for this purpose. Optionally, a generalized "activity area" (last 7 days, rounded to roughly 1–2&nbsp;km blocks) may be shared with your linked family.</td></tr>
+        <tr><td>Geolocation — approximate (optional)</td><td>City / district level, used for local personalization (e.g., weather-based conversation) and to find nearby care facilities such as hospitals and pharmacies (rounded to roughly 1&nbsp;km before being sent to our maps provider — see section 5). We do not store precise coordinates for these purposes. Optionally, a generalized "activity area" (last 7 days, rounded to roughly 1–2&nbsp;km blocks) may be shared with your linked family.</td></tr>
         <tr><td>Geolocation — precise (optional, emergency only)</td><td>Your precise location captured <strong>once</strong>, at the moment you place a 911 call, and shared with your linked family so they can help. See section 7.</td></tr>
-        <tr><td>Audio / visual (optional)</td><td>Microphone signal (real-time only, not stored); meal and medication / prescription photos you choose to upload</td></tr>
+        <tr><td>Audio / visual (optional)</td><td>Microphone signal (real-time only, not stored); meal, medication / prescription, and symptom photos you choose to upload (symptom photos are deleted right after analysis)</td></tr>
         <tr><td>Health &amp; fitness from connected health apps (optional)</td><td>Read-only measurements imported from Apple Health or Google Health Connect: sleep and sleep stages, steps, distance, active energy, and workout sessions; vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate); blood sugar and weight; fitness and gait (VO2 max, heart rate variability, walking steadiness / speed); and mental wellness (mindfulness sessions and mood). See section 8.</td></tr>
         <tr><td>Health activity records</td><td>Meal logs (time, type, optional photo / nutrition analysis), exercise (duration, type), medication (name, dose, schedule, intake), hydration (intake events), sleep (start / end times)</td></tr>
         <tr><td>Self-reported health</td><td>Symptoms, mood, emotion notes</td></tr>
+        <tr><td>Religious / faith affiliation (optional, sensitive)</td><td>Collected only if you volunteer it in conversation, used for occasional faith-friendly greetings. We never infer it without your statement and never share it with family. See section 10.</td></tr>
         <tr><td>AI memory</td><td>Distilled one-line "moments" from conversation, encrypted verbatim quotes, and semantic embeddings used so the assistant can remember your context</td></tr>
         <tr><td>Inferences</td><td>Personality, interests, and mood inferred from conversation</td></tr>
       </tbody>
@@ -201,6 +207,7 @@
       <li>Daily plans, meal / medication / hydration reminders, and lifestyle support</li>
       <li>Daily summaries combining your activity with optional health-app measurements</li>
       <li>Emergency support — first-aid reference, one-tap 911 dialing, and optional family alerts (see section 7)</li>
+      <li>Care navigation (optional) — helping you find nearby hospitals / pharmacies and showing general symptom guidance (informational only, not a diagnosis)</li>
       <li>Local personalization (approximate location for weather-based conversation)</li>
       <li>Family support (optional) — short summaries to enable family caregiving</li>
       <li>Account management, including phone-number recovery you pre-authorize for a linked family member</li>
@@ -217,10 +224,14 @@
         <tr><td>Google Cloud Vision</td><td>Meal and medication / prescription photos</td><td>Text recognition and image analysis to read labels and food.</td></tr>
         <tr><td>Google Vertex AI (text embeddings)</td><td>Short conversation snippets</td><td>Semantic search so the assistant can recall relevant context.</td></tr>
         <tr><td>Google Cloud Text-to-Speech</td><td>Response text</td><td>Voice synthesis. Your voice is not sent.</td></tr>
+        <tr><td>Google Places (Google Maps Platform)</td><td>Approximate location (rounded to ~1&nbsp;km) and a care category (hospital / pharmacy)</td><td>Finding nearby care facilities. No personal identifier is sent; not used for advertising.</td></tr>
+        <tr><td>Google Search (via Vertex AI grounding)</td><td>Your web-lookup question text; generic region-scoped news queries</td><td>Real-time factual lookup during conversation and the daily news brief. Not used for advertising.</td></tr>
         <tr><td>OpenWeather</td><td>Approximate (city / district level) location</td><td>Weather information used to start friendly conversation. Precise coordinates are not sent.</td></tr>
         <tr><td>USDA FoodData Central</td><td>Food names only (no personal identifiers)</td><td>Nutrition reference lookup for meals.</td></tr>
-        <tr><td>RxNorm / RxNav (U.S. National Library of Medicine)</td><td>Medication names only (no personal identifiers)</td><td>Standardizing medication information. Public service.</td></tr>
-        <tr><td>Apple Push / Google FCM</td><td>Push tokens, notification payloads</td><td>Notification delivery.</td></tr>
+        <tr><td>U.S. government health services — RxNorm / RxNav, openFDA, MedlinePlus, DailyMed (NLM / FDA), CMS Care Compare</td><td>Medication names, or a hospital's ZIP / name for ratings (no personal identifiers)</td><td>Standardizing medication information, drug labels / images, health-topic summaries, and hospital quality data. Public services.</td></tr>
+        <tr><td>Twilio (Verify)</td><td>Phone number, one-time verification code</td><td>SMS verification for sign-in and account / phone-number recovery.</td></tr>
+        <tr><td>Resend</td><td>Email address and request details</td><td>Sending account and rights-request notification emails.</td></tr>
+        <tr><td>Expo Push (relaying to Apple APNs / Google FCM)</td><td>Push tokens, notification payloads</td><td>Notification delivery.</td></tr>
         <tr><td>Supabase (infrastructure)</td><td>A subset of the above for storage</td><td>Service operation, with row-level security isolating your data.</td></tr>
       </tbody>
     </table>
@@ -301,7 +312,7 @@
     </div>
 
     <h2 id="en-spi">10. Sensitive Personal Information</h2>
-    <p>SPI under CPRA includes health information, audio signals, and precise geolocation. We collect precise geolocation <strong>only</strong> for emergency 911 family sharing (section 7), with your opt-in, and never for advertising. We do not use SPI beyond service delivery and the purposes you have explicitly consented to. You may restrict SPI use via the in-app <em>Consent history</em> screen. (CPRA §1798.121 — Right to Limit Use of SPI)</p>
+    <p>SPI under CPRA includes health information, audio signals, precise geolocation, and religious or philosophical beliefs. We collect precise geolocation <strong>only</strong> for emergency 911 family sharing (section 7), with your opt-in, and never for advertising. We collect faith affiliation <strong>only</strong> if you volunteer it in conversation, solely for occasional faith-friendly greetings — never inferred, never shared with family, and removable anytime in <em>Settings → What the AI has learned</em>. We do not use SPI beyond service delivery and the purposes you have explicitly consented to. You may restrict SPI use via the in-app <em>Consent history</em> screen. (CPRA §1798.121 — Right to Limit Use of SPI)</p>
 
     <h2 id="en-retention">11. Retention</h2>
     <ul>
@@ -334,7 +345,7 @@
     <ul>
       <li>In-app — <em>Settings → My information rights</em>:
         <ul>
-          <li><strong>Right to Know</strong> — generates a downloadable ZIP (JSON + CSV) within minutes. Once per 30 days.</li>
+          <li><strong>Right to Know</strong> — generates a downloadable ZIP (JSON + CSV) of your data within minutes. Request it via the download link at the end of this policy (available when you are signed in) or by email. Once per 30 days. Photos you uploaded (meal, medication, and symptom images) are not included in the automatic export but are available on request by email.</li>
           <li><strong>Right to Correct</strong> — review and edit "What the AI has learned about you".</li>
           <li><strong>Right to Delete</strong> — account deletion screen.</li>
           <li><strong>Right to Limit SPI / Withdraw Consent</strong> — per-item withdrawal in the Consent history screen.</li>
@@ -353,7 +364,8 @@
       <li>Meal, medication, hydration, sleep, and exercise records and photos</li>
       <li>Sleep, steps, activity, vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate), blood sugar, weight, fitness / gait, and mental-wellness measurements (mindfulness, mood) imported from a connected health app (optional)</li>
       <li>Inferred physical / emotional state from conversation</li>
-      <li>Pill bottle and prescription photos (if uploaded)</li>
+      <li>Symptoms you report and the general symptom guidance / recommended care setting shown to you</li>
+      <li>Pill bottle, prescription, and symptom photos (if uploaded)</li>
       <li>Voice signals (real-time processing, not stored)</li>
       <li>Precise location captured once during a 911 call (optional)</li>
     </ul>
@@ -401,12 +413,14 @@
       <li>Rights requests: hello@healthia.app (subject line: [Rights Request])</li>
       <li>Operating company: Deeper Emptiness AI (mailing address available on request via hello@healthia.app)</li>
     </ul>
+
+    <p class="meta app-only"><a href="healthia-export://request">Request a copy of my data (download)</a> — available while signed in; once per 30 days.</p>
     </article>
 
     <!-- ===================== 한국어 ===================== -->
     <article data-lang-block="ko">
     <h1>Healthya 개인정보처리방침</h1>
-    <p class="meta">적용 대상: Healthya(시니어 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 7월 17일 · 동의 버전: 2026-07-17</p>
+    <p class="meta">적용 대상: Healthya(시니어 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 8월 1일 · 동의 버전: 2026-07-17</p>
 
     <div class="callout">
       <p><strong>핵심 요약.</strong> Healthya는 어르신의 일상 건강과 대화를 돕는 AI 동반자 앱입니다. 본 방침은 어떤 정보를 수집하고, 누구와 공유하며, 어떻게 권리를 행사할 수 있는지 설명합니다. 저희는 광고 목적으로 개인정보를 판매하거나 공유하지 않습니다.</p>
@@ -449,12 +463,13 @@
         <tr><td>식별자</td><td>전화번호, 이메일 주소, 소셜 로그인 식별자(Apple/Google 로그인), 계정(사용자) ID, 기기 ID, 푸시 토큰</td></tr>
         <tr><td>개인정보(Cal. Civ. Code §1798.80)</td><td>닉네임, 출생 연도, 성별(선택 — 직접 입력한 경우에만)</td></tr>
         <tr><td>인터넷/전자적 활동</td><td>앱 사용 로그, 기능 사용 시각, 충돌/성능 보고</td></tr>
-        <tr><td>위치 — 대략(선택)</td><td>시·구 단위만 사용하며 지역 맞춤(예: 날씨 기반 대화)에 활용합니다. 이 목적으로 정밀 좌표를 저장하지 않습니다. 선택 시, 최근 7일의 일반화된 "활동 영역"(약 1~2&nbsp;km 블록 단위로 반올림)을 연결된 가족에게 공유할 수 있습니다.</td></tr>
+        <tr><td>위치 — 대략(선택)</td><td>시·구 단위로, 지역 맞춤(예: 날씨 기반 대화)과 근처 병원·약국 등 케어 시설 찾기에 활용합니다(지도 제공자에 전송하기 전 약 1&nbsp;km 단위로 반올림 — 5항 참조). 이 목적들로 정밀 좌표를 저장하지 않습니다. 선택 시, 최근 7일의 일반화된 "활동 영역"(약 1~2&nbsp;km 블록 단위로 반올림)을 연결된 가족에게 공유할 수 있습니다.</td></tr>
         <tr><td>위치 — 정밀(선택, 응급 전용)</td><td>911 발신 순간에 <strong>1회</strong> 캡처되는 정밀 위치로, 가족이 도울 수 있도록 연결된 가족에게 공유됩니다. 7항 참조.</td></tr>
-        <tr><td>음성/영상(선택)</td><td>마이크 신호(실시간 처리만, 저장 안 함); 직접 업로드한 식사·약/처방전 사진</td></tr>
+        <tr><td>음성/영상(선택)</td><td>마이크 신호(실시간 처리만, 저장 안 함); 직접 업로드한 식사·약/처방전·증상 사진(증상 사진은 분석 직후 삭제)</td></tr>
         <tr><td>건강 앱에서 가져온 건강·운동 정보(선택)</td><td>Apple 건강 또는 Google Health Connect에서 읽어오는 측정값(읽기 전용): 수면·수면 단계, 걸음 수, 거리, 활동 칼로리, 운동 세션; 활력징후(심박·혈압·산소·체온·호흡수); 혈당·체중; 체력·보행(VO2max·심박변이도·보행 안정성/속도); 정신건강(마음챙김·기분). 8항 참조.</td></tr>
         <tr><td>건강 활동 기록</td><td>식사 기록(시각, 종류, 선택 사진/영양 분석), 운동(시간, 종류), 복약(이름, 용량, 일정, 복용), 수분(섭취), 수면(시작/종료 시각)</td></tr>
         <tr><td>본인 보고 건강정보</td><td>증상, 기분, 감정 메모</td></tr>
+        <tr><td>종교/신앙(선택, 민감)</td><td>대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에 사용합니다. 언급 없이 추론하지 않고, 가족과 공유하지 않습니다. 10항 참조.</td></tr>
         <tr><td>AI 기억</td><td>대화에서 추출한 한 줄 "순간", 암호화된 사용자 발화 인용, 맥락 기억을 위한 의미 임베딩</td></tr>
         <tr><td>추론 정보</td><td>대화로부터 추론된 성향, 관심사, 기분</td></tr>
       </tbody>
@@ -477,6 +492,7 @@
       <li>하루 계획, 식사·복약·수분 알림 및 생활 지원</li>
       <li>활동 정보와 (선택) 건강 앱 측정값을 결합한 하루 요약</li>
       <li>응급 지원 — 응급처치 안내, 원탭 911 발신, 선택적 가족 알림(7항 참조)</li>
+      <li>케어 내비게이션(선택) — 근처 병원·약국 찾기 및 일반 증상 안내 표시(정보 제공 목적이며 진단이 아님)</li>
       <li>지역 맞춤(날씨 기반 대화를 위한 대략 위치)</li>
       <li>가족 지원(선택) — 가족 돌봄을 위한 짧은 요약</li>
       <li>계정 관리 — 연결된 가족에게 사전 위임한 전화번호 복구 포함</li>
@@ -493,10 +509,14 @@
         <tr><td>Google Cloud Vision</td><td>식사·약/처방전 사진</td><td>라벨·음식 인식을 위한 텍스트 인식 및 이미지 분석.</td></tr>
         <tr><td>Google Vertex AI(텍스트 임베딩)</td><td>짧은 대화 조각</td><td>관련 맥락을 떠올리기 위한 의미 검색.</td></tr>
         <tr><td>Google Cloud Text-to-Speech</td><td>응답 텍스트</td><td>음성 합성. 이용자 음성은 전송하지 않음.</td></tr>
+        <tr><td>Google Places(Google Maps Platform)</td><td>대략 위치(약 1&nbsp;km 반올림)와 케어 분류(병원/약국)</td><td>근처 케어 시설 찾기. 개인 식별자 미전송, 광고 미사용.</td></tr>
+        <tr><td>Google Search(Vertex AI grounding 경유)</td><td>웹 조회 질문 텍스트; 지역 범위의 일반 뉴스 질의</td><td>대화 중 실시간 사실 조회 및 매일 뉴스 브리핑. 광고 미사용.</td></tr>
         <tr><td>OpenWeather</td><td>대략(시·구 단위) 위치</td><td>친근한 대화 시작을 위한 날씨 정보. 정밀 좌표는 전송 안 함.</td></tr>
         <tr><td>USDA FoodData Central</td><td>음식 이름만(개인 식별자 없음)</td><td>식사 영양 정보 조회.</td></tr>
-        <tr><td>RxNorm / RxNav(미국 국립의학도서관)</td><td>약 이름만(개인 식별자 없음)</td><td>약품 정보 표준화. 공공 서비스.</td></tr>
-        <tr><td>Apple Push / Google FCM</td><td>푸시 토큰, 알림 페이로드</td><td>알림 전달.</td></tr>
+        <tr><td>미국 정부 건강 서비스 — RxNorm / RxNav, openFDA, MedlinePlus, DailyMed(NLM / FDA), CMS Care Compare</td><td>약 이름, 또는 평가 조회용 병원 ZIP/이름(개인 식별자 없음)</td><td>약품 정보 표준화, 의약품 라벨/이미지, 건강 주제 요약, 병원 품질 정보. 공공 서비스.</td></tr>
+        <tr><td>Twilio(Verify)</td><td>전화번호, 일회용 인증 코드</td><td>로그인 및 계정/전화번호 복구를 위한 SMS 인증.</td></tr>
+        <tr><td>Resend</td><td>이메일 주소 및 요청 내용</td><td>계정 및 권리 요청 관련 안내 이메일 발송.</td></tr>
+        <tr><td>Expo Push(Apple APNs / Google FCM로 중계)</td><td>푸시 토큰, 알림 페이로드</td><td>알림 전달.</td></tr>
         <tr><td>Supabase(인프라)</td><td>위 항목 중 저장에 필요한 부분</td><td>서비스 운영. 행 수준 보안(RLS)으로 본인 데이터 격리.</td></tr>
       </tbody>
     </table>
@@ -577,7 +597,7 @@
     </div>
 
     <h2 id="ko-spi">10. 민감 개인정보(SPI)</h2>
-    <p>CPRA상 SPI에는 건강정보, 음성 신호, 정밀 위치가 포함됩니다. 당사는 정밀 위치를 <strong>오직</strong> 응급 911 가족 공유(7항)를 위해, 이용자 옵트인하에만 수집하며, 광고에는 절대 사용하지 않습니다. SPI는 서비스 제공과 이용자가 명시적으로 동의한 목적 외에는 사용하지 않습니다. 앱 내 <em>동의 이력</em> 화면에서 SPI 이용을 제한할 수 있습니다. (CPRA §1798.121 — SPI 이용 제한권)</p>
+    <p>CPRA상 SPI에는 건강정보, 음성 신호, 정밀 위치, 종교·철학적 신념이 포함됩니다. 당사는 정밀 위치를 <strong>오직</strong> 응급 911 가족 공유(7항)를 위해, 이용자 옵트인하에만 수집하며, 광고에는 절대 사용하지 않습니다. 신앙 정보는 이용자가 대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에만 사용합니다 — 추론하지 않고, 가족과 공유하지 않으며, <em>설정 → AI가 학습한 정보</em>에서 언제든 삭제할 수 있습니다. SPI는 서비스 제공과 이용자가 명시적으로 동의한 목적 외에는 사용하지 않습니다. 앱 내 <em>동의 이력</em> 화면에서 SPI 이용을 제한할 수 있습니다. (CPRA §1798.121 — SPI 이용 제한권)</p>
 
     <h2 id="ko-retention">11. 보유 기간</h2>
     <ul>
@@ -610,7 +630,7 @@
     <ul>
       <li>앱 내 — <em>설정 → 내 정보 권리</em>:
         <ul>
-          <li><strong>알 권리</strong> — 수 분 내 다운로드 가능한 ZIP(JSON + CSV) 생성. 30일 1회.</li>
+          <li><strong>알 권리</strong> — 본인 데이터를 수 분 내 다운로드 가능한 ZIP(JSON + CSV)으로 생성. 본 방침 하단의 다운로드 링크(로그인 상태에서 이용) 또는 이메일로 요청. 30일 1회. 업로드하신 사진(식사·복약·증상 이미지)은 자동 내보내기에 포함되지 않으며 이메일 요청 시 제공됩니다.</li>
           <li><strong>정정권</strong> — "AI가 학습한 정보" 검토 및 편집.</li>
           <li><strong>삭제권</strong> — 계정 삭제 화면.</li>
           <li><strong>SPI 제한 / 동의 철회</strong> — 동의 이력 화면에서 항목별 철회.</li>
@@ -629,7 +649,8 @@
       <li>식사, 복약, 수분, 수면, 운동 기록 및 사진</li>
       <li>연동한 건강 앱에서 가져온 수면·걸음·활동, 활력징후(심박·혈압·산소·체온·호흡수), 혈당·체중, 체력·보행, 정신건강 측정값(마음챙김·기분)(선택)</li>
       <li>대화로부터 추론된 신체/감정 상태</li>
-      <li>약통·처방전 사진(업로드 시)</li>
+      <li>이용자가 보고한 증상 및 표시되는 일반 증상 안내/권장 진료 세팅</li>
+      <li>약통·처방전·증상 사진(업로드 시)</li>
       <li>음성 신호(실시간 처리, 저장 안 함)</li>
       <li>911 발신 시 1회 캡처되는 정밀 위치(선택)</li>
     </ul>
@@ -677,6 +698,8 @@
       <li>권리 요청: hello@healthia.app (제목: [Rights Request])</li>
       <li>운영 회사: Deeper Emptiness AI (주소는 hello@healthia.app로 요청 시 제공)</li>
     </ul>
+
+    <p class="meta app-only"><a href="healthia-export://request">내 데이터 사본 요청(다운로드)</a> — 로그인 상태에서 이용 가능, 30일 1회.</p>
     </article>
   </main>
 
