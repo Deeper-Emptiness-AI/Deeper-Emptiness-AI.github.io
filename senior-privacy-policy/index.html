@@ -345,7 +345,7 @@
     <ul>
       <li>In-app — <em>Settings → My information rights</em>:
         <ul>
-          <li><strong>Right to Know</strong> — generates a downloadable ZIP (JSON + CSV) of your data within minutes. Request it via the download link at the end of this policy (available when you are signed in) or by email. Once per 30 days. Photos you uploaded (meal, medication, and symptom images) are not included in the automatic export but are available on request by email.</li>
+          <li><strong>Right to Know</strong> — generates a downloadable ZIP (JSON + CSV) of your data within minutes. Request it via the download link at the end of this policy (in the app) or by email. Once per 30 days. Photos you uploaded (meal, medication, and symptom images) are not included in the automatic export but are available on request by email.</li>
           <li><strong>Right to Correct</strong> — review and edit "What the AI has learned about you".</li>
           <li><strong>Right to Delete</strong> — account deletion screen.</li>
           <li><strong>Right to Limit SPI / Withdraw Consent</strong> — per-item withdrawal in the Consent history screen.</li>
@@ -414,7 +414,7 @@
       <li>Operating company: Deeper Emptiness AI (mailing address available on request via hello@healthia.app)</li>
     </ul>
 
-    <p class="meta app-only"><a href="healthia-export://request">Request a copy of my data (download)</a> — available while signed in; once per 30 days.</p>
+    <p class="meta app-only"><a href="#" onclick="if(window.ReactNativeWebView&&window.ReactNativeWebView.postMessage){window.ReactNativeWebView.postMessage('healthia:export-request');}return false;">Request a copy of my data (download)</a> — once per 30 days.</p>
     </article>
 
     <!-- ===================== 한국어 ===================== -->
@@ -630,7 +630,7 @@
     <ul>
       <li>앱 내 — <em>설정 → 내 정보 권리</em>:
         <ul>
-          <li><strong>알 권리</strong> — 본인 데이터를 수 분 내 다운로드 가능한 ZIP(JSON + CSV)으로 생성. 본 방침 하단의 다운로드 링크(로그인 상태에서 이용) 또는 이메일로 요청. 30일 1회. 업로드하신 사진(식사·복약·증상 이미지)은 자동 내보내기에 포함되지 않으며 이메일 요청 시 제공됩니다.</li>
+          <li><strong>알 권리</strong> — 본인 데이터를 수 분 내 다운로드 가능한 ZIP(JSON + CSV)으로 생성. 본 방침 하단의 다운로드 링크(앱에서) 또는 이메일로 요청. 30일 1회. 업로드하신 사진(식사·복약·증상 이미지)은 자동 내보내기에 포함되지 않으며 이메일 요청 시 제공됩니다.</li>
           <li><strong>정정권</strong> — "AI가 학습한 정보" 검토 및 편집.</li>
           <li><strong>삭제권</strong> — 계정 삭제 화면.</li>
           <li><strong>SPI 제한 / 동의 철회</strong> — 동의 이력 화면에서 항목별 철회.</li>
@@ -699,7 +699,7 @@
       <li>운영 회사: Deeper Emptiness AI (주소는 hello@healthia.app로 요청 시 제공)</li>
     </ul>
 
-    <p class="meta app-only"><a href="healthia-export://request">내 데이터 사본 요청(다운로드)</a> — 로그인 상태에서 이용 가능, 30일 1회.</p>
+    <p class="meta app-only"><a href="#" onclick="if(window.ReactNativeWebView&&window.ReactNativeWebView.postMessage){window.ReactNativeWebView.postMessage('healthia:export-request');}return false;">내 데이터 사본 요청(다운로드)</a> — 30일 1회.</p>
     </article>
   </main>
 
