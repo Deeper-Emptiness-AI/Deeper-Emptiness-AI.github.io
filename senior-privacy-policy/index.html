@@ -135,7 +135,7 @@
     <!-- ===================== ENGLISH ===================== -->
     <article data-lang-block="en">
     <h1>Healthya Privacy Policy</h1>
-    <p class="meta">Applies to: Healthya (senior app) · Effective: June 21, 2026 · Last updated: August 1, 2026 · Consent version: 2026-07-17</p>
+    <p class="meta">Applies to: Healthya (senior app) · Effective: June 21, 2026 · Last updated: August 18, 2026 · Consent version: 2026-07-17</p>
 
     <div class="callout">
       <p><strong>At a glance.</strong> Healthya is an AI companion app supporting older adults with daily health and conversation. This policy explains what we collect, with whom we share it, and how you can exercise your rights. We do not sell or share your personal information for advertising.</p>
@@ -179,16 +179,23 @@
         <tr><td>Personal information (Cal. Civ. Code §1798.80)</td><td>Display name, birth year, gender (optional, only if you choose to provide it)</td></tr>
         <tr><td>Internet / electronic activity</td><td>App usage logs, feature timestamps, crash / performance reports</td></tr>
         <tr><td>Geolocation — approximate (optional)</td><td>City / district level, used for local personalization (e.g., weather-based conversation) and to find nearby care facilities such as hospitals and pharmacies (rounded to roughly 1&nbsp;km before being sent to our maps provider — see section 5). We do not store precise coordinates for these purposes. Optionally, a generalized "activity area" (last 7 days, rounded to roughly 1–2&nbsp;km blocks) may be shared with your linked family.</td></tr>
-        <tr><td>Geolocation — precise (optional, emergency only)</td><td>Your precise location captured <strong>once</strong>, at the moment you place a 911 call, and shared with your linked family so they can help. See section 7.</td></tr>
+        <tr><td>Geolocation — precise (optional, emergency readiness)</td><td>If you grant emergency location sharing to a linked family member, the app refreshes a single stored precise location about every 5 minutes <strong>while the app is open on your screen</strong>, so that a usable location already exists the moment you call 911. Only the most recent one is kept — each refresh overwrites the last, so no trail or history is stored. Nothing is collected while the app is in the background or closed. See section 7.</td></tr>
         <tr><td>Audio / visual (optional)</td><td>Microphone signal (real-time only, not stored); meal, medication / prescription, and symptom photos you choose to upload (symptom photos are deleted right after analysis)</td></tr>
         <tr><td>Health &amp; fitness from connected health apps (optional)</td><td>Read-only measurements imported from Apple Health or Google Health Connect: sleep and sleep stages, steps, distance, active energy, and workout sessions; vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate); blood sugar and weight; fitness and gait (VO2 max, heart rate variability, walking steadiness / speed); and mental wellness (mindfulness sessions and mood). See section 8.</td></tr>
         <tr><td>Health activity records</td><td>Meal logs (time, type, optional photo / nutrition analysis), exercise (duration, type), medication (name, dose, schedule, intake), hydration (intake events), sleep (start / end times)</td></tr>
+        <tr><td>Body measurements (optional)</td><td>Height and weight you enter yourself, together with your sex and birth year, used only to size meal and snack suggestions. You may decline — meal suggestions still work without them. These values are stored under your own account, are <strong>never</strong> visible to your linked family, and the raw height / weight and any body-mass figure derived from them are <strong>never</strong> sent to our AI provider (see section 5). If you have connected a health app, a recent weight measured by your device may be used instead of the weight you typed.</td></tr>
         <tr><td>Self-reported health</td><td>Symptoms, mood, emotion notes</td></tr>
         <tr><td>Religious / faith affiliation (optional, sensitive)</td><td>Collected only if you volunteer it in conversation, used for occasional faith-friendly greetings. We never infer it without your statement and never share it with family. See section 10.</td></tr>
         <tr><td>AI memory</td><td>Distilled one-line "moments" from conversation, encrypted verbatim quotes, and semantic embeddings used so the assistant can remember your context</td></tr>
         <tr><td>Inferences</td><td>Personality, interests, and mood inferred from conversation</td></tr>
       </tbody>
     </table>
+
+    <p><strong>Where this information can appear on your phone.</strong> Some of it is shown outside the app, where anyone holding or glancing at your phone may see it — this is a normal part of how reminders and widgets work, not sharing with us or anyone else:</p>
+    <ul>
+      <li><strong>Notifications</strong> — reminder text appears on your lock screen. Medication reminders deliberately use a neutral wording instead of the medicine's name.</li>
+      <li><strong>Home-screen and lock-screen widgets</strong> — the "Today's plan" widget shows your remaining care items and their times (again, medication is shown as a neutral label), and the "3-Day Wins" widget shows the goal titles you wrote yourself, including on the iOS lock screen. If you would rather not have a goal title visible there, choose a title that does not reveal anything you want kept private, or remove the widget.</li>
+    </ul>
 
     <h2 id="en-sources">3. Sources</h2>
     <ul>
@@ -205,6 +212,7 @@
       <li>AI companion conversation and memory of your context</li>
       <li>Text-to-speech for natural voice responses</li>
       <li>Daily plans, meal / medication / hydration reminders, and lifestyle support</li>
+      <li>Sizing meal and snack suggestions to you, using your optional height, weight, sex, and birth year</li>
       <li>Daily summaries combining your activity with optional health-app measurements</li>
       <li>Emergency support — first-aid reference, one-tap 911 dialing, and optional family alerts (see section 7)</li>
       <li>Care navigation (optional) — helping you find nearby hospitals / pharmacies and showing general symptom guidance (informational only, not a diagnosis)</li>
@@ -229,6 +237,8 @@
         <tr><td>OpenWeather</td><td>Approximate (city / district level) location</td><td>Weather information used to start friendly conversation. Precise coordinates are not sent.</td></tr>
         <tr><td>USDA FoodData Central</td><td>Food names only (no personal identifiers)</td><td>Nutrition reference lookup for meals.</td></tr>
         <tr><td>U.S. government health services — RxNorm / RxNav, openFDA, MedlinePlus, DailyMed (NLM / FDA), CMS Care Compare</td><td>Medication names, or a hospital's ZIP / name for ratings (no personal identifiers)</td><td>Standardizing medication information, drug labels / images, health-topic summaries, and hospital quality data. Public services.</td></tr>
+        <tr><td>Google Maps (Android) / Apple Maps (iOS)</td><td>Your device's IP address and the map area being displayed</td><td>Drawing the map when you look for nearby care. No account identifier is sent.</td></tr>
+        <tr><td>Google Translate (translate.google gateway)</td><td>Your device's IP address and the address of the health page being translated</td><td>Showing a US government health article in your language when you open it in the app. Used only for reference articles you choose to open; your own records are never sent.</td></tr>
         <tr><td>Twilio (Verify)</td><td>Phone number, one-time verification code</td><td>SMS verification for sign-in and account / phone-number recovery.</td></tr>
         <tr><td>Resend</td><td>Email address and request details</td><td>Sending account and rights-request notification emails.</td></tr>
         <tr><td>Expo Push (relaying to Apple APNs / Google FCM)</td><td>Push tokens, notification payloads</td><td>Notification delivery.</td></tr>
@@ -257,12 +267,17 @@
       <li><strong>Sleep</strong> — sleep start / end timestamps and sleep stages (including measurements imported from a connected health app, if enabled)</li>
       <li><strong>Device health metrics</strong> (if you connected a health app) — steps, distance, active energy, vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate), blood sugar / weight, and fitness / gait measurements imported from Apple Health or Google Health Connect</li>
       <li><strong>Recent activity timestamp</strong> — when you were last active in the app</li>
+      <li><strong>AI daily summary</strong> — a short AI-written paragraph about your day, the emotional tone the assistant inferred from your conversations (together with the assistant's stated reasoning), and the general <em>topics</em> you talked about. This is a summary, not a transcript: your actual words are stripped out before the summary is stored, so family never sees what you literally said.</li>
+      <li><strong>Weekly and monthly reports</strong> — patterns across the period (meals, medication, sleep, exercise), health-screening flags produced by fixed rules, an AI-written recap, and a monthly summary intended to help you and your family prepare for a doctor's visit.</li>
     </ul>
-    <p><strong>Mental-wellness data</strong> (mindfulness minutes and self-logged mood imported from a connected health app) is <strong>never</strong> shared with family — it is redacted server-side even when health-sharing consent is on. Free-form conversation content, AI memory, learned preferences, voice signals, and consent history are also <strong>never</strong> shared with family.</p>
+    <div class="callout">
+      <p><strong>What this means in practice.</strong> Because the daily summary describes your mood and the subjects you raised, a family member with health-sharing access can learn how you seemed to be feeling and what was on your mind — even though they cannot read your conversations. If you would rather they not see this, turn health sharing off in <em>Settings → Data Use Consent</em>.</p>
+    </div>
+    <p><strong>What family never sees.</strong> The literal text of your conversations, your AI memory and learned preferences, your voice, your faith affiliation, the height and weight you entered, and your consent history are <strong>never</strong> shared with family. Mindfulness minutes and self-logged mood imported from a connected health app are also <strong>never</strong> shared — they are redacted server-side even when health-sharing consent is on.</p>
 
     <h3>6.3 Optional location sharing with family</h3>
     <ul>
-      <li><strong>Activity area</strong> — if you enable <em>Share activity area with family</em>, your linked family can see a generalized activity area from the last 7 days (rounded to roughly 1–2&nbsp;km blocks; never an exact point or a live trail). Older data is automatically deleted on a rolling 7-day window.</li>
+      <li><strong>Activity area</strong> — if you grant <em>Share activity area with family</em> (granted separately for each linked family member), that family member can see a generalized activity area from the last 7 days (rounded to roughly 1–2&nbsp;km blocks; never an exact point or a live trail). Older data is automatically deleted on a rolling 7-day window.</li>
       <li><strong>Emergency location</strong> — handled separately under section 7.</li>
     </ul>
 
@@ -284,11 +299,13 @@
       <p><strong>This is the one case where we use your precise location.</strong> Healthya is not an emergency response service and cannot guarantee that help will arrive; it provides first-aid reference, one-tap 911 dialing (you place the call yourself), and optional alerts to your linked family.</p>
     </div>
     <ul>
-      <li><strong>Consent.</strong> Precise emergency location sharing is governed by the optional <em>Share location with family in emergencies</em> consent. It is off until you turn it on (we strongly recommend keeping it on).</li>
-      <li><strong>When.</strong> Only at the moment you place a 911 call from the app. We capture your location <strong>once</strong> (using a recent fix or a single fresh fix). We do not track you continuously.</li>
-      <li><strong>What we share.</strong> The push notification to your family contains your name only — never coordinates. The precise coordinates are stored on our server and shown to your linked family only after they open the alert, retrieved under row-level security.</li>
-      <li><strong>If consent is off</strong> or location permission is unavailable, the alert is still sent without any location.</li>
-      <li><strong>What we keep.</strong> We keep only the single most recent emergency record per person — a new 911 call overwrites the previous one. It is automatically deleted 7 days after the call, and also deleted immediately if you withdraw this consent or delete your account.</li>
+      <li><strong>Consent.</strong> Precise emergency location sharing is off until you turn it on, and you turn it on <strong>separately for each linked family member</strong>. We strongly recommend keeping it on for at least one person.</li>
+      <li><strong>When we collect it.</strong> So that a usable location exists at the moment you need it, the app refreshes your stored precise location about every <strong>5 minutes while the app is open on your screen</strong>. We do this in advance because placing a 911 call sends your phone to the dialer, which would cut off a fresh GPS reading at exactly the wrong moment. <strong>Nothing is collected while the app is in the background or closed</strong>, and we never build a location history.</li>
+      <li><strong>What is stored.</strong> Exactly one location per person. Each refresh overwrites the previous one, so there is no trail, no route, and no record of everywhere you have been — only where you were most recently while using the app.</li>
+      <li><strong>Who can see it.</strong> A family member you have granted this permission can view that single most recent location in their app, under row-level security. <strong>Please note that this is not limited to emergencies</strong> — if you have granted the permission, they can open the map and see your most recent location at any time. Family members you have not granted it to cannot see any location, even during an emergency.</li>
+      <li><strong>When you call 911.</strong> The push notification to your family contains your name only — never coordinates. Placing the call does not itself capture a new location; it sends the alert, and the family member opens the location already stored.</li>
+      <li><strong>If the permission is off</strong> or location access is unavailable, the alert is still sent, with no location attached.</li>
+      <li><strong>What we keep.</strong> The stored location is automatically deleted 7 days after it was last refreshed, and immediately if you withdraw the permission or delete your account.</li>
     </ul>
 
     <h2 id="en-health-apps">8. Connected health apps (Apple Health / Google Health Connect)</h2>
@@ -312,7 +329,7 @@
     </div>
 
     <h2 id="en-spi">10. Sensitive Personal Information</h2>
-    <p>SPI under CPRA includes health information, audio signals, precise geolocation, and religious or philosophical beliefs. We collect precise geolocation <strong>only</strong> for emergency 911 family sharing (section 7), with your opt-in, and never for advertising. We collect faith affiliation <strong>only</strong> if you volunteer it in conversation, solely for occasional faith-friendly greetings — never inferred, never shared with family, and removable anytime in <em>Settings → What the AI has learned</em>. We do not use SPI beyond service delivery and the purposes you have explicitly consented to. You may restrict SPI use via the in-app <em>Consent history</em> screen. (CPRA §1798.121 — Right to Limit Use of SPI)</p>
+    <p>SPI under CPRA includes health information, audio signals, precise geolocation, and religious or philosophical beliefs. We collect precise geolocation <strong>only</strong> for 911 emergency readiness and family sharing (section 7) — with your opt-in, only while the app is open on your screen, keeping only the single most recent location, and never for advertising. We collect faith affiliation <strong>only</strong> if you volunteer it in conversation, solely for occasional faith-friendly greetings — never inferred, never shared with family, and removable anytime in <em>Settings → What the AI has learned</em>. We do not use SPI beyond service delivery and the purposes you have explicitly consented to. You may restrict SPI use via the in-app <em>Consent history</em> screen. (CPRA §1798.121 — Right to Limit Use of SPI)</p>
 
     <h2 id="en-retention">11. Retention</h2>
     <ul>
@@ -362,12 +379,13 @@
     <h3>13.1 Categories collected</h3>
     <ul>
       <li>Meal, medication, hydration, sleep, and exercise records and photos</li>
+      <li>Height and weight you enter yourself (optional), and the meal / snack portion guidance derived from them</li>
       <li>Sleep, steps, activity, vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate), blood sugar, weight, fitness / gait, and mental-wellness measurements (mindfulness, mood) imported from a connected health app (optional)</li>
       <li>Inferred physical / emotional state from conversation</li>
       <li>Symptoms you report and the general symptom guidance / recommended care setting shown to you</li>
       <li>Pill bottle, prescription, and symptom photos (if uploaded)</li>
       <li>Voice signals (real-time processing, not stored)</li>
-      <li>Precise location captured once during a 911 call (optional)</li>
+      <li>A single most-recent precise location, refreshed while the app is open so it is ready if you call 911 (optional — see section 7)</li>
     </ul>
     <h3>13.2 Sources</h3>
     <ul>
@@ -420,7 +438,7 @@
     <!-- ===================== 한국어 ===================== -->
     <article data-lang-block="ko">
     <h1>Healthya 개인정보처리방침</h1>
-    <p class="meta">적용 대상: Healthya(시니어 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 8월 1일 · 동의 버전: 2026-07-17</p>
+    <p class="meta">적용 대상: Healthya(시니어 앱) · 시행일: 2026년 6월 21일 · 최종 갱신: 2026년 8월 18일 · 동의 버전: 2026-07-17</p>
 
     <div class="callout">
       <p><strong>핵심 요약.</strong> Healthya는 어르신의 일상 건강과 대화를 돕는 AI 동반자 앱입니다. 본 방침은 어떤 정보를 수집하고, 누구와 공유하며, 어떻게 권리를 행사할 수 있는지 설명합니다. 저희는 광고 목적으로 개인정보를 판매하거나 공유하지 않습니다.</p>
@@ -464,16 +482,23 @@
         <tr><td>개인정보(Cal. Civ. Code §1798.80)</td><td>닉네임, 출생 연도, 성별(선택 — 직접 입력한 경우에만)</td></tr>
         <tr><td>인터넷/전자적 활동</td><td>앱 사용 로그, 기능 사용 시각, 충돌/성능 보고</td></tr>
         <tr><td>위치 — 대략(선택)</td><td>시·구 단위로, 지역 맞춤(예: 날씨 기반 대화)과 근처 병원·약국 등 케어 시설 찾기에 활용합니다(지도 제공자에 전송하기 전 약 1&nbsp;km 단위로 반올림 — 5항 참조). 이 목적들로 정밀 좌표를 저장하지 않습니다. 선택 시, 최근 7일의 일반화된 "활동 영역"(약 1~2&nbsp;km 블록 단위로 반올림)을 연결된 가족에게 공유할 수 있습니다.</td></tr>
-        <tr><td>위치 — 정밀(선택, 응급 전용)</td><td>911 발신 순간에 <strong>1회</strong> 캡처되는 정밀 위치로, 가족이 도울 수 있도록 연결된 가족에게 공유됩니다. 7항 참조.</td></tr>
+        <tr><td>위치 — 정밀(선택, 응급 대비)</td><td>연결된 가족에게 응급 위치 공유 권한을 부여하시면, 911 발신 순간에 쓸 수 있는 위치가 미리 확보되어 있도록 <strong>앱이 화면에 열려 있는 동안</strong> 약 5분마다 저장된 정밀 위치 1건을 갱신합니다. 가장 최근 1건만 보관하며 갱신 시 이전 값을 덮어쓰므로 이동 경로나 이력은 저장되지 않습니다. 앱이 백그라운드에 있거나 종료된 동안에는 수집하지 않습니다. 7항 참조.</td></tr>
         <tr><td>음성/영상(선택)</td><td>마이크 신호(실시간 처리만, 저장 안 함); 직접 업로드한 식사·약/처방전·증상 사진(증상 사진은 분석 직후 삭제)</td></tr>
         <tr><td>건강 앱에서 가져온 건강·운동 정보(선택)</td><td>Apple 건강 또는 Google Health Connect에서 읽어오는 측정값(읽기 전용): 수면·수면 단계, 걸음 수, 거리, 활동 칼로리, 운동 세션; 활력징후(심박·혈압·산소·체온·호흡수); 혈당·체중; 체력·보행(VO2max·심박변이도·보행 안정성/속도); 정신건강(마음챙김·기분). 8항 참조.</td></tr>
         <tr><td>건강 활동 기록</td><td>식사 기록(시각, 종류, 선택 사진/영양 분석), 운동(시간, 종류), 복약(이름, 용량, 일정, 복용), 수분(섭취), 수면(시작/종료 시각)</td></tr>
+        <tr><td>신체 정보(선택)</td><td>직접 입력한 키·몸무게와 성별·출생 연도로, 식사·간식 제안의 양을 정하는 데에만 사용합니다. 입력하지 않아도 되며, 그 경우에도 식사 제안은 이용할 수 있습니다. 이 값은 본인 계정에만 저장되어 연결된 가족에게 <strong>공개되지 않으며</strong>, 키·몸무게 원본 수치와 이로부터 계산된 체질량 수치는 AI 제공자에게 <strong>전송하지 않습니다</strong>(5항 참조). 건강 앱을 연동한 경우, 직접 입력한 몸무게 대신 기기에서 최근 측정된 몸무게가 사용될 수 있습니다.</td></tr>
         <tr><td>본인 보고 건강정보</td><td>증상, 기분, 감정 메모</td></tr>
         <tr><td>종교/신앙(선택, 민감)</td><td>대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에 사용합니다. 언급 없이 추론하지 않고, 가족과 공유하지 않습니다. 10항 참조.</td></tr>
         <tr><td>AI 기억</td><td>대화에서 추출한 한 줄 "순간", 암호화된 사용자 발화 인용, 맥락 기억을 위한 의미 임베딩</td></tr>
         <tr><td>추론 정보</td><td>대화로부터 추론된 성향, 관심사, 기분</td></tr>
       </tbody>
     </table>
+
+    <p><strong>이 정보가 휴대폰에서 보이는 위치.</strong> 일부 정보는 앱 밖에도 표시되어, 휴대폰을 들거나 곁눈질하는 사람에게 보일 수 있습니다. 이는 알림과 위젯이 동작하는 일반적인 방식이며, 당사나 제3자와 공유하는 것이 아닙니다.</p>
+    <ul>
+      <li><strong>알림</strong> — 알림 문구가 잠금화면에 표시됩니다. 복약 알림은 약 이름 대신 의도적으로 중립적인 표현을 사용합니다.</li>
+      <li><strong>홈화면·잠금화면 위젯</strong> — "오늘의 계획" 위젯은 남은 케어 항목과 시각을 보여 주며(복약은 마찬가지로 중립적인 라벨로 표시), "작심삼일" 위젯은 직접 지으신 목표 제목을 iOS 잠금화면을 포함해 표시합니다. 목표 제목이 그곳에 보이는 것을 원하지 않으시면, 비공개로 두고 싶은 내용이 드러나지 않는 제목을 쓰시거나 위젯을 제거하시면 됩니다.</li>
+    </ul>
 
     <h2 id="ko-sources">3. 수집 출처</h2>
     <ul>
@@ -490,6 +515,7 @@
       <li>AI 동반자 대화 및 이용자 맥락 기억</li>
       <li>자연스러운 음성 응답을 위한 음성 합성(TTS)</li>
       <li>하루 계획, 식사·복약·수분 알림 및 생활 지원</li>
+      <li>선택 입력한 키·몸무게·성별·출생 연도를 이용한 식사·간식 제안량 조정</li>
       <li>활동 정보와 (선택) 건강 앱 측정값을 결합한 하루 요약</li>
       <li>응급 지원 — 응급처치 안내, 원탭 911 발신, 선택적 가족 알림(7항 참조)</li>
       <li>케어 내비게이션(선택) — 근처 병원·약국 찾기 및 일반 증상 안내 표시(정보 제공 목적이며 진단이 아님)</li>
@@ -514,6 +540,8 @@
         <tr><td>OpenWeather</td><td>대략(시·구 단위) 위치</td><td>친근한 대화 시작을 위한 날씨 정보. 정밀 좌표는 전송 안 함.</td></tr>
         <tr><td>USDA FoodData Central</td><td>음식 이름만(개인 식별자 없음)</td><td>식사 영양 정보 조회.</td></tr>
         <tr><td>미국 정부 건강 서비스 — RxNorm / RxNav, openFDA, MedlinePlus, DailyMed(NLM / FDA), CMS Care Compare</td><td>약 이름, 또는 평가 조회용 병원 ZIP/이름(개인 식별자 없음)</td><td>약품 정보 표준화, 의약품 라벨/이미지, 건강 주제 요약, 병원 품질 정보. 공공 서비스.</td></tr>
+        <tr><td>Google 지도(Android) / Apple 지도(iOS)</td><td>기기 IP 주소와 화면에 표시 중인 지도 영역</td><td>근처 케어 시설을 찾을 때의 지도 표시. 계정 식별자는 전송하지 않음.</td></tr>
+        <tr><td>Google 번역(translate.google 게이트웨이)</td><td>기기 IP 주소와 번역 대상 건강 문서 주소</td><td>미국 정부 건강 자료를 이용자 언어로 볼 때 사용. 직접 열어 보는 참고 문서에만 적용되며, 본인 기록은 전송하지 않음.</td></tr>
         <tr><td>Twilio(Verify)</td><td>전화번호, 일회용 인증 코드</td><td>로그인 및 계정/전화번호 복구를 위한 SMS 인증.</td></tr>
         <tr><td>Resend</td><td>이메일 주소 및 요청 내용</td><td>계정 및 권리 요청 관련 안내 이메일 발송.</td></tr>
         <tr><td>Expo Push(Apple APNs / Google FCM로 중계)</td><td>푸시 토큰, 알림 페이로드</td><td>알림 전달.</td></tr>
@@ -542,12 +570,17 @@
       <li><strong>수면</strong> — 수면 시작/종료 시각 및 수면 단계(연동 시 건강 앱에서 가져온 측정값 포함)</li>
       <li><strong>기기 건강 지표</strong>(건강 앱을 연동한 경우) — Apple 건강 또는 Google Health Connect에서 가져온 걸음 수·거리·활동 칼로리, 활력징후(심박·혈압·산소·체온·호흡수), 혈당·체중, 체력·보행 측정값</li>
       <li><strong>최근 활동 시각</strong> — 마지막으로 앱을 사용한 시점</li>
+      <li><strong>AI 하루 요약</strong> — 하루를 서술한 짧은 AI 작성 문단, 대화에서 추론된 감정 상태(추론 근거 포함), 그리고 이야기한 <em>주제</em>. 이는 대화록이 아니라 요약입니다. 실제 발화 문장은 저장 전에 제거되므로, 가족이 무슨 말을 했는지 그대로 보지는 못합니다.</li>
+      <li><strong>주간·월간 리포트</strong> — 기간 동안의 패턴(식사·복약·수면·운동), 정해진 규칙으로 산출된 건강 스크리닝 플래그, AI 작성 요약, 그리고 진료 상담 준비를 돕기 위한 월간 요약</li>
     </ul>
-    <p><strong>정신건강 데이터</strong>(건강 앱에서 가져온 마음챙김 시간과 본인이 기록한 기분)는 건강 공유 동의가 켜져 있어도 서버에서 제거되어 <strong>절대</strong> 가족과 공유되지 않습니다. 자유 형식 대화 내용, AI 기억, 학습된 선호, 음성 신호, 동의 이력 또한 <strong>절대</strong> 가족과 공유되지 않습니다.</p>
+    <div class="callout">
+      <p><strong>실제로 어떤 의미인가.</strong> 하루 요약에는 기분과 이야기한 주제가 담기므로, 건강 공유 권한이 있는 가족은 대화 내용을 읽지 못하더라도 그날 기분이 어땠는지, 무엇을 마음에 두고 계셨는지는 알 수 있습니다. 원하지 않으시면 <em>설정 → 데이터 이용 동의</em>에서 건강 공유를 끄시면 됩니다.</p>
+    </div>
+    <p><strong>가족이 절대 볼 수 없는 것.</strong> 대화의 실제 문장, AI 기억과 학습된 선호, 음성, 종교·신앙, 직접 입력한 키·몸무게, 동의 이력은 <strong>절대</strong> 가족과 공유되지 않습니다. 건강 앱에서 가져온 마음챙김 시간과 본인이 기록한 기분 또한 건강 공유 동의가 켜져 있어도 서버에서 제거되어 <strong>절대</strong> 공유되지 않습니다.</p>
 
     <h3>6.3 가족과의 선택적 위치 공유</h3>
     <ul>
-      <li><strong>활동 영역</strong> — <em>가족과 활동 영역 공유</em>를 켜면, 연결된 가족은 최근 7일의 일반화된 활동 영역(약 1~2&nbsp;km 블록 단위로 반올림, 정확한 지점이나 실시간 동선은 아님)을 볼 수 있습니다. 오래된 데이터는 7일 롤링 단위로 자동 삭제됩니다.</li>
+      <li><strong>활동 영역</strong> — <em>가족과 활동 영역 공유</em> 권한을 부여하면(연결된 가족 구성원마다 따로 부여), 해당 가족은 최근 7일의 일반화된 활동 영역(약 1~2&nbsp;km 블록 단위로 반올림, 정확한 지점이나 실시간 동선은 아님)을 볼 수 있습니다. 오래된 데이터는 7일 롤링 단위로 자동 삭제됩니다.</li>
       <li><strong>응급 위치</strong> — 7항에서 별도로 다룹니다.</li>
     </ul>
 
@@ -569,11 +602,13 @@
       <p><strong>정밀 위치를 사용하는 유일한 경우입니다.</strong> Healthya는 응급 대응 서비스가 아니며 구조가 도착함을 보장할 수 없습니다. 응급처치 안내, 원탭 911 발신(통화는 본인이 직접 누름), 연결된 가족에 대한 선택적 알림을 제공합니다.</p>
     </div>
     <ul>
-      <li><strong>동의.</strong> 정밀 응급 위치 공유는 선택 항목인 <em>응급 시 가족에게 위치 공유</em> 동의로 통제됩니다. 켜기 전에는 비활성이며, 켜두실 것을 강력히 권장합니다.</li>
-      <li><strong>시점.</strong> 앱에서 911을 발신하는 순간에만 작동합니다. 위치는 <strong>1회</strong>(최근 위치 또는 1회 신규 측정)만 캡처하며, 지속적으로 추적하지 않습니다.</li>
-      <li><strong>공유 내용.</strong> 가족에게 가는 푸시 알림에는 이름만 담기며 좌표는 포함되지 않습니다. 정밀 좌표는 당사 서버에 저장되고, 가족이 알림을 연 뒤 행 수준 보안으로 조회될 때에만 표시됩니다.</li>
-      <li><strong>동의가 꺼져 있거나</strong> 위치 권한이 없으면, 알림은 위치 없이 그대로 발송됩니다.</li>
-      <li><strong>보유.</strong> 응급 기록은 사람당 가장 최근 1건만 보관하며, 새 911 발신이 이전 기록을 덮어씁니다. 발신 7일 후 자동 삭제되고, 본 동의를 철회하거나 계정을 삭제하면 즉시 삭제됩니다.</li>
+      <li><strong>동의.</strong> 정밀 응급 위치 공유는 켜기 전에는 비활성이며, <strong>연결된 가족 구성원마다 따로</strong> 켜실 수 있습니다. 최소 한 분에게는 켜두실 것을 강력히 권장합니다.</li>
+      <li><strong>수집 시점.</strong> 필요한 순간에 쓸 수 있는 위치가 미리 확보되어 있도록, <strong>앱이 화면에 열려 있는 동안</strong> 약 <strong>5분마다</strong> 저장된 정밀 위치를 갱신합니다. 911을 누르면 전화 앱으로 전환되면서 바로 그 순간 GPS 측정이 끊기기 때문에, 위치는 미리 확보해 둡니다. <strong>앱이 백그라운드에 있거나 종료된 동안에는 수집하지 않으며</strong>, 이동 이력을 만들지 않습니다.</li>
+      <li><strong>저장 내용.</strong> 사람당 위치는 정확히 1건입니다. 갱신할 때마다 이전 값을 덮어쓰므로 이동 경로나 방문 이력은 남지 않고, 앱을 사용하던 시점의 가장 최근 위치만 남습니다.</li>
+      <li><strong>열람 범위.</strong> 권한을 부여받은 가족은 그 최근 위치 1건을 행 수준 보안으로 자신의 앱에서 볼 수 있습니다. <strong>응급 상황에만 한정되지 않는다는 점을 알아두세요</strong> — 권한을 부여하셨다면, 가족은 언제든 지도를 열어 가장 최근 위치를 확인할 수 있습니다. 권한을 부여하지 않은 가족은 응급 상황에도 위치를 볼 수 없습니다.</li>
+      <li><strong>911 발신 시.</strong> 가족에게 가는 푸시 알림에는 이름만 담기며 좌표는 포함되지 않습니다. 발신 자체가 새 위치를 캡처하지는 않으며, 알림을 보내면 가족이 이미 저장된 위치를 열어 봅니다.</li>
+      <li><strong>권한이 꺼져 있거나</strong> 위치 접근이 불가능하면, 알림은 위치 없이 그대로 발송됩니다.</li>
+      <li><strong>보유.</strong> 저장된 위치는 마지막으로 갱신된 시점으로부터 7일 후 자동 삭제되며, 권한을 철회하거나 계정을 삭제하면 즉시 삭제됩니다.</li>
     </ul>
 
     <h2 id="ko-health-apps">8. 건강 앱 연동(Apple 건강 / Google Health Connect)</h2>
@@ -597,7 +632,7 @@
     </div>
 
     <h2 id="ko-spi">10. 민감 개인정보(SPI)</h2>
-    <p>CPRA상 SPI에는 건강정보, 음성 신호, 정밀 위치, 종교·철학적 신념이 포함됩니다. 당사는 정밀 위치를 <strong>오직</strong> 응급 911 가족 공유(7항)를 위해, 이용자 옵트인하에만 수집하며, 광고에는 절대 사용하지 않습니다. 신앙 정보는 이용자가 대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에만 사용합니다 — 추론하지 않고, 가족과 공유하지 않으며, <em>설정 → AI가 학습한 정보</em>에서 언제든 삭제할 수 있습니다. SPI는 서비스 제공과 이용자가 명시적으로 동의한 목적 외에는 사용하지 않습니다. 앱 내 <em>동의 이력</em> 화면에서 SPI 이용을 제한할 수 있습니다. (CPRA §1798.121 — SPI 이용 제한권)</p>
+    <p>CPRA상 SPI에는 건강정보, 음성 신호, 정밀 위치, 종교·철학적 신념이 포함됩니다. 당사는 정밀 위치를 <strong>오직</strong> 911 응급 대비 및 가족 공유(7항)를 위해 수집합니다 — 이용자 옵트인하에, 앱이 화면에 열려 있는 동안에만, 가장 최근 1건만 보관하며, 광고에는 절대 사용하지 않습니다. 신앙 정보는 이용자가 대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에만 사용합니다 — 추론하지 않고, 가족과 공유하지 않으며, <em>설정 → AI가 학습한 정보</em>에서 언제든 삭제할 수 있습니다. SPI는 서비스 제공과 이용자가 명시적으로 동의한 목적 외에는 사용하지 않습니다. 앱 내 <em>동의 이력</em> 화면에서 SPI 이용을 제한할 수 있습니다. (CPRA §1798.121 — SPI 이용 제한권)</p>
 
     <h2 id="ko-retention">11. 보유 기간</h2>
     <ul>
@@ -647,12 +682,13 @@
     <h3>13.1 수집 항목</h3>
     <ul>
       <li>식사, 복약, 수분, 수면, 운동 기록 및 사진</li>
+      <li>직접 입력한 키·몸무게(선택)와 이로부터 산출된 식사·간식 양 안내</li>
       <li>연동한 건강 앱에서 가져온 수면·걸음·활동, 활력징후(심박·혈압·산소·체온·호흡수), 혈당·체중, 체력·보행, 정신건강 측정값(마음챙김·기분)(선택)</li>
       <li>대화로부터 추론된 신체/감정 상태</li>
       <li>이용자가 보고한 증상 및 표시되는 일반 증상 안내/권장 진료 세팅</li>
       <li>약통·처방전·증상 사진(업로드 시)</li>
       <li>음성 신호(실시간 처리, 저장 안 함)</li>
-      <li>911 발신 시 1회 캡처되는 정밀 위치(선택)</li>
+      <li>911 발신에 대비해 앱이 열려 있는 동안 갱신되는 가장 최근 정밀 위치 1건(선택 — 7항 참조)</li>
     </ul>
     <h3>13.2 출처</h3>
     <ul>
