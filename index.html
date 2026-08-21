@@ -201,7 +201,8 @@
       line-height: 1.62;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      overflow-x: hidden;
+      /* no overflow on body: it would become a scroll container and capture the
+         ghost watermarks' view() timelines (html's overflow-x: clip handles x) */
       position: relative;
       counter-reset: sect;
     }
@@ -213,27 +214,28 @@
 
     /* ── ATMOSPHERE (paper canvas): drifting aurora + fine grain ─────── */
     .aurora { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; }
-    .aurora span { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5; will-change: transform; }
+    .aurora span { position: absolute; border-radius: 50%; opacity: .5; will-change: transform; }
     .aurora .a1 {
       width: 46vw; height: 46vw; top: 20vh; right: -10vw;
-      background: radial-gradient(circle at 50% 50%, rgba(21,150,180,.26), transparent 68%);
+      background: radial-gradient(circle at 50% 50%, rgba(21,150,180,.26), transparent 76%);
       animation: drift1 26s ease-in-out infinite;
     }
     .aurora .a2 {
       width: 40vw; height: 40vw; top: 48vh; left: -12vw;
-      background: radial-gradient(circle at 50% 50%, rgba(27,139,102,.22), transparent 68%);
+      background: radial-gradient(circle at 50% 50%, rgba(27,139,102,.22), transparent 76%);
       animation: drift2 32s ease-in-out infinite;
     }
     .aurora .a3 {
       width: 34vw; height: 34vw; top: 70vh; left: 38vw;
-      background: radial-gradient(circle at 50% 50%, rgba(188,99,80,.13), transparent 70%);
+      background: radial-gradient(circle at 50% 50%, rgba(188,99,80,.13), transparent 78%);
       animation: drift3 38s ease-in-out infinite;
     }
     .aurora .a4 {
       width: 30vw; height: 30vw; bottom: -10vw; right: 12vw;
-      background: radial-gradient(circle at 50% 50%, rgba(104,73,199,.12), transparent 70%);
+      background: radial-gradient(circle at 50% 50%, rgba(104,73,199,.12), transparent 78%);
       animation: drift2 44s ease-in-out infinite reverse;
     }
+    body.in-hero .aurora span { animation-play-state: paused; }
     @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-4vw,4vh) scale(1.12)} }
     @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(5vw,3vh) scale(1.08)} }
     @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(3vw,-5vh) scale(1.15)} }
@@ -258,8 +260,7 @@
       transform: scaleX(0); transform-origin: left; pointer-events: none;
     }
     .grain {
-      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .05;
-      mix-blend-mode: soft-light;
+      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .04;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
@@ -402,26 +403,26 @@
       color: var(--hero-ink);
     }
     .hero-sky { position: absolute; inset: 0; pointer-events: none; }
-    .hs-glow { position: absolute; border-radius: 50%; filter: blur(72px); will-change: transform; }
+    .hs-glow { position: absolute; border-radius: 50%; will-change: transform; }
     .hs-glow.g1 {
       width: 52vw; height: 52vw; top: -18vw; right: -12vw;
-      background: radial-gradient(circle at 50% 50%, var(--hero-glow-1), transparent 66%);
+      background: radial-gradient(circle at 50% 50%, var(--hero-glow-1), transparent 74%);
       animation: drift1 26s ease-in-out infinite;
     }
     .hs-glow.g2 {
       width: 44vw; height: 44vw; top: -10vw; left: -14vw;
-      background: radial-gradient(circle at 50% 50%, var(--hero-glow-2), transparent 66%);
+      background: radial-gradient(circle at 50% 50%, var(--hero-glow-2), transparent 74%);
       animation: drift2 34s ease-in-out infinite;
     }
     .hs-glow.g3 {
       width: 30vw; height: 30vw; bottom: 4vw; left: 30vw;
-      background: radial-gradient(circle at 50% 50%, var(--hero-glow-3), transparent 70%);
+      background: radial-gradient(circle at 50% 50%, var(--hero-glow-3), transparent 78%);
       animation: drift3 40s ease-in-out infinite;
     }
     .hs-glow.g4 {
       width: 90vw; height: 34vw; bottom: -22vw; left: 50%; transform: translateX(-50%);
-      border-radius: 50%; filter: blur(90px);
-      background: radial-gradient(ellipse at 50% 50%, var(--hero-glow-4), transparent 70%);
+      border-radius: 50%;
+      background: radial-gradient(ellipse at 50% 50%, var(--hero-glow-4), transparent 78%);
       animation: none;
     }
     /* the horizon arc — a vast rim of light beneath everything */
@@ -455,7 +456,6 @@
       color: var(--hero-eyebrow); letter-spacing: .2em;
       padding: 9px 18px; border: 1px solid var(--hero-line); border-radius: 999px;
       background: var(--hero-glass);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
     .hero .eyebrow::before {
       content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--hero-accent); opacity: 1;
@@ -491,7 +491,6 @@
     .hero .btn-ghost {
       border-color: var(--hero-btn-border); color: var(--hero-ink);
       background: var(--hero-glass);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
     .btn-ghost:hover { border-color: var(--primary); background: var(--card); transform: translateY(-2px); }
     .hero .btn-ghost:hover { border-color: var(--hero-btn-border-hover); background: var(--hero-glass-strong); }
@@ -502,7 +501,7 @@
       display: inline-flex; align-items: center; gap: 8px;
       font-size: 12.5px; font-weight: 500; color: var(--hero-muted);
       padding: 8px 14px; border: 1px solid var(--hero-line); border-radius: 999px;
-      background: var(--hero-glass); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      background: var(--hero-glass);
     }
     .chip svg { width: 14px; height: 14px; color: var(--hero-accent); flex-shrink: 0; }
 
@@ -663,12 +662,9 @@
     }
     .ghost.g-right { top: 16px; right: -1vw; }
     .ghost.g-left  { top: 16px; left: -1vw; }
-    @supports (animation-timeline: view()) {
-      .ghost { animation: ghostDrift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
-      .ghost.g-left { animation-name: ghostDriftL; }
-      @keyframes ghostDrift  { from { transform: translateX(5vw); }  to { transform: translateX(-7vw); } }
-      @keyframes ghostDriftL { from { transform: translateX(-5vw); } to { transform: translateX(7vw); } }
-    }
+    /* ghost drift is driven by the scroll handler — CSS view() timelines attach
+       to the wrong scroller in this layout and lack Safari/Firefox support */
+    .ghost { will-change: transform; }
     .how, #features { position: relative; }
     .how > :not(.ghost), #features > :not(.ghost) { position: relative; }
     .who-inner, .privacy-inner { position: relative; }
@@ -712,7 +708,7 @@
 
     /* ── WHO — staggered editorial cards ─────────────────────────────── */
     .who {
-      background: var(--bg-2); max-width: none; position: relative; overflow: hidden;
+      background: var(--bg-2); max-width: none; position: relative; overflow: clip;
       margin-inline: clamp(10px, 2vw, 26px); border-radius: var(--band-radius);
     }
     .who::before {
@@ -874,7 +870,7 @@
         radial-gradient(ellipse 70% 60% at 12% 0%, rgba(21,150,180,.30), transparent 60%),
         radial-gradient(ellipse 60% 70% at 92% 100%, rgba(27,139,102,.26), transparent 62%),
         linear-gradient(165deg, var(--lagoon-3), var(--lagoon-1));
-      color: #fff; max-width: none; position: relative; overflow: hidden;
+      color: #fff; max-width: none; position: relative; overflow: clip;
       margin-inline: clamp(10px, 2vw, 26px); border-radius: var(--band-radius);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 30px 80px -40px rgba(4,22,28,.7);
     }
@@ -1020,12 +1016,12 @@
 
     /* ── REVEAL (scroll) ─────────────────────────────────────────────── */
     .reveal {
-      opacity: 0; transform: translateY(26px); filter: blur(10px);
+      opacity: 0; transform: translateY(26px); filter: blur(5px);
       transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1), filter .8s cubic-bezier(.2,.7,.2,1);
     }
     .reveal.in { opacity: 1; transform: none; filter: blur(0); }
     .stagger > * {
-      opacity: 0; transform: translateY(20px); filter: blur(8px);
+      opacity: 0; transform: translateY(20px); filter: blur(5px);
       transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1), filter .7s cubic-bezier(.2,.7,.2,1);
     }
     .stagger.in > * { opacity: 1; transform: none; filter: blur(0); }
@@ -1888,19 +1884,42 @@
       var nav = document.getElementById('nav');
       var progressEl = document.getElementById('progress');
       var heroEl = document.querySelector('.hero');
+      var heroH = 0, scrollMax = 1, viewH = 0, vwPx = 0;
+      var ghostEls = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? [] :
+        Array.prototype.map.call(document.querySelectorAll('.ghost'), function (g) {
+          return { el: g, dir: g.classList.contains('g-left') ? -1 : 1 };
+        });
+      function remeasure() {
+        heroH = heroEl ? heroEl.offsetHeight : 0;
+        viewH = window.innerHeight;
+        vwPx = window.innerWidth / 100;
+        scrollMax = Math.max(1, document.documentElement.scrollHeight - viewH);
+      }
       function onScroll() {
-        if (nav) nav.classList.toggle('scrolled', window.scrollY > 12);
-        var overHero = heroEl ? window.scrollY < heroEl.offsetHeight - 64 : false;
-        if (nav) nav.classList.toggle('over-hero', overHero);
+        var y = window.scrollY;
+        var overHero = heroEl ? y < heroH - 64 : false;
+        /* read phase — all layout reads happen before any DOM writes */
+        var rects = ghostEls.map(function (g) { return g.el.getBoundingClientRect(); });
+        /* write phase */
+        if (nav) {
+          nav.classList.toggle('scrolled', y > 12);
+          nav.classList.toggle('over-hero', overHero);
+        }
         document.body.classList.toggle('in-hero', overHero);
-        if (progressEl) {
-          var max = document.documentElement.scrollHeight - window.innerHeight;
-          progressEl.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+        if (progressEl) progressEl.style.transform = 'scaleX(' + Math.min(1, y / scrollMax) + ')';
+        /* ghost watermark drift: ±5vw → ∓7vw across each ghost's pass through the viewport */
+        for (var i = 0; i < ghostEls.length; i++) {
+          var r = rects[i];
+          if (r.bottom < -80 || r.top > viewH + 80) continue;
+          var p = Math.max(0, Math.min(1, (viewH - r.top) / (viewH + r.height)));
+          ghostEls[i].el.style.transform = 'translateX(' + (ghostEls[i].dir * (5 - 12 * p) * vwPx).toFixed(1) + 'px)';
         }
       }
-      onScroll();
+      remeasure(); onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll);
+      window.addEventListener('resize', function () { remeasure(); onScroll(); });
+      window.addEventListener('load', function () { remeasure(); onScroll(); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { remeasure(); onScroll(); });
 
       /* Hero title word-by-word rise — rebuilt whenever the language changes */
       function decorateHeroTitle() {
