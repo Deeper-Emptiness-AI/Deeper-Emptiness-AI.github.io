@@ -626,6 +626,20 @@
     .store-card-desc { font-size: 14px; color: var(--text-muted); line-height: 1.45; }
     .store-card-cta { font-size: 13.5px; font-weight: 600; color: var(--primary); margin-top: 4px; }
 
+    /* ── SURVEY MODAL ────────────────────────────────────────────────── */
+    /* Fill nearly the full viewport height: the dialog is a column and the
+       form iframe flexes into all remaining space. */
+    .survey-dialog { max-width: 680px; height: min(960px, 100%); display: flex; flex-direction: column; }
+    .survey-frame-wrap {
+      flex: 1; min-height: 0; margin-top: 12px;
+      border: 1px solid var(--border-strong); border-radius: 16px; overflow: hidden;
+      background: #fff;
+    }
+    .survey-frame-wrap iframe { display: block; width: 100%; height: 100%; border: 0; }
+    .survey-fallback { text-align: center; font-size: 13px; margin-top: 12px; }
+    .survey-fallback a { color: var(--text-muted); text-decoration: underline; }
+    .survey-fallback a:hover { color: var(--text); }
+
     /* ── RESPONSIVE ──────────────────────────────────────────────────── */
     /* wide screens — grow the canvas so it never feels empty */
     @media (min-width: 1440px) {
@@ -684,6 +698,7 @@
       <a href="#features" class="nav-only-wide" data-i18n="nav_features">Features</a>
       <a href="#privacy" class="nav-only-wide" data-i18n="nav_privacy">Privacy</a>
       <a href="#legal" class="nav-only-wide" data-i18n="nav_legal">Legal</a>
+      <a href="#survey" class="nav-only-wide" data-i18n="nav_survey" data-survey-trigger>Survey</a>
       <a href="#launch" class="nav-cta" data-i18n="nav_cta" data-store-trigger>Get the app</a>
     </div>
   </nav>
@@ -707,6 +722,19 @@
           <span class="store-card-cta" data-store-cta></span>
         </a>
       </div>
+    </div>
+  </div>
+
+  <!-- Survey modal (Google Form embedded — fill & submit without leaving the page) -->
+  <div class="store-modal" id="surveyModal" hidden>
+    <div class="store-backdrop" data-survey-close></div>
+    <div class="store-dialog survey-dialog" role="dialog" aria-modal="true" aria-labelledby="surveyModalTitle">
+      <button class="store-x" type="button" data-survey-close aria-label="Close">&times;</button>
+      <h2 id="surveyModalTitle" data-i18n="survey_title">Tell us what you think</h2>
+      <div class="survey-frame-wrap">
+        <iframe id="surveyFrame" title="Survey"></iframe>
+      </div>
+      <p class="survey-fallback"><a id="surveyFallbackLink" href="#" target="_blank" rel="noopener" data-i18n="survey_fallback">Trouble loading? Open in a new tab →</a></p>
     </div>
   </div>
 
@@ -1112,6 +1140,8 @@
         launch_sub:"Available now on iOS and Android. Free to start, simple to use, and designed for real life.",
         launch_cta:"Get the app", launch_note:"Developed by Deeper Emptiness AI · hello@healthia.app",
         store_title:"Get the app", store_sub:"Choose the app that's right for you.",
+        nav_survey:"Survey", survey_title:"Tell us what you think",
+        survey_fallback:"Trouble loading? Open the survey in a new tab \u2192",
         store_senior_name:"Healthya", store_senior_desc:"For seniors. Your voice-first health companion — talk, get reminders, and stay well every day.",
         store_family_name:"Healthya Family", store_family_desc:"For family members. Gently stay in the loop and support your loved one's well-being.",
         legal_eyebrow:"Legal", legal_title:"Legal & privacy documents", legal_sub:"Full policies for both apps, plus how to request account deletion.",
@@ -1176,6 +1206,8 @@
         launch_sub:"iOS와 Android에서 지금 이용할 수 있습니다. 무료로 시작하고, 쉽게 쓰고, 실제 삶을 위해 만들었습니다.",
         launch_cta:"앱 다운로드", launch_note:"Deeper Emptiness AI 개발 · hello@healthia.app",
         store_title:"앱 다운로드", store_sub:"본인에게 맞는 앱을 선택하세요.",
+        nav_survey:"설문", survey_title:"의견을 들려주세요",
+        survey_fallback:"화면이 안 보이면 새 탭에서 열기 \u2192",
         store_senior_name:"Healthya", store_senior_desc:"시니어용. 음성으로 함께하는 건강 동반자 — 대화하고, 알림을 받고, 매일 건강을 챙깁니다.",
         store_family_name:"Healthya Family", store_family_desc:"가족용. 사랑하는 분의 일상을 부드럽게 살피고 건강을 함께 응원합니다.",
         legal_eyebrow:"약관", legal_title:"약관 & 개인정보 문서", legal_sub:"두 앱의 전체 방침과 계정 삭제 요청 방법입니다.",
@@ -1294,7 +1326,34 @@
       document.querySelectorAll('[data-store-close]').forEach(function (el) {
         el.addEventListener('click', closeModal);
       });
-      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) closeModal(); });
+
+      /* ---------- Survey (Google Form embedded in a modal) ----------
+         The form loads lazily on first open; while the modal is hidden the iframe
+         keeps its document, so in-progress answers survive close/reopen. */
+      var SURVEY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe9xj3Ru3vRkthyoWMwOWc1F7B45mU-4CNR9Sd_3g1UhucX9A/viewform';
+      var surveyModal = document.getElementById('surveyModal');
+      var surveyFrame = document.getElementById('surveyFrame');
+      function surveySrc() { return SURVEY_FORM_URL + '?embedded=true&hl=' + currentLang(); }
+      function openSurvey() {
+        var src = surveySrc();
+        if (surveyFrame.getAttribute('src') !== src) surveyFrame.setAttribute('src', src);
+        var fb = document.getElementById('surveyFallbackLink');
+        if (fb) fb.setAttribute('href', src);
+        surveyModal.hidden = false; document.body.style.overflow = 'hidden';
+      }
+      function closeSurvey() { surveyModal.hidden = true; document.body.style.overflow = ''; }
+      document.querySelectorAll('[data-survey-trigger]').forEach(function (el) {
+        el.addEventListener('click', function (e) { e.preventDefault(); openSurvey(); });
+      });
+      document.querySelectorAll('[data-survey-close]').forEach(function (el) {
+        el.addEventListener('click', closeSurvey);
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        if (!modal.hidden) closeModal();
+        if (!surveyModal.hidden) closeSurvey();
+      });
 
       /* Scroll reveal */
       var observer = new IntersectionObserver(
