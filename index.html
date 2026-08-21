@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Healthya · Your voice, your health — cared for</title>
   <meta name="description" content="Healthya is a voice-first AI health companion for older adults. It listens, remembers, and helps with meals, medications, and daily well-being — with a companion app that keeps family gently in the loop. Available on iOS and Android." />
-  <meta name="theme-color" content="#FBFAF7" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#EAF6F3" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#07161B" media="(prefers-color-scheme: dark)" />
 
   <!-- Favicon -->
@@ -21,28 +21,29 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:image" content="assets/icon_apple.png" />
 
-  <!-- Type: Fraunces (warm display serif) + Pretendard (body, Korean-safe, matches the in-app typeface) -->
+  <!-- Type: Fraunces (warm display serif) + Hahmlet (Korean display serif) + Pretendard (body, Korean-safe, matches the in-app typeface) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
   <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&display=swap" />
+        href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..700;1,9..144,400..600&family=Hahmlet:wght@100..900&display=swap" />
   <link rel="stylesheet" as="style" crossorigin
         href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 
   <style>
+
     /* ===================================================================
-       Healthya — "Calm Clinical Warmth"
-       Editorial health-tech: warm paper canvas · aurora mesh · fine grain
+       Healthya — "Deep Lagoon Editorial"
+       Sunlit-shallows hero (light) · deep-lagoon hero (dark) · warm paper editorial body
        Display: Fraunces (serif) · Body: Pretendard (Korean-safe)
-       Palette mirrors the app's Modern Bento Calm — teal / mint / warm.
+       Crossed ticker ribbons · ghost typography · giant serif numerals
        =================================================================== */
     :root {
       --nav-h: 74px;
-      --maxw: 1200px;   /* content width — grows on wide screens (see media queries) */
+      --maxw: 1200px;
 
       --font-body: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      --font-display: 'Fraunces', 'Pretendard Variable', Pretendard, Georgia, 'Times New Roman', serif;
+      --font-display: 'Fraunces', 'Hahmlet', 'Pretendard Variable', Pretendard, Georgia, 'Times New Roman', serif;
 
       /* warm paper canvas */
       --bg:            #FBFAF7;
@@ -55,12 +56,55 @@
       --border:        rgba(18, 40, 36, 0.09);
       --border-strong: rgba(18, 40, 36, 0.15);
 
-      --primary:        #0E7490;   /* deep medical teal — trust */
-      --primary-bright: #1596B4;   /* friendlier teal (matches wordmark) */
+      --primary:        #0E7490;
+      --primary-bright: #1596B4;
       --primary-dark:   #124B5B;
-      --mint:           #1B8B66;   /* solid action green */
+      --mint:           #1B8B66;
       --mint-dark:      #157253;
-      --coral:          #BC6350;   /* family accent */
+      --coral:          #BC6350;
+
+      /* the lagoon — privacy/finale constants, shared by both themes */
+      --lagoon-1:  #04161C;
+      --lagoon-2:  #0B2E38;
+      --lagoon-3:  #0E3945;
+      --glow-cyan:  #40CDDE;
+      --glow-mint:  #4ADEA8;
+
+      /* hero — sunlit shallows (light) · deep lagoon (dark) */
+      --hero-bg-1: #EAF6F3;
+      --hero-bg-2: #CBE5DF;
+      --hero-bg-3: #A9D8D0;
+      --hero-ink:   #0D2B26;
+      --hero-muted: #3D5B54;
+      --hero-soft:  #5E7A73;
+      --hero-line:  rgba(13, 43, 38, 0.15);
+      --hero-eyebrow: #0B6B51;
+      --hero-accent:  #157253;
+      --hero-glass:        rgba(255, 255, 255, 0.55);
+      --hero-glass-strong: rgba(255, 255, 255, 0.8);
+      --hero-btn-border:       rgba(13, 43, 38, 0.3);
+      --hero-btn-border-hover: rgba(13, 43, 38, 0.55);
+      --hero-ring-line: rgba(14, 116, 144, 0.3);
+      --hero-title-shadow: 0 2px 34px rgba(255, 255, 255, .65);
+      --hero-title-grad: linear-gradient(100deg, #0F8B60 8%, #0C7D9E 38%, #1596B4 58%, #0E8F63 88%);
+      --hero-nav-bg: rgba(234, 246, 243, 0.66);
+      --hero-glow-1: rgba(21, 150, 180, .52);
+      --hero-glow-2: rgba(27, 139, 102, .44);
+      --hero-glow-3: rgba(216, 109, 85, .32);
+      --hero-glow-4: rgba(64, 205, 222, .46);
+      --hero-device-shadow:
+        0 40px 90px -28px rgba(12, 62, 60, .5),
+        0 0 100px -18px rgba(64, 205, 222, .55),
+        inset 0 1px 0 rgba(255, 255, 255, .14);
+      --hero-float-shadow: 0 18px 44px -14px rgba(20, 50, 46, .3), 0 0 40px -14px rgba(64, 205, 222, .35);
+      --hero-device-frame: linear-gradient(155deg, #FFFFFF, #DEEAE7 60%, #EFF6F4);
+      --hero-device-border: rgba(13, 43, 38, 0.14);
+      --hero-device-notch: rgba(13, 43, 38, 0.16);
+      --hero-horizon-core: radial-gradient(circle at 50% 18%, #FFFFFF, #C9E6E0 55%);
+      --hero-horizon-rim:
+        0 -2px 0 1px rgba(14, 116, 144, .5),
+        0 -10px 48px 6px rgba(21, 150, 180, .4),
+        0 -34px 140px 26px rgba(21, 150, 180, .28);
 
       /* pastel tint surfaces (light) */
       --warm-bg:  #FFF0EB; --warm-ink:  #7C2A1E; --warm-accent:  #B8604E;
@@ -75,9 +119,9 @@
 
       --nav-bg: rgba(251, 250, 247, 0.72);
       --ring: rgba(14, 116, 144, 0.30);
+      --band-radius: clamp(30px, 4.5vw, 54px);
     }
 
-    :root[data-theme="dark"], :root:not([data-theme]) { }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme]) {
         color-scheme: dark;
@@ -110,11 +154,46 @@
 
         --nav-bg: rgba(7, 22, 27, 0.72);
         --ring: rgba(52, 193, 220, 0.34);
+
+        --hero-bg-1: #04161C;
+        --hero-bg-2: #0B2E38;
+        --hero-bg-3: #0E3945;
+        --hero-ink:   #F0F8F5;
+        --hero-muted: #AEC8C1;
+        --hero-soft:  #86A49D;
+        --hero-line:  rgba(255, 255, 255, 0.14);
+        --hero-eyebrow: #8EE3C2;
+        --hero-accent:  #4ADEA8;
+        --hero-glass:        rgba(255, 255, 255, 0.05);
+        --hero-glass-strong: rgba(255, 255, 255, 0.1);
+        --hero-btn-border:       rgba(255, 255, 255, 0.26);
+        --hero-btn-border-hover: rgba(255, 255, 255, 0.6);
+        --hero-ring-line: rgba(120, 220, 230, 0.4);
+        --hero-title-shadow: 0 2px 40px rgba(0, 0, 0, 0.25);
+        --hero-title-grad: linear-gradient(100deg, #7FE9CB 8%, #40CDDE 38%, #9BE8F2 58%, #58D5B4 88%);
+        --hero-nav-bg: rgba(4, 20, 26, 0.62);
+        --hero-glow-1: rgba(21, 150, 180, .4);
+        --hero-glow-2: rgba(27, 139, 102, .34);
+        --hero-glow-3: rgba(216, 109, 85, .17);
+        --hero-glow-4: rgba(64, 205, 222, .3);
+        --hero-device-shadow:
+          0 40px 90px -28px rgba(0, 0, 0, .8),
+          0 0 90px -20px rgba(64, 205, 222, .5),
+          inset 0 1px 0 rgba(255, 255, 255, .14);
+        --hero-float-shadow: 0 18px 44px -14px rgba(0, 0, 0, .55), 0 0 40px -14px rgba(64, 205, 222, .4);
+        --hero-device-frame: linear-gradient(155deg, #1A3A44, #0B242C 60%, #123039);
+        --hero-device-border: rgba(255, 255, 255, 0.14);
+        --hero-device-notch: rgba(255, 255, 255, 0.2);
+        --hero-horizon-core: radial-gradient(circle at 50% 18%, #06222B, #041318 55%);
+        --hero-horizon-rim:
+          0 -2px 0 1px rgba(150, 236, 244, .38),
+          0 -8px 44px 4px rgba(64, 205, 222, .34),
+          0 -30px 130px 22px rgba(21, 150, 180, .26);
       }
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; overflow-x: clip; }
     body {
       background: var(--bg);
       color: var(--text);
@@ -124,52 +203,74 @@
       text-rendering: optimizeLegibility;
       overflow-x: hidden;
       position: relative;
+      counter-reset: sect;
     }
     a { color: inherit; text-decoration: none; }
-    ::selection { background: rgba(27, 139, 102, 0.22); }
+    ::selection { background: rgba(21, 150, 180, 0.26); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--primary-bright); outline-offset: 3px; border-radius: 8px;
+    }
 
-    /* ── ATMOSPHERE: drifting aurora mesh + fine grain ───────────────── */
-    .aurora {
-      position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden;
-    }
-    .aurora span {
-      position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55;
-      will-change: transform;
-    }
+    /* ── ATMOSPHERE (paper canvas): drifting aurora + fine grain ─────── */
+    .aurora { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; }
+    .aurora span { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .5; will-change: transform; }
     .aurora .a1 {
-      width: 46vw; height: 46vw; top: -12vw; right: -8vw;
-      background: radial-gradient(circle at 50% 50%, rgba(21,150,180,.34), transparent 68%);
+      width: 46vw; height: 46vw; top: 20vh; right: -10vw;
+      background: radial-gradient(circle at 50% 50%, rgba(21,150,180,.26), transparent 68%);
       animation: drift1 26s ease-in-out infinite;
     }
     .aurora .a2 {
-      width: 40vw; height: 40vw; top: -6vw; left: -10vw;
-      background: radial-gradient(circle at 50% 50%, rgba(27,139,102,.30), transparent 68%);
+      width: 40vw; height: 40vw; top: 48vh; left: -12vw;
+      background: radial-gradient(circle at 50% 50%, rgba(27,139,102,.22), transparent 68%);
       animation: drift2 32s ease-in-out infinite;
     }
     .aurora .a3 {
-      width: 34vw; height: 34vw; top: 44vh; left: 38vw;
-      background: radial-gradient(circle at 50% 50%, rgba(188,99,80,.16), transparent 70%);
+      width: 34vw; height: 34vw; top: 70vh; left: 38vw;
+      background: radial-gradient(circle at 50% 50%, rgba(188,99,80,.13), transparent 70%);
       animation: drift3 38s ease-in-out infinite;
+    }
+    .aurora .a4 {
+      width: 30vw; height: 30vw; bottom: -10vw; right: 12vw;
+      background: radial-gradient(circle at 50% 50%, rgba(104,73,199,.12), transparent 70%);
+      animation: drift2 44s ease-in-out infinite reverse;
     }
     @keyframes drift1 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(-4vw,4vh) scale(1.12)} }
     @keyframes drift2 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(5vw,3vh) scale(1.08)} }
     @keyframes drift3 { 0%,100%{transform:translate(0,0) scale(1)} 50%{transform:translate(3vw,-5vh) scale(1.15)} }
+    /* soft light that follows the cursor (fine pointers only) */
+    .spotlight {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none; opacity: 0;
+      transition: opacity .8s ease;
+      background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 28%),
+        color-mix(in srgb, var(--primary-bright) 9%, transparent), transparent 70%);
+    }
+    body.pointer-live .spotlight { opacity: 1; }
+    .dotgrid {
+      position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background-image: radial-gradient(color-mix(in srgb, var(--text) 9%, transparent) 1px, transparent 1.4px);
+      background-size: 26px 26px;
+      -webkit-mask-image: linear-gradient(180deg, transparent 30vh, rgba(0,0,0,.75) 60vh, transparent 120vh);
+      mask-image: linear-gradient(180deg, transparent 30vh, rgba(0,0,0,.75) 60vh, transparent 120vh);
+    }
+    .progress {
+      position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 130;
+      background: linear-gradient(90deg, var(--glow-mint), var(--glow-cyan), var(--coral));
+      transform: scaleX(0); transform-origin: left; pointer-events: none;
+    }
     .grain {
-      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .04;
+      position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .05;
       mix-blend-mode: soft-light;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
     /* ── CONTROLS (language) ─────────────────────────────────────────── */
-    .controls {
-      position: fixed; top: calc(var(--nav-h) + 10px); right: 18px; z-index: 90;
-      display: flex; gap: 8px;
-    }
+    .controls { position: fixed; top: calc(var(--nav-h) + 10px); right: 18px; z-index: 90; display: flex; gap: 8px; }
     .seg {
       display: inline-flex; border: 1px solid var(--border-strong);
       border-radius: 999px; overflow: hidden;
       background: var(--nav-bg); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
       box-shadow: var(--shadow-soft);
+      transition: background .35s ease, border-color .35s ease;
     }
     .seg button {
       font: inherit; font-size: 13px; cursor: pointer; letter-spacing: .2px;
@@ -178,6 +279,13 @@
     }
     .seg button + button { border-left: 1px solid var(--border); }
     .seg button[aria-pressed="true"] { background: var(--primary); color: #fff; font-weight: 600; }
+    /* over the deep hero (dark theme only) → dark glass */
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) body.in-hero .seg { background: rgba(8, 30, 37, .55); border-color: var(--hero-line); box-shadow: none; }
+      :root:not([data-theme]) body.in-hero .seg button { color: var(--hero-muted); }
+      :root:not([data-theme]) body.in-hero .seg button + button { border-left-color: var(--hero-line); }
+      :root:not([data-theme]) body.in-hero .seg button[aria-pressed="true"] { background: #34D399; color: #04231A; }
+    }
 
     /* ── NAV ─────────────────────────────────────────────────────────── */
     nav {
@@ -194,18 +302,26 @@
       border-bottom: 1px solid var(--border);
       box-shadow: var(--shadow-soft);
     }
+    nav.over-hero.scrolled {
+      background: var(--hero-nav-bg); border-bottom-color: var(--hero-line); box-shadow: none;
+    }
     .nav-logo { display: inline-flex; align-items: center; gap: 10px; }
-    .nav-wordmark { height: 52px; width: auto; display: block; transition: height .35s ease; }
+    .nav-wordmark { height: 52px; width: auto; display: block; transition: height .35s ease, filter .35s ease; }
     nav.scrolled .nav-wordmark { height: 42px; }
-    :root:not([data-theme]) .nav-wordmark { }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) nav.over-hero .nav-wordmark { filter: brightness(1.55) saturate(.85) drop-shadow(0 2px 10px rgba(0,0,0,.35)); }
+    }
     @media (prefers-color-scheme: dark) { :root:not([data-theme]) .nav-wordmark { filter: brightness(1.25) saturate(1.1); } }
     .nav-links { display: flex; gap: 30px; align-items: center; }
     .nav-links a { font-size: 14.5px; color: var(--text-muted); transition: color .2s; position: relative; }
+    nav.over-hero .nav-links a { color: var(--hero-muted); }
     .nav-links a.nav-only-wide::after {
       content: ''; position: absolute; left: 0; right: 100%; bottom: -5px; height: 2px;
       background: var(--primary); border-radius: 2px; transition: right .25s ease;
     }
+    nav.over-hero .nav-links a.nav-only-wide::after { background: var(--hero-accent); }
     .nav-links a.nav-only-wide:hover { color: var(--text); }
+    nav.over-hero .nav-links a.nav-only-wide:hover { color: var(--hero-ink); }
     .nav-links a.nav-only-wide:hover::after { right: 0; }
     .nav-cta {
       padding: 10px 20px; border-radius: 999px;
@@ -213,54 +329,156 @@
       box-shadow: 0 8px 20px -8px var(--ring);
       transition: transform .18s, background .2s, box-shadow .2s;
     }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) nav.over-hero .nav-cta { background: var(--mint); color: #04231A !important; box-shadow: 0 10px 26px -8px rgba(52, 211, 153, .45); }
+      :root:not([data-theme]) nav.over-hero .nav-cta:hover { background: #3ADFA5; }
+    }
     .nav-cta:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 12px 26px -10px var(--ring); }
     @media (max-width: 860px) { .nav-links .nav-only-wide { display: none; } }
 
     /* ── LAYOUT PRIMITIVES ───────────────────────────────────────────── */
-    section { padding: clamp(72px, 10vw, 118px) clamp(20px, 5vw, 44px); max-width: var(--maxw); margin: 0 auto; }
+    section { padding: clamp(84px, 11vw, 136px) clamp(20px, 5vw, 44px); max-width: var(--maxw); margin: 0 auto; }
+    /* editorial eyebrow: ( 01 ) — LABEL ———— */
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 10px;
-      font-size: 12.5px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase;
-      color: var(--primary); margin-bottom: 20px;
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase;
+      color: var(--primary); margin-bottom: 22px;
     }
-    .eyebrow::before {
-      content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--mint);
-      box-shadow: 0 0 0 0 rgba(27,139,102,.5); animation: pulseDot 2.4s ease-out infinite;
+    .eyebrow::before { content: ''; width: 26px; height: 1px; background: currentColor; opacity: .55; }
+    .section-head .eyebrow::before {
+      counter-increment: sect;
+      content: counter(sect, decimal-leading-zero);
+      width: auto; height: auto; background: none; opacity: 1;
+      font-family: var(--font-display); font-style: italic; font-weight: 500;
+      font-size: 17px; letter-spacing: .02em; transform: translateY(-1px);
     }
-    @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(27,139,102,.45)} 70%{box-shadow:0 0 0 9px rgba(27,139,102,0)} 100%{box-shadow:0 0 0 0 rgba(27,139,102,0)} }
+    .section-head .eyebrow::after {
+      content: ''; width: 44px; height: 1px;
+      background: linear-gradient(90deg, currentColor, transparent); opacity: .5;
+    }
     h1 {
       font-family: var(--font-display);
-      font-size: clamp(42px, 6.6vw, 78px); line-height: 1.02; letter-spacing: -1.4px;
-      font-weight: 560; margin-bottom: 24px;
+      font-size: clamp(44px, 7vw, 88px); line-height: .99; letter-spacing: -.028em;
+      font-weight: 560; margin-bottom: 26px;
     }
     h2 {
       font-family: var(--font-display);
-      font-size: clamp(29px, 4.3vw, 46px); line-height: 1.1; letter-spacing: -.9px; font-weight: 560;
+      font-size: clamp(31px, 4.6vw, 52px); line-height: 1.06; letter-spacing: -.022em; font-weight: 560;
     }
     h3 { letter-spacing: -.2px; }
-    .serif-accent { color: var(--primary); }
-    .section-head { max-width: 660px; margin-bottom: 56px; }
+    .serif-accent { color: var(--primary); font-style: italic; }
+    /* hero title — word-by-word curtain rise (rebuilt on language switch) */
+    .hero h1 .w {
+      display: inline-block; vertical-align: top;
+      /* curtain mask: only the bottom lip clips (hides the word before it rises);
+         top/left/right stay open so italic overhangs are never cut */
+      clip-path: inset(-2em -2em -.16em -2em);
+    }
+    .hero h1 .w > i {
+      display: inline-block; font-style: inherit;
+      /* Safari paints background-clip:text only inside the border box — pad the
+         box out to cover italic ink overhang, pull it back with equal margins */
+      padding: .25em .35em .12em .15em; margin: -.25em -.35em -.12em -.15em;
+      transform: translateY(125%) rotate(3deg);
+      animation: wordUp .9s cubic-bezier(.16,.8,.24,1) forwards;
+    }
+    @keyframes wordUp { to { transform: none; } }
+    .serif-accent .w > i {
+      background: var(--hero-title-grad);
+      background-size: 220% 100%; -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+      animation: wordUp .9s cubic-bezier(.16,.8,.24,1) forwards, inkShift 8s ease-in-out 1.1s infinite;
+    }
+    @keyframes inkShift { 0%,100% { background-position: 0% 0; } 50% { background-position: 100% 0; } }
+    .section-head { max-width: 680px; margin-bottom: clamp(44px, 6vw, 64px); }
     .section-head p { margin-top: 18px; font-size: clamp(16.5px, 2vw, 19px); color: var(--text-muted); }
 
-    /* ── HERO ────────────────────────────────────────────────────────── */
+    /* ── HERO — the lagoon ───────────────────────────────────────────── */
     .hero {
-      position: relative; padding-top: clamp(140px, 17vh, 178px); padding-bottom: 84px;
-      display: grid; grid-template-columns: 1.04fr .96fr; gap: clamp(32px, 5vw, 60px); align-items: center;
+      position: relative; max-width: none; margin: 0; overflow: hidden;
+      padding: 0 0 clamp(96px, 12vw, 150px);
+      background: linear-gradient(178deg, var(--hero-bg-1) 4%, var(--hero-bg-2) 58%, var(--hero-bg-3) 100%);
+      border-radius: 0 0 var(--band-radius) var(--band-radius);
+      color: var(--hero-ink);
     }
-    .hero-sub { font-size: clamp(17px, 2.1vw, 20px); color: var(--text-muted); max-width: 540px; margin-bottom: 34px; }
+    .hero-sky { position: absolute; inset: 0; pointer-events: none; }
+    .hs-glow { position: absolute; border-radius: 50%; filter: blur(72px); will-change: transform; }
+    .hs-glow.g1 {
+      width: 52vw; height: 52vw; top: -18vw; right: -12vw;
+      background: radial-gradient(circle at 50% 50%, var(--hero-glow-1), transparent 66%);
+      animation: drift1 26s ease-in-out infinite;
+    }
+    .hs-glow.g2 {
+      width: 44vw; height: 44vw; top: -10vw; left: -14vw;
+      background: radial-gradient(circle at 50% 50%, var(--hero-glow-2), transparent 66%);
+      animation: drift2 34s ease-in-out infinite;
+    }
+    .hs-glow.g3 {
+      width: 30vw; height: 30vw; bottom: 4vw; left: 30vw;
+      background: radial-gradient(circle at 50% 50%, var(--hero-glow-3), transparent 70%);
+      animation: drift3 40s ease-in-out infinite;
+    }
+    .hs-glow.g4 {
+      width: 90vw; height: 34vw; bottom: -22vw; left: 50%; transform: translateX(-50%);
+      border-radius: 50%; filter: blur(90px);
+      background: radial-gradient(ellipse at 50% 50%, var(--hero-glow-4), transparent 70%);
+      animation: none;
+    }
+    /* the horizon arc — a vast rim of light beneath everything */
+    .hs-horizon {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      bottom: calc(-1 * clamp(560px, 92vw, 1400px));
+      width: clamp(760px, 150vw, 2100px); height: clamp(760px, 150vw, 2100px);
+      border-radius: 50%;
+      background: var(--hero-horizon-core);
+      box-shadow: var(--hero-horizon-rim);
+    }
+    .hs-stars { display: none; } /* stars belong to the night lagoon only */
+    @media (prefers-color-scheme: dark) { :root:not([data-theme]) .hs-stars { display: block; } }
+    .hs-stars i {
+      position: absolute; left: var(--x); top: var(--y);
+      width: 3px; height: 3px; border-radius: 50%;
+      background: #C6F1F4; opacity: 0; transform: scale(var(--s, 1));
+      box-shadow: 0 0 8px 1px rgba(150, 230, 235, .55);
+      animation: twinkle 5.5s ease-in-out var(--d, 0s) infinite;
+    }
+    @keyframes twinkle { 0%, 100% { opacity: 0; } 40% { opacity: .95; } 62% { opacity: .3; } }
+
+    .hero-shell {
+      position: relative; z-index: 2;
+      max-width: var(--maxw); margin: 0 auto;
+      padding: clamp(146px, 19vh, 196px) clamp(20px, 5vw, 44px) 0;
+      display: grid; grid-template-columns: 1.04fr .96fr;
+      gap: clamp(32px, 5vw, 60px); align-items: center;
+    }
+    .hero .eyebrow {
+      color: var(--hero-eyebrow); letter-spacing: .2em;
+      padding: 9px 18px; border: 1px solid var(--hero-line); border-radius: 999px;
+      background: var(--hero-glass);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
+    .hero .eyebrow::before {
+      content: ''; width: 8px; height: 8px; border-radius: 50%; background: var(--hero-accent); opacity: 1;
+      box-shadow: 0 0 0 0 rgba(74,222,168,.5); animation: pulseDot 2.4s ease-out infinite;
+    }
+    @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(74,222,168,.45)} 70%{box-shadow:0 0 0 9px rgba(74,222,168,0)} 100%{box-shadow:0 0 0 0 rgba(74,222,168,0)} }
+    .hero h1 { color: var(--hero-ink); text-shadow: var(--hero-title-shadow); }
+    .hero-sub { font-size: clamp(17px, 2.1vw, 20px); color: var(--hero-muted); max-width: 540px; margin-bottom: 34px; }
     .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 9px;
-      background: var(--mint); color: #fff; padding: 16px 30px; border-radius: 999px;
+      background: linear-gradient(135deg, #2BB68A, #128C9F); color: #fff;
+      padding: 16px 30px; border-radius: 999px;
       font-size: 15.5px; font-weight: 600; position: relative; overflow: hidden;
-      box-shadow: 0 12px 28px -8px rgba(27,139,102,.42); transition: transform .16s, box-shadow .2s;
+      box-shadow: 0 14px 34px -8px rgba(27,139,102,.5), inset 0 1px 0 rgba(255,255,255,.25);
+      transition: transform .16s, box-shadow .2s;
     }
     .btn-primary::after {
       content: ''; position: absolute; top: 0; left: -120%; width: 60%; height: 100%;
       background: linear-gradient(100deg, transparent, rgba(255,255,255,.4), transparent);
       transform: skewX(-18deg); transition: left .6s ease;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 36px -10px rgba(27,139,102,.5); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 20px 44px -10px rgba(27,139,102,.6), inset 0 1px 0 rgba(255,255,255,.25); }
     .btn-primary:hover::after { left: 130%; }
     .btn-primary svg { width: 17px; height: 17px; }
     .btn-ghost {
@@ -270,40 +488,54 @@
       background: color-mix(in srgb, var(--card) 60%, transparent);
       transition: border-color .2s, background .2s, transform .16s;
     }
+    .hero .btn-ghost {
+      border-color: var(--hero-btn-border); color: var(--hero-ink);
+      background: var(--hero-glass);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    }
     .btn-ghost:hover { border-color: var(--primary); background: var(--card); transform: translateY(-2px); }
+    .hero .btn-ghost:hover { border-color: var(--hero-btn-border-hover); background: var(--hero-glass-strong); }
     .btn-ghost svg { width: 16px; height: 16px; }
 
     .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 40px; }
     .chip {
       display: inline-flex; align-items: center; gap: 8px;
-      font-size: 12.5px; font-weight: 500; color: var(--text-muted);
-      padding: 8px 14px; border: 1px solid var(--border); border-radius: 999px;
-      background: color-mix(in srgb, var(--card) 70%, transparent); backdrop-filter: blur(6px);
+      font-size: 12.5px; font-weight: 500; color: var(--hero-muted);
+      padding: 8px 14px; border: 1px solid var(--hero-line); border-radius: 999px;
+      background: var(--hero-glass); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     }
-    .chip svg { width: 14px; height: 14px; color: var(--mint); flex-shrink: 0; }
+    .chip svg { width: 14px; height: 14px; color: var(--hero-accent); flex-shrink: 0; }
 
-    /* Hero visual — floating device + breathing voice orb + sound rings */
+    /* Hero visual — glowing device above the horizon */
     .hero-visual { position: relative; justify-self: center; width: 100%; max-width: 420px; }
     .rings { position: absolute; inset: 0; display: grid; place-items: center; z-index: 0; pointer-events: none; }
     .rings i {
       position: absolute; width: 260px; height: 260px; border-radius: 50%;
-      border: 1px solid var(--ring); opacity: 0; animation: ripple 4.6s ease-out infinite;
+      border: 1px solid var(--hero-ring-line); opacity: 0; animation: ripple 4.6s ease-out infinite;
     }
     .rings i:nth-child(2) { animation-delay: 1.5s; }
     .rings i:nth-child(3) { animation-delay: 3s; }
     @keyframes ripple { 0%{transform:scale(.55);opacity:.5} 80%{opacity:0} 100%{transform:scale(1.9);opacity:0} }
+    /* light pooling on the water beneath the device */
+    .hero-visual::after {
+      content: ''; position: absolute; left: 50%; bottom: -66px; transform: translateX(-50%);
+      width: 78%; height: 60px; border-radius: 50%;
+      background: radial-gradient(ellipse at 50% 50%, rgba(64,205,222,.35), transparent 70%);
+      filter: blur(14px);
+    }
 
     .device {
       position: relative; z-index: 1; border-radius: 42px; padding: 14px;
-      background: linear-gradient(155deg, color-mix(in srgb, var(--card) 92%, var(--primary) 8%), var(--card));
-      border: 1px solid var(--border); box-shadow: var(--shadow-hero);
+      background: var(--hero-device-frame);
+      border: 1px solid var(--hero-device-border);
+      box-shadow: var(--hero-device-shadow);
       transform-style: preserve-3d; transition: transform .25s ease-out;
       animation: floaty 7s ease-in-out infinite;
     }
     @keyframes floaty { 0%,100%{translate:0 0} 50%{translate:0 -12px} }
     .device::before {
       content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
-      width: 92px; height: 6px; border-radius: 999px; background: var(--border-strong); z-index: 3;
+      width: 92px; height: 6px; border-radius: 999px; background: var(--hero-device-notch); z-index: 3;
     }
     .screen {
       border-radius: 30px; padding: 20px; background: var(--surface);
@@ -350,59 +582,171 @@
     .t-mint  { background: var(--mint-bg);  color: var(--mint-ink); }
     .t-sky   { background: var(--sky-bg);   color: var(--sky-ink); }
     .t-lilac { background: var(--lilac-bg); color: var(--lilac-ink); }
+    .mock-grid > .mock-tile { animation: tilePulse 9s ease-in-out infinite; animation-delay: calc(var(--td, 0) * 2.25s); }
+    .mock-grid > .mock-tile:nth-child(1) { --td: 0 } .mock-grid > .mock-tile:nth-child(2) { --td: 1 }
+    .mock-grid > .mock-tile:nth-child(3) { --td: 2 } .mock-grid > .mock-tile:nth-child(4) { --td: 3 }
+    @keyframes tilePulse {
+      0%, 10%, 100% { transform: none; box-shadow: none; }
+      4% { transform: translateY(-4px) scale(1.03); box-shadow: 0 12px 22px -12px rgba(20,50,46,.4); }
+    }
     /* floating family mini-card */
     .float-card {
       position: absolute; z-index: 2; right: -6px; bottom: 30px;
       display: flex; align-items: center; gap: 10px; padding: 12px 15px;
       border-radius: 18px; background: var(--card); border: 1px solid var(--border);
-      box-shadow: var(--shadow-card); max-width: 214px;
+      box-shadow: var(--hero-float-shadow);
+      max-width: 214px;
       animation: floaty 7s ease-in-out infinite; animation-delay: -3.5s;
     }
     .float-card .fc-emoji { font-size: 22px; }
     .float-card .fc-t { font-size: 12.5px; font-weight: 700; color: var(--text); line-height: 1.25; }
     .float-card .fc-s { font-size: 11px; color: var(--text-soft); margin-top: 1px; }
 
-    /* ── HOW IT WORKS ────────────────────────────────────────────────── */
+    /* ── CROSSED TICKER RIBBONS (overlapping the hero seam) ──────────── */
+    .ribbons { position: relative; z-index: 6; height: 0; margin-top: clamp(-46px, -3.4vw, -28px); }
+    .marquee { overflow: hidden; padding: 13px 0; width: 105vw; margin-left: -2.5vw; }
+    .mq-solid {
+      position: relative; transform: rotate(-1.4deg);
+      background: linear-gradient(90deg, #0E7490, #159A74 46%, #0F7E95);
+      box-shadow: 0 18px 44px -18px rgba(10, 70, 80, .55);
+      border-block: 1px solid rgba(255,255,255,.18);
+    }
+    .mq-solid .marquee-track span { color: rgba(255,255,255,.92); }
+    .mq-outline {
+      position: absolute; top: 6px; left: -2.5vw; transform: rotate(1.1deg); z-index: -1;
+      border-block: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg) 72%, transparent);
+    }
+    .mq-outline .marquee-track { animation-direction: reverse; animation-duration: 52s; }
+    .mq-outline .marquee-track span {
+      color: transparent;
+      -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 34%, transparent);
+    }
+    .marquee-track { display: flex; width: max-content; animation: marquee 38s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track span {
+      white-space: nowrap; padding-right: 12px;
+      font-family: var(--font-display); font-style: italic; font-weight: 500;
+      font-size: 17.5px; letter-spacing: .5px;
+    }
+    @keyframes marquee { to { transform: translateX(-50%); } }
+
+    /* ── GHOST WATERMARKS (giant outlined words behind sections) ─────── */
+    .ghost {
+      position: absolute; z-index: 0; pointer-events: none; user-select: none;
+      font-family: var(--font-display); font-style: italic; font-weight: 560;
+      font-size: clamp(104px, 16.5vw, 250px); line-height: 1; white-space: nowrap;
+      letter-spacing: -.02em;
+      color: transparent;
+      background: linear-gradient(110deg,
+        color-mix(in srgb, var(--primary) 9%, transparent),
+        color-mix(in srgb, var(--mint) 7%, transparent) 60%,
+        color-mix(in srgb, var(--coral) 6%, transparent));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-stroke: 1.5px color-mix(in srgb, var(--primary) 22%, transparent);
+      opacity: .7;
+    }
+    /* Hangul display glyphs come from Hahmlet, which has no italic —
+       keep Korean display type upright instead of faux-slanting it */
+    :root[lang="ko"] .serif-accent,
+    :root[lang="ko"] .marquee-track span,
+    :root[lang="ko"] .ghost { font-style: normal; }
+    /* keep the Korean watermark airy, and quieter on dark */
+    :root[lang="ko"] .ghost, html[lang="ko"] .ghost { font-weight: 380; }
+    @media (prefers-color-scheme: dark) {
+      .ghost { opacity: .4; -webkit-text-stroke-width: 1px; }
+    }
+    .privacy .ghost {
+      -webkit-text-stroke-color: rgba(255,255,255,.12);
+      background: linear-gradient(110deg, rgba(142,227,194,.06), rgba(64,205,222,.05));
+      -webkit-background-clip: text; background-clip: text;
+    }
+    .ghost.g-right { top: 16px; right: -1vw; }
+    .ghost.g-left  { top: 16px; left: -1vw; }
+    @supports (animation-timeline: view()) {
+      .ghost { animation: ghostDrift linear both; animation-timeline: view(); animation-range: entry 0% exit 100%; }
+      .ghost.g-left { animation-name: ghostDriftL; }
+      @keyframes ghostDrift  { from { transform: translateX(5vw); }  to { transform: translateX(-7vw); } }
+      @keyframes ghostDriftL { from { transform: translateX(-5vw); } to { transform: translateX(7vw); } }
+    }
+    .how, #features { position: relative; }
+    .how > :not(.ghost), #features > :not(.ghost) { position: relative; }
+    .who-inner, .privacy-inner { position: relative; }
+
+    /* ── HOW IT WORKS — editorial numbered rail ──────────────────────── */
     .how { text-align: center; }
     .how .section-head { margin-left: auto; margin-right: auto; text-align: center; }
-    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; text-align: left; }
+    .how .section-head .eyebrow { justify-content: center; }
+    .how-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); text-align: left;
+      border-block: 1px solid var(--border-strong);
+      background: color-mix(in srgb, var(--card) 40%, transparent);
+    }
     .step {
-      position: relative; padding: 30px 26px 28px; border-radius: 24px;
-      background: var(--card); border: 1px solid var(--border); box-shadow: var(--shadow-card);
-      overflow: hidden;
+      position: relative; padding: clamp(34px, 4vw, 52px) clamp(24px, 3vw, 40px);
+      transition: background .3s ease;
     }
+    .step + .step { border-left: 1px solid var(--border-strong); }
+    .step:hover { background: color-mix(in srgb, var(--card) 85%, transparent); }
     .step::before {
-      content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;
+      content: ''; position: absolute; inset: auto 0 -1px 0; height: 2px;
       background: linear-gradient(90deg, var(--primary), var(--mint));
-      transform: scaleX(0); transform-origin: left; transition: transform .5s ease .1s;
+      transform: scaleX(0); transform-origin: left; transition: transform .6s cubic-bezier(.2,.7,.2,1) .15s;
     }
-    .reveal.in .step::before, .step.in::before { transform: scaleX(1); }
+    .step:hover::before { transform: scaleX(1); }
     .step-n {
-      font-family: var(--font-display); font-size: 40px; font-weight: 500;
-      color: var(--primary); line-height: 1; letter-spacing: -1px;
-      display: inline-flex; align-items: baseline; gap: 4px; margin-bottom: 16px;
+      font-family: var(--font-display); font-style: italic;
+      font-size: clamp(56px, 7vw, 86px); font-weight: 500;
+      line-height: 1; letter-spacing: -.04em; margin-bottom: 18px;
+      background: linear-gradient(160deg, var(--primary) 20%, var(--mint) 90%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      display: block;
     }
-    .step-n small { font-size: 15px; color: var(--text-soft); font-family: var(--font-body); font-weight: 600; }
-    .step h3 { font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+    .step h3 { font-size: 20px; font-weight: 700; margin-bottom: 9px; }
     .step p { font-size: 15px; color: var(--text-muted); }
-    .step-line {
-      position: absolute; top: 52px; right: -13px; z-index: 2; color: var(--border-strong);
+    .step-line { display: none; }
+    @media (max-width: 820px) {
+      .how-grid { grid-template-columns: 1fr; }
+      .step + .step { border-left: none; border-top: 1px solid var(--border-strong); }
     }
-    .step-line svg { width: 26px; height: 26px; }
-    @media (max-width: 820px) { .how-grid { grid-template-columns: 1fr; } .step-line { display: none; } }
 
-    /* ── WHO ─────────────────────────────────────────────────────────── */
-    .who { background: var(--bg-2); max-width: none; }
-    .who-inner { max-width: var(--maxw); margin: 0 auto; }
-    .who-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); gap: 20px; }
-    .who-card {
-      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
-      padding: 34px 30px; box-shadow: var(--shadow-card); transition: transform .22s, box-shadow .22s;
+    /* ── WHO — staggered editorial cards ─────────────────────────────── */
+    .who {
+      background: var(--bg-2); max-width: none; position: relative; overflow: hidden;
+      margin-inline: clamp(10px, 2vw, 26px); border-radius: var(--band-radius);
     }
-    .who-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hero); }
+    .who::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 60% 44% at 84% 0%, color-mix(in srgb, var(--primary) 9%, transparent), transparent 70%);
+    }
+    .who-inner { max-width: var(--maxw); margin: 0 auto; }
+    .who-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(268px, 1fr)); gap: 22px; align-items: start; }
+    .who-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 28px;
+      padding: 36px 30px; box-shadow: var(--shadow-card);
+      position: relative; overflow: hidden;
+      transition: transform .22s, box-shadow .22s;
+    }
+    .who-card::before {
+      content: ''; position: absolute; inset: 0 0 auto 0; height: 4px;
+      background: linear-gradient(90deg, var(--mint), var(--primary-bright));
+      opacity: 0; transition: opacity .3s;
+    }
+    .who-card:nth-child(2)::before { background: linear-gradient(90deg, var(--coral), #D8956F); }
+    .who-card:nth-child(3)::before { background: linear-gradient(90deg, var(--sky-accent, #2A72B4), var(--primary-bright)); }
+    .who-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-hero); }
+    .who-card:hover::before { opacity: 1; }
+    @media (min-width: 901px) {
+      .who-grid .who-card:nth-child(2) { transform: translateY(26px); }
+      .who-grid .who-card:nth-child(3) { transform: translateY(52px); }
+      .who-grid .who-card:nth-child(2):hover { transform: translateY(20px); }
+      .who-grid .who-card:nth-child(3):hover { transform: translateY(46px); }
+      .who-grid { padding-bottom: 52px; }
+    }
     .who-badge {
-      width: 56px; height: 56px; border-radius: 17px; display: grid; place-items: center;
-      font-size: 27px; margin-bottom: 20px;
+      width: 60px; height: 60px; border-radius: 19px; display: grid; place-items: center;
+      font-size: 28px; margin-bottom: 20px;
+      box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 8%, transparent);
     }
     .who-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 9px; }
     .who-card p { font-size: 15px; color: var(--text-muted); }
@@ -410,17 +754,34 @@
     /* ── FEATURES (bento) ────────────────────────────────────────────── */
     .bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; grid-auto-flow: dense; }
     .cell {
-      border-radius: 26px; padding: 28px; border: 1px solid transparent;
+      border-radius: 28px; padding: 28px; border: 1px solid transparent;
       box-shadow: var(--shadow-card); position: relative; overflow: hidden;
       transition: transform .22s, box-shadow .22s;
     }
-    .cell:hover { transform: translateY(-4px); box-shadow: var(--shadow-hero); }
+    .cell:hover { transform: translateY(-5px); box-shadow: var(--shadow-hero); }
+    /* gradient hairline ring that lights up on hover */
     .cell::before {
-      content: ''; position: absolute; width: 180px; height: 180px; right: -60px; top: -60px;
-      background: radial-gradient(circle, rgba(255,255,255,.35), transparent 68%);
+      content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1.4px;
+      background: linear-gradient(135deg,
+        color-mix(in srgb, var(--primary-bright) 75%, transparent),
+        transparent 40% 60%,
+        color-mix(in srgb, var(--mint) 65%, transparent));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude;
+      opacity: 0; transition: opacity .35s; pointer-events: none;
+    }
+    .cell:hover::before { opacity: 1; }
+    .cell:hover .c-emoji, .who-card:hover .who-badge { animation: wiggle .55s ease; }
+    @keyframes wiggle { 0% { transform: rotate(0); } 30% { transform: rotate(-9deg) scale(1.1); } 60% { transform: rotate(7deg) scale(1.06); } 100% { transform: rotate(0); } }
+    /* pointer tilt + glare */
+    [data-tilt] { will-change: transform; }
+    .tilt-glare { position: relative; }
+    .tilt-glare::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit; z-index: 2;
+      background: radial-gradient(460px circle at var(--gx, 50%) var(--gy, 50%), rgba(255,255,255,.25), transparent 55%);
       opacity: 0; transition: opacity .3s; pointer-events: none;
     }
-    .cell:hover::before { opacity: .8; }
+    .tilt-glare:hover::after { opacity: 1; }
     .c-emoji {
       font-size: 27px; width: 52px; height: 52px; border-radius: 15px; display: grid; place-items: center;
       background: rgba(255,255,255,.5); box-shadow: var(--shadow-soft);
@@ -432,6 +793,17 @@
     .cell.tall .c-emoji { width: 58px; height: 58px; font-size: 30px; }
     .cell.tall h3 { font-size: 22px; margin-top: 20px; }
     .cell.tall p { font-size: 15.5px; margin-top: 4px; }
+    /* the flagship voice cell — richer wash + faint waveform */
+    .cell.c-mint.tall {
+      background:
+        radial-gradient(circle at 50% 124%, transparent 88px, color-mix(in srgb, var(--mint-accent) 22%, transparent) 89px, transparent 91px),
+        radial-gradient(circle at 50% 124%, transparent 138px, color-mix(in srgb, var(--mint-accent) 17%, transparent) 139px, transparent 141px),
+        radial-gradient(circle at 50% 124%, transparent 192px, color-mix(in srgb, var(--mint-accent) 13%, transparent) 193px, transparent 195px),
+        radial-gradient(circle at 50% 124%, transparent 250px, color-mix(in srgb, var(--mint-accent) 9%, transparent) 251px, transparent 253px),
+        radial-gradient(circle at 86% -4%, color-mix(in srgb, var(--primary-bright) 22%, transparent), transparent 52%),
+        var(--mint-bg);
+    }
+    .cell.c-mint.tall::after { z-index: 2; }
     .c-warm  { background: var(--warm-bg);  color: var(--warm-ink); }
     .c-mint  { background: var(--mint-bg);  color: var(--mint-ink); }
     .c-sky   { background: var(--sky-bg);   color: var(--sky-ink); }
@@ -440,19 +812,36 @@
     .c-plain { background: var(--card); color: var(--text); border-color: var(--border); }
     .c-plain .c-emoji { background: var(--surface); }
     .c-plain p { color: var(--text-muted); }
+    .bento > .cell:last-child {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: 52px 1fr; column-gap: 20px; align-items: start;
+    }
+    .bento > .cell:last-child .c-emoji { grid-row: 1 / span 2; margin-top: 2px; }
+    .bento > .cell:last-child h3 { grid-column: 2; margin: 2px 0 6px; }
+    .bento > .cell:last-child p { grid-column: 2; max-width: 920px; }
     @media (max-width: 900px) { .bento { grid-template-columns: repeat(2, 1fr); } .cell.wide { grid-column: span 2; } .cell.tall { grid-row: span 1; } }
     @media (max-width: 560px) { .bento { grid-template-columns: 1fr; } .cell.wide { grid-column: span 1; } }
 
     /* ── FAMILY BAND ─────────────────────────────────────────────────── */
     .family-band {
       display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center;
-      background: linear-gradient(150deg, var(--warm-bg), color-mix(in srgb, var(--warm-bg) 80%, var(--card)));
-      border: 1px solid var(--border); border-radius: 34px; padding: clamp(34px, 5vw, 54px);
-      margin: 0 auto; max-width: var(--maxw); width: calc(100% - clamp(40px, 10vw, 88px));
+      background:
+        radial-gradient(circle at 88% 6%, color-mix(in srgb, var(--coral) 16%, transparent), transparent 52%),
+        linear-gradient(150deg, var(--warm-bg), color-mix(in srgb, var(--warm-bg) 76%, var(--amber-bg)));
+      border: 1px solid color-mix(in srgb, var(--coral) 20%, transparent);
+      border-radius: var(--band-radius); padding: clamp(36px, 5vw, 58px);
+      margin: 0 auto clamp(84px, 11vw, 136px); max-width: var(--maxw); width: calc(100% - clamp(40px, 10vw, 88px));
       box-shadow: var(--shadow-card);
+      position: relative; overflow: hidden;
     }
+    .family-band::after {
+      content: '❤'; position: absolute; right: -3%; bottom: -22%;
+      font-size: clamp(200px, 26vw, 380px); line-height: 1;
+      color: color-mix(in srgb, var(--coral) 9%, transparent);
+      transform: rotate(-10deg); pointer-events: none;
+    }
+    .family-band > div { position: relative; z-index: 1; }
     .family-band .eyebrow { color: var(--warm-accent); }
-    .family-band .eyebrow::before { background: var(--warm-accent); animation: none; box-shadow: none; }
     .family-band h2 { color: var(--warm-ink); }
     .family-band > div > p { color: var(--warm-ink); opacity: .84; margin-top: 16px; font-size: 16.5px; }
     .family-list { list-style: none; margin-top: 24px; display: grid; gap: 13px; }
@@ -460,44 +849,70 @@
     .family-list svg { width: 21px; height: 21px; color: var(--warm-accent); flex-shrink: 0; margin-top: 1px; }
     .family-visual {
       justify-self: center; width: 100%; max-width: 356px; aspect-ratio: 4/5;
-      border-radius: 28px; background: var(--card); box-shadow: var(--shadow-hero);
+      border-radius: 30px; background: var(--card); box-shadow: var(--shadow-hero);
       border: 1px solid var(--border); display: grid; place-content: center; gap: 14px;
       padding: 34px; text-align: center; position: relative; overflow: hidden;
     }
     .family-visual::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 12%, rgba(188,99,80,.14), transparent 60%);
+      background: radial-gradient(circle at 50% 12%, color-mix(in srgb, var(--coral) 16%, transparent), transparent 60%);
     }
-    .fv-emoji { font-size: 56px; position: relative; animation: floaty 6s ease-in-out infinite; }
+    .fv-emoji { font-size: 56px; position: relative; animation: heartbeat 2.8s ease-in-out infinite; transform-origin: center; }
+    @keyframes heartbeat {
+      0%, 40%, 100% { transform: scale(1); }
+      8% { transform: scale(1.18); }
+      16% { transform: scale(1); }
+      24% { transform: scale(1.1); }
+    }
     .fv-title { font-family: var(--font-display); font-weight: 560; font-size: 20px; color: var(--text); position: relative; }
     .fv-desc { font-size: 13.5px; color: var(--text-muted); position: relative; }
     @media (max-width: 820px) { .family-band { grid-template-columns: 1fr; } }
 
-    /* ── PRIVACY ─────────────────────────────────────────────────────── */
+    /* ── PRIVACY — return to the lagoon ──────────────────────────────── */
     .privacy {
       background:
-        radial-gradient(ellipse 70% 60% at 12% 0%, rgba(21,150,180,.28), transparent 60%),
-        radial-gradient(ellipse 60% 70% at 92% 100%, rgba(27,139,102,.24), transparent 62%),
-        linear-gradient(160deg, #0C3A45, #0A2A33);
-      color: #fff; max-width: none;
+        radial-gradient(ellipse 70% 60% at 12% 0%, rgba(21,150,180,.30), transparent 60%),
+        radial-gradient(ellipse 60% 70% at 92% 100%, rgba(27,139,102,.26), transparent 62%),
+        linear-gradient(165deg, var(--lagoon-3), var(--lagoon-1));
+      color: #fff; max-width: none; position: relative; overflow: hidden;
+      margin-inline: clamp(10px, 2vw, 26px); border-radius: var(--band-radius);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 30px 80px -40px rgba(4,22,28,.7);
     }
     .privacy-inner { max-width: var(--maxw); margin: 0 auto; }
     .privacy h2 { color: #fff; }
     .privacy .section-head p { color: rgba(255,255,255,.74); }
     .privacy .eyebrow { color: #8EE3C2; }
-    .privacy .eyebrow::before { background: #8EE3C2; }
     .privacy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(248px, 1fr)); gap: 18px; }
     .privacy-item {
-      padding: 26px; border: 1px solid rgba(255,255,255,.15); border-radius: 20px;
-      background: rgba(255,255,255,.055); backdrop-filter: blur(4px);
+      padding: 26px; border: 1px solid rgba(255,255,255,.15); border-radius: 22px;
+      background: rgba(255,255,255,.055); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
       transition: transform .2s, background .2s, border-color .2s;
     }
-    .privacy-item:hover { transform: translateY(-3px); background: rgba(255,255,255,.09); border-color: rgba(255,255,255,.28); }
+    .privacy-item:hover { transform: translateY(-3px); background: rgba(255,255,255,.09); border-color: rgba(142,227,194,.4); }
     .p-check {
       width: 36px; height: 36px; border-radius: 999px; background: rgba(142,227,194,.2);
       display: grid; place-items: center; margin-bottom: 15px; color: #8EE3C2;
     }
     .p-check svg { width: 18px; height: 18px; }
+    .p-check polyline { stroke-dasharray: 26; stroke-dashoffset: 26; }
+    .privacy-grid.in .p-check polyline { animation: drawCheck .7s ease forwards; animation-delay: calc(var(--pd, 0) * .12s + .25s); }
+    .privacy-grid .privacy-item:nth-child(2) { --pd: 1; } .privacy-grid .privacy-item:nth-child(3) { --pd: 2; }
+    .privacy-grid .privacy-item:nth-child(4) { --pd: 3; } .privacy-grid .privacy-item:nth-child(5) { --pd: 4; }
+    .privacy-grid .privacy-item:nth-child(6) { --pd: 5; } .privacy-grid .privacy-item:nth-child(7) { --pd: 6; }
+    @keyframes drawCheck { to { stroke-dashoffset: 0; } }
+    .fireflies { position: absolute; inset: 0; pointer-events: none; }
+    .fireflies i {
+      position: absolute; width: 5px; height: 5px; border-radius: 50%;
+      background: #8EE3C2; filter: blur(.5px); opacity: 0;
+      left: var(--x); top: var(--y);
+      animation: firefly var(--t, 8s) ease-in-out var(--fd, 0s) infinite;
+    }
+    @keyframes firefly {
+      0%, 100% { transform: translateY(0); opacity: 0; }
+      30% { opacity: .55; }
+      50% { transform: translateY(-34px); opacity: .3; }
+      70% { opacity: .5; }
+    }
     .privacy-item h3 { font-size: 15.5px; font-weight: 700; margin-bottom: 7px; }
     .privacy-item p { font-size: 13.5px; color: rgba(255,255,255,.72); line-height: 1.56; }
     .privacy-note {
@@ -505,28 +920,49 @@
       border-left: 3px solid #8EE3C2; padding-left: 15px; max-width: 760px;
     }
 
-    /* ── LAUNCH ──────────────────────────────────────────────────────── */
+    /* ── LAUNCH — iridescent finale ──────────────────────────────────── */
     .launch { text-align: center; }
     .launch-card {
-      max-width: 760px; margin: 0 auto; border-radius: 34px; padding: clamp(44px, 7vw, 64px) clamp(28px, 5vw, 48px);
-      background: linear-gradient(145deg, var(--primary-bright), var(--mint));
-      color: #fff; box-shadow: var(--shadow-hero); position: relative; overflow: hidden;
+      max-width: 820px; margin: 0 auto; border-radius: var(--band-radius);
+      padding: clamp(48px, 7.5vw, 76px) clamp(28px, 5vw, 52px);
+      background: linear-gradient(120deg, #0E7490, #0FA3B1 26%, #1FB585 52%, #3CBFA0 72%, #E0A93F 92%, #D96D55 100%);
+      background-size: 240% 240%;
+      animation: iride 14s ease-in-out infinite;
+      color: #fff; box-shadow: 0 40px 100px -30px rgba(20, 120, 120, .55);
+      position: relative; overflow: hidden;
     }
+    @keyframes iride { 0%, 100% { background-position: 0% 40%; } 50% { background-position: 100% 60%; } }
     .launch-card::before {
       content: ''; position: absolute; inset: 0;
-      background: radial-gradient(circle at 80% 0%, rgba(255,255,255,.25), transparent 55%);
+      background:
+        radial-gradient(circle at 82% 0%, rgba(255,255,255,.3), transparent 52%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.16'/%3E%3C/svg%3E");
+      mix-blend-mode: soft-light;
     }
     .launch-card > * { position: relative; z-index: 1; }
-    .launch-card .eyebrow { color: rgba(255,255,255,.9); justify-content: center; }
-    .launch-card .eyebrow::before { background: rgba(255,255,255,.85); }
-    .launch-card h2 { color: #fff; }
-    .launch-card p { color: rgba(255,255,255,.9); margin: 16px auto 30px; max-width: 500px; font-size: 17px; }
-    .launch-card .btn-primary { background: #fff; color: var(--primary-dark); box-shadow: 0 12px 28px rgba(0,0,0,.2); }
+    .launch-card::after {
+      content: ''; position: absolute; inset: 0; z-index: 0;
+      background: linear-gradient(115deg, transparent 32%, rgba(255,255,255,.22) 46%, transparent 58%);
+      background-size: 240% 100%; animation: sheen 5.5s ease-in-out infinite;
+    }
+    @keyframes sheen { 0% { background-position: 135% 0; } 55%, 100% { background-position: -55% 0; } }
+    .launch-card .eyebrow { color: rgba(255,255,255,.95); justify-content: center; }
+    .launch-card .eyebrow::before { background: rgba(255,255,255,.9); }
+    .launch-card h2 { color: #fff; font-size: clamp(34px, 5vw, 58px); text-shadow: 0 2px 30px rgba(0,0,0,.18); }
+    .launch-card p { color: rgba(255,255,255,.92); margin: 16px auto 32px; max-width: 520px; font-size: 17px; }
+    .launch-card .btn-primary {
+      background: #fff; color: var(--primary-dark);
+      box-shadow: 0 16px 40px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.8);
+    }
     .launch-card .btn-primary:hover { background: #F0FDFA; }
-    .launch-note { margin-top: 20px; font-size: 13px; color: rgba(255,255,255,.76); }
+    .launch-note { margin-top: 22px; font-size: 13px; color: rgba(255,255,255,.8); }
 
     /* ── LEGAL ───────────────────────────────────────────────────────── */
-    .legal { background: var(--bg-2); max-width: none; }
+    .legal {
+      background: var(--bg-2); max-width: none; position: relative; overflow: hidden;
+      margin-inline: clamp(10px, 2vw, 26px); border-radius: var(--band-radius);
+      padding: clamp(56px, 8vw, 96px) clamp(20px, 5vw, 44px);
+    }
     .legal-inner { max-width: var(--maxw); margin: 0 auto; }
     .legal-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
     .legal-group-head { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
@@ -538,7 +974,7 @@
     .legal-cards { display: grid; gap: 12px; }
     .legal-card {
       display: flex; align-items: center; gap: 15px; padding: 18px 20px;
-      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 20px;
       box-shadow: var(--shadow-soft); transition: transform .18s, box-shadow .18s, border-color .18s;
     }
     .legal-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); border-color: var(--border-strong); }
@@ -559,20 +995,40 @@
     .legal-card.danger:hover .l-arrow { color: var(--coral); }
     @media (max-width: 720px) { .legal-groups { grid-template-columns: 1fr; gap: 24px; } }
 
-    /* ── FOOTER ──────────────────────────────────────────────────────── */
-    footer {
-      padding: 36px clamp(20px, 5vw, 44px); border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-      font-size: 13.5px; color: var(--text-muted); max-width: var(--maxw); margin: 0 auto;
+    /* ── FOOTER — signature outro ────────────────────────────────────── */
+    footer { padding: clamp(40px, 6vw, 72px) clamp(20px, 5vw, 44px) 34px; position: relative; overflow: hidden; }
+    .foot-mark {
+      font-family: var(--font-display); font-style: italic; font-weight: 560;
+      font-size: clamp(72px, 15vw, 220px); line-height: .92; text-align: center;
+      letter-spacing: -.03em; user-select: none; pointer-events: none;
+      background: linear-gradient(120deg,
+        color-mix(in srgb, var(--primary) 34%, transparent),
+        color-mix(in srgb, var(--mint) 26%, transparent) 55%,
+        color-mix(in srgb, var(--coral) 22%, transparent));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.25) 82%);
+      mask-image: linear-gradient(180deg, rgba(0,0,0,.9), rgba(0,0,0,.25) 82%);
+      margin-bottom: clamp(18px, 3vw, 34px);
     }
-    footer a:hover { color: var(--primary); }
+    .foot-row {
+      max-width: var(--maxw); margin: 0 auto; padding-top: 22px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      font-size: 13.5px; color: var(--text-muted);
+    }
+    .foot-row a:hover { color: var(--primary); }
 
     /* ── REVEAL (scroll) ─────────────────────────────────────────────── */
-    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
-    .reveal.in { opacity: 1; transform: none; }
-    /* staggered children */
-    .stagger > * { opacity: 0; transform: translateY(20px); transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1); }
-    .stagger.in > * { opacity: 1; transform: none; }
+    .reveal {
+      opacity: 0; transform: translateY(26px); filter: blur(10px);
+      transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1), filter .8s cubic-bezier(.2,.7,.2,1);
+    }
+    .reveal.in { opacity: 1; transform: none; filter: blur(0); }
+    .stagger > * {
+      opacity: 0; transform: translateY(20px); filter: blur(8px);
+      transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1), filter .7s cubic-bezier(.2,.7,.2,1);
+    }
+    .stagger.in > * { opacity: 1; transform: none; filter: blur(0); }
     .stagger.in > *:nth-child(1){transition-delay:.04s}
     .stagger.in > *:nth-child(2){transition-delay:.12s}
     .stagger.in > *:nth-child(3){transition-delay:.20s}
@@ -581,6 +1037,13 @@
     .stagger.in > *:nth-child(6){transition-delay:.44s}
     .stagger.in > *:nth-child(7){transition-delay:.52s}
     .stagger.in > *:nth-child(8){transition-delay:.60s}
+    /* staggered who-cards keep their editorial offsets */
+    @media (min-width: 901px) {
+      .who-grid.stagger > .who-card:nth-child(2) { transform: translateY(46px); }
+      .who-grid.stagger > .who-card:nth-child(3) { transform: translateY(72px); }
+      .who-grid.stagger.in > .who-card:nth-child(2) { transform: translateY(26px); }
+      .who-grid.stagger.in > .who-card:nth-child(3) { transform: translateY(52px); }
+    }
 
     /* hero load orchestration */
     .hero-content > * { opacity: 0; transform: translateY(22px); animation: heroIn .9s cubic-bezier(.2,.7,.2,1) forwards; }
@@ -597,10 +1060,10 @@
     /* ── STORE MODAL ─────────────────────────────────────────────────── */
     .store-modal { position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center; padding: 20px; }
     .store-modal[hidden] { display: none; }
-    .store-backdrop { position: absolute; inset: 0; background: rgba(6,20,24,.58); backdrop-filter: blur(6px); animation: fadeIn .25s ease; }
+    .store-backdrop { position: absolute; inset: 0; background: rgba(4,17,21,.62); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: fadeIn .25s ease; }
     .store-dialog {
       position: relative; z-index: 1; width: 100%; max-width: 452px;
-      background: var(--card); border: 1px solid var(--border); border-radius: 24px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 26px;
       padding: 30px 26px; box-shadow: 0 30px 70px rgba(0,0,0,.32);
       animation: dialogIn .32s cubic-bezier(.2,.8,.2,1);
     }
@@ -627,8 +1090,6 @@
     .store-card-cta { font-size: 13.5px; font-weight: 600; color: var(--primary); margin-top: 4px; }
 
     /* ── SURVEY MODAL ────────────────────────────────────────────────── */
-    /* Fill nearly the full viewport height: the dialog is a column and the
-       form iframe flexes into all remaining space. */
     .survey-dialog { max-width: 680px; height: min(960px, 100%); display: flex; flex-direction: column; }
     .survey-frame-wrap {
       flex: 1; min-height: 0; margin-top: 12px;
@@ -641,45 +1102,49 @@
     .survey-fallback a:hover { color: var(--text); }
 
     /* ── RESPONSIVE ──────────────────────────────────────────────────── */
-    /* wide screens — grow the canvas so it never feels empty */
     @media (min-width: 1440px) {
       :root { --maxw: 1280px; }
-      .hero { gap: 64px; }
+      .hero-shell { gap: 64px; }
       .hero-visual { max-width: 472px; }
     }
     @media (min-width: 1720px) {
       :root { --maxw: 1360px; }
       .hero-visual { max-width: 500px; }
     }
-    /* laptop — rebalance the hero split before it stacks */
     @media (max-width: 1180px) and (min-width: 901px) {
-      .hero { grid-template-columns: 1.12fr .88fr; gap: 40px; }
+      .hero-shell { grid-template-columns: 1.12fr .88fr; gap: 40px; }
       .hero-visual { max-width: 400px; }
     }
     @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; padding-top: 118px; }
+      .hero-shell { grid-template-columns: 1fr; padding-top: 118px; }
       .hero-visual { grid-row: 1; max-width: 356px; margin-bottom: 6px; }
-      .rings i { width: 180px; height: 180px; }   /* keep ripples inside the viewport on phones */
+      .rings i { width: 180px; height: 180px; }
       .float-card { right: 0; }
     }
     @media (max-width: 680px) {
       .nav-links { gap: 14px; }
-      footer { flex-direction: column; text-align: center; }
+      .foot-row { flex-direction: column; text-align: center; }
     }
     @media (max-width: 560px) { .float-card { display: none; } }
 
     /* ── REDUCED MOTION ──────────────────────────────────────────────── */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; transition-duration: .001ms !important; }
-      .reveal, .stagger > *, .hero-content > *, .hero-visual, .float-card { opacity: 1 !important; transform: none !important; }
+      .reveal, .stagger > *, .hero-content > *, .hero-visual, .float-card { opacity: 1 !important; transform: none !important; filter: none !important; }
+      .hero h1 .w > i { transform: none !important; }
+      .fireflies, .progress, .hs-stars { display: none !important; }
     }
+
   </style>
 </head>
 <body>
 
   <!-- atmosphere -->
-  <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span></div>
+  <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span><span class="a3"></span><span class="a4"></span></div>
   <div class="grain" aria-hidden="true"></div>
+  <div class="spotlight" aria-hidden="true"></div>
+  <div class="dotgrid" aria-hidden="true"></div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
 
   <!-- Language controls (theme follows the device) -->
   <div class="controls" role="toolbar" aria-label="Language">
@@ -740,6 +1205,27 @@
 
   <!-- HERO -->
   <section class="hero">
+    <div class="hero-sky" aria-hidden="true">
+      <span class="hs-glow g1"></span><span class="hs-glow g2"></span><span class="hs-glow g3"></span><span class="hs-glow g4"></span>
+      <div class="hs-stars">
+        <i style="--x:6%;--y:16%;--d:0s;--s:0.8"></i>
+        <i style="--x:13%;--y:42%;--d:1.4s;--s:1"></i>
+        <i style="--x:21%;--y:10%;--d:2.6s;--s:0.7"></i>
+        <i style="--x:29%;--y:30%;--d:0.8s;--s:1.1"></i>
+        <i style="--x:37%;--y:7%;--d:3.4s;--s:0.9"></i>
+        <i style="--x:46%;--y:20%;--d:1.9s;--s:0.75"></i>
+        <i style="--x:55%;--y:9%;--d:4.2s;--s:1"></i>
+        <i style="--x:63%;--y:26%;--d:0.4s;--s:0.85"></i>
+        <i style="--x:71%;--y:13%;--d:2.2s;--s:1.05"></i>
+        <i style="--x:79%;--y:34%;--d:3.8s;--s:0.8"></i>
+        <i style="--x:86%;--y:8%;--d:1.1s;--s:0.95"></i>
+        <i style="--x:92%;--y:24%;--d:2.9s;--s:0.7"></i>
+        <i style="--x:96%;--y:44%;--d:4.6s;--s:0.9"></i>
+        <i style="--x:42%;--y:38%;--d:5s;--s:0.65"></i>
+      </div>
+      <span class="hs-horizon"></span>
+    </div>
+    <div class="hero-shell">
     <div class="hero-content">
       <p class="eyebrow" data-i18n="hero_eyebrow">AI Health Companion · Available now</p>
       <h1><span data-i18n="hero_title_1">Your voice.</span><br><span class="serif-accent" data-i18n="hero_title_2">Your health, cared for.</span></h1>
@@ -788,10 +1274,28 @@
         </span>
       </div>
     </div>
+    </div>
   </section>
+
+  <!-- crossed ticker ribbons -->
+  <div class="ribbons" aria-hidden="true">
+    <div class="marquee mq-outline">
+      <div class="marquee-track">
+        <span data-i18n="ticker">Voice-first · Meals · Medication · Morning briefing · Brain games · 3-Day Wins · Hydration &amp; exercise · Family peace of mind · </span>
+        <span data-i18n="ticker">Voice-first · Meals · Medication · Morning briefing · Brain games · 3-Day Wins · Hydration &amp; exercise · Family peace of mind · </span>
+      </div>
+    </div>
+    <div class="marquee mq-solid">
+      <div class="marquee-track">
+        <span data-i18n="ticker">Voice-first · Meals · Medication · Morning briefing · Brain games · 3-Day Wins · Hydration &amp; exercise · Family peace of mind · </span>
+        <span data-i18n="ticker">Voice-first · Meals · Medication · Morning briefing · Brain games · 3-Day Wins · Hydration &amp; exercise · Family peace of mind · </span>
+      </div>
+    </div>
+  </div>
 
   <!-- HOW IT WORKS -->
   <section class="how" id="how">
+    <div class="ghost g-right" aria-hidden="true" data-i18n="ghost_how">Talk</div>
     <div class="section-head reveal">
       <p class="eyebrow" data-i18n="hiw_eyebrow" style="justify-content:center">How it works</p>
       <h2 data-i18n="hiw_title">As simple as talking.</h2>
@@ -820,27 +1324,28 @@
 
   <!-- WHO -->
   <section class="who" id="who">
+    <div class="ghost g-right" aria-hidden="true" data-i18n="ghost_who">Family</div>
     <div class="who-inner">
       <div class="section-head reveal">
         <p class="eyebrow" data-i18n="who_eyebrow">Who it's for</p>
         <h2 data-i18n="who_title">One app, three people, less worry.</h2>
-        <p data-i18n="who_sub">Peace of mind for the whole family — whether you're the older adult, the adult child, or a care team supporting them.</p>
+        <p data-i18n="who_sub">Peace of mind for the whole family — whether you're the older adult, the adult child checking in, or relatives sharing the care together.</p>
       </div>
       <div class="who-grid reveal stagger">
-        <div class="who-card">
+        <div class="who-card tilt-glare" data-tilt>
           <div class="who-badge t-mint">🧓</div>
           <h3 data-i18n="who1_t">Older adults</h3>
           <p data-i18n="who1_p">Manage the day just by talking — no typing, no menus to learn. Meals, medications, and check-ins, all by voice.</p>
         </div>
-        <div class="who-card">
+        <div class="who-card tilt-glare" data-tilt>
           <div class="who-badge t-warm">👨‍👩‍👧</div>
           <h3 data-i18n="who2_t">Adult children</h3>
           <p data-i18n="who2_p">Stay reassured without constant calls. The family app shows brief, consented summaries and sends emergency alerts.</p>
         </div>
-        <div class="who-card">
+        <div class="who-card tilt-glare" data-tilt>
           <div class="who-badge t-sky">🏥</div>
-          <h3 data-i18n="who3_t">Care teams &amp; plans</h3>
-          <p data-i18n="who3_p">Support healthier routines with daily summaries and gentle, proactive nudges — always under the person's control.</p>
+          <h3 data-i18n="who3_t">The wider family</h3>
+          <p data-i18n="who3_p">Several family members can link to one senior — and one person can watch over both parents. Emergency alerts reach everyone at once.</p>
         </div>
       </div>
     </div>
@@ -848,61 +1353,62 @@
 
   <!-- FEATURES -->
   <section id="features">
+    <div class="ghost g-left" aria-hidden="true" data-i18n="ghost_feat">Care</div>
     <div class="section-head reveal">
       <p class="eyebrow" data-i18n="feat_eyebrow">Features</p>
-      <h2 data-i18n="feat_title">Everything, by voice, chat, or touch.</h2>
-      <p data-i18n="feat_sub">Every feature works three ways — speak to it, type to it, or tap. Nothing is locked behind a keyboard.</p>
+      <h2 data-i18n="feat_title">Voice first — chat and touch, too.</h2>
+      <p data-i18n="feat_sub">Just talk and it's done. Prefer not to speak? There's a text chat, and big, simple buttons for everything else — nothing is locked behind a keyboard.</p>
     </div>
     <div class="bento reveal stagger">
-      <div class="cell c-mint wide tall">
+      <div class="cell c-mint wide tall tilt-glare" data-tilt>
         <div class="c-emoji">🎙️</div>
         <h3 data-i18n="f_voice_t">Voice-first companion</h3>
         <p data-i18n="f_voice_p">Talk naturally about your day, ask health questions, or just chat. Healthya remembers your context and follows up like a good companion — warm, patient, never rushed.</p>
       </div>
-      <div class="cell c-warm">
+      <div class="cell c-warm tilt-glare" data-tilt>
         <div class="c-emoji">🍽️</div>
         <h3 data-i18n="f_meal_t">Meal tracking</h3>
-        <p data-i18n="f_meal_p">Snap a photo — AI reads the food, estimates nutrition, and suggests a balanced next meal.</p>
+        <p data-i18n="f_meal_p">Snap a photo — or just say what you ate. AI reads the food, estimates nutrition, and suggests a balanced next meal.</p>
       </div>
-      <div class="cell c-amber">
+      <div class="cell c-amber tilt-glare" data-tilt>
         <div class="c-emoji">💊</div>
         <h3 data-i18n="f_med_t">Medication reminders</h3>
         <p data-i18n="f_med_p">Scan a pill bottle or prescription for drug info, then get reminders and daily adherence tracking.</p>
       </div>
-      <div class="cell c-lilac">
+      <div class="cell c-lilac tilt-glare" data-tilt>
         <div class="c-emoji">🌅</div>
         <h3 data-i18n="f_brief_t">Morning briefing</h3>
-        <p data-i18n="f_brief_p">A daily start with weather, headlines, and today's appointments — plus weekly and monthly recaps.</p>
+        <p data-i18n="f_brief_p">A daily start with weather, real news headlines, a health tip, and today's appointments — plus weekly and monthly recaps of your health.</p>
       </div>
-      <div class="cell c-sky">
+      <div class="cell c-sky tilt-glare" data-tilt>
         <div class="c-emoji">🩺</div>
         <h3 data-i18n="f_care_t">When you're unwell</h3>
-        <p data-i18n="f_care_p">Describe how you feel and find nearby clinics, pharmacies, and urgent care — with plain-language guidance on what to do next. Not a diagnosis.</p>
+        <p data-i18n="f_care_p">Describe how you feel and get plain-language guidance on what to do next — then find nearby clinics and pharmacies. Not a diagnosis.</p>
       </div>
-      <div class="cell c-warm">
+      <div class="cell c-warm tilt-glare" data-tilt>
         <div class="c-emoji">🧩</div>
         <h3 data-i18n="f_games_t">Daily brain games</h3>
         <p data-i18n="f_games_p">Four light puzzles — sudoku, crossword, bubble pop, and color sort — for a gentle daily mind workout.</p>
       </div>
-      <div class="cell c-plain">
+      <div class="cell c-plain tilt-glare" data-tilt>
         <div class="c-emoji">🌄</div>
         <h3 data-i18n="f_goals_t">3-Day Wins</h3>
         <p data-i18n="f_goals_p">Set a small goal and keep it for three days at a time, with a gentle reminder and a home-screen widget to cheer you on.</p>
       </div>
-      <div class="cell c-plain">
+      <div class="cell c-plain tilt-glare" data-tilt>
         <div class="c-emoji">💧</div>
         <h3 data-i18n="f_hydra_t">Hydration &amp; exercise</h3>
         <p data-i18n="f_hydra_p">Gentle water reminders and light activity tracking that fit into an ordinary day.</p>
       </div>
-      <div class="cell c-sky">
+      <div class="cell c-sky tilt-glare" data-tilt>
         <div class="c-emoji">⌚</div>
         <h3 data-i18n="f_health_t">Connected health apps</h3>
-        <p data-i18n="f_health_p">Optionally read sleep, steps, and activity from Apple Health or Google Health Connect — read-only.</p>
+        <p data-i18n="f_health_p">Optionally read sleep, steps, heart rate, blood pressure, and other health metrics from Apple Health or Google Health Connect — read-only, and only if you turn it on.</p>
       </div>
-      <div class="cell c-plain wide">
+      <div class="cell c-plain wide tilt-glare" data-tilt>
         <div class="c-emoji">🚑</div>
         <h3 data-i18n="f_sos_t">Emergency help</h3>
-        <p data-i18n="f_sos_p">First-aid reference and a one-tap 911 dialer — the app opens your phone's dialer and you place the call. If you choose, family can get an alert with your location. Healthya is not an emergency response service.</p>
+        <p data-i18n="f_sos_p">Offline first-aid guides and a big 911 button — one tap from the home-screen widget. The app opens your phone's dialer and you place the call; calling 911 from the app alerts your linked family, with your location if you've turned that on. Healthya is not an emergency response service.</p>
       </div>
     </div>
   </section>
@@ -914,13 +1420,13 @@
       <h2 data-i18n="fam_title">Close, without hovering.</h2>
       <p data-i18n="fam_sub">A separate companion app lets a linked family member support an older adult — only ever seeing what the senior has consented to share.</p>
       <ul class="family-list">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam1">Brief, read-only health summaries — never the raw conversations.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam2">Optional generalized activity area — never a live location trail.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam3">Emergency alerts when the senior places a 911 call.</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam4">Every share is turned on — and can be turned off — by the senior.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam1">Summaries, not transcripts — daily and monthly overviews with at most a short quoted phrase, never full conversations.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam2">A generalized activity area on about a 2 km grid, plus one latest location kept for emergencies — no route history, ever.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam3">An alert to every linked family member when the senior calls 911 from the app.</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam4">Every share is decided by the senior — set when approving the link, and can be turned off anytime.</span></li>
       </ul>
     </div>
-    <div class="family-visual" aria-hidden="true">
+    <div class="family-visual tilt-glare" data-tilt aria-hidden="true">
       <div class="fv-emoji">💛</div>
       <div class="fv-title" data-i18n="fam_vt">Mom is doing well today</div>
       <div class="fv-desc" data-i18n="fam_vd">Breakfast logged · medication on track · active this morning</div>
@@ -929,6 +1435,16 @@
 
   <!-- PRIVACY -->
   <section class="privacy" id="privacy">
+    <div class="ghost g-right" aria-hidden="true" data-i18n="ghost_priv">Trust</div>
+    <div class="fireflies" aria-hidden="true">
+      <i style="--x:8%;  --y:70%; --t:8s;   --fd:0s"></i>
+      <i style="--x:22%; --y:30%; --t:9s;   --fd:1.2s"></i>
+      <i style="--x:38%; --y:80%; --t:7s;   --fd:.6s"></i>
+      <i style="--x:55%; --y:22%; --t:10s;  --fd:2s"></i>
+      <i style="--x:70%; --y:65%; --t:8.5s; --fd:.3s"></i>
+      <i style="--x:84%; --y:35%; --t:7.5s; --fd:1.6s"></i>
+      <i style="--x:93%; --y:75%; --t:9.5s; --fd:.9s"></i>
+    </div>
     <div class="privacy-inner">
       <div class="section-head reveal">
         <p class="eyebrow" data-i18n="priv_eyebrow">Privacy &amp; safety</p>
@@ -944,7 +1460,7 @@
         <div class="privacy-item">
           <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
           <h3 data-i18n="p2_t">You control every share</h3>
-          <p data-i18n="p2_p">Health sharing, location, and emergency alerts are each opt-in — toggle any of them on or off at any time.</p>
+          <p data-i18n="p2_p">Health sharing, activity area, and emergency location are separate per-family switches — the senior sets them when approving a link, and can turn any of them off at any time.</p>
         </div>
         <div class="privacy-item">
           <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -964,12 +1480,12 @@
         <div class="privacy-item">
           <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
           <h3 data-i18n="p7_t">Download your data</h3>
-          <p data-i18n="p7_p">Exercise your right to know — export a copy of your data from inside the app, anytime.</p>
+          <p data-i18n="p7_p">Exercise your right to know — request a copy of your data from the senior app's Privacy Policy screen, one export every 30 days.</p>
         </div>
         <div class="privacy-item">
           <div class="p-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
           <h3 data-i18n="p6_t">Delete anytime</h3>
-          <p data-i18n="p6_p">Delete your account in-app or from the web, and your data is removed within 30 days.</p>
+          <p data-i18n="p6_p">Delete your account in the app for immediate removal, or request it on the web — gone within 30 days at the latest.</p>
         </div>
       </div>
       <p class="privacy-note" data-i18n="priv_note">Healthya supports daily well-being and is not a medical service or an emergency response service. It does not diagnose, treat, or replace professional medical care. In an emergency, call 911 or your local emergency number.</p>
@@ -986,7 +1502,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/></svg>
         <span data-i18n="launch_cta">Get the app</span>
       </a>
-      <p class="launch-note" data-i18n="launch_note">Developed by Deeper Emptiness AI · hello@healthia.app</p>
+      <p class="launch-note" data-i18n="launch_note">Developed by Deeper Emptiness AI · hello@healthya.app</p>
     </div>
   </section>
 
@@ -1078,8 +1594,11 @@
   </div>
 
   <footer>
-    <span data-i18n="footer_copy">© 2026 Deeper Emptiness AI · Healthya</span>
-    <span><a href="mailto:hello@healthia.app">hello@healthia.app</a></span>
+    <div class="foot-mark" aria-hidden="true">Healthya</div>
+    <div class="foot-row">
+      <span data-i18n="footer_copy">© 2026 Deeper Emptiness AI · Healthya</span>
+      <span><a href="mailto:hello@healthya.app">hello@healthya.app</a></span>
+    </div>
   </footer>
 
   <script>
@@ -1102,43 +1621,42 @@
         hiw2_t:"It remembers", hiw2_p:"Your context is kept in mind — so reminders, briefings, and check-ins actually fit your life.",
         hiw3_t:"Family stays close", hiw3_p:"With your consent, loved ones see gentle summaries and get an alert when it truly matters.",
         who_eyebrow:"Who it's for", who_title:"One app, three people, less worry.",
-        who_sub:"Peace of mind for the whole family — whether you're the older adult, the adult child, or a care team supporting them.",
+        who_sub:"Peace of mind for the whole family — whether you're the older adult, the adult child checking in, or relatives sharing the care together.",
         who1_t:"Older adults", who1_p:"Manage the day just by talking — no typing, no menus to learn. Meals, medications, and check-ins, all by voice.",
         who2_t:"Adult children", who2_p:"Stay reassured without constant calls. The family app shows brief, consented summaries and sends emergency alerts.",
-        who3_t:"Care teams & plans", who3_p:"Support healthier routines with daily summaries and gentle, proactive nudges — always under the person's control.",
-        feat_eyebrow:"Features", feat_title:"Everything, by voice, chat, or touch.",
-        feat_sub:"Every feature works three ways — speak to it, type to it, or tap. Nothing is locked behind a keyboard.",
+        who3_t:"The wider family", who3_p:"Several family members can link to one senior — and one person can watch over both parents. Emergency alerts reach everyone at once.",
+        feat_eyebrow:"Features", feat_title:"Voice first — chat and touch, too.",
+        feat_sub:"Just talk and it's done. Prefer not to speak? There's a text chat, and big, simple buttons for everything else — nothing is locked behind a keyboard.",
         f_voice_t:"Voice-first companion", f_voice_p:"Talk naturally about your day, ask health questions, or just chat. Healthya remembers your context and follows up like a good companion — warm, patient, never rushed.",
-        f_meal_t:"Meal tracking", f_meal_p:"Snap a photo — AI reads the food, estimates nutrition, and suggests a balanced next meal.",
+        f_meal_t:"Meal tracking", f_meal_p:"Snap a photo — or just say what you ate. AI reads the food, estimates nutrition, and suggests a balanced next meal.",
         f_med_t:"Medication reminders", f_med_p:"Scan a pill bottle or prescription for drug info, then get reminders and daily adherence tracking.",
-        f_brief_t:"Morning briefing", f_brief_p:"A daily start with weather, headlines, and today's appointments — plus weekly and monthly recaps.",
-        f_care_t:"When you're unwell", f_care_p:"Describe how you feel and find nearby clinics, pharmacies, and urgent care — with plain-language guidance on what to do next. Not a diagnosis.",
+        f_brief_t:"Morning briefing", f_brief_p:"A daily start with weather, real news headlines, a health tip, and today's appointments — plus weekly and monthly recaps of your health.",
+        f_care_t:"When you're unwell", f_care_p:"Describe how you feel and get plain-language guidance on what to do next — then find nearby clinics and pharmacies. Not a diagnosis.",
         f_games_t:"Daily brain games", f_games_p:"Four light puzzles — sudoku, crossword, bubble pop, and color sort — for a gentle daily mind workout.",
         f_goals_t:"3-Day Wins", f_goals_p:"Set a small goal and keep it for three days at a time, with a gentle reminder and a home-screen widget to cheer you on.",
         f_hydra_t:"Hydration & exercise", f_hydra_p:"Gentle water reminders and light activity tracking that fit into an ordinary day.",
-        f_cal_t:"Calendar & appointments", f_cal_p:"Add appointments by voice and see them alongside the day's plan.",
-        f_health_t:"Connected health apps", f_health_p:"Optionally read sleep, steps, and activity from Apple Health or Google Health Connect — read-only.",
-        f_sos_t:"Emergency help", f_sos_p:"First-aid reference and a one-tap 911 dialer — the app opens your phone's dialer and you place the call. If you choose, family can get an alert with your location. Healthya is not an emergency response service.",
+        f_health_t:"Connected health apps", f_health_p:"Optionally read sleep, steps, heart rate, blood pressure, and other health metrics from Apple Health or Google Health Connect — read-only, and only if you turn it on.",
+        f_sos_t:"Emergency help", f_sos_p:"Offline first-aid guides and a big 911 button — one tap from the home-screen widget. The app opens your phone's dialer and you place the call; calling 911 from the app alerts your linked family, with your location if you've turned that on. Healthya is not an emergency response service.",
         fam_eyebrow:"The family app", fam_title:"Close, without hovering.",
         fam_sub:"A separate companion app lets a linked family member support an older adult — only ever seeing what the senior has consented to share.",
-        fam1:"Brief, read-only health summaries — never the raw conversations.",
-        fam2:"Optional generalized activity area — never a live location trail.",
-        fam3:"Emergency alerts when the senior places a 911 call.",
-        fam4:"Every share is turned on — and can be turned off — by the senior.",
+        fam1:"Summaries, not transcripts — daily and monthly overviews with at most a short quoted phrase, never full conversations.",
+        fam2:"A generalized activity area on about a 2 km grid, plus one latest location kept for emergencies — no route history, ever.",
+        fam3:"An alert to every linked family member when the senior calls 911 from the app.",
+        fam4:"Every share is decided by the senior — set when approving the link, and can be turned off anytime.",
         fam_vt:"Mom is doing well today", fam_vd:"Breakfast logged · medication on track · active this morning",
         priv_eyebrow:"Privacy & safety", priv_title:"Health data, treated like it matters.",
         priv_sub:"Privacy is built in from the first screen — with clear consent, strong safeguards, and no advertising business hiding underneath.",
         p1_t:"No ads, no data sales", p1_p:"We never sell or share your personal information for advertising, and never work with data brokers.",
-        p2_t:"You control every share", p2_p:"Health sharing, location, and emergency alerts are each opt-in — toggle any of them on or off at any time.",
+        p2_t:"You control every share", p2_p:"Health sharing, activity area, and emergency location are separate per-family switches — the senior sets them when approving a link, and can turn any of them off at any time.",
         p3_t:"Health-app data stays read-only", p3_p:"Data from Apple Health or Google Health Connect is read-only, never sold, and never used for ads.",
         p4_t:"US data residency", p4_p:"Data is stored in US-region infrastructure with encryption and per-user row-level isolation.",
         p5_t:"Built around US privacy law", p5_p:"Designed for CCPA / CPRA, Washington's My Health My Data Act, Illinois BIPA, and related state laws.",
-        p7_t:"Download your data", p7_p:"Exercise your right to know — export a copy of your data from inside the app, anytime.",
-        p6_t:"Delete anytime", p6_p:"Delete your account in-app or from the web, and your data is removed within 30 days.",
+        p7_t:"Download your data", p7_p:"Exercise your right to know — request a copy of your data from the senior app's Privacy Policy screen, one export every 30 days.",
+        p6_t:"Delete anytime", p6_p:"Delete your account in the app for immediate removal, or request it on the web — gone within 30 days at the latest.",
         priv_note:"Healthya supports daily well-being and is not a medical service or an emergency response service. It does not diagnose, treat, or replace professional medical care. In an emergency, call 911 or your local emergency number.",
         launch_eyebrow:"Available now", launch_title:"Ready when you are.",
         launch_sub:"Available now on iOS and Android. Free to start, simple to use, and designed for real life.",
-        launch_cta:"Get the app", launch_note:"Developed by Deeper Emptiness AI · hello@healthia.app",
+        launch_cta:"Get the app", launch_note:"Developed by Deeper Emptiness AI · hello@healthya.app",
         store_title:"Get the app", store_sub:"Choose the app that's right for you.",
         nav_survey:"Survey", survey_title:"Tell us what you think",
         survey_fallback:"Trouble loading? Open the survey in a new tab \u2192",
@@ -1149,6 +1667,8 @@
         legal_privacy:"Privacy Policy", legal_privacy_s:"How your data is handled",
         legal_terms:"Terms of Service", legal_terms_s:"Rules for using the app",
         legal_del:"Request account deletion", legal_del_s:"Applies to both apps · removes your account and data",
+        ticker:"Voice-first · Meals · Medication · Morning briefing · Brain games · 3-Day Wins · Hydration & exercise · Family peace of mind · ",
+        ghost_how:"Talk", ghost_feat:"Care", ghost_who:"Family", ghost_priv:"Trust",
         footer_copy:"© 2026 Deeper Emptiness AI · Healthya"
       },
       ko: {
@@ -1168,43 +1688,42 @@
         hiw2_t:"기억합니다", hiw2_p:"맥락을 기억해 알림·브리핑·안부가 실제 삶에 맞게 이어집니다.",
         hiw3_t:"가족이 가까이", hiw3_p:"동의하시면, 가족이 부드러운 요약을 보고 정말 필요한 순간에 알림을 받습니다.",
         who_eyebrow:"이런 분들을 위해", who_title:"하나의 앱, 세 사람, 줄어드는 걱정.",
-        who_sub:"시니어 본인이든, 자녀든, 돌봄 팀이든 — 온 가족의 마음이 놓입니다.",
+        who_sub:"시니어 본인이든, 살피는 자녀든, 함께 지켜보는 온 가족이든 — 모두의 마음이 놓입니다.",
         who1_t:"시니어", who1_p:"말만 하면 하루가 정리됩니다. 타이핑도, 배워야 할 메뉴도 없이 식사·복약·안부를 음성으로.",
         who2_t:"자녀", who2_p:"자주 전화하지 않아도 안심할 수 있어요. 가족 앱은 동의된 짧은 요약을 보여주고 응급 알림을 보냅니다.",
-        who3_t:"돌봄 팀·보험", who3_p:"하루 요약과 부드러운 선제 알림으로 건강한 습관을 지원합니다 — 언제나 본인의 통제 아래에서.",
-        feat_eyebrow:"기능", feat_title:"음성으로, 채팅으로, 터치로.",
-        feat_sub:"모든 기능이 세 가지 방식으로 작동합니다 — 말하거나, 입력하거나, 누르거나. 키보드 뒤에 갇힌 기능은 없습니다.",
+        who3_t:"온 가족이 함께", who3_p:"여러 가족이 한 분과 연동할 수 있고, 한 사람이 부모님 두 분을 함께 살필 수도 있어요. 응급 알림은 연동된 모두에게 한 번에 전달됩니다.",
+        feat_eyebrow:"기능", feat_title:"음성이 기본, 채팅과 터치도.",
+        feat_sub:"말만 하면 됩니다. 말하기 어려울 땐 글자로 대화하고, 큰 버튼으로 눌러 쓸 수도 있어요 — 키보드 뒤에 갇힌 기능은 없습니다.",
         f_voice_t:"음성 우선 동반자", f_voice_p:"하루 이야기를 나누고, 건강을 묻고, 그냥 수다를 떨어도 좋아요. Healthya는 맥락을 기억하고 좋은 친구처럼 이어서 물어봅니다 — 따뜻하고, 서두르지 않게.",
-        f_meal_t:"식사 기록", f_meal_p:"사진 한 장이면 AI가 음식을 읽고 영양을 추정해 균형 잡힌 다음 끼니를 제안합니다.",
+        f_meal_t:"식사 기록", f_meal_p:"사진 한 장, 혹은 말 한마디면 AI가 음식을 읽고 영양을 추정해 균형 잡힌 다음 끼니를 제안합니다.",
         f_med_t:"복약 알림", f_med_p:"약통이나 처방전을 스캔해 약 정보를 확인하고, 알림과 하루 복용 관리를 받습니다.",
-        f_brief_t:"오늘의 브리핑", f_brief_p:"날씨·주요 뉴스·오늘의 약속으로 하루를 시작하고, 주간·월간 정리도 함께.",
-        f_care_t:"아플 때 도움", f_care_p:"증상을 말하면 근처 병원·약국·응급 진료를 찾아주고, 다음에 무엇을 하면 좋을지 쉬운 말로 안내합니다. 진단은 아니에요.",
-        f_games_t:"매일 두뇌 게임", f_games_p:"스도쿠·낱말·버블·색깔 정렬 네 가지 가벼운 퍼즐로 매일 즐기는 두뇌 운동.",
+        f_brief_t:"오늘의 브리핑", f_brief_p:"날씨·실제 뉴스·건강 상식·오늘의 약속으로 하루를 시작하고, 주간·월간 건강 리포트도 함께.",
+        f_care_t:"아플 때 도움", f_care_p:"증상을 말하면 다음에 무엇을 하면 좋을지 쉬운 말로 안내하고, 근처 병원·약국을 찾아드립니다. 진단은 아니에요.",
+        f_games_t:"매일 두뇌 게임", f_games_p:"스도쿠·가로세로 낱말퀴즈·버블 슈터·색깔 정렬 네 가지 가벼운 퍼즐로 매일 즐기는 두뇌 운동.",
         f_goals_t:"작심삼일", f_goals_p:"작은 목표를 정해 사흘씩 이어 가세요. 부담 없는 알림과 홈화면 위젯이 곁에서 응원합니다.",
         f_hydra_t:"수분 & 운동", f_hydra_p:"부드러운 물 알림과 일상에 자연스럽게 녹아드는 가벼운 활동 기록.",
-        f_cal_t:"캘린더 & 약속", f_cal_p:"약속을 음성으로 추가하고 하루 계획과 함께 확인하세요.",
-        f_health_t:"건강 앱 연동", f_health_p:"선택 시 Apple 건강 또는 Google Health Connect에서 수면·걸음·활동을 읽어옵니다 — 읽기 전용.",
-        f_sos_t:"응급 지원", f_sos_p:"응급처치 안내와 원탭 911 발신 — 앱이 전화 다이얼러를 열어주면 통화는 본인이 직접 누릅니다. 원하시면 가족에게 위치가 담긴 알림이 갑니다. Healthya는 응급 대응 서비스가 아닙니다.",
+        f_health_t:"건강 앱 연동", f_health_p:"선택 시 Apple 건강 또는 Google Health Connect에서 수면·걸음·심박·혈압 등 건강 지표를 읽어옵니다 — 읽기 전용, 켰을 때만.",
+        f_sos_t:"응급 지원", f_sos_p:"오프라인에서도 열리는 응급처치 안내와 큰 911 버튼 — 홈 화면 위젯에서는 원탭이에요. 앱이 다이얼러를 열어주면 통화는 본인이 직접 누릅니다. 앱에서 911을 걸면 연동된 가족에게 알림이 가고, 위치 공유를 켜 두셨다면 위치도 함께 전달됩니다. Healthya는 응급 대응 서비스가 아닙니다.",
         fam_eyebrow:"가족 앱", fam_title:"가까이, 그러나 부담 없이.",
         fam_sub:"별도의 가족 앱으로 연결된 가족이 시니어를 도울 수 있습니다 — 시니어가 공유에 동의한 것만 볼 수 있어요.",
-        fam1:"짧은 읽기 전용 건강 요약 — 대화 원문은 절대 보이지 않습니다.",
-        fam2:"선택적인 일반화된 활동 영역 — 실시간 동선은 아닙니다.",
-        fam3:"시니어가 911을 발신할 때 오는 응급 알림.",
-        fam4:"모든 공유는 시니어가 켜고 — 언제든 끌 수 있습니다.",
+        fam1:"대화 전문이 아닌 요약 — 하루·월간 정리와 최소한의 짧은 인용만 보일 뿐, 대화 원문 전체는 보이지 않습니다.",
+        fam2:"약 2km 격자의 대략적인 활동 범위와 응급 대비 최신 위치 1건만 — 이동 경로 기록은 남기지 않습니다.",
+        fam3:"시니어가 앱에서 911을 걸면 연동된 모든 가족에게 가는 응급 알림.",
+        fam4:"모든 공유는 시니어가 결정합니다 — 연동을 승인할 때 정하고, 언제든 끌 수 있어요.",
         fam_vt:"오늘 어머니는 잘 지내고 계세요", fam_vd:"아침 식사 기록 · 복약 정상 · 오전에 활동적",
         priv_eyebrow:"개인정보 & 안전", priv_title:"건강 데이터, 소중히 다룹니다.",
         priv_sub:"개인정보 보호는 첫 화면부터 설계되어 있습니다 — 명확한 동의, 강력한 보호, 그리고 뒤에 숨은 광고 사업은 없습니다.",
         p1_t:"광고 없음, 데이터 판매 없음", p1_p:"광고 목적으로 개인정보를 판매·공유하지 않으며, 데이터 브로커와 거래하지 않습니다.",
-        p2_t:"모든 공유는 본인이 결정", p2_p:"건강 공유·위치·응급 알림은 각각 옵트인입니다 — 언제든 켜고 끌 수 있습니다.",
+        p2_t:"모든 공유는 본인이 결정", p2_p:"건강 공유·활동 범위·응급 위치는 가족별로 나뉜 스위치입니다 — 연동 승인 때 시니어가 정하고, 언제든 끌 수 있습니다.",
         p3_t:"건강 앱 데이터는 읽기 전용", p3_p:"Apple 건강 또는 Google Health Connect 데이터는 읽기 전용이며, 판매되거나 광고에 쓰이지 않습니다.",
         p4_t:"미국 내 데이터 보관", p4_p:"데이터는 암호화와 사용자별 행 수준 격리로 미국 리전 인프라에 저장됩니다.",
         p5_t:"미국 프라이버시법 기준 설계", p5_p:"CCPA / CPRA, 워싱턴 My Health My Data Act, 일리노이 BIPA 및 관련 주법을 고려해 설계했습니다.",
-        p7_t:"내 데이터 내려받기", p7_p:"알 권리를 언제든 — 앱 안에서 내 데이터 사본을 직접 내려받을 수 있습니다.",
-        p6_t:"언제든 삭제", p6_p:"앱이나 웹에서 계정을 삭제하면 데이터는 30일 이내 삭제됩니다.",
+        p7_t:"내 데이터 내려받기", p7_p:"알 권리를 행사하세요 — 시니어 앱의 개인정보처리방침 화면에서 내 데이터 사본을 요청할 수 있습니다. 내보내기는 30일에 한 번.",
+        p6_t:"언제든 삭제", p6_p:"앱에서 삭제하면 즉시, 웹으로 요청하면 늦어도 30일 이내에 삭제됩니다.",
         priv_note:"Healthya는 일상 건강을 돕는 서비스이며 의료 서비스나 응급 대응 서비스가 아닙니다. 진단·치료하거나 전문 의료를 대체하지 않습니다. 응급 상황에서는 911 또는 현지 응급번호로 전화하세요.",
         launch_eyebrow:"지금 이용 가능", launch_title:"준비되시면, 언제든.",
         launch_sub:"iOS와 Android에서 지금 이용할 수 있습니다. 무료로 시작하고, 쉽게 쓰고, 실제 삶을 위해 만들었습니다.",
-        launch_cta:"앱 다운로드", launch_note:"Deeper Emptiness AI 개발 · hello@healthia.app",
+        launch_cta:"앱 다운로드", launch_note:"Deeper Emptiness AI 개발 · hello@healthya.app",
         store_title:"앱 다운로드", store_sub:"본인에게 맞는 앱을 선택하세요.",
         nav_survey:"설문", survey_title:"의견을 들려주세요",
         survey_fallback:"화면이 안 보이면 새 탭에서 열기 \u2192",
@@ -1215,6 +1734,8 @@
         legal_privacy:"개인정보처리방침", legal_privacy_s:"데이터를 어떻게 다루는지",
         legal_terms:"이용약관", legal_terms_s:"앱 이용 규칙",
         legal_del:"계정 삭제 요청", legal_del_s:"두 앱 공통 · 계정과 데이터 삭제",
+        ticker:"음성 우선 · 식사 기록 · 복약 알림 · 아침 브리핑 · 두뇌 게임 · 작심삼일 · 수분과 운동 · 가족의 안심 · ",
+        ghost_how:"대화", ghost_feat:"돌봄", ghost_who:"가족", ghost_priv:"신뢰",
         footer_copy:"© 2026 Deeper Emptiness AI · Healthya"
       }
     };
@@ -1250,6 +1771,7 @@
         var desc = { en: "Healthya is a voice-first AI health companion for older adults, with a companion app for family. Available now on iOS and Android.",
                      ko: "Healthya는 시니어를 위한 음성 우선 AI 건강 동반자이며, 가족을 위한 별도 앱을 제공합니다. iOS와 Android에서 지금 이용 가능." };
         var m = document.querySelector('meta[name="description"]'); if (m) m.setAttribute('content', desc[l] || desc.en);
+        decorateHeroTitle();
       }
       var qpLang = params.get('lang');
       var lang = (qpLang === 'ko' || qpLang === 'en') ? qpLang : (store.get('healthia-doc-lang') || browserLang());
@@ -1364,25 +1886,94 @@
 
       /* Nav condense on scroll */
       var nav = document.getElementById('nav');
-      function onScroll() { if (nav) nav.classList.toggle('scrolled', window.scrollY > 12); }
+      var progressEl = document.getElementById('progress');
+      var heroEl = document.querySelector('.hero');
+      function onScroll() {
+        if (nav) nav.classList.toggle('scrolled', window.scrollY > 12);
+        var overHero = heroEl ? window.scrollY < heroEl.offsetHeight - 64 : false;
+        if (nav) nav.classList.toggle('over-hero', overHero);
+        document.body.classList.toggle('in-hero', overHero);
+        if (progressEl) {
+          var max = document.documentElement.scrollHeight - window.innerHeight;
+          progressEl.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0) + ')';
+        }
+      }
       onScroll();
       window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
 
-      /* Hero device — subtle pointer parallax tilt (fine pointers only, motion-safe) */
+      /* Hero title word-by-word rise — rebuilt whenever the language changes */
+      function decorateHeroTitle() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var lines = document.querySelectorAll('.hero h1 > span[data-i18n]');
+        var idx = 0;
+        lines.forEach(function (line) {
+          var words = line.textContent.split(' ');
+          line.textContent = '';
+          words.forEach(function (word, i) {
+            var w = document.createElement('span'); w.className = 'w';
+            var inner = document.createElement('i'); inner.textContent = word;
+            inner.style.animationDelay = (0.12 + idx * 0.08) + 's';
+            w.appendChild(inner); line.appendChild(w);
+            if (i < words.length - 1) line.appendChild(document.createTextNode(' '));
+            idx++;
+          });
+        });
+      }
+
+      /* Pointer-driven flourishes (fine pointers only, motion-safe) */
       var device = document.getElementById('heroDevice');
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var finePointer = window.matchMedia('(pointer: fine)').matches;
-      if (device && finePointer && !reduce) {
-        var raf = 0;
+      if (finePointer && !reduce) {
+        /* hero device parallax tilt + cursor spotlight */
+        var raf = 0, mx = 0, my = 0;
         window.addEventListener('mousemove', function (e) {
+          mx = e.clientX; my = e.clientY;
           if (raf) return;
           raf = requestAnimationFrame(function () {
             raf = 0;
-            var rx = (e.clientY / window.innerHeight - 0.5) * -7;
-            var ry = (e.clientX / window.innerWidth - 0.5) * 8;
-            device.style.transform = 'perspective(1000px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+            document.body.classList.add('pointer-live');
+            document.body.style.setProperty('--mx', mx + 'px');
+            document.body.style.setProperty('--my', my + 'px');
+            if (device) {
+              var rx = (my / window.innerHeight - 0.5) * -7;
+              var ry = (mx / window.innerWidth - 0.5) * 8;
+              device.style.transform = 'perspective(1000px) rotateX(' + rx.toFixed(2) + 'deg) rotateY(' + ry.toFixed(2) + 'deg)';
+            }
           });
         }, { passive: true });
+
+        /* card tilt + glare */
+        document.querySelectorAll('[data-tilt]').forEach(function (card) {
+          var rafT = 0, ev = null;
+          card.addEventListener('pointermove', function (e) {
+            ev = e;
+            if (rafT) return;
+            rafT = requestAnimationFrame(function () {
+              rafT = 0;
+              var r = card.getBoundingClientRect();
+              if (!r.width || !r.height) return;
+              var px = (ev.clientX - r.left) / r.width;
+              var py = (ev.clientY - r.top) / r.height;
+              card.style.setProperty('--gx', (px * 100).toFixed(1) + '%');
+              card.style.setProperty('--gy', (py * 100).toFixed(1) + '%');
+              card.style.transform = 'perspective(700px) rotateX(' + ((py - 0.5) * -6).toFixed(2) + 'deg) rotateY(' + ((px - 0.5) * 7).toFixed(2) + 'deg) translateY(-4px)';
+            });
+          });
+          card.addEventListener('pointerleave', function () { card.style.transform = ''; });
+        });
+
+        /* magnetic CTAs */
+        document.querySelectorAll('.btn-primary, .btn-ghost, .nav-cta').forEach(function (btn) {
+          btn.addEventListener('pointermove', function (e) {
+            var r = btn.getBoundingClientRect();
+            var tx = (e.clientX - r.left - r.width / 2) * 0.16;
+            var ty = (e.clientY - r.top - r.height / 2) * 0.3;
+            btn.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px)';
+          });
+          btn.addEventListener('pointerleave', function () { btn.style.transform = ''; });
+        });
       }
     })();
   </script>
