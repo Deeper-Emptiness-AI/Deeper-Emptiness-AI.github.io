@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <title>헬시야 골프 방 입장</title>
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <meta name="robots" content="noindex, nofollow" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f9fb;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --accent: #d97b6b;
+      --on-accent: #ffffff;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0b1220;
+      --surface: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #cbd5e1;
+      --border: #475569;
+      --accent: #e8927f;
+      --on-accent: #0b1220;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #0b1220;
+        --surface: #1e293b;
+        --text: #f8fafc;
+        --text-muted: #cbd5e1;
+        --border: #475569;
+        --accent: #e8927f;
+        --on-accent: #0b1220;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px 48px;
+    }
+    main { width: 100%; max-width: 420px; }
+    h1 { font-size: 1.35rem; margin: 0 0 6px; }
+    .sub { color: var(--text-muted); margin: 0 0 28px; font-size: 0.95rem; }
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: var(--surface);
+    }
+    .btn.primary {
+      background: var(--accent);
+      color: var(--on-accent);
+      border-color: transparent;
+    }
+    .desktop-note {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 18px 0 0;
+      font-size: 0.92rem;
+    }
+    .hint { color: var(--text-muted); font-size: 0.88rem; margin-top: 20px; }
+    .hint ol { padding-left: 1.1em; margin: 8px 0 0; }
+    .hint li { margin-bottom: 4px; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="title">골프 방에 입장</h1>
+    <p class="sub" id="subtitle"></p>
+
+    <a class="btn primary" id="openApp" href="#"></a>
+    <a class="btn" id="getApp" href="#" rel="noopener"></a>
+
+    <p class="desktop-note" id="desktopNote" hidden></p>
+
+    <div class="hint" id="hint">
+      <div id="hintTitle"></div>
+      <ol>
+        <li id="hintStep1"></li>
+        <li id="hintStep2"></li>
+        <li id="hintStep3"></li>
+      </ol>
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // 입장 코드 알파벳은 앱·서버와 같아야 한다(0438: 혼동 문자 0/O/1/I/L 제외 6자).
+      // 코드는 화면에 보여 주지 않는다 — 사람이 옮겨 적는 경로를 시스템에서 없앴다.
+      // 여기서 코드는 앱으로 넘길 주소를 만드는 데만 쓰이는 열쇠다.
+      var ALPHABET = /^[ABCDEFGHJKMNPQRSTUVWXYZ23456789]{6}$/;
+      var SCHEME = 'healthia';
+      var ANDROID_PACKAGE = 'com.deeperemptinessai.healthia';
+      var IOS_APP_ID = '6783849123';
+      var PLAY_URL =
+        'https://play.google.com/store/apps/details?id=' + ANDROID_PACKAGE;
+      var APPSTORE_URL = 'https://apps.apple.com/app/id' + IOS_APP_ID;
+
+      var STRINGS = {
+        ko: {
+          title: '골프 방에 입장',
+          subtitle: '헬시야 앱에서 바로 들어가요.',
+          openApp: '앱에서 열기',
+          getApp: '헬시야 앱 받기',
+          hintTitle: '앱이 없다면',
+          step1: '위 버튼으로 헬시야를 설치하고 가입하세요.',
+          // 설치를 마친 시점에 이 페이지는 이미 닫혀 있다. 그때 실제로 할 수 있는 행동은
+          // "다시 찍기" 이지, 적어 둔 무언가를 입력하는 것이 아니다.
+          step2: '설치가 끝나면 QR 을 한 번 더 찍으세요. 그대로 방에 들어갑니다.',
+          step3: '링크로 받았다면 이 링크를 다시 열어도 됩니다.',
+          desktopNote: '휴대폰에서 열어 주세요. 헬시야는 휴대폰 앱이라 이 화면에서는 입장할 수 없어요.',
+          noCode: '입장 링크가 올바르지 않아요. 초대한 분께 QR 이나 링크를 다시 받아 주세요.',
+        },
+        en: {
+          title: 'Join the golf game',
+          subtitle: 'Open it straight in the Healthia app.',
+          openApp: 'Open in the app',
+          getApp: 'Get Healthia',
+          hintTitle: "Don't have the app?",
+          step1: 'Install Healthia with the button above and sign up.',
+          step2: 'Once it is installed, scan the QR code again. That takes you straight in.',
+          step3: 'If you got a link instead, just open it again.',
+          desktopNote: 'Open this on your phone. Healthia is a phone app, so you cannot join from this screen.',
+          noCode: "This invite link isn't valid. Ask your friend for a new QR code or link.",
+        },
+      };
+
+      function pickLang() {
+        var l = (navigator.language || 'ko').toLowerCase();
+        return l.indexOf('ko') === 0 ? 'ko' : 'en';
+      }
+
+      /** ?c= / ?code= / #CODE / 마지막 경로 조각 어디에 있어도 읽는다(core 의 join-link 와 같은 규칙). */
+      function readCode() {
+        var params = new URLSearchParams(location.search);
+        var raw =
+          params.get('c') ||
+          params.get('code') ||
+          location.hash.replace('#', '') ||
+          location.pathname.split('/').filter(Boolean).pop() ||
+          '';
+        var normalized = raw.trim().toUpperCase().replace(/[^A-Z0-9]/g, '');
+        return ALPHABET.test(normalized) ? normalized : null;
+      }
+
+      function platform() {
+        var ua = navigator.userAgent || '';
+        if (/android/i.test(ua)) return 'android';
+        // iPadOS 13+ 는 Macintosh 로 보고하므로 터치 지원으로 가른다.
+        if (/iphone|ipod|ipad/i.test(ua)) return 'ios';
+        if (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1) return 'ios';
+        return 'other';
+      }
+
+      function setText(id, value) {
+        document.getElementById(id).textContent = value;
+      }
+
+      var t = STRINGS[pickLang()];
+      var code = readCode();
+      var os = platform();
+      var storeUrl = os === 'ios' ? APPSTORE_URL : PLAY_URL;
+      var appUrl = code ? SCHEME + '://golf/join?code=' + code : SCHEME + '://golf';
+
+      document.documentElement.lang = pickLang();
+      setText('title', t.title);
+      setText('openApp', t.openApp);
+      setText('getApp', t.getApp);
+      setText('hintTitle', t.hintTitle);
+      setText('hintStep1', t.step1);
+      setText('hintStep2', t.step2);
+      setText('hintStep3', t.step3);
+      setText('subtitle', code ? t.subtitle : t.noCode);
+
+      document.getElementById('openApp').setAttribute('href', appUrl);
+      document.getElementById('getApp').setAttribute('href', storeUrl);
+
+      if (!code) {
+        // 열 방이 없다. 앱으로 넘기는 버튼과 설치 안내를 남기면 헛걸음만 시킨다.
+        document.getElementById('openApp').hidden = true;
+        document.getElementById('hint').hidden = true;
+      }
+
+      if (os === 'other') {
+        // 데스크톱에서는 앱으로 넘길 방법이 없다. 스토어 버튼도 접는다 — 여기서는 어느
+        // 스토어인지 찍어 맞히는 셈이라, 아이폰 쓰는 사람에게 플레이스토어를 쥐여 주는
+        // 막다른 길이 된다.
+        setText('desktopNote', t.desktopNote);
+        document.getElementById('desktopNote').hidden = false;
+        document.getElementById('openApp').hidden = true;
+        document.getElementById('getApp').hidden = true;
+        // 버튼을 접었으면 "위 버튼으로 설치하세요" 도 같이 접는다 — 없는 것을 가리키는
+        // 안내는 사용자를 화면 위에서 헤매게 만든다.
+        document.getElementById('hint').hidden = true;
+      }
+
+      if (!code || os === 'other') return; // 데스크톱·미지 플랫폼은 자동 이동하지 않는다
+
+      if (os === 'android') {
+        // 크롬이 알아서 가른다: 앱이 있으면 열고, 없으면 fallback URL(플레이 스토어)로 간다.
+        // 타이머가 필요 없고 "열 수 없음" 대화상자도 뜨지 않는다.
+        location.replace(
+          'intent://golf/join?code=' + code +
+            '#Intent;scheme=' + SCHEME +
+            ';package=' + ANDROID_PACKAGE +
+            ';S.browser_fallback_url=' + encodeURIComponent(PLAY_URL) +
+            ';end'
+        );
+        return;
+      }
+
+      // iOS: 앱 스킴을 한 번 시도하고, 화면이 그대로면 앱이 없다고 보고 스토어로 보낸다.
+      // 페이지가 가려지면(앱이 떴다) 타이머를 취소한다.
+      //
+      // 사파리는 앱이 없을 때 "주소가 잘못되었습니다" 를 잠깐 띄운다. 이걸 없애려면 유니버설
+      // 링크(associatedDomains + apple-app-site-association)가 필요하고, 그러면 설치된
+      // 사용자는 이 페이지를 거치지도 않는다. 그 전까지의 절충이다.
+      var left = false;
+      function cancel() {
+        left = true;
+      }
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) cancel();
+      });
+      window.addEventListener('pagehide', cancel);
+
+      setTimeout(function () {
+        window.location.href = appUrl;
+      }, 100);
+      setTimeout(function () {
+        if (!left && !document.hidden) window.location.replace(storeUrl);
+      }, 1600);
+    })();
+  </script>
+</body>
+</html>
