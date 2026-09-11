@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DAYLIGHT — 하늘이 시간을 말한다</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+/* ════════════════════════════════════════════════════════════
+   Healthya — DAYLIGHT (일반 모드)
+   배경은 지금 시각의 하늘. 해와 달이 뜨고 진다.
+   그 위에 반투명 유리가 떠 있고, 누르면 반응한다.
+   ════════════════════════════════════════════════════════════ */
+:root{
+  --f:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;
+  --w:#FFFFFF;
+  --w80:rgba(255,255,255,.8);
+  --w60:rgba(255,255,255,.6);
+  --w45:rgba(255,255,255,.45);
+  /* 반투명 컴포넌트 — 홈페이지의 유리 */
+  --glass:rgba(255,255,255,.14);
+  --glass-hi:rgba(255,255,255,.26);
+  --glass-edge:rgba(255,255,255,.3);
+  --cycle:24s;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0B0D11;color:#fff;font-family:var(--f);-webkit-font-smoothing:antialiased;padding:72px 56px 96px}
+
+/* ── 보드 ── */
+.head{max-width:900px;margin-bottom:20px}
+.head .k{font-size:14px;color:rgba(255,255,255,.45)}
+.head h1{font-size:56px;font-weight:800;letter-spacing:-.045em;line-height:1;margin-top:14px}
+.head h2{font-size:22px;font-weight:600;letter-spacing:-.025em;margin-top:16px}
+.head p{font-size:16px;line-height:1.8;color:rgba(255,255,255,.6);margin-top:16px;letter-spacing:-.01em}
+.head p b{color:#fff;font-weight:600}
+.live{display:inline-flex;align-items:center;gap:9px;margin-top:26px;padding:11px 18px;border-radius:999px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);font-size:15px;font-weight:600;letter-spacing:-.015em}
+.live i{width:8px;height:8px;border-radius:50%;background:#7BE0A8;animation:blip 1.6s ease-in-out infinite}
+@keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
+
+.row{display:grid;grid-template-columns:repeat(auto-fill,390px);gap:52px 52px;justify-content:start;padding:44px 4px 36px;max-width:1768px}
+.shot{flex:none;width:390px}
+.shot .t{font-size:15px;font-weight:600;letter-spacing:-.02em;margin:0 0 16px 2px;display:flex;justify-content:space-between;align-items:baseline}
+.shot .t span{font-size:13.5px;font-weight:400;color:rgba(255,255,255,.4)}
+.shot .c{font-size:14px;line-height:1.75;color:rgba(255,255,255,.55);margin:20px 2px 0;letter-spacing:-.01em}
+.shot .c b{color:#fff;font-weight:600}
+
+/* ── 폰 ── */
+.p{width:390px;height:844px;border-radius:52px;position:relative;overflow:hidden;background:#0B0D11;color:#fff;
+  box-shadow:0 30px 70px -24px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.1)}
+.isl{position:absolute;top:13px;left:50%;translate:-50% 0;width:118px;height:34px;border-radius:20px;background:#000;z-index:60}
+.sb{position:absolute;top:0;left:0;right:0;height:58px;display:flex;justify-content:space-between;align-items:center;
+  padding:0 34px;font-size:15px;font-weight:600;letter-spacing:-.01em;z-index:55}
+.sb i{display:flex;gap:5px;align-items:center;font-style:normal;font-size:11px}
+.sb i b{width:23px;height:11.5px;border:1.4px solid currentColor;border-radius:3.5px;opacity:.55;position:relative}
+.sb i b::after{content:"";position:absolute;inset:1.8px;right:5px;background:currentColor;border-radius:1px}
+.hi{position:absolute;bottom:9px;left:50%;translate:-50% 0;width:132px;height:5px;border-radius:3px;background:currentColor;opacity:.3;z-index:60}
+
+/* ══ 하늘 ══ */
+.sky{position:absolute;inset:0;z-index:0;overflow:hidden}
+.sky b{position:absolute;inset:0;display:block;opacity:0;will-change:opacity}
+/* 사진 같은 하늘 — 사탕색 금지, 채도 낮게 깊게 */
+.s1{background:linear-gradient(180deg,#101A33 0%,#2B3757 32%,#7A6076 64%,#C99182 100%)} /* 새벽 */
+.s2{background:linear-gradient(180deg,#8FBEE4 0%,#CFE3F1 46%,#F8F4EA 100%)}             /* 아침 */
+.s3{background:linear-gradient(180deg,#9FD0F2 0%,#DCEBF6 48%,#FCFAF3 100%)}             /* 낮 — 가장 밝음 */
+.s4{background:linear-gradient(180deg,#1F2B49 0%,#6B5175 32%,#CE8663 70%,#F0B184 100%)} /* 저녁 */
+.s5{background:linear-gradient(180deg,#03050C 0%,#080E1E 56%,#10182C 100%)}             /* 밤 — 가장 어두움 */
+
+.sun,.moon{position:absolute;border-radius:50%;translate:-50% -50%;pointer-events:none;will-change:left,top,opacity}
+.sun{width:112px;height:112px;background:radial-gradient(circle,#FFFCF0 0%,#FFF2CE 26%,rgba(255,222,160,.5) 46%,rgba(255,205,130,0) 72%);
+  box-shadow:0 0 90px 44px rgba(255,224,168,.42),0 0 220px 90px rgba(255,196,120,.22)}
+.moon{width:66px;height:66px;background:radial-gradient(circle,#FBFCFF 0%,#DCE6FA 40%,rgba(190,208,244,.35) 62%,rgba(170,192,238,0) 78%);
+  box-shadow:0 0 60px 26px rgba(206,224,255,.28)}
+.stars{position:absolute;inset:0;opacity:0}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;
+  animation:tw 4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.25}50%{opacity:.95}}
+/* 아래쪽 어둡게 — 하늘이 어떤 색이든 흰 글씨가 항상 읽힌다 */
+.scrim{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(4,6,12,.42) 0%,rgba(4,6,12,.08) 28%,rgba(4,6,12,.34) 60%,rgba(4,6,12,.78) 100%)}
+/* 낮에는 걷히고 밤에는 덮인다 — 밝기 차이를 살리기 위함 */
+.live .scrim{animation:scrimfade var(--cycle) linear infinite}
+@keyframes scrimfade{0%{opacity:.85}18%{opacity:.14}46%,52%{opacity:0}70%{opacity:.32}88%,100%{opacity:.9}}
+
+/* ── 하루 한 바퀴 (24초) ── */
+.cy .s1{animation:k1 var(--cycle) linear infinite}
+.cy .s2{animation:k2 var(--cycle) linear infinite}
+.cy .s3{animation:k3 var(--cycle) linear infinite}
+.cy .s4{animation:k4 var(--cycle) linear infinite}
+.cy .s5{animation:k5 var(--cycle) linear infinite}
+.cy .sun{animation:sunpath var(--cycle) linear infinite}
+.cy .moon{animation:moonpath var(--cycle) linear infinite}
+.cy .stars{animation:starfade var(--cycle) linear infinite}
+@keyframes k1{0%{opacity:1}13%{opacity:0}88%{opacity:0}100%{opacity:1}}
+@keyframes k2{0%,6%{opacity:0}22%{opacity:1}38%{opacity:0}100%{opacity:0}}
+@keyframes k3{0%,30%{opacity:0}48%{opacity:1}64%{opacity:0}100%{opacity:0}}
+@keyframes k4{0%,56%{opacity:0}74%{opacity:1}86%{opacity:0}100%{opacity:0}}
+@keyframes k5{0%,80%{opacity:0}92%,96%{opacity:1}100%{opacity:0}}
+@keyframes sunpath{
+  0%{left:4%;top:96%;opacity:0}
+  8%{left:12%;top:78%;opacity:1}
+  24%{left:28%;top:46%;opacity:1}
+  40%{left:42%;top:26%;opacity:1}
+  52%{left:56%;top:21%;opacity:1}
+  66%{left:70%;top:38%;opacity:1}
+  78%{left:82%;top:64%;opacity:1}
+  86%{left:90%;top:86%;opacity:.85}
+  91%{left:94%;top:99%;opacity:0}
+  100%{left:4%;top:99%;opacity:0}}
+@keyframes moonpath{
+  0%{left:80%;top:22%;opacity:.6}
+  6%{left:86%;top:15%;opacity:0}
+  84%{left:52%;top:74%;opacity:0}
+  90%{left:60%;top:54%;opacity:.9}
+  100%{left:78%;top:24%;opacity:.85}}
+@keyframes starfade{0%{opacity:.45}10%{opacity:0}82%{opacity:0}94%,100%{opacity:.85}}
+
+/* ══ 반투명 컴포넌트 ══ */
+.g{background:var(--glass);-webkit-backdrop-filter:blur(30px) saturate(1.5);backdrop-filter:blur(30px) saturate(1.5);
+  border:1px solid rgba(255,255,255,.18);border-radius:28px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.34),0 18px 40px -22px rgba(0,0,0,.6)}
+.g.pill{border-radius:999px}
+
+/* ── 낮/밤 잉크 반전 ── */
+.live{animation:inkflip var(--cycle) linear infinite}
+@keyframes inkflip{0%,11%{color:#FFFFFF}21%,57%{color:#101B28}70%,100%{color:#FFFFFF}}
+.live .gf{animation:rise .9s cubic-bezier(.2,.9,.25,1) backwards var(--rd,0s),glassflip var(--cycle) linear infinite}
+@keyframes glassflip{
+  0%,11%{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.2)}
+  21%,57%{background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.85)}
+  70%,100%{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.2)}}
+.live .camflip{animation:rise .9s cubic-bezier(.2,.9,.25,1) backwards var(--rd,0s),camflip var(--cycle) linear infinite}
+@keyframes camflip{0%,11%{background:#fff}21%,57%{background:#101B28}70%,100%{background:#fff}}
+.live .cam::after{animation:ring 3.4s cubic-bezier(.2,.8,.3,1) infinite,ringflip var(--cycle) linear infinite}
+@keyframes ringflip{0%,11%{border-color:rgba(255,255,255,.55)}21%,57%{border-color:rgba(16,27,40,.45)}70%,100%{border-color:rgba(255,255,255,.55)}}
+
+/* ── 홈 ── */
+.top{position:absolute;left:30px;right:30px;top:92px;z-index:5}
+.dayline{font-size:15px;opacity:.62;letter-spacing:-.01em;position:relative;height:22px}
+.dayline span{position:absolute;left:0;top:0;opacity:0}
+.clock{font-size:58px;font-weight:200;letter-spacing:-.045em;line-height:1.1;margin-top:4px;position:relative;height:64px}
+.clock span{position:absolute;left:0;top:0;opacity:0;font-variant-numeric:tabular-nums}
+.hero{position:absolute;left:30px;right:30px;top:318px;z-index:5;height:150px}
+.hero > div{position:absolute;left:0;right:0;top:0;opacity:0}
+.hero .l{font-size:15px;opacity:.62;letter-spacing:-.01em}
+.hero .b{font-size:42px;font-weight:600;letter-spacing:-.04em;line-height:1.12;margin-top:8px}
+.hero .s{font-size:17px;opacity:.78;letter-spacing:-.02em;margin-top:9px}
+/* 다섯 국면 텍스트 교대 */
+.f0{animation:ph0 var(--cycle) linear infinite}
+.f1{animation:ph1 var(--cycle) linear infinite}
+.f2{animation:ph2 var(--cycle) linear infinite}
+.f3{animation:ph3 var(--cycle) linear infinite}
+.f4{animation:ph4 var(--cycle) linear infinite}
+@keyframes ph0{0%,6%{opacity:1}13%{opacity:0}90%{opacity:0}100%{opacity:1}}
+@keyframes ph1{0%,8%{opacity:0}18%,30%{opacity:1}38%{opacity:0}100%{opacity:0}}
+@keyframes ph2{0%,32%{opacity:0}42%,56%{opacity:1}64%{opacity:0}100%{opacity:0}}
+@keyframes ph3{0%,58%{opacity:0}68%,80%{opacity:1}86%{opacity:0}100%{opacity:0}}
+@keyframes ph4{0%,82%{opacity:0}90%,96%{opacity:1}100%{opacity:0}}
+
+.act{position:absolute;left:30px;right:30px;top:492px;height:60px;z-index:5;
+  display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:600;letter-spacing:-.02em}
+.tray{position:absolute;left:22px;right:22px;top:570px;padding:6px 22px;z-index:5}
+.tray div{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;font-size:17px;letter-spacing:-.02em}
+.tray div span{opacity:.6;font-size:16px}
+.cam{position:absolute;left:50%;bottom:42px;translate:-50% 0;width:64px;height:64px;border-radius:50%;background:#fff;z-index:8;
+  box-shadow:0 10px 30px -8px rgba(0,0,0,.55)}
+.cam::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid rgba(255,255,255,.55);
+  animation:ring 3.4s cubic-bezier(.2,.8,.3,1) infinite}
+@keyframes ring{0%{transform:scale(1);opacity:.8}70%,100%{transform:scale(1.9);opacity:0}}
+
+/* 등장 — 유리가 아래에서 떠오른다 */
+.rise{animation:rise .9s cubic-bezier(.2,.9,.25,1) backwards}
+.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.31s}.d4{animation-delay:.44s}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.97)}to{opacity:1;transform:none}}
+
+/* ── 선택 애니메이션 데모 ── */
+.sel{position:absolute;left:22px;right:22px;top:230px;z-index:5;padding:6px 0;overflow:hidden}
+.sel .r{position:relative;display:flex;justify-content:space-between;align-items:center;
+  padding:20px 22px;font-size:18px;letter-spacing:-.02em;border-radius:22px}
+.sel .r em{font-style:normal;color:var(--w60);font-size:16px}
+.sel .r.go{animation:press 5s cubic-bezier(.3,.9,.3,1) infinite}
+@keyframes press{
+  0%,8%{background:transparent;transform:scale(1)}
+  13%{background:rgba(255,255,255,.2);transform:scale(.975)}
+  20%{background:rgba(255,255,255,.13);transform:scale(1)}
+  70%{background:rgba(255,255,255,.13)}
+  86%,100%{background:transparent;transform:scale(1)}}
+.halo{position:absolute;left:44px;top:50%;width:16px;height:16px;border-radius:50%;translate:-50% -50%;
+  border:2px solid rgba(255,255,255,.9);opacity:0;animation:halo 5s cubic-bezier(.2,.8,.3,1) infinite}
+@keyframes halo{0%,12%{transform:scale(.4);opacity:0}16%{opacity:.9}46%{transform:scale(11);opacity:0}100%{transform:scale(11);opacity:0}}
+.tick{width:26px;height:26px;flex:none}
+.tick circle{fill:none;stroke:rgba(255,255,255,.35);stroke-width:2}
+.tick path{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:22;stroke-dashoffset:22;animation:draw 5s ease-in-out infinite}
+@keyframes draw{0%,17%{stroke-dashoffset:22}27%,84%{stroke-dashoffset:0}92%,100%{stroke-dashoffset:22}}
+.swap{position:relative;width:88px;height:24px;flex:none}
+.swap em{position:absolute;right:0;top:0;white-space:nowrap}
+.swap .a{animation:sa 5s ease-in-out infinite}
+.swap .b{animation:sb 5s ease-in-out infinite;color:#fff !important}
+@keyframes sa{0%,14%{opacity:1;transform:none}22%,88%{opacity:0;transform:translateY(-8px)}96%,100%{opacity:1;transform:none}}
+@keyframes sb{0%,18%{opacity:0;transform:translateY(8px)}26%,86%{opacity:1;transform:none}94%,100%{opacity:0;transform:translateY(8px)}}
+
+/* ── 사진 화면 ── */
+.shot-bg{position:absolute;inset:0;z-index:0}
+.shot-bg img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-scrim{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,.05) 24%,rgba(0,0,0,.5) 62%,rgba(0,0,0,.88) 100%)}
+.capsule{position:absolute;left:50%;translate:-50% 0;bottom:214px;padding:14px 26px;z-index:6;
+  font-size:18px;font-weight:600;letter-spacing:-.02em;white-space:nowrap;
+  animation:rise .8s cubic-bezier(.2,.9,.25,1) backwards .3s}
+.shut{position:absolute;left:50%;bottom:80px;translate:-50% 0;width:76px;height:76px;border-radius:50%;background:#fff;z-index:6;
+  box-shadow:0 0 0 5px rgba(255,255,255,.3)}
+.camtop{position:absolute;top:92px;left:30px;right:30px;display:flex;justify-content:space-between;z-index:6;
+  font-size:16px;color:var(--w80);letter-spacing:-.015em}
+
+/* 결과 시트 — 사진 위에 뜨는 유리 */
+.sheet{position:absolute;left:14px;right:14px;bottom:14px;z-index:6;padding:30px 26px 26px;border-radius:34px;
+  background:rgba(255,255,255,.11);-webkit-backdrop-filter:blur(40px) saturate(1.6);backdrop-filter:blur(40px) saturate(1.6);
+  border:1px solid rgba(255,255,255,.2);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 30px 60px -30px rgba(0,0,0,.9);
+  animation:rise 1s cubic-bezier(.2,.9,.25,1) backwards .25s}
+.sheet .k{font-size:15px;color:var(--w60);letter-spacing:-.01em}
+.sheet h2{font-size:34px;font-weight:600;letter-spacing:-.04em;line-height:1.12;margin-top:6px}
+.sheet .num{display:flex;align-items:baseline;gap:10px;margin-top:24px}
+.sheet .num b{font-size:64px;font-weight:200;letter-spacing:-.05em;line-height:1}
+.sheet .num span{font-size:17px;color:var(--w60)}
+.sheet .say{font-size:18px;font-weight:500;line-height:1.55;letter-spacing:-.025em;margin-top:18px}
+.sheet .three{display:flex;gap:28px;margin-top:22px}
+.sheet .three div b{display:block;font-size:22px;font-weight:400;letter-spacing:-.02em}
+.sheet .three div span{font-size:14px;color:var(--w45)}
+.sheet .btn{margin-top:26px;height:56px;border-radius:999px;background:#fff;color:#0B0D11;
+  display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.sheet .link{text-align:center;font-size:15px;color:var(--w60);margin-top:16px;letter-spacing:-.015em}
+.blk{margin-top:22px}
+.blk .l{font-size:14px;color:var(--w45);letter-spacing:-.01em}
+.blk p{font-size:17px;line-height:1.6;letter-spacing:-.02em;margin-top:6px;color:var(--w80)}
+
+/* ── 주간 ── */
+.wk{position:absolute;left:22px;right:22px;top:150px;z-index:5;padding:28px 26px 26px}
+.wk .k{font-size:15px;color:var(--w60);letter-spacing:-.01em}
+.wk h2{font-size:32px;font-weight:600;letter-spacing:-.04em;line-height:1.2;margin-top:8px}
+.chart{position:relative;height:132px;margin-top:26px}
+.chart svg{width:100%;height:100%;overflow:visible}
+.chart path.ln{fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;
+  filter:drop-shadow(0 0 10px rgba(255,255,255,.6));
+  stroke-dasharray:460;stroke-dashoffset:460;animation:drawline 2.6s cubic-bezier(.3,.8,.3,1) infinite}
+@keyframes drawline{0%{stroke-dashoffset:460}55%,88%{stroke-dashoffset:0}100%{stroke-dashoffset:0}}
+.chart path.ar{fill:url(#fade);opacity:0;animation:fadein 2.6s ease infinite}
+@keyframes fadein{0%,30%{opacity:0}70%,100%{opacity:.5}}
+.chart .dot{position:absolute;right:2px;top:14px;width:11px;height:11px;border-radius:50%;background:#fff;
+  box-shadow:0 0 18px 4px rgba(255,255,255,.7);animation:pop 2.6s ease infinite}
+@keyframes pop{0%,52%{transform:scale(0)}66%{transform:scale(1.3)}78%,100%{transform:scale(1)}}
+.wk .days{display:flex;justify-content:space-between;margin-top:12px;font-size:13px;color:var(--w45)}
+.wk .three{display:flex;gap:30px;margin-top:26px}
+.wk .three div b{display:block;font-size:26px;font-weight:300;letter-spacing:-.03em}
+.wk .three div span{font-size:14px;color:var(--w45)}
+
+/* ── 모드 전환 ── */
+.pick{position:absolute;left:22px;right:22px;top:200px;z-index:5;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pick .o{padding:12px;border-radius:26px;position:relative}
+.pick .o.on{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.4);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 0 rgba(255,255,255,.5);animation:glow 3s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 0 rgba(255,255,255,.32)}
+  50%{box-shadow:inset 0 1px 0 rgba(255,255,255,.4),0 0 0 7px rgba(255,255,255,0)}}
+.pick .o.off{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1)}
+.mini{height:186px;border-radius:18px;overflow:hidden;position:relative}
+.mini.day{background:linear-gradient(180deg,#24304F 0%,#6B5175 36%,#C07E62 74%,#DFA477 100%)}
+.mini.day::before{content:"";position:absolute;left:62%;top:30%;width:40px;height:40px;border-radius:50%;background:#FFF6DC;
+  box-shadow:0 0 34px 14px rgba(255,224,168,.6)}
+.mini.day::after{content:"";position:absolute;left:14px;right:14px;bottom:14px;height:56px;border-radius:14px;
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3)}
+.mini.q{background:#fff}
+.mini.q::before{content:"";position:absolute;left:16px;top:22px;width:96px;height:16px;border-radius:4px;background:#0C0C0D}
+.mini.q::after{content:"";position:absolute;left:16px;right:16px;top:56px;height:40px;border-radius:999px;background:#0C0C0D}
+.pick .o b{display:block;font-size:18px;font-weight:600;letter-spacing:-.025em;margin-top:14px}
+.pick .o span{display:block;font-size:14px;color:var(--w60);margin-top:4px;letter-spacing:-.01em}
+.pick .o .chk{position:absolute;right:20px;top:20px;width:26px;height:26px;border-radius:50%;background:#fff;
+  display:grid;place-items:center;z-index:3}
+.pick .o .chk svg{width:15px;height:15px;fill:none;stroke:#0B0D11;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.tog{position:absolute;left:22px;right:22px;top:500px;z-index:5;padding:4px 22px}
+.tog div{display:flex;justify-content:space-between;align-items:center;padding:18px 0;font-size:17px;letter-spacing:-.02em}
+.tog div span{color:var(--w60);font-size:16px}
+
+/* 노트 */
+.notes{max-width:1240px;margin-top:20px;display:grid;grid-template-columns:1fr 1fr;gap:56px}
+.notes h3{font-size:18px;font-weight:700;letter-spacing:-.025em;margin-bottom:18px}
+.notes p{font-size:15px;line-height:1.85;color:rgba(255,255,255,.6);letter-spacing:-.01em;margin-bottom:14px}
+.notes p b{color:#fff;font-weight:600}
+.kv{display:grid;grid-template-columns:104px 1fr;gap:11px 18px;font-size:15px;line-height:1.7;color:rgba(255,255,255,.6)}
+.kv b{color:#fff;font-weight:600}
+.credit{max-width:1240px;margin-top:44px;font-size:13px;color:rgba(255,255,255,.35);line-height:1.7}
+</style>
+</head>
+<body>
+
+<header class="head">
+  <div class="k">Healthya · 일반 모드</div>
+  <h1>DAYLIGHT</h1>
+  <h2>하늘이 시간을 말하고, 유리가 그 위에 뜬다</h2>
+  <p>배경은 <b>지금 시각의 하늘</b>입니다. 해가 뜨고, 호를 그리며 지나가고, 지고 나면 달과 별이 올라옵니다. 그 위에 <b>반투명한 유리 카드</b>가 떠 있고, 누르면 밝아지며 파문이 번집니다.</p>
+  <div class="live"><i></i>화면은 실제로 움직입니다 — 첫 화면에서 하루가 24초에 한 바퀴 돕니다</div>
+</header>
+
+<section class="row">
+
+  <!-- 1 · 홈 (라이브) -->
+  <div class="shot">
+    <div class="t">홈 · 하루 한 바퀴</div>
+    <div class="p live">
+      <div class="sky cy">
+        <b class="s1"></b><b class="s2"></b><b class="s3"></b><b class="s4"></b><b class="s5"></b>
+        <div class="stars">
+          <i style="left:12%;top:9%;animation-delay:.2s"></i><i style="left:31%;top:15%;animation-delay:1.3s"></i>
+          <i style="left:52%;top:7%;animation-delay:.7s"></i><i style="left:71%;top:13%;animation-delay:2.1s"></i>
+          <i style="left:86%;top:22%;animation-delay:1.6s"></i><i style="left:23%;top:26%;animation-delay:2.6s"></i>
+          <i style="left:62%;top:29%;animation-delay:.4s"></i><i style="left:43%;top:20%;animation-delay:3.1s"></i>
+        </div>
+        <div class="sun"></div><div class="moon"></div>
+      </div>
+      <div class="scrim"></div>
+      <div class="isl"></div>
+      <div class="sb"><span>5:42</span><i>•••• ᯤ <b></b></i></div>
+
+      <div class="top">
+        <div class="dayline">
+          <span class="f0">목요일 · 새벽</span><span class="f1">목요일 · 아침</span><span class="f2">목요일 · 낮</span>
+          <span class="f3">목요일 · 저녁</span><span class="f4">목요일 · 밤</span>
+        </div>
+        <div class="clock">
+          <span class="f0">5:30</span><span class="f1">9:00</span><span class="f2">13:00</span>
+          <span class="f3">18:40</span><span class="f4">22:00</span>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="f0"><div class="l">아직</div><div class="b">더 주무셔도<br>괜찮아요</div></div>
+        <div class="f1"><div class="l">다음</div><div class="b">아침 약</div><div class="s">8시 · 식사 후</div></div>
+        <div class="f2"><div class="l">물어볼 게 있어요</div><div class="b">점심 뭐<br>드셨어요?</div></div>
+        <div class="f3"><div class="l">다음</div><div class="b">저녁 약</div><div class="s">밤 9시 · 식사 후</div></div>
+        <div class="f4"><div class="l">오늘</div><div class="b">다 하셨어요</div><div class="s">내일 아침에 다시 올게요</div></div>
+      </div>
+
+      <div class="act g pill gf" style="--rd:.18s">먹었어요</div>
+      <div class="tray g gf" style="--rd:.31s">
+        <div>혈압약<span>먹었어요</span></div>
+        <div>비빔밥<span>620</span></div>
+        <div>물<span>5잔</span></div>
+      </div>
+      <div class="cam camflip" style="--rd:.44s"></div>
+      <div class="hi"></div>
+    </div>
+    <p class="c">해가 뜨면 화면이 실제로 환해지고, 글씨는 검게 뒤집힙니다. 지금 해야 할 하나를 가장 크게 보여줍니다.</p>
+  </div>
+
+  <!-- 2 · 선택 애니메이션 -->
+  <div class="shot">
+    <div class="t">선택했을 때</div>
+    <div class="p">
+      <div class="sky">
+        <b class="s4" style="opacity:1"></b>
+        <div class="sun" style="left:76%;top:62%"></div>
+      </div>
+      <div class="scrim"></div>
+      <div class="isl"></div>
+      <div class="sb"><span>8:02</span><i>•••• ᯤ <b></b></i></div>
+      <div class="top">
+        <div class="dayline" style="height:auto"><span style="position:static;opacity:1">목요일 · 저녁</span></div>
+        <div class="clock" style="height:auto"><span style="position:static;opacity:1">20:02</span></div>
+      </div>
+      <div class="sel g">
+        <div class="r"><span>아침 약</span><em>먹었어요</em></div>
+        <div class="r go">
+          <span class="halo"></span>
+          <span style="display:flex;align-items:center;gap:14px">
+            <svg class="tick" viewBox="0 0 26 26"><circle cx="13" cy="13" r="11.5"/><path d="M7.5 13.4l3.8 3.8 7.2-7.6"/></svg>
+            저녁 약
+          </span>
+          <span class="swap"><em class="a">밤 9시</em><em class="b">먹었어요</em></span>
+        </div>
+        <div class="r"><span>물 한 잔</span><em>5잔째</em></div>
+      </div>
+      <div class="cam"></div>
+      <div class="hi"></div>
+    </div>
+    <p class="c">누르는 순간 유리가 밝아지고, 손끝에서 파문이 번지고, 체크가 그려지며 글자가 바뀝니다.</p>
+  </div>
+
+  <!-- 3 · 카메라 -->
+  <div class="shot">
+    <div class="t">카메라</div>
+    <div class="p">
+      <div class="shot-bg"><img src="assets/meal.jpg" alt="" /></div>
+      <div class="photo-scrim"></div>
+      <div class="isl"></div>
+      <div class="sb"><span>12:32</span><i>•••• ᯤ <b></b></i></div>
+      <div class="camtop"><span>취소</span><span>앨범</span></div>
+      <div class="capsule g pill">음식이에요</div>
+      <div class="shut"></div>
+      <div class="hi"></div>
+    </div>
+    <p class="c">무엇을 찍었는지 앱이 먼저 알아봅니다. 종류를 고를 필요가 없습니다.</p>
+  </div>
+
+  <!-- 4 · 식사 -->
+  <div class="shot">
+    <div class="t">식사</div>
+    <div class="p">
+      <div class="shot-bg"><img src="assets/meal.jpg" alt="" /></div>
+      <div class="photo-scrim"></div>
+      <div class="isl"></div>
+      <div class="sb"><span>12:33</span><i>•••• ᯤ <b></b></i></div>
+      <div class="sheet">
+        <div class="k">오후 12:32 · 점심</div>
+        <h2>비빔밥</h2>
+        <div class="num"><b>620</b><span>kcal</span></div>
+        <div class="say">오늘 단백질이 조금 가벼워요.<br>저녁엔 두부나 달걀 어때요?</div>
+        <div class="three">
+          <div><b>58</b><span>탄수화물</span></div>
+          <div><b>16</b><span>단백질</span></div>
+          <div><b>26</b><span>지방</span></div>
+        </div>
+        <div class="btn">저녁 추천 보기</div>
+        <div class="link">고치기</div>
+      </div>
+      <div class="hi"></div>
+    </div>
+    <p class="c">사진 한 장으로 영양을 읽고, 오늘 먹은 것에 맞춰 다음 끼니를 제안합니다.</p>
+  </div>
+
+  <!-- 5 · 무엇이든 -->
+  <div class="shot">
+    <div class="t">무엇이든</div>
+    <div class="p">
+      <div class="shot-bg"><img src="assets/plant.jpg" alt="" /></div>
+      <div class="photo-scrim"></div>
+      <div class="isl"></div>
+      <div class="sb"><span>10:12</span><i>•••• ᯤ <b></b></i></div>
+      <div class="sheet">
+        <div class="k">Monstera deliciosa</div>
+        <h2>몬스테라</h2>
+        <div class="blk"><div class="l">물</div><p>겉흙이 마르면 한 번. 요즘 계절엔 7~10일에 한 번이면 충분해요.</p></div>
+        <div class="blk"><div class="l">빛</div><p>직사광선은 피하고 밝은 그늘에 두세요.</p></div>
+        <div class="blk"><div class="l">알아둘 것</div><p>잎과 줄기에 독성이 있어요. 반려동물이 있다면 닿지 않는 곳에.</p></div>
+        <div class="link" style="margin-top:24px">더 물어보기</div>
+      </div>
+      <div class="hi"></div>
+    </div>
+    <p class="c">앱 기능이 아닌 사진은 AI가 읽고 알려줍니다. 식물, 물건, 라벨 무엇이든.</p>
+  </div>
+
+  <!-- 6 · 주간 -->
+  <div class="shot">
+    <div class="t">주간 인사이트</div>
+    <div class="p">
+      <div class="sky">
+        <b class="s5" style="opacity:1"></b>
+        <div class="stars" style="opacity:.85">
+          <i style="left:12%;top:9%"></i><i style="left:31%;top:15%;animation-delay:1.3s"></i><i style="left:52%;top:7%;animation-delay:.7s"></i>
+          <i style="left:71%;top:13%;animation-delay:2.1s"></i><i style="left:86%;top:22%;animation-delay:1.6s"></i>
+          <i style="left:23%;top:26%;animation-delay:2.6s"></i><i style="left:62%;top:29%;animation-delay:.4s"></i>
+        </div>
+        <div class="moon" style="left:78%;top:16%;opacity:.9"></div>
+      </div>
+      <div class="scrim"></div>
+      <div class="isl"></div>
+      <div class="sb"><span>22:10</span><i>•••• ᯤ <b></b></i></div>
+      <div class="wk g rise d1">
+        <div class="k">이번 주</div>
+        <h2>산책을 앞당긴 뒤<br>수면이 41분 늘었어요</h2>
+        <div class="chart">
+          <svg viewBox="0 0 300 120" preserveAspectRatio="none">
+            <defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fff" stop-opacity=".38"/><stop offset="1" stop-color="#fff" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path class="ar" d="M0 92 C 34 88, 52 74, 78 78 S 126 96, 150 72 S 196 44, 226 40 S 272 22, 300 14 L300 120 L0 120 Z"/>
+            <path class="ln" d="M0 92 C 34 88, 52 74, 78 78 S 126 96, 150 72 S 196 44, 226 40 S 272 22, 300 14"/>
+          </svg>
+          <span class="dot"></span>
+        </div>
+        <div class="days"><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span><span>일</span></div>
+        <div class="three">
+          <div><b>7시간 12분</b><span>평균 수면</span></div>
+          <div><b>6일</b><span>복약</span></div>
+        </div>
+      </div>
+      <div class="cam"></div>
+      <div class="hi"></div>
+    </div>
+    <p class="c">한 주의 변화를 문장 하나와 선 하나로 보여줍니다.</p>
+  </div>
+
+  <!-- 7 · 모드 전환 -->
+  <div class="shot">
+    <div class="t">모드 전환</div>
+    <div class="p">
+      <div class="sky"><b class="s2" style="opacity:1"></b><div class="sun" style="left:22%;top:24%"></div></div>
+      <div class="scrim"></div>
+      <div class="isl"></div>
+      <div class="sb" style="color:#12202F"><span>9:14</span><i>•••• ᯤ <b></b></i></div>
+      <div class="top" style="color:#12202F">
+        <div class="dayline" style="height:auto;color:rgba(18,32,47,.6)"><span style="position:static;opacity:1">설정</span></div>
+        <div class="clock" style="height:auto;font-size:40px;font-weight:600;letter-spacing:-.035em"><span style="position:static;opacity:1">화면 방식</span></div>
+      </div>
+      <div class="pick">
+        <div class="o on">
+          <div class="chk"><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg></div>
+          <div class="mini day"></div><b>기본</b><span>하늘·유리·움직임</span>
+        </div>
+        <div class="o off"><div class="mini q"></div><b>쉬운 화면</b><span>흑백·큰 글자</span></div>
+      </div>
+      <div class="tog g">
+        <div>글자 크기<span>크게</span></div>
+        <div>움직임 줄이기<span>꺼짐</span></div>
+        <div>어두운 하늘 고정<span>꺼짐</span></div>
+      </div>
+      <div class="hi" style="background:#12202F"></div>
+    </div>
+    <p class="c">언제든 쉬운 화면으로 바꿀 수 있습니다. 글자 크기와 움직임도 조절합니다.</p>
+  </div>
+
+</section>
+
+
+
+<p class="credit">사진은 시안용 예시 이미지입니다 (Wikimedia Commons). 개발 중인 화면이며 최종과 다를 수 있습니다.</p>
+
+</body>
+</html>
