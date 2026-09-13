@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Healthya — 카드 더미 홈</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--f:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#08090C;color:#fff;font-family:var(--f);-webkit-font-smoothing:antialiased;padding:60px 44px 120px}
+.head{max-width:1040px}
+.k{font-size:13px;color:rgba(255,255,255,.42)}
+h1{font-size:46px;font-weight:800;letter-spacing:-.045em;line-height:1.06;margin-top:14px}
+.head p{font-size:15.5px;line-height:1.85;color:rgba(255,255,255,.6);margin-top:20px}
+.head p b{color:#fff;font-weight:600}
+.bar-top{display:flex;align-items:center;gap:8px;margin-top:26px;flex-wrap:wrap}
+.btn-t{font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.06);color:#fff;cursor:pointer;font-family:var(--f)}
+.btn-t.on{background:#fff;color:#0B0D11;border-color:#fff}
+.sep{width:1px;height:20px;background:rgba(255,255,255,.16);margin:0 5px}
+.lbl{font-size:11.5px;color:rgba(255,255,255,.34);letter-spacing:.05em}
+.hint{font-size:13px;color:rgba(255,255,255,.38);flex-basis:100%;margin-top:6px}
+.try{display:inline-block;margin-top:16px;font-size:13.5px;font-weight:600;color:#0B0D11;background:#7BE0A8;padding:7px 14px;border-radius:999px}
+.deckrow{display:flex;gap:26px;align-items:flex-start;margin-top:28px;overflow-x:auto;padding:6px 4px 20px}
+.deckrow::-webkit-scrollbar{height:8px}.deckrow::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:4px}
+body[data-fit="1"] .fr{zoom:.5}
+.cell{flex:none;position:relative}
+.cap{font-size:12.5px;color:rgba(255,255,255,.44);margin-bottom:10px}
+.cap b{color:rgba(255,255,255,.86);font-weight:600}
+
+.fr{position:relative;overflow:hidden;border-radius:42px;background:#0B0D11;color:#fff;flex:none;--fs:1;
+  box-shadow:0 26px 70px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.09);touch-action:none;user-select:none;
+  --half:#FFC86B;--miss:#FF8E8E}
+.fr.ink{color:#12202F}
+.sky{position:absolute;inset:0;transition:filter .5s ease}
+.sun,.moon{position:absolute;border-radius:50%;pointer-events:none;translate:-50% -50%;transition:opacity .4s}
+.sun{width:96px;height:96px;background:radial-gradient(circle,#FFFCF0 0%,#FFF2CE 26%,rgba(255,222,160,.5) 46%,rgba(255,205,130,0) 72%)}
+.moon{width:58px;height:58px;background:radial-gradient(circle,#FBFCFF 0%,#DCE6FA 40%,rgba(190,208,244,.32) 62%,rgba(170,192,238,0) 78%)}
+.stars{position:absolute;inset:0;pointer-events:none;transition:opacity .5s}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:tw 3.4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.2}50%{opacity:.9}}
+.clouds{position:absolute;inset:-10% -20%;pointer-events:none;opacity:0;transition:opacity .6s,filter .5s}
+.clouds b{position:absolute;border-radius:50%;filter:blur(22px);animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-8%)}to{transform:translateX(8%)}}
+.veil{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s,background .6s}
+.rain{position:absolute;inset:-20% 0;pointer-events:none;opacity:0;transition:opacity .5s;
+  background:repeating-linear-gradient(102deg,transparent 0 7px,rgba(255,255,255,.22) 7px 8px,transparent 8px 15px);
+  animation:pour .55s linear infinite}
+@keyframes pour{from{background-position:0 0}to{background-position:-26px 120px}}
+.snow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s}
+.snow i{position:absolute;width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.9);filter:blur(.4px);animation:fall linear infinite}
+@keyframes fall{from{transform:translate(0,-12%)}to{transform:translate(14px,112%)}}
+.scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 48%,rgba(0,0,0,.4) 100%)}
+.isl{position:absolute;top:12px;left:50%;translate:-50% 0;width:112px;height:32px;border-radius:20px;background:#000;z-index:60}
+.sb{position:absolute;top:20px;left:0;right:0;display:flex;justify-content:space-between;padding:0 30px;font-size:14px;font-weight:600;z-index:55;opacity:.92}
+.hi{position:absolute;bottom:9px;left:50%;translate:-50% 0;width:128px;height:5px;border-radius:3px;background:currentColor;opacity:.28;z-index:60}
+.g{background:rgba(255,255,255,.16);backdrop-filter:blur(22px) saturate(1.35);-webkit-backdrop-filter:blur(22px) saturate(1.35);border:1px solid rgba(255,255,255,.3)}
+.fr.ink .g{background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.75)}
+
+.top{position:absolute;z-index:20}
+.clock{cursor:ew-resize}
+/* 해가 지나온 짧은 자취 — 원호 전체가 아니라 꼬리만 */
+.trail{position:absolute;inset:0;z-index:13;pointer-events:none}
+.trail svg{position:absolute;inset:0;width:100%;height:100%}
+.trail path{fill:none;stroke:currentColor;stroke-linecap:round}
+.trail path.full{stroke-width:1.3;stroke-dasharray:2 7;opacity:0;transition:opacity .28s ease}
+.fr.dragging .trail path.full{opacity:.3}
+/* 물방울 메뉴 — 필터가 걸리는 층에는 유리를 쓸 수 없다 (아래 주석 참고) */
+.goo{position:absolute;inset:0;z-index:33;pointer-events:none}
+.blob{position:absolute;width:62px;height:62px;border-radius:50%;translate:-50% -50%;
+  display:grid;place-items:center;opacity:0}
+.blob em{font-style:normal;font-size:calc(11.5px * var(--fs));font-weight:600;letter-spacing:-.02em}
+/* 코너에서는 호가 안 들어간다 — 카메라 위로 세로 일렬. 원 대신 알약이라야 8개가 선다 */
+.blob.col{border-radius:15px;width:auto;height:auto;translate:0 0;justify-items:end;
+  padding:13px 18px;text-align:right}
+.blob.col em{font-size:calc(14.5px * var(--fs));font-weight:600;white-space:nowrap}
+.scrimC{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;z-index:32;pointer-events:none;transition:opacity .25s}
+/* 첫 실행 안내 — 상시 UI 장치를 대신한다 */
+.onb{position:absolute;inset:0;z-index:52;display:none;align-items:center;justify-content:center;
+  background:rgba(6,10,18,.5);padding:0 20px}
+body[data-onb="1"] .onb{display:flex}
+.onbc{width:100%;max-width:340px;border-radius:26px;padding:26px 24px 22px}
+.onbc .ot{font-size:calc(21px * var(--fs));font-weight:700;letter-spacing:-.035em;line-height:1.25}
+.onbc .oi{display:flex;gap:13px;margin-top:20px;align-items:flex-start}
+.onbc .oi i{flex:none;width:22px;height:22px;border-radius:50%;font-style:normal;display:grid;place-items:center;
+  font-size:calc(12px * var(--fs));font-weight:700;background:currentColor;margin-top:1px}
+.onbc .oi i b{color:#0B0D11;font-weight:700}
+.fr.ink .onbc .oi i b{color:#fff}
+.onbc .oi .tx3 b{display:block;font-size:calc(15.5px * var(--fs));font-weight:600;letter-spacing:-.025em}
+.onbc .oi .tx3 span{display:block;font-size:calc(13.5px * var(--fs));opacity:.62;margin-top:3px;line-height:1.5}
+.onbc .ob{margin-top:24px;border-radius:999px;text-align:center;padding:13px;font-weight:600;
+  font-size:calc(16px * var(--fs));cursor:pointer;background:rgba(255,255,255,.24);border:1px solid rgba(255,255,255,.36)}
+.fr.ink .onbc .ob{background:rgba(18,32,47,.12);border-color:rgba(18,32,47,.22)}
+.dayline{font-size:calc(15px * var(--fs));opacity:.72;display:flex;align-items:center;gap:7px}
+.dayline .wx b{font-weight:600}
+.clock{font-weight:600;letter-spacing:-.04em;line-height:1;margin-top:5px}
+
+/* 카드판 */
+.board{position:absolute;z-index:18;overflow:hidden}
+.card{position:absolute;border-radius:22px;overflow:hidden;
+  transition:left .42s cubic-bezier(.22,.9,.26,1),top .42s cubic-bezier(.22,.9,.26,1),
+             width .42s cubic-bezier(.22,.9,.26,1),height .42s cubic-bezier(.22,.9,.26,1),
+             opacity .3s ease,transform .42s cubic-bezier(.22,.9,.26,1)}
+.card .inn{position:absolute;inset:0;padding:14px 15px;display:flex;flex-direction:column}
+.card.pile .nm{font-size:calc(15px * var(--fs));font-weight:600;letter-spacing:-.025em}
+.card.pile .vl{font-size:calc(13px * var(--fs));opacity:.62;margin-top:3px}
+.card.pile.half{border-color:var(--half)}
+.card.edge .inn{display:none}
+/* 모서리는 대부분 화면 밖이라 블러가 의미 없다 — backdrop-filter 를 쓰면
+   둥근 프레임의 overflow:hidden 을 빠져나가 밖으로 새어 나온다 */
+.card.pile.edge{background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.6);
+  backdrop-filter:none;-webkit-backdrop-filter:none}
+.fr.ink .card.pile.edge{background:rgba(255,255,255,.62);border-color:rgba(255,255,255,.8)}
+.card.pile.edge.half{border-color:var(--half)}
+.card.front .inn{padding:20px 22px}
+.card.front .l{font-size:calc(14.5px * var(--fs));opacity:.66}
+.card.front .ti{font-weight:700;letter-spacing:-.045em;line-height:1.08;margin-top:7px}
+.card.front .sb2{font-size:calc(15.5px * var(--fs));opacity:.7;margin-top:8px}
+.card.front .go{margin-top:auto;align-self:flex-start;border-radius:999px;font-weight:600;cursor:pointer;
+  background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.34)}
+.fr.ink .card.front .go{background:rgba(18,32,47,.1);border-color:rgba(18,32,47,.2)}
+.card.miss{border-color:var(--miss);box-shadow:0 0 0 1px var(--miss)}
+.card.miss .l{color:var(--miss);opacity:1;font-weight:600}
+.card.behind .inn{display:none}
+.pileCount{position:absolute;z-index:19;border-radius:999px;padding:4px 10px;font-size:calc(11.5px * var(--fs));
+  font-weight:600;opacity:.9;cursor:pointer}
+.nowline{position:absolute;z-index:17;width:1px;opacity:.28;background:currentColor}
+.nowtag{position:absolute;z-index:19;font-size:calc(11px * var(--fs));opacity:.5;letter-spacing:.04em;translate:-50% 0}
+
+.aibar{position:absolute;z-index:26;border-radius:999px;display:flex;align-items:center;gap:11px;padding:0 8px 0 7px}
+.aibar .mo{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.2)}
+.fr.ink .aibar .mo{background:rgba(18,32,47,.12)}
+.aibar svg{width:17px;height:17px;fill:currentColor}
+.aibar .tx{flex:1;font-size:calc(14.5px * var(--fs));opacity:.66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cam{position:absolute;border-radius:50%;background:#fff;z-index:36;box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 5px rgba(255,255,255,.16)}
+.fr.ink .cam{box-shadow:0 10px 26px rgba(18,32,47,.3),0 0 0 1px rgba(18,32,47,.12)}
+.cam .grab{position:absolute;left:50%;top:9px;translate:-50% 0;width:17px;height:2.5px;border-radius:2px;background:#0B0D11;opacity:.3}
+.more{position:absolute;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;z-index:28;font-size:16px;font-weight:700;letter-spacing:.06em}
+
+h2{font-size:13px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.04em;margin:72px 0 0}
+.ttl{font-size:30px;font-weight:700;letter-spacing:-.04em;margin-top:10px}
+.notes{max-width:1120px;margin-top:22px;border-radius:22px;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.035);padding:24px 28px}
+.notes .r{display:grid;grid-template-columns:120px 1fr;gap:10px 18px;font-size:14.5px;line-height:1.72;color:rgba(255,255,255,.62)}
+.ok b{color:#7BE0A8}.no b{color:#FF9E9E}.mid b{color:#FFD98E}
+.credit{max-width:1120px;margin-top:44px;font-size:13px;color:rgba(255,255,255,.32);line-height:1.75}
+</style>
+</head>
+<body data-fit="1" data-onb="0">
+
+<header class="head">
+  <div class="k">Healthya · 일반 모드 홈 · 카드 더미</div>
+  <h1>한 것은 옆으로 빠진다</h1>
+  <div class="bar-top">
+    <span class="lbl">날씨</span>
+    <button class="btn-t on" data-wx="clear">맑음</button>
+    <button class="btn-t" data-wx="cloudy">흐림</button>
+    <button class="btn-t" data-wx="rain">비</button>
+    <button class="btn-t" data-wx="snow">눈</button>
+    <span class="sep"></span>
+    <button class="btn-t on" id="bNorm">기본 글씨</button>
+    <button class="btn-t" id="bBig">큰 글씨 1.25×</button>
+    <span class="sep"></span>
+    <button class="btn-t" id="bOnb">첫 실행 안내</button>
+    <span class="sep"></span>
+    <button class="btn-t on" id="bFit">한눈에</button>
+    <button class="btn-t" id="bReal">1:1</button>
+  </div>
+</header>
+
+<div class="deckrow" id="deck"></div>
+
+<script>
+const KF=[{p:0,c:['#0A0F24','#121838','#20264C']},{p:.20,c:['#2E4A7D','#7FA3CE','#E8C9A6']},
+ {p:.40,c:['#2F7DD1','#6FB4EA','#C3E2F7']},{p:.62,c:['#3B6FA8','#9E86A8','#E8B287']},
+ {p:.80,c:['#24304F','#6B5175','#DFA477']},{p:.92,c:['#0D1330','#161E42','#2A2F58']},
+ {p:1,c:['#0A0F24','#121838','#20264C']}];
+const BAND=t=>t<.20?'새벽':t<.44?'아침':t<.62?'낮':t<.86?'저녁':'밤';
+const WX={
+ clear :{n:'맑음',ico:'☀',t:'22°',cloud:0,  veil:'rgba(0,0,0,0)',        vo:0,sat:1,  rain:0,snow:0,sun:1},
+ cloudy:{n:'흐림',ico:'☁',t:'18°',cloud:.85,veil:'rgba(158,168,186,.24)',vo:1,sat:.74,rain:0,snow:0,sun:.20},
+ rain  :{n:'비',ico:'🌧',t:'16°',cloud:1,  veil:'rgba(46,58,78,.34)',   vo:1,sat:.66,rain:1,snow:0,sun:.06},
+ snow  :{n:'눈',ico:'❄',t:'-1°',cloud:.85,veil:'rgba(228,236,248,.22)',vo:1,sat:.68,rain:0,snow:1,sun:.28},
+};
+/* st: done(한 것) / half(일부) / miss(지나갔는데 안 함) / todo(앞으로) */
+const TODO=[
+ {k:'수면',    s:'7시간 12분', sub:'', at:.14, st:'done'},
+ {k:'물',      s:'5잔',        sub:'하루 8잔 중', at:.29, st:'done'},
+ {k:'혈압약',  s:'먹었어요',   sub:'아침 · 식사 후', at:.34, st:'done'},
+ {k:'혈압',    s:'122/78',     sub:'', at:.37, st:'done'},
+ {k:'작심삼일',s:'9일차',      sub:'오늘 절반', at:.44, st:'half'},
+ {k:'점심',    s:'비빔밥 620', sub:'', at:.53, st:'done'},
+ {k:'걷기',    s:'3,120보',    sub:'목표 4,000보', at:.61, st:'done'},
+ {k:'오후 약', s:'',           sub:'2시 · 식사 후', at:.68, st:'miss'},
+ {k:'저녁 약', s:'',           sub:'밤 9시 · 식사 후', at:.88, st:'todo'},
+];
+const cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+const hx=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+const lc=(a,b,u)=>{const A=hx(a),B=hx(b);return `rgb(${A.map((v,i)=>Math.round(v+(B[i]-v)*u)).join(',')})`;};
+function skyAt(t){let i=0;while(i<KF.length-2&&t>KF[i+1].p)i++;const a=KF[i],b=KF[i+1],u=cl((t-a.p)/(b.p-a.p||1),0,1);
+  return a.c.map((c,j)=>lc(c,b.c[j],u));}
+const clockAt=t=>{const h=t*24;return `${Math.floor(h)%24}:${String(Math.floor((h%1)*60)).padStart(2,'0')}`;};
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+const MIC='<svg viewBox="0 0 24 24"><path d="M12 14.5a3.2 3.2 0 0 0 3.2-3.2V5.7a3.2 3.2 0 1 0-6.4 0v5.6a3.2 3.2 0 0 0 3.2 3.2zm5.6-3.4a.9.9 0 0 0-1.8 0 3.8 3.8 0 0 1-7.6 0 .9.9 0 0 0-1.8 0 5.6 5.6 0 0 0 4.7 5.5v2a.9.9 0 0 0 1.8 0v-2a5.6 5.6 0 0 0 4.7-5.5z"/></svg>';
+const ARC=[{s:'식사'},{s:'복약'},{s:'목표'},{s:'리포트'},{s:'가족'},{s:'운동'},{s:'달력'},{s:'설정'}];
+let WKEY='clear';
+
+function build(w,h,cap){
+  const sc=w<600?'compact':(w<840?'medium':'expanded');
+  const cell=el('div','cell'); cell.appendChild(el('div','cap',cap));
+  const fr=el('div','fr'); fr.style.width=w+'px'; fr.style.height=h+'px';
+
+  const sky=el('div','sky'),stars=el('div','stars');
+  for(let i=0;i<9;i++){const s=el('i');s.style.cssText=`left:${6+i*10.5}%;top:${4+(i%4)*6}%;animation-delay:${i*.37}s`;stars.appendChild(s);}
+  const sun=el('div','sun'),moon=el('div','moon'); sky.append(stars,sun,moon);
+  const clouds=el('div','clouds');
+  [[6,10,190,86,26],[38,4,240,104,34],[64,16,200,78,30],[18,26,170,66,38],[78,30,160,60,22],[48,22,150,58,42]]
+    .forEach(([x,y,cw,ch,dur])=>{const b=el('b');
+      b.style.cssText=`left:${x}%;top:${y}%;width:${cw}px;height:${ch}px;animation-duration:${dur}s;`+
+        `background:radial-gradient(circle at 40% 45%,rgba(255,255,255,.92),rgba(232,238,248,.55) 55%,rgba(210,220,235,0) 74%)`;
+      clouds.appendChild(b);});
+  const veil=el('div','veil'),rain=el('div','rain'),snow=el('div','snow');
+  for(let i=0;i<16;i++){const f=el('i');
+    f.style.cssText=`left:${(i*6.3+3)%98}%;animation-duration:${6+(i%5)*1.7}s;animation-delay:${-i*.7}s;opacity:${.5+(i%4)*.16}`;
+    snow.appendChild(f);}
+  fr.append(sky,clouds,veil,rain,snow,el('div','scrim'),el('div','isl'));
+  const sb=el('div','sb','<span class="t"></span><span>•••• ᯤ ▯</span>'); fr.appendChild(sb);
+
+  const pad=sc==='compact'?24:30, topPad=sc==='compact'?52:56;
+  const camS=sc==='compact'?58:(sc==='medium'?68:60), camB=sc==='compact'?24:30;
+  const aiH=sc==='compact'?50:56;
+  /* 더미 펼침은 compact 를 넘으면(medium·expanded) 적용.
+     ★카메라를 오른쪽 끝으로 옮기고 메뉴를 세로 일렬로 바꾸는 것은 **가로로 넓은 창(expanded)만**.
+     세로로 긴 창(아이패드 세로·Duo 펼침 세로)은 하단 중앙 + 호를 유지한다 — 엄지가 중앙 아래에 있다 */
+  const wide=sc==='expanded';
+  const oneRow=sc==='expanded';
+  const aiB=oneRow ? camB+(camS-aiH)/2 : camB+camS+12;
+  const botPad=oneRow ? camB+camS+18 : aiB+aiH+18;
+  const camCX=wide ? w-pad-camS/2 : w/2;
+  const edgeW=64;                                     /* 더미 카드 실제 폭 — 대부분 화면 밖 */
+  const peek=sc==='compact'?17:20;                    /* 모서리로 보이는 만큼 */
+  const pileOut=sc!=='compact';                       /* 더미를 화면 안에 펼친다 (medium·expanded) */
+  const pileW=pileOut?(sc==='medium'?200:232):0;
+  const frontL=pileOut ? pad+pileW+30 : peek+(sc==='compact'?13:16);
+  const frontW=Math.min(w-frontL-pad, sc==='compact'?9999:(sc==='medium'?450:520));
+  const aiW=wide ? (frontL+frontW-pad) : 0;           /* 오른쪽 끝을 카드와 맞춘다 */
+
+  const trail=el('div','trail','<svg><path class="full"/></svg>');
+  fr.appendChild(trail);
+  const top=el('div','top','<div class="dayline"><span class="dl"></span><span class="wx"></span></div>'+
+    '<div class="clock"><span class="cv"></span></div>');
+  top.style.cssText+=`left:${pad}px;top:${topPad}px`;
+  top.querySelector('.clock').style.fontSize=`calc(${sc==='compact'?38:44}px * var(--fs))`;
+  fr.appendChild(top);
+
+  /* 카드판 기하 */
+  const boardTop=topPad+(sc==='compact'?92:104);
+  const boardBot=h-botPad;
+  const boardH=boardBot-boardTop;
+  const frontH=Math.min(sc==='compact'?226:262, boardH-64);
+  const pileH=pileOut?86:(sc==='compact'?92:104);
+  const pileStep=30;                                  /* 펼쳤을 때 카드당 보이는 높이 */
+
+  const board=el('div','board');
+  board.style.cssText=`left:0;right:0;top:${boardTop}px;height:${boardH}px`;
+  const cards=TODO.map(()=>{const c=el('div','card g');board.appendChild(c);return c;});
+  const lineTop=boardTop+(boardH-frontH-10)-24;
+  const nowline=el('div','nowline'); nowline.style.display='none';
+  const nowtag=el('div','nowtag',''); nowtag.style.display='none';
+  const pc=el('div','pileCount g','');
+  pc.style.cssText=`left:${pileOut?pad:peek+8}px;top:${lineTop}px`;
+  fr.append(board,nowline,nowtag,pc);
+
+  const aibar=el('div','aibar g',`<div class="mo">${MIC}</div><div class="tx">듣고 있어요 — 말하거나 적어보세요</div>`);
+  aibar.style.cssText+= wide
+    ? `left:${pad}px;width:${aiW}px;bottom:${aiB}px;height:${aiH}px`
+    : `left:${pad}px;right:${pad}px;bottom:${aiB}px;height:${aiH}px`;
+  const cam=el('div','cam','<i class="grab"></i>');
+  cam.style.cssText+=`width:${camS}px;height:${camS}px;left:${camCX}px;translate:-50% 0;bottom:${camB}px`;
+  const more=el('div','more g','⋯'); more.style.cssText+=`top:${topPad+4}px;right:${pad}px`;
+  const scrimC=el('div','scrimC');
+  const goo=el('div','goo');
+  const blobs=ARC.map(x=>{const b=el('div','blob g'+(wide?' col':''),`<em>${x.s}</em>`);goo.appendChild(b);return b;});
+  const onb=el('div','onb',
+    '<div class="onbc g">'+
+    '<div class="ot">세 가지만 알면<br>됩니다</div>'+
+    '<div class="oi"><i><b>1</b></i><div class="tx3"><b>하늘을 좌우로 밀어 보세요</b>'+
+      '<span>하루가 흐르고, 그 시각의 할 일이 앞으로 나옵니다</span></div></div>'+
+    '<div class="oi"><i><b>2</b></i><div class="tx3"><b>아래 동그라미를 누르면 사진</b>'+
+      '<span>위로 끌어올리면 메뉴가 펼쳐집니다</span></div></div>'+
+    '<div class="oi"><i><b>3</b></i><div class="tx3"><b>왼쪽에 쌓이는 것이 오늘 한 일</b>'+
+      '<span>끝낸 것은 옆으로 빠져 쌓입니다</span></div></div>'+
+    '<div class="ob">알겠어요</div></div>');
+  fr.append(aibar,scrimC,goo,cam,more,onb,el('div','hi'));
+
+  cell.appendChild(fr);
+  const st={fr,sky,sun,moon,stars,clouds,veil,rain,snow,sb:sb.querySelector('.t'),top,cards,pc,
+    w,h,sc,pad,edgeW,peek,frontL,frontW,frontH,pileH,boardH,botPad,t:.50,base:.50,
+    trail,blobs,scrimC,cam,camS,camB,p:0,pileOut,pileW,pileStep,oneRow,wide,camCX,aiW,
+    R: sc==='compact'?(w<430?152:166):(sc==='medium'?206:182)};
+  fr._st=st; wire(st); render(st);
+  return cell;
+}
+
+function render(s){
+  const t=s.t,c=skyAt(t),W=WX[WKEY];
+  s.sky.style.background=`linear-gradient(180deg,${c[0]} 0%,${c[1]} 48%,${c[2]} 100%)`;
+  s.sky.style.filter=`saturate(${W.sat})`;
+  const dl=cl(Math.sin(Math.PI*cl((t-.16)/.72,0,1)),0,1);
+  s.clouds.style.opacity=W.cloud;
+  s.clouds.style.filter=`brightness(${(.26+.74*dl).toFixed(2)})`;
+  s.clouds.style.mixBlendMode=dl>.35?'screen':'normal';
+  s.veil.style.background=W.veil; s.veil.style.opacity=W.vo;
+  s.rain.style.opacity=W.rain; s.snow.style.opacity=W.snow;
+  s.fr.classList.toggle('ink',(t>.28&&t<.66)&&W.sat>.55);
+  s.stars.style.opacity=(t<.16||t>.86?.95:(t<.24||t>.78?.4:0))*(1-W.cloud*.9);
+  const shine=t>.19&&t<.83, sx=8+t*84, sy=26-Math.sin(Math.PI*t)*14;
+  s.sun.style.cssText=`left:${sx}%;top:${sy}%;opacity:${shine?W.sun:0}`;
+  s.moon.style.cssText=`left:${sx}%;top:${sy}%;opacity:${shine?0:.95*(1-W.cloud*.8)}`;
+  /* 해 뒤 짧은 꼬리 + (잡는 동안만) 전체 길 */
+  const pt=u=>[s.w*(8+u*84)/100, s.h*(26-Math.sin(Math.PI*u)*14)/100];
+  const seg=(a,b)=>{let d='';for(let i=0;i<=14;i++){const [x,y]=pt(a+(b-a)*i/14);
+    d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);}return d;};
+  s.trail.querySelector('.full').setAttribute('d',seg(0,1));
+
+  /* 더미 = 한 것(done/half) · 덱 = 안 한 것(miss 먼저, 그다음 앞으로 올 것) */
+  const doneIdx=[], deckIdx=[];
+  TODO.forEach((d,i)=>{
+    const past=t>=d.at;
+    if(past && (d.st==='done'||d.st==='half')) doneIdx.push(i);
+    else deckIdx.push(i);
+  });
+  deckIdx.sort((a,b)=>{
+    const A=TODO[a],B=TODO[b];
+    const am=(t>=A.at&&A.st==='miss')?0:1, bm=(t>=B.at&&B.st==='miss')?0:1;
+    return am-bm || A.at-B.at;
+  });
+
+  const bh=s.boardH, fh=s.frontH, fy=Math.max(6,bh-fh-10);
+  /* 더미 — 최근이 앞 */
+  /* 겹침 간격·카드 높이는 글씨 배율을 따라간다 — 안 그러면 큰 글씨에서 이름이 잘린다 */
+  const fs=parseFloat(getComputedStyle(s.fr).getPropertyValue('--fs'))||1;
+  const pileH=Math.round(s.pileH*(s.pileOut?fs:1));
+  const pileStep=Math.round(s.pileStep*fs);
+  const maxOpen=s.pileOut?Math.max(1,Math.floor((fh-pileH)/pileStep)+1):0;
+  doneIdx.forEach((idx,n)=>{
+    const back=doneIdx.length-1-n;                    /* 0 = 맨 앞(최근) */
+    const e=s.cards[idx], d=TODO[idx];
+    if(s.pileOut){
+      /* 가로가 넓은 창 — 같은 더미를 화면 안에서 펼쳐 보여준다 (새 기능이 아니라 노출량).
+         ★최신이 맨 아래·맨 앞. 그래야 뒤 카드의 윗머리(이름)가 가려지지 않는다 */
+      const vis=Math.min(doneIdx.length,maxOpen);
+      const stackH=(vis-1)*pileStep+pileH;
+      const py=fy+(fh-stackH)/2;
+      e.className='card g pile'+(d.st==='half'?' half':'');
+      e.style.left=s.pad+'px';
+      e.style.top=(py+(vis-1-Math.min(back,vis-1))*pileStep)+'px';
+      e.style.width=s.pileW+'px'; e.style.height=pileH+'px';
+      e.style.opacity=back>=maxOpen?0:1;
+      e.style.transform='none'; e.style.zIndex=String(40-back);
+      e.innerHTML=back>=maxOpen?'':
+        `<div class="inn"><div class="nm">${d.k}</div>`+(back===0?`<div class="vl">${d.s}</div>`:'')+`</div>`;
+    }else{
+      const off=Math.min(back,2);
+      const py=fy+(fh-pileH)/2;
+      e.className='card pile edge'+(d.st==='half'?' half':'');
+      e.style.left=(s.peek-s.edgeW-off*6)+'px';       /* 대부분 화면 밖 — 모서리만 */
+      e.style.top=(py+off*7)+'px';
+      e.style.width=s.edgeW+'px'; e.style.height=(pileH-off*10)+'px';
+      e.style.opacity=back>2?0:(.92-back*.24);
+      e.style.transform='none'; e.style.zIndex=String(40-back);
+      e.innerHTML='';
+    }
+  });
+  /* 덱 — 맨 앞이 히어로 */
+  deckIdx.forEach((idx,n)=>{
+    const e=s.cards[idx], d=TODO[idx];
+    const miss=(t>=d.at&&d.st==='miss');
+    if(n===0){
+      e.className='card g front'+(miss?' miss':'');
+      e.style.left=s.frontL+'px'; e.style.top=fy+'px';
+      e.style.width=s.frontW+'px'; e.style.height=fh+'px';
+      e.style.opacity=1; e.style.transform='none'; e.style.zIndex='30';
+      const ti=s.sc==='compact'?30:36;
+      e.innerHTML=`<div class="inn">`+
+        `<div class="l">${miss?'놓쳤어요':'다음'}</div>`+
+        `<div class="ti" style="font-size:calc(${ti}px * var(--fs))">${d.k}</div>`+
+        `<div class="sb2">${d.sub||d.s}</div>`+
+        `<div class="go" style="padding:${s.sc==='compact'?'11px 20px':'12px 24px'};font-size:calc(${s.sc==='compact'?15:16}px * var(--fs))">`+
+        `${miss?'지금이라도':'먹었어요'}</div></div>`;
+    }else{
+      const off=Math.min(n,3);
+      e.className='card g behind';
+      e.style.left=(s.frontL+off*9)+'px';
+      e.style.top=(fy+off*9)+'px';
+      e.style.width=(s.frontW-off*18)+'px'; e.style.height=fh+'px';
+      e.style.opacity=n>3?0:(.42-off*.09);
+      e.style.transform='none'; e.style.zIndex=String(29-n);
+      e.innerHTML='';
+    }
+  });
+
+  s.pc.textContent=s.pileOut?`한 것 ${doneIdx.length}`:`← 한 것 ${doneIdx.length}`;
+  s.pc.style.opacity=doneIdx.length?'.9':'0';
+  s.sb.textContent=clockAt(t);
+  s.top.querySelector('.dl').textContent='목요일 · '+BAND(t);
+  s.top.querySelector('.wx').innerHTML=`· ${W.ico} <b>${W.n} ${W.t}</b>`;
+  s.top.querySelector('.cv').textContent=clockAt(t);
+
+}
+
+function wire(s){
+  /* 시간 이동 — 하늘 아무 데나, 그리고 시계 숫자 자체가 핸들 */
+  let id=null, sx0=0, t0=0;
+  const clockEl=s.top.querySelector('.clock');
+  const startAbs=e=>{const r=s.fr.getBoundingClientRect();s.t=cl((e.clientX-r.left)/r.width,0,.999);render(s);};
+  const bind=(node,mode)=>{
+    node.addEventListener('pointerdown',e=>{
+      id=e.pointerId; s.fr.classList.add('dragging');
+      if(mode==='abs') startAbs(e); else {sx0=e.clientX;t0=s.t;}
+      e.preventDefault(); try{node.setPointerCapture(e.pointerId);}catch(_){}} );
+    node.addEventListener('pointermove',e=>{ if(id!==e.pointerId)return;
+      if(mode==='abs') startAbs(e);
+      else {const z=s.fr.getBoundingClientRect().width/s.w||1;
+            s.t=cl(t0+(e.clientX-sx0)/z/s.w,0,.999); render(s);} });
+    const up=()=>{id=null;s.fr.classList.remove('dragging');};
+    node.addEventListener('pointerup',up); node.addEventListener('pointercancel',up);
+  };
+  bind(s.sky,'abs'); bind(clockEl,'rel');
+
+  s.fr.addEventListener('click',e=>{
+    const c=e.target.closest('.card,.pileCount'); if(!c)return;
+    c.style.filter='brightness(1.45)'; setTimeout(()=>c.style.filter='',230);});
+
+  /* 물방울 메뉴 — 원에서 방울이 갈라져 나온다 */
+  const cx=s.camCX, cy=s.h-s.camB-s.camS/2, n=s.blobs.length;
+  /* 코너에서는 축(가로·세로)까지 벌리지 않는다 — 45° 대각선을 중심으로 한 부채꼴.
+     좁힌 만큼 반경을 키워야 8개가 안 겹친다 */
+  const a0=200, a1=340, RR=s.R;
+  const colRight=cx+s.camS/2, colGap=10;
+  const place=p=>{
+    s.blobs.forEach((b,i)=>{
+      if(s.wide){
+        /* 세로 일렬 — 첫 항목이 카메라 바로 위(가장 가깝게) */
+        b.className='blob g col';
+        b.style.right=(s.w-colRight)+'px'; b.style.left='auto';
+        const h0=b.offsetHeight||48;
+        const step=h0+colGap;
+        const restTop=cy-s.camS/2-14-h0;             /* 카메라 바로 위 */
+        b.style.top=(restTop-i*step*p)+'px';
+        b.style.opacity=cl((p-.06-i*.045)/.4,0,1);
+        b.style.transform=`scale(${.88+.12*p})`;
+      }else{
+        b.className='blob g';
+        b.style.left=(cx+Math.cos((a0+(a1-a0)*(i/(n-1)))*Math.PI/180)*RR*p)+'px';
+        b.style.top=(cy+Math.sin((a0+(a1-a0)*(i/(n-1)))*Math.PI/180)*RR*p)+'px';
+        b.style.opacity=cl((p-.08)/.5,0,1);
+        b.style.transform=`scale(${.55+.45*p})`;
+      }
+      b.style.pointerEvents=p>.9?'auto':'none';
+    });
+    s.scrimC.style.opacity=p*.9; s.scrimC.style.pointerEvents=p>.9?'auto':'none';
+    s.cam.querySelector('.grab').style.opacity=(1-p)*.3;
+    s.p=p;
+  };
+  const anim=to=>{const f=s.p,t1=performance.now();
+    const step=nw=>{const u=cl((nw-t1)/320,0,1);place(f+(to-f)*(1-Math.pow(1-u,3)));if(u<1)requestAnimationFrame(step);};
+    requestAnimationFrame(step);};
+  place(0);
+  let y0=null,moved=false;
+  s.cam.addEventListener('pointerdown',e=>{y0=e.clientY;moved=false;e.preventDefault();
+    try{s.cam.setPointerCapture(e.pointerId);}catch(_){}} );
+  s.cam.addEventListener('pointermove',e=>{if(y0==null)return;
+    const zf=s.fr.getBoundingClientRect().height/s.h||1,dy=(y0-e.clientY)/zf;
+    if(Math.abs(dy)>4)moved=true; place(cl(dy/150,0,1));});
+  const end=()=>{if(y0==null)return;y0=null; anim(moved&&s.p>.45?1:0);};
+  s.cam.addEventListener('pointerup',end); s.cam.addEventListener('pointercancel',end);
+  s.scrimC.addEventListener('click',()=>anim(0));
+  s._place=place;
+}
+
+const SZ=[[390,844,'<b>390 × 844</b> · 아이폰 표준 <b style="color:#7BE0A8">(주력)</b>'],
+          [466,678,'<b>466 × 678</b> · Duo 닫힘 <b style="color:#FFD98E">(가장 빡빡)</b>'],
+          [669,951,'<b>669 × 951</b> · Duo 펼침 세로'],
+          [951,669,'<b>951 × 669</b> · Duo 펼침 가로 / 아이패드']];
+const row=document.getElementById('deck');
+const all=SZ.map(([w,h,c])=>{const cell=build(w,h,c);row.appendChild(cell);return cell.querySelector('.fr')._st;});
+const redraw=()=>all.forEach(render);
+requestAnimationFrame(redraw);
+document.querySelectorAll('[data-wx]').forEach(b=>b.onclick=()=>{WKEY=b.dataset.wx;
+  document.querySelectorAll('[data-wx]').forEach(x=>x.classList.toggle('on',x===b));redraw();});
+bBig.onclick=()=>{all.forEach(s=>s.fr.style.setProperty('--fs',1.25));
+  bBig.classList.add('on');bNorm.classList.remove('on');requestAnimationFrame(redraw);};
+bNorm.onclick=()=>{all.forEach(s=>s.fr.style.setProperty('--fs',1));
+  bNorm.classList.add('on');bBig.classList.remove('on');requestAnimationFrame(redraw);};
+bOnb.onclick=()=>{const on=document.body.dataset.onb!=='1';
+  document.body.dataset.onb=on?'1':'0'; bOnb.classList.toggle('on',on);};
+bFit.onclick=()=>{document.body.dataset.fit='1';bFit.classList.add('on');bReal.classList.remove('on');requestAnimationFrame(redraw);};
+bReal.onclick=()=>{document.body.dataset.fit='0';bReal.classList.add('on');bFit.classList.remove('on');requestAnimationFrame(redraw);};
+</script>
+</body>
+</html>
