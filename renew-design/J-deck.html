@@ -71,11 +71,14 @@ body[data-fit="1"] .fr{zoom:.5}
 .goo{position:absolute;inset:0;z-index:33;pointer-events:none}
 .blob{position:absolute;width:62px;height:62px;border-radius:50%;translate:-50% -50%;
   display:grid;place-items:center;opacity:0}
-.blob em{font-style:normal;font-size:calc(11.5px * var(--fs));font-weight:600;letter-spacing:-.02em}
+.blob em{font-style:normal;font-size:calc(10.5px * var(--fs));font-weight:600;letter-spacing:-.02em;
+  display:flex;flex-direction:column;align-items:center;gap:3px}
+.blob em i{font-style:normal;font-size:calc(19px * var(--fs));line-height:1}
 /* 코너에서는 호가 안 들어간다 — 카메라 위로 세로 일렬. 원 대신 알약이라야 8개가 선다 */
 .blob.col{border-radius:15px;width:auto;height:auto;translate:0 0;justify-items:end;
   padding:13px 18px;text-align:right}
-.blob.col em{font-size:calc(14.5px * var(--fs));font-weight:600;white-space:nowrap}
+.blob.col em{font-size:calc(14.5px * var(--fs));font-weight:600;white-space:nowrap;flex-direction:row;gap:8px}
+.blob.col em i{font-size:calc(16px * var(--fs))}
 .scrimC{position:absolute;inset:0;background:rgba(0,0,0,.5);opacity:0;z-index:32;pointer-events:none;transition:opacity .25s}
 /* 첫 실행 안내 — 상시 UI 장치를 대신한다 */
 .onb{position:absolute;inset:0;z-index:52;display:none;align-items:center;justify-content:center;
@@ -134,6 +137,17 @@ body[data-onb="1"] .onb{display:flex}
 .fr.ink .aibar .mo{background:rgba(18,32,47,.12)}
 .aibar svg{width:17px;height:17px;fill:currentColor}
 .aibar .tx{flex:1;font-size:calc(14.5px * var(--fs));opacity:.66;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* 네비 도크 — 카메라를 이고 있는 유리 바 한 장. 자르지 않는다(카메라가 위로 솟는다) */
+.dock{position:absolute;z-index:30;border-radius:24px}
+.di{position:absolute;z-index:31;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;translate:-50% -50%}
+.di .ic{font-size:calc(19px * var(--fs));line-height:1;opacity:.92}
+.di .nm{font-size:calc(10.5px * var(--fs));font-weight:600;letter-spacing:-.02em;opacity:.82}
+.di.act .nm,.di.act .ic{opacity:1}
+.di.act::before{content:'';position:absolute;inset:-6px -12px;border-radius:999px;background:rgba(255,255,255,.18)}
+.fr.ink .di.act::before{background:rgba(255,255,255,.55)}
+.railmore{position:absolute;z-index:31;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  translate:-50% -50%;font-size:16px;font-weight:700;letter-spacing:.06em}
 .cam{position:absolute;border-radius:50%;background:#fff;z-index:36;box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 5px rgba(255,255,255,.16)}
 .fr.ink .cam{box-shadow:0 10px 26px rgba(18,32,47,.3),0 0 0 1px rgba(18,32,47,.12)}
 .cam .grab{position:absolute;left:50%;top:9px;translate:-50% 0;width:17px;height:2.5px;border-radius:2px;background:#0B0D11;opacity:.3}
@@ -204,7 +218,10 @@ function skyAt(t){let i=0;while(i<KF.length-2&&t>KF[i+1].p)i++;const a=KF[i],b=K
 const clockAt=t=>{const h=t*24;return `${Math.floor(h)%24}:${String(Math.floor((h%1)*60)).padStart(2,'0')}`;};
 const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
 const MIC='<svg viewBox="0 0 24 24"><path d="M12 14.5a3.2 3.2 0 0 0 3.2-3.2V5.7a3.2 3.2 0 1 0-6.4 0v5.6a3.2 3.2 0 0 0 3.2 3.2zm5.6-3.4a.9.9 0 0 0-1.8 0 3.8 3.8 0 0 1-7.6 0 .9.9 0 0 0-1.8 0 5.6 5.6 0 0 0 4.7 5.5v2a.9.9 0 0 0 1.8 0v-2a5.6 5.6 0 0 0 4.7-5.5z"/></svg>';
-const ARC=[{s:'식사'},{s:'복약'},{s:'목표'},{s:'리포트'},{s:'가족'},{s:'운동'},{s:'달력'},{s:'설정'}];
+/* 원호 8개 = §8-C 기본값. ★앞 4개는 도크에 상시 노출되고, 끌어올리면 나머지 4개가 이어 붙는다 */
+const ARC=[{ic:'🍚',s:'식사'},{ic:'💊',s:'복약'},{ic:'🎯',s:'목표'},{ic:'📄',s:'리포트'},
+           {ic:'👪',s:'가족'},{ic:'🏃',s:'운동'},{ic:'🗓',s:'달력'},{ic:'⚙',s:'설정'}];
+const DOCK_N=4;                                     /* 도크에 나와 있는 개수 */
 let WKEY='clear';
 
 function build(w,h,cap){
@@ -229,22 +246,25 @@ function build(w,h,cap){
   const sb=el('div','sb','<span class="t"></span><span>•••• ᯤ ▯</span>'); fr.appendChild(sb);
 
   const pad=sc==='compact'?24:30, topPad=sc==='compact'?52:56;
-  const camS=sc==='compact'?58:(sc==='medium'?68:60), camB=sc==='compact'?24:30;
+  const camS=70, camB=28;                            /* ★도크 위로 18pt 솟는다 (§7-A″) */
   const aiH=sc==='compact'?50:56;
+  const DOCK_H=64, DOCK_B=16, RAIL_W=64;
   /* 더미 펼침은 compact 를 넘으면(medium·expanded) 적용.
      ★카메라를 오른쪽 끝으로 옮기고 메뉴를 세로 일렬로 바꾸는 것은 **가로로 넓은 창(expanded)만**.
      세로로 긴 창(아이패드 세로·Duo 펼침 세로)은 하단 중앙 + 호를 유지한다 — 엄지가 중앙 아래에 있다 */
   const wide=sc==='expanded';
   const oneRow=sc==='expanded';
-  const aiB=oneRow ? camB+(camS-aiH)/2 : camB+camS+12;
-  const botPad=oneRow ? camB+camS+18 : aiB+aiH+18;
+  /* expanded 는 카메라·메뉴를 우측 레일이 가져가므로 AI 바가 하단 한 줄을 혼자 쓴다 */
+  const aiB=wide ? pad : camB+camS+12;
+  const botPad=aiB+aiH+18;
   const camCX=wide ? w-pad-camS/2 : w/2;
   const edgeW=64;                                     /* 더미 카드 실제 폭 — 대부분 화면 밖 */
   const peek=sc==='compact'?17:20;                    /* 모서리로 보이는 만큼 */
   const pileOut=sc!=='compact';                       /* 더미를 화면 안에 펼친다 (medium·expanded) */
   const pileW=pileOut?(sc==='medium'?200:232):0;
   const frontL=pileOut ? pad+pileW+30 : peek+(sc==='compact'?13:16);
-  const frontW=Math.min(w-frontL-pad, sc==='compact'?9999:(sc==='medium'?450:520));
+  const railRes=wide ? RAIL_W+24 : 0;                /* 카드가 레일 앞에서 멈춘다 */
+  const frontW=Math.min(w-frontL-pad-railRes, sc==='compact'?9999:(sc==='medium'?450:520));
   const aiW=wide ? (frontL+frontW-pad) : 0;           /* 오른쪽 끝을 카드와 맞춘다 */
 
   const trail=el('div','trail','<svg><path class="full"/></svg>');
@@ -279,10 +299,41 @@ function build(w,h,cap){
     : `left:${pad}px;right:${pad}px;bottom:${aiB}px;height:${aiH}px`;
   const cam=el('div','cam','<i class="grab"></i>');
   cam.style.cssText+=`width:${camS}px;height:${camS}px;left:${camCX}px;translate:-50% 0;bottom:${camB}px`;
-  const more=el('div','more g','⋯'); more.style.cssText+=`top:${topPad+4}px;right:${pad}px`;
+  /* ── 네비 도크 ─────────────────────────────────────────────────
+     compact·medium : 하단 유리 바 한 장 + 앞 4개. 카메라가 그 위로 18pt 솟는다.
+     expanded       : 같은 바가 카메라 위로 솟아 우측 레일이 된다(좌우 정렬) + 8개 전부.  */
+  const dock=el('div','dock g'); const dis=[];
+  if(wide){
+    const PITCH=54, IH=48, MORE=52, GAP=14;
+    const camTop=h-(camB+camS);
+    const rbot=h-(camB+camS/2-17);                   /* 카메라가 레일 아래로 18pt 솟는다 */
+    const ys=ARC.map((_,i)=>camTop-GAP-IH/2-PITCH*i);
+    const rtop=ys[ARC.length-1]-IH/2-GAP-MORE;
+    dock.style.cssText+=`left:${camCX-RAIL_W/2}px;top:${rtop}px;width:${RAIL_W}px;height:${rbot-rtop}px`;
+    ARC.forEach((it,i)=>{
+      const e=el('div','di'+(i?'':' act'),`<div class="ic">${it.ic}</div><div class="nm">${it.s}</div>`);
+      e.style.cssText+=`left:${camCX}px;top:${ys[i]}px`; dis.push(e);
+    });
+    const rm=el('div','railmore','⋯'); rm.style.cssText+=`left:${camCX}px;top:${rtop+MORE/2+4}px`; dis.push(rm);
+  }else{
+    const DW=w-pad*2, lcx=camCX-pad;
+    const INSET=8, space=lcx-camS/2-14-INSET;        /* 항목 자리는 폭에서 파생한다 */
+    const s1=INSET+space*.25, s2=INSET+space*.75;
+    dock.style.cssText+=`left:${pad}px;bottom:${DOCK_B}px;width:${DW}px;height:${DOCK_H}px`;
+    [s1,s2,DW-s2,DW-s1].forEach((x,i)=>{
+      const it=ARC[i];
+      const e=el('div','di'+(i?'':' act'),`<div class="ic">${it.ic}</div><div class="nm">${it.s}</div>`);
+      e.style.cssText+=`left:${pad+x}px;bottom:${DOCK_B+DOCK_H/2}px;translate:-50% 50%`; dis.push(e);
+    });
+  }
+  fr.append(dock,...dis);
+
+  const more=el('div','more g','⋯');
+  more.style.display=wide?'none':'grid';             /* expanded 는 레일 맨 위 칸이 대신한다 */
+  more.style.cssText+=`top:${topPad+4}px;right:${pad}px`;
   const scrimC=el('div','scrimC');
   const goo=el('div','goo');
-  const blobs=ARC.map(x=>{const b=el('div','blob g'+(wide?' col':''),`<em>${x.s}</em>`);goo.appendChild(b);return b;});
+  const blobs=ARC.map(x=>{const b=el('div','blob g'+(wide?' col':''),`<em><i>${x.ic}</i>${x.s}</em>`);goo.appendChild(b);return b;});
   const onb=el('div','onb',
     '<div class="onbc g">'+
     '<div class="ot">세 가지만 알면<br>됩니다</div>'+
@@ -298,7 +349,7 @@ function build(w,h,cap){
   cell.appendChild(fr);
   const st={fr,sky,sun,moon,stars,clouds,veil,rain,snow,sb:sb.querySelector('.t'),top,cards,pc,
     w,h,sc,pad,edgeW,peek,frontL,frontW,frontH,pileH,boardH,botPad,t:.50,base:.50,
-    trail,blobs,scrimC,cam,camS,camB,p:0,pileOut,pileW,pileStep,oneRow,wide,camCX,aiW,
+    trail,blobs,scrimC,cam,camS,camB,p:0,pileOut,pileW,pileStep,oneRow,wide,camCX,aiW,dock,dis,
     R: sc==='compact'?(w<430?152:166):(sc==='medium'?206:182)};
   fr._st=st; wire(st); render(st);
   return cell;
@@ -438,30 +489,29 @@ function wire(s){
   const cx=s.camCX, cy=s.h-s.camB-s.camS/2, n=s.blobs.length;
   /* 코너에서는 축(가로·세로)까지 벌리지 않는다 — 45° 대각선을 중심으로 한 부채꼴.
      좁힌 만큼 반경을 키워야 8개가 안 겹친다 */
-  const a0=200, a1=340, RR=s.R;
-  const colRight=cx+s.camS/2, colGap=10;
+  const a0=220, a1=320, RR=s.R;   /* 4개만 펼치므로 8개 때보다 좁힌다 */
   const place=p=>{
-    s.blobs.forEach((b,i)=>{
-      if(s.wide){
-        /* 세로 일렬 — 첫 항목이 카메라 바로 위(가장 가깝게) */
-        b.className='blob g col';
-        b.style.right=(s.w-colRight)+'px'; b.style.left='auto';
-        const h0=b.offsetHeight||48;
-        const step=h0+colGap;
-        const restTop=cy-s.camS/2-14-h0;             /* 카메라 바로 위 */
-        b.style.top=(restTop-i*step*p)+'px';
-        b.style.opacity=cl((p-.06-i*.045)/.4,0,1);
-        b.style.transform=`scale(${.88+.12*p})`;
-      }else{
-        b.className='blob g';
-        b.style.left=(cx+Math.cos((a0+(a1-a0)*(i/(n-1)))*Math.PI/180)*RR*p)+'px';
-        b.style.top=(cy+Math.sin((a0+(a1-a0)*(i/(n-1)))*Math.PI/180)*RR*p)+'px';
-        b.style.opacity=cl((p-.08)/.5,0,1);
-        b.style.transform=`scale(${.55+.45*p})`;
-      }
+    /* expanded — 8개가 레일에 상시 노출되므로 펼칠 것이 없다. 카메라는 탭 전용 */
+    if(s.wide){
+      s.blobs.forEach(b=>{b.style.opacity=0;b.style.pointerEvents='none';});
+      s.scrimC.style.opacity=0; s.scrimC.style.pointerEvents='none'; s.p=0; return;
+    }
+    /* ★앞 DOCK_N 개는 이미 도크에 나와 있다 — 나머지만 위로 이어 붙는다 */
+    s.blobs.slice(0,DOCK_N).forEach(b=>{b.style.opacity=0;b.style.pointerEvents='none';});
+    const rest=s.blobs.slice(DOCK_N), m=rest.length;
+    rest.forEach((b,i)=>{
+      b.className='blob g';
+      const a=(a0+(a1-a0)*(m>1?i/(m-1):.5))*Math.PI/180;
+      b.style.left=(cx+Math.cos(a)*RR*p)+'px';
+      b.style.top=(cy+Math.sin(a)*RR*p)+'px';
+      b.style.opacity=cl((p-.08)/.5,0,1);
+      b.style.transform=`scale(${.55+.45*p})`;
       b.style.pointerEvents=p>.9?'auto':'none';
     });
     s.scrimC.style.opacity=p*.9; s.scrimC.style.pointerEvents=p>.9?'auto':'none';
+    /* 열려도 도크는 밝게 둔다 — 원호와 같은 목록이고, 1번 자리가 흔들리면 안 된다 */
+    s.dock.style.zIndex=p>.02?34:30;
+    s.dis.forEach(e=>e.style.zIndex=p>.02?35:31);
     s.cam.querySelector('.grab').style.opacity=(1-p)*.3;
     s.p=p;
   };
@@ -470,7 +520,8 @@ function wire(s){
     requestAnimationFrame(step);};
   place(0);
   let y0=null,moved=false;
-  s.cam.addEventListener('pointerdown',e=>{y0=e.clientY;moved=false;e.preventDefault();
+  s.cam.querySelector('.grab').style.display=s.wide?'none':'';
+  s.cam.addEventListener('pointerdown',e=>{if(s.wide)return;y0=e.clientY;moved=false;e.preventDefault();
     try{s.cam.setPointerCapture(e.pointerId);}catch(_){}} );
   s.cam.addEventListener('pointermove',e=>{if(y0==null)return;
     const zf=s.fr.getBoundingClientRect().height/s.h||1,dy=(y0-e.clientY)/zf;
