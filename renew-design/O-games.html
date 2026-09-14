@@ -1,0 +1,986 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Healthya — 두뇌 게임</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+:root{--f:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#08090C;color:#fff;font-family:var(--f);-webkit-font-smoothing:antialiased;padding:60px 44px 120px}
+.head{max-width:1040px}
+.k{font-size:13px;color:rgba(255,255,255,.42)}
+h1{font-size:46px;font-weight:800;letter-spacing:-.045em;line-height:1.06;margin-top:14px}
+.bar-top{display:flex;align-items:center;gap:8px;margin-top:26px;flex-wrap:wrap}
+.btn-t{font-size:13px;font-weight:600;padding:8px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.22);
+  background:rgba(255,255,255,.06);color:#fff;cursor:pointer;font-family:var(--f)}
+.btn-t.on{background:#fff;color:#0B0D11;border-color:#fff}
+.sep{width:1px;height:20px;background:rgba(255,255,255,.16);margin:0 5px}
+.lbl{font-size:11.5px;color:rgba(255,255,255,.34);letter-spacing:.05em}
+#tRange{width:190px;accent-color:#fff;cursor:ew-resize}
+#tVal{font-size:13px;font-weight:600;color:rgba(255,255,255,.7);width:52px}
+.deckrow{display:flex;gap:26px;align-items:flex-start;margin-top:28px;overflow-x:auto;padding:6px 4px 20px}
+.deckrow::-webkit-scrollbar{height:8px}.deckrow::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:4px}
+body[data-fit="1"] .fr{zoom:.5}
+.cell{flex:none;position:relative}
+.cap{font-size:12.5px;color:rgba(255,255,255,.44);margin-bottom:10px}
+.cap b{color:rgba(255,255,255,.86);font-weight:600}
+.cap .ok{color:#7BE0A8}
+
+.fr{position:relative;overflow:hidden;border-radius:42px;background:#0B0D11;color:#fff;flex:none;--fs:1;
+  box-shadow:0 26px 70px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.09);touch-action:none;user-select:none;
+  --half:#FFC86B;--miss:#FF8E8E}
+.fr.ink{color:#12202F}
+.sky{position:absolute;inset:0;transition:filter .5s ease}
+.sun,.moon{position:absolute;border-radius:50%;pointer-events:none;translate:-50% -50%;transition:opacity .4s}
+.sun{width:96px;height:96px;background:radial-gradient(circle,#FFFCF0 0%,#FFF2CE 26%,rgba(255,222,160,.5) 46%,rgba(255,205,130,0) 72%)}
+.moon{width:58px;height:58px;background:radial-gradient(circle,#FBFCFF 0%,#DCE6FA 40%,rgba(190,208,244,.32) 62%,rgba(170,192,238,0) 78%)}
+.stars{position:absolute;inset:0;pointer-events:none;transition:opacity .5s}
+.stars i{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff;animation:tw 3.4s ease-in-out infinite}
+@keyframes tw{0%,100%{opacity:.2}50%{opacity:.9}}
+.clouds{position:absolute;inset:-10% -20%;pointer-events:none;opacity:0;transition:opacity .6s,filter .5s}
+.clouds b{position:absolute;border-radius:50%;filter:blur(22px);animation:drift linear infinite}
+@keyframes drift{from{transform:translateX(-8%)}to{transform:translateX(8%)}}
+/* ★메시 — 시간 × 날씨로 도는 색 덩이 4개 (§4-A) */
+.mesh{position:absolute;inset:-14%;pointer-events:none;filter:blur(2px)}
+.veil{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s,background .6s}
+/* ── 흐린 날 ★ ───────────────────────────────────────────────
+   흐림은 「구름이 몇 개 떠 있는 하늘」이 아니라 **덮인 하늘**이다.
+   개별 덩이가 보이면 그 순간 흐림이 아니라 「구름 조금」이 된다.
+     1) 구름 천장 두 겹 — 높은 층은 넓고 느리게, 낮은 층은 길고 빠르게
+     2) 천장 그라데이션 — 위가 어둡다(덮개의 아랫면), 지평선 쪽은 살짝 탁하게 밝다
+     3) 해는 점이 아니라 **천장 뒤에서 번지는 밝은 자리** */
+.deck{position:absolute;inset:-22%;pointer-events:none;opacity:0;transition:opacity .7s}
+.deck i{position:absolute;inset:0;display:block}
+.deck .hi{filter:blur(18px);
+  background:
+    radial-gradient(58% 30% at 18% 12%, rgba(255,246,232,.60), transparent 72%),
+    radial-gradient(52% 26% at 74% 22%, rgba(236,240,255,.52), transparent 74%),
+    radial-gradient(66% 30% at 44% 40%, rgba(104,96,146,.44), transparent 74%),
+    radial-gradient(72% 32% at 84% 56%, rgba(78,102,124,.40), transparent 76%),
+    radial-gradient(80% 34% at 24% 68%, rgba(140,116,120,.32), transparent 76%),
+    radial-gradient(60% 26% at 62% 88%, rgba(240,236,252,.44), transparent 74%);
+  animation:deckA 54s ease-in-out infinite alternate}
+.deck .lo{filter:blur(11px);
+  background:
+    radial-gradient(58% 13% at 26% 34%, rgba(255,250,238,.46), transparent 76%),
+    radial-gradient(66% 11% at 76% 52%, rgba(84,80,128,.36), transparent 78%),
+    radial-gradient(50% 10% at 44% 18%, rgba(238,244,255,.38), transparent 78%),
+    radial-gradient(62% 12% at 58% 72%, rgba(74,104,116,.30), transparent 78%);
+  animation:deckB 25s linear infinite alternate}
+@keyframes deckA{from{transform:translate3d(-4%,-1.5%,0) scale(1.04)}to{transform:translate3d(4%,1.5%,0) scale(1.1)}}
+@keyframes deckB{from{transform:translate3d(-9%,1%,0)}to{transform:translate3d(9%,-1%,0)}}
+.fr[data-wx="cloudy"] .deck{opacity:1}
+.fr[data-wx="rain"] .deck{opacity:.9;filter:brightness(1.02) saturate(1.06)}
+.fr[data-wx="snow"] .deck{opacity:.62;filter:brightness(1.06)}
+/* 덮개의 아랫면 — 위가 어둡고 지평선이 탁하게 밝다 */
+.ceil{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .7s;
+  background:linear-gradient(180deg,rgba(84,78,122,.48),rgba(110,108,150,.26) 30%,
+             rgba(146,142,158,.14) 58%,rgba(186,158,132,.26) 100%)}
+.fr[data-wx="cloudy"] .ceil{opacity:1}
+.fr[data-wx="rain"] .ceil{opacity:1;background:linear-gradient(180deg,rgba(120,134,186,.28),rgba(150,166,206,.10) 34%,
+             rgba(186,200,226,0) 58%,rgba(206,192,182,.18) 100%)}
+.fr[data-wx="snow"] .ceil{opacity:1;background:linear-gradient(180deg,rgba(146,158,206,.30),rgba(178,192,226,.10) 34%,
+             rgba(206,214,238,0) 58%,rgba(226,212,206,.18) 100%)}
+/* 해는 천장 뒤에서 번진다 — 가장자리 없는 밝은 자리 */
+/* ★흐림·비·눈에도 해는 떠 있다. 점이 아니라 **천장 뒤에서 번지는 밝은 자리**로 */
+.fr[data-wx="cloudy"] .sun,.fr[data-wx="snow"] .sun,.fr[data-wx="rain"] .sun{
+  width:250px;height:250px;filter:blur(22px)}
+.glow{position:absolute;border-radius:50%;translate:-50% -50%;pointer-events:none;opacity:0;transition:opacity .6s;
+  width:560px;height:560px;mix-blend-mode:screen;
+  background:radial-gradient(circle,rgba(255,248,226,.74) 0%,rgba(255,242,208,.36) 30%,
+             rgba(255,238,204,.14) 52%,rgba(255,236,200,0) 70%)}
+.fr[data-wx="cloudy"] .glow,.fr[data-wx="snow"] .glow{opacity:1}
+.fr[data-wx="rain"] .glow{opacity:.8}
+.fr[data-wx="clear"] .glow{opacity:.55}   /* 맑은 날도 해 쪽 하늘이 더 밝다 */
+/* ★해의 자리를 짚는 옅은 테두리 — UI 마커가 아니라 **구름 사이로 비치는 해무리**.
+   안쪽 링 = 해의 원반, 바깥 링 = 무리. 둘 다 아주 옅게 */
+.sunring{position:absolute;translate:-50% -50%;pointer-events:none;opacity:0;transition:opacity .6s;
+  width:104px;height:104px;border-radius:50%;
+  border:1.2px solid rgba(255,250,234,.62);
+  box-shadow:0 0 0 1px rgba(255,248,226,.16) inset, 0 0 22px rgba(255,246,220,.26)}
+.sunring::after{content:'';position:absolute;inset:-52px;border-radius:50%;
+  border:1px solid rgba(255,248,228,.22)}
+
+/* ── 비 ★ (입자 방식, 2026-09-14 재작성) ─────────────────────
+   시트(repeating-gradient + mask)는 아무리 끊어도 **같은 길이·같은 간격의 격자**라 티가 난다.
+   눈이 잘 나온 이유가 입자였으므로 비도 입자로 간다 — 76개 빗줄기가 각자
+   **길이·위치·속도·기울기·흐림**을 따로 가진다. 양 끝이 녹는 그라데이션 = 모션 블러. */
+.rain{position:absolute;inset:-14% -10% 0;pointer-events:none;opacity:0;transition:opacity .5s}
+.rain i{position:absolute;top:-16%;display:block;border-radius:2px;
+  background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 42%,rgba(255,255,255,.15) 78%,rgba(255,255,255,0));
+  animation:rfall linear infinite}
+/* ★가로 이동은 px 로. %로 두면 요소 자기 폭(1~3px) 기준이라 사실상 안 움직인다 —
+   그러면 기울어진 빗줄기가 수직으로 떨어지는 이상한 그림이 된다 */
+@keyframes rfall{from{transform:translate3d(0,0,0)}to{transform:translate3d(-116px,128vh,0)}}
+/* 빗발 — 밀도가 가로로 흐른다(소나기 결) */
+.rain .gust{position:absolute;inset:-10%;
+  background:radial-gradient(120% 60% at 20% 40%,rgba(255,255,255,.09),transparent 60%),
+             radial-gradient(90% 70% at 78% 60%,rgba(255,255,255,.06),transparent 62%);
+  animation:gust 9s ease-in-out infinite alternate}
+@keyframes gust{from{transform:translateX(-6%)}to{transform:translateX(6%)}}
+
+/* ★유리창에 맺힌 물방울 — 「비 오는 느낌」의 8할은 사실 이것이다.
+   카드보다 뒤(z 16)에 둬서 하늘에만 맺히게 한다 — UI 위로 올리면 가독성을 깬다 */
+.drops{position:absolute;inset:0;pointer-events:none;z-index:16;opacity:0;transition:opacity .6s}
+.fr[data-wx="rain"] .drops{opacity:1}
+.drops b{position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 34% 30%, rgba(255,255,255,.62), rgba(255,255,255,.14) 44%, rgba(255,255,255,.03) 70%);
+  box-shadow:inset -1px -1.5px 2px rgba(255,255,255,.5), 0 1px 2px rgba(10,18,36,.18)}
+.drops b.run{animation:run linear infinite}
+@keyframes run{0%{transform:translateY(0);opacity:.9}88%{opacity:.9}100%{transform:translateY(190px);opacity:0}}
+
+/* 번개 — 화면 전체 흰 섬광은 촌스럽다. 위쪽만, 짧게, 드물게 */
+.bolt{position:absolute;inset:0;pointer-events:none;opacity:0;
+  background:linear-gradient(180deg,rgba(214,230,255,.55),rgba(186,210,255,.14) 26%,transparent 46%)}
+.fr[data-wx="rain"] .bolt{animation:bolt 13s linear infinite}
+@keyframes bolt{0%,93%{opacity:0}93.6%{opacity:.55}94.4%{opacity:.04}95%{opacity:.34}96%{opacity:0}100%{opacity:0}}
+/* ── 눈 ★ ────────────────────────────────────────────────────
+   낙하만 시키면 「떨어지는 흰 점」이다. 진짜 눈은 **흔들리며** 내리고,
+   가까운 눈은 크고 흐릿(초점 밖)하고 먼 눈은 작고 선명하다. */
+.snow{position:absolute;inset:-8% 0 0;pointer-events:none;opacity:0;transition:opacity .5s}
+.snow i{position:absolute;top:-6%;display:block;animation:fall linear infinite}
+.snow b{display:block;border-radius:50%;
+  background:radial-gradient(circle at 42% 38%, rgba(255,255,255,.98), rgba(255,255,255,.55) 46%, rgba(255,255,255,0) 72%);
+  animation:sway ease-in-out infinite alternate}
+@keyframes fall{from{transform:translateY(0)}to{transform:translateY(112vh)}}
+@keyframes sway{from{transform:translateX(-9px) rotate(-14deg)}to{transform:translateX(9px) rotate(14deg)}}
+.scrim{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,0) 24%,rgba(0,0,0,0) 48%,rgba(0,0,0,.4) 100%)}
+.fr[data-wx="rain"] .scrim{background:linear-gradient(180deg,rgba(6,10,26,.5) 0%,rgba(6,10,26,.12) 30%,rgba(0,0,0,0) 52%,rgba(0,0,0,.44) 100%)}
+.fr[data-wx="snow"] .scrim{background:linear-gradient(180deg,rgba(120,160,210,.22) 0%,rgba(0,0,0,0) 34%,rgba(0,0,0,0) 52%,rgba(0,0,0,.34) 100%)}
+.isl{position:absolute;top:12px;left:50%;translate:-50% 0;width:112px;height:32px;border-radius:20px;background:#000;z-index:60}
+.sb{position:absolute;top:20px;left:0;right:0;display:flex;justify-content:space-between;padding:0 30px;font-size:14px;font-weight:600;z-index:55;opacity:.92}
+.hi{position:absolute;bottom:9px;left:50%;translate:-50% 0;width:128px;height:5px;border-radius:3px;background:currentColor;opacity:.28;z-index:60}
+.g{background:rgba(255,255,255,.16);backdrop-filter:blur(22px) saturate(1.35);-webkit-backdrop-filter:blur(22px) saturate(1.35);border:1px solid rgba(255,255,255,.3)}
+.fr.ink .g{background:rgba(255,255,255,.5);border-color:rgba(255,255,255,.75)}
+
+
+/* ── 유리 재질 ★ ──────────────────────────────────────────────
+   평면 사각형 + 반투명이 아니라, 「두께가 있는 유리판」으로 만든다.
+     1) 테두리를 그라데이션으로 — 광원 쪽만 밝다
+     2) 윗면 하이라이트 + 아랫면 접지 그림자 = 두께
+     3) 테두리 바로 안쪽 굴절 띠 = 빛이 모서리에서 꺾인다
+     4) 아주 옅은 그레인 = 「면」이 아니라 「재질」
+     5) ★하이라이트 각도(--gAng)가 **해를 따라 돈다** — 아침엔 왼쪽 위, 저녁엔 오른쪽 위 */
+.fr[data-glass="2"] .g{
+  background:
+    linear-gradient(var(--gAng,180deg), rgba(255,255,255,.22), rgba(255,255,255,.06) 46%, rgba(255,255,255,.13));
+  backdrop-filter:blur(26px) saturate(1.7) brightness(1.03);
+  -webkit-backdrop-filter:blur(26px) saturate(1.7) brightness(1.03);
+  border:none;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.26),
+    inset 0 -1px 0 rgba(16,26,44,.10),
+    var(--shX,0px) 24px 52px -16px rgba(10,18,36,.46),
+    calc(var(--shX,0px) * .35) 4px 12px -6px rgba(10,18,36,.28);
+}
+.fr.ink[data-glass="2"] .g{
+  background:
+    linear-gradient(var(--gAng,180deg), rgba(255,255,255,.46), rgba(255,255,255,.26) 46%, rgba(255,255,255,.36));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.6),
+    inset 0 -1px 0 rgba(18,32,47,.08),
+    0 22px 46px -18px rgba(18,32,47,.30), 0 4px 10px -6px rgba(18,32,47,.16);
+}
+/* 테두리 = 광원 쪽만 밝은 2px 링 */
+.fr[data-glass="2"] .g::before{
+  content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;pointer-events:none;z-index:3;
+  background:linear-gradient(var(--gAng,180deg),
+    rgba(255,255,255,.58), rgba(255,255,255,.14) 26%, rgba(255,255,255,.02) 56%, rgba(255,255,255,.24));
+  -webkit-mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000,#000) content-box,linear-gradient(#000,#000);
+  mask-composite:exclude;
+}
+.fr.ink[data-glass="2"] .g::before{
+  background:linear-gradient(var(--gAng,180deg),
+    rgba(255,255,255,.82), rgba(255,255,255,.40) 26%, rgba(255,255,255,.14) 56%, rgba(255,255,255,.46));
+}
+/* ★상단 광택 밴드 + 아래 두께 컷 — 유리판의 「윗면」과 「단면」 */
+.fr[data-glass="2"] .g::after{
+  content:'';position:absolute;inset:1.6px;border-radius:inherit;pointer-events:none;z-index:2;
+  background:linear-gradient(var(--gAng,180deg),
+    rgba(255,255,255,.38) 0%, rgba(255,255,255,.14) 18%, rgba(255,255,255,.03) 34%, rgba(255,255,255,0) 48%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 -1.5px 0 rgba(255,255,255,.18),
+    inset 0 -12px 20px -12px rgba(14,22,40,.30);
+}
+.fr.ink[data-glass="2"] .g::after{
+  background:linear-gradient(var(--gAng,180deg),
+    rgba(255,255,255,.58) 0%, rgba(255,255,255,.26) 18%, rgba(255,255,255,.06) 34%, rgba(255,255,255,0) 48%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255,255,255,.22),
+    inset 0 -1.5px 0 rgba(255,255,255,.34),
+    inset 0 -12px 20px -14px rgba(18,32,47,.18);
+}
+/* 그레인 — 밴딩을 없애고 「재질」로 만든다 */
+.fr[data-glass="2"]::after{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:45;opacity:.042;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='120' height='120' filter='url(%23n)'/></svg>");
+}
+/* 카메라 원도 같은 재질감 — 흰색은 유지(§9-B) */
+.fr[data-glass="2"] .cam{
+  background:linear-gradient(var(--gAng,180deg),#fff,#F3F6FB 58%,#E9EEF7);
+  box-shadow:var(--shX,0px) 12px 30px rgba(0,0,0,.34),0 0 0 5px rgba(255,255,255,.16),
+    inset 0 1px 0 rgba(255,255,255,.6),inset 0 -2px 3px rgba(18,32,47,.10);
+}
+.fr.ink[data-glass="2"] .cam{
+  box-shadow:0 12px 26px rgba(18,32,47,.28),0 0 0 1px rgba(18,32,47,.10),
+    inset 0 1px 0 #fff,inset 0 -2px 3px rgba(18,32,47,.10);
+}
+
+/* ★유리는 하루 종일 동일하다 (2026-09-14 결정) — 낮이라고 하얘지지도, 어두워지지도 않는다.
+   잉크 반전은 유리 표면에서 폐기. 글씨는 늘 흰색이고, 맨 하늘 위 글씨만 그림자로 받친다. */
+/* 유리는 안 건드린다. 대신 **글씨에 그림자**를 얹어 밝은 하늘에서의 대비를 살린다 */
+.fr[data-glass="2"] .card,.fr[data-glass="2"] .di,.fr[data-glass="2"] .aibar,
+.fr[data-glass="2"] .chat,.fr[data-glass="2"] .blob,.fr[data-glass="2"] .more{
+  text-shadow:0 1px 2px rgba(8,16,34,.45)}
+.fr[data-glass="2"] .top{text-shadow:0 1px 4px rgba(8,16,34,.5),0 0 18px rgba(8,16,34,.28)}
+.fr[data-glass="2"] .sb{text-shadow:0 1px 3px rgba(8,16,34,.40)}
+/* ══════════════════════════════════════════════════════════════════
+   게임 = 하위 화면 문법의 **특수형**
+   1) 게임만 **하단 3층을 내린다**. 취향이 아니라 기하다 — 390×844 에서
+      AI 바·도크·카메라(178pt)를 두면 판+패드가 들어갈 자리가 498pt 뿐이라
+      스도쿠 한 판도 안 들어간다. 나가는 길은 좌상단 ‹ 하나.
+   2) 제목은 **한 줄**로 접는다(하위 화면의 두 줄 제목 블록 → ‹ · 이름 · ⓘ).
+   3) ★**판도 유리다.** 앱에 재질은 하나뿐이다 — 게임판만 종이로 두면 게임만 다른 앱처럼 보인다.
+      대신 판 위 글씨는 **흰색 + 그림자**로 가고(§9-C), 게임 중에는 하늘을 한 겹 더 가라앉혀
+      숫자가 흔들리지 않게 받친다.
+   4) ★**색은 판 안에서만.** 게임 정체성 색(하늘/앰버/틸/로즈 코너 글로우)은 폐기 —
+      색의 자리는 하늘이다. 공 7색은 장식이 아니라 **게임의 내용**이라 그대로 산다.
+   5) ★**판이 필요 없는 게임은 판을 두지 않는다** — 색깔 정렬·버블은 하늘 위에서 바로 논다.
+      허전함을 채우던 **풍경 실루엣은 은퇴**한다. 하늘이 그 자리를 대신한다.
+   ══════════════════════════════════════════════════════════════════ */
+/* 게임 중엔 하늘이 한 겹 가라앉는다 — 판 옆에서 움직이는 것이 시선을 끈다 */
+.calm{position:absolute;inset:0;pointer-events:none;z-index:15;background:rgba(10,16,32,.22)}
+.fr[data-play="1"] .rain,.fr[data-play="1"] .snow,.fr[data-play="1"] .drops{filter:opacity(.5)}
+
+.ghead{position:absolute;z-index:24;display:flex;align-items:center;gap:12px;height:38px}
+.ghead .gt{font-size:calc(20px * var(--fs));font-weight:700;letter-spacing:-.035em}
+.hbtn{position:absolute;z-index:24;border-radius:50%;display:grid;place-items:center;
+  font-size:calc(17px * var(--fs));font-weight:700;width:38px;height:38px;cursor:pointer}
+.hbtn.rel{position:relative}
+
+/* HUD — 시간 압박·실패 신호 없음(시니어 원칙 유지). [난이도 | 진행 | 남은 것] */
+.hud{position:absolute;z-index:20;border-radius:18px;display:flex;align-items:center}
+.hud .z{flex:1;display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 0}
+.hud .gz{display:flex;align-items:center;gap:8px}
+.hud .gz span{font-size:calc(13px * var(--fs));font-weight:700;letter-spacing:-.03em}
+.hud .c2{font-size:calc(11.5px * var(--fs));opacity:.7}
+.hud .v3{font-size:calc(15.5px * var(--fs));font-weight:700;letter-spacing:-.03em}
+.hud .dv{width:1px;height:32px;background:rgba(255,255,255,.22)}
+.gauge{width:calc(72px * var(--fs));height:8px;border-radius:4px;background:rgba(255,255,255,.24);overflow:hidden}
+.gauge i{display:block;height:100%;border-radius:4px;background:rgba(255,255,255,.88)}
+
+/* ★판 — 종이 한 장 */
+/* ★판도 유리 — 홈·하위 화면과 **같은 재질**. 글씨는 흰색, 구분은 색이 아니라 **밝기와 색조**로.
+   (밝은 하늘 위 유리에서 작은 숫자는 이 앱에서 가장 어려운 읽기다 — §9-A 의 「정오 흰 글씨
+   대비」 실기기 확인 항목에 **스도쿠 판**을 반드시 포함할 것) */
+.panel{position:absolute;z-index:19;border-radius:20px;overflow:hidden;
+  --ink:rgba(255,255,255,.74);--mine:#fff;--bad:#FF8E8E;--lock:#EBD2FB}
+.panel.dim{filter:blur(2px);opacity:.4;transform:scale(.96)}
+.faded{opacity:.36}
+
+/* 스도쿠 */
+.sud{position:absolute;inset:0;display:grid}
+.sud b{display:flex;align-items:center;justify-content:center;font-weight:600;color:var(--ink);
+  border-right:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)}
+.sud b.r3{border-right:2.5px solid rgba(255,255,255,.5)}
+.sud b.b3{border-bottom:2.5px solid rgba(255,255,255,.5)}
+.sud b.e{border-right:none}.sud b.s{border-bottom:none}
+/* ★구분은 **밝기**로 한다 — 색조로 하면 하루 중 어느 하늘에서는 반드시 묻힌다
+   (연한 파랑은 낮 하늘에, 금색은 노을에 씻긴다). 주어진 수 = 눌린 흰색 / 내가 넣은 수 = 흰색 굵게 */
+.sud b.mine{color:var(--mine);font-weight:800}
+.sud b.bad{color:#fff;background:rgba(255,104,104,.34);box-shadow:inset 0 0 0 1px rgba(255,142,142,.7)}
+.sud b.unit{background:rgba(255,255,255,.09)}
+.sud b.sel{background:rgba(255,255,255,.26);box-shadow:inset 0 0 0 2px rgba(255,255,255,.9)}
+
+/* 낱말퀴즈 */
+.xw{position:absolute;inset:0;display:grid;padding:10px}
+.xw b{position:relative;display:flex;align-items:center;justify-content:center;font-weight:700;
+  border-radius:6px;color:rgba(255,255,255,.96)}
+.xw b{font-weight:700}
+.xw b.on{background:rgba(255,255,255,.16);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.xw b.act{background:rgba(255,255,255,.3);box-shadow:inset 0 0 0 2px rgba(255,255,255,.92)}
+/* 다 맞힌 낱말 = 연보라로 잠긴다(앱 문구 그대로) — 유리 위라 면은 옅게, 글씨를 밝게 */
+.xw b.lock{background:rgba(186,132,238,.34);color:var(--lock);box-shadow:inset 0 0 0 1px rgba(214,172,248,.6)}
+.xw b i{position:absolute;left:4px;top:2px;font-style:normal;font-weight:700;opacity:.62;
+  font-size:calc(9.5px * var(--fs))}
+
+/* 단서 바 · 도구 · 패드 — 전부 유리(홈의 AI 바와 같은 재질) */
+.clue{position:absolute;z-index:21;border-radius:18px;display:flex;align-items:center;gap:4px;padding:0 4px}
+.clue .ar{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;
+  font-size:calc(17px * var(--fs));opacity:.8}
+.clue .cx{flex:1;min-width:0;padding:0 2px}
+.clue .cn{font-size:calc(11.5px * var(--fs));opacity:.68;font-weight:600}
+.clue .cq{font-size:calc(15.5px * var(--fs));font-weight:600;letter-spacing:-.025em;margin-top:3px;line-height:1.3}
+.tools{position:absolute;z-index:21;display:flex;gap:9px}
+.tool{flex:1;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  font-size:calc(12.5px * var(--fs));font-weight:600;cursor:pointer}
+.tool i{font-style:normal;font-size:calc(17px * var(--fs));line-height:1}
+.tool.off{opacity:.42}
+.pad{position:absolute;z-index:21;display:flex;flex-direction:column;gap:8px}
+.prow{display:flex;gap:8px;justify-content:center}
+.key{flex:1;border-radius:14px;display:grid;place-items:center;font-weight:700;cursor:pointer;
+  font-size:calc(21px * var(--fs));letter-spacing:-.03em}
+.key.sm{font-size:calc(17px * var(--fs));font-weight:600}
+.key.wide{flex:1.4}
+.key.used{opacity:.34}
+
+/* 색깔 정렬 — 유리 병에 불투명 공. ★공 외곽선 0.3 은 **색약 불변식**이자 하늘 위 가독의 조건 */
+.tubes{position:absolute;z-index:19;display:flex;flex-direction:column;align-items:center;gap:24px}
+.trow{display:flex;gap:16px;justify-content:center}
+.tube{border-radius:8px 8px 22px 22px;display:flex;flex-direction:column-reverse;
+  align-items:center;justify-content:flex-start;padding:7px 5px;gap:4px;position:relative}
+.tube.sel{transform:translateY(-12px)}
+.ball{border-radius:50%;border:1px solid rgba(0,0,0,.3);position:relative;flex:none}
+.ball::after{content:'';position:absolute;left:18%;top:14%;width:34%;height:24%;border-radius:50%;
+  background:rgba(255,255,255,.45)}
+.tube .lift{position:absolute;left:50%;translate:-50% 0}
+
+/* 솔리테어 — 판(유리)은 두지 않는다. 카드가 화면을 채우므로 바탕은 하늘 그대로.
+   ★카드는 **살짝 투명**하다 — 하늘이 옅게 비쳐 카드가 이 세계의 물건이 된다.
+   ★다만 **블러는 얹지 않는다**: 카드가 52장이라 `backdrop-filter` 를 걸면 블러 층이
+   52개가 된다(블러 예산 = 화면당 유리 한 장 + 하단 3층, §16-B). **알파만**으로 비친다. */
+.sol{position:absolute;z-index:19}
+.sol .sl{position:absolute;border-radius:5px;border:1.5px dashed rgba(255,255,255,.42);
+  background:rgba(255,255,255,.07)}
+.sol .cd{position:absolute;border-radius:5px;overflow:hidden;
+  box-shadow:var(--shX,0px) 3px 7px -2px rgba(10,18,36,.5),0 0 0 .5px rgba(10,18,36,.28)}
+.sol .cd.f{background:rgba(250,249,245,.78);color:#17202C;display:flex;align-items:flex-start;gap:1px;
+  padding:3px 4px;line-height:1;font-weight:800;letter-spacing:-.04em;
+  box-shadow:inset 0 0 0 .5px rgba(255,255,255,.55),
+    var(--shX,0px) 3px 7px -2px rgba(10,18,36,.42),0 0 0 .5px rgba(10,18,36,.22)}
+.sol .cd.f.red{color:#BE2B2B}
+.sol .cd.f b{font-weight:800}
+.sol .cd.f u{text-decoration:none}
+.sol .cd.f s{position:absolute;right:3px;bottom:1px;text-decoration:none;opacity:.22;line-height:1}
+/* 뒷면 — 공 7색과 겹치지 않는 자기 색(판 안의 색, §16-F) */
+.sol .cd.b{background:
+  repeating-linear-gradient(135deg,rgba(255,255,255,.13) 0 2px,transparent 2px 5px),
+  linear-gradient(150deg,rgba(78,95,153,.76),rgba(42,53,102,.8));
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.36),var(--shX,0px) 3px 7px -2px rgba(10,18,36,.42)}
+
+/* 완성 — ★보상은 하늘이다. 판이 뒤로 물러나고 하늘이 앞으로 나온다 */
+/* ★완성 카드만 **짙은 면 + 흰 글씨** — 판이 유리라 그 위에 또 유리를 얹으면 **층이 안 읽힌다**
+   (유리 위의 유리 금지, §16-B). 홈의 「말풍선만 밝은 면」과 같은 종류의 예외다 */
+.win{position:absolute;z-index:40;border-radius:26px;padding:26px 24px 22px;text-align:center;
+  background:rgba(14,22,42,.72);backdrop-filter:blur(24px) saturate(1.3);
+  -webkit-backdrop-filter:blur(24px) saturate(1.3);border:1px solid rgba(255,255,255,.18);
+  box-shadow:0 24px 60px -18px rgba(6,10,22,.6)}
+.win .wt{font-size:calc(25px * var(--fs));font-weight:800;letter-spacing:-.04em}
+.win .wb{font-size:calc(15px * var(--fs));opacity:.78;margin-top:9px}
+.win .wr{display:flex;gap:9px;margin-top:20px}
+.win .wr .btn{flex:1;border-radius:999px;padding:13px 0;font-weight:600;font-size:calc(15px * var(--fs));
+  background:rgba(255,255,255,.24);border:1px solid rgba(255,255,255,.36);cursor:pointer}
+.win .wr .btn.gh{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2)}
+.winglow{position:absolute;z-index:39;border-radius:50%;translate:-50% -50%;pointer-events:none;
+  width:520px;height:520px;mix-blend-mode:screen;
+  background:radial-gradient(circle,rgba(255,246,220,.62) 0%,rgba(255,240,206,.24) 40%,rgba(255,238,200,0) 70%)}
+
+/* 허브 — 여기는 **하위 화면 그대로**다(하단 3층 유지). 예외는 게임 안에서만 */
+.title{position:absolute;z-index:22}
+.title .ti{font-weight:800;letter-spacing:-.045em;line-height:1.04}
+.title .su{font-size:calc(15px * var(--fs));opacity:.76;margin-top:7px;letter-spacing:-.02em}
+.sheet{position:absolute;z-index:18;border-radius:28px;overflow:hidden;display:flex;flex-direction:column}
+.sbody{flex:1;min-height:0;overflow-y:auto;display:flex;flex-direction:column;gap:14px;padding:16px 16px 18px}
+.sbody::-webkit-scrollbar{width:4px}
+.sbody::-webkit-scrollbar-thumb{background:rgba(255,255,255,.28);border-radius:2px}
+.sbody>*{flex:none}
+.tile{border-radius:18px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);padding:14px 15px}
+.sh{font-size:calc(12.5px * var(--fs));font-weight:600;opacity:.62;margin:2px 3px -5px}
+.l{font-size:calc(13px * var(--fs));opacity:.74}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.gcard{border-radius:18px;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);
+  padding:13px 13px 14px;cursor:pointer}
+.gcard .mo{height:calc(56px * var(--fs));display:flex;align-items:center;justify-content:center}
+.gcard .gn{font-size:calc(15px * var(--fs));font-weight:700;letter-spacing:-.03em;margin-top:9px}
+.gcard .gs{font-size:calc(12px * var(--fs));opacity:.64;margin-top:3px}
+.mo svg{overflow:visible}
+.mo .ln{stroke:currentColor;fill:none;stroke-width:1.6;opacity:.75}
+.mo .fl{fill:currentColor;opacity:.2}
+.rsm{display:flex;align-items:center;gap:12px}
+.rsm .rl{flex:1;min-width:0}
+.rsm .rt{font-size:calc(15px * var(--fs));font-weight:600;letter-spacing:-.025em}
+.rsm .rs{font-size:calc(12.5px * var(--fs));opacity:.66;margin-top:3px}
+.rsm .go{flex:none;border-radius:999px;padding:9px 16px;font-size:calc(13.5px * var(--fs));font-weight:600;
+  background:rgba(255,255,255,.22);border:1px solid rgba(255,255,255,.34)}
+/* ★게임 구역에는 하단 3층이 없다 — AI 바·도크·카메라 스타일 자체를 두지 않는다 */
+.fr[data-glass="2"] .hud,.fr[data-glass="2"] .clue,.fr[data-glass="2"] .tool,.fr[data-glass="2"] .key,
+.fr[data-glass="2"] .sheet,.fr[data-glass="2"] .hbtn,
+.fr[data-glass="2"] .shoot,.fr[data-glass="2"] .win{text-shadow:0 1px 2px rgba(8,16,34,.45)}
+.fr[data-glass="2"] .ghead .gt,.fr[data-glass="2"] .title{text-shadow:0 1px 4px rgba(8,16,34,.5),0 0 18px rgba(8,16,34,.28)}
+.fr[data-glass="2"] .panel{text-shadow:0 1px 2px rgba(8,16,34,.5)}
+</style>
+</head>
+<body data-fit="1" data-glass="2">
+
+<header class="head">
+  <div class="k">Healthya · 일반 모드 · 두뇌 게임</div>
+  <h1>하늘 위에<br>놓인 게임판</h1>
+  <div class="bar-top">
+    <span class="lbl">날씨</span>
+    <button class="btn-t on" data-wx="clear">맑음</button>
+    <button class="btn-t" data-wx="cloudy">흐림</button>
+    <button class="btn-t" data-wx="rain">비</button>
+    <button class="btn-t" data-wx="snow">눈</button>
+    <span class="sep"></span>
+    <span class="lbl">시각</span>
+    <input type="range" id="tRange" min="0" max="999" value="530" />
+    <span id="tVal">12:43</span>
+    <span class="sep"></span>
+    <button class="btn-t on" id="bNorm">기본 글씨</button>
+    <button class="btn-t" id="bBig">큰 글씨 1.25×</button>
+    <span class="sep"></span>
+    <button class="btn-t on" id="bFit">한눈에</button>
+    <button class="btn-t" id="bReal">1:1</button>
+  </div>
+</header>
+
+<div class="deckrow" id="deck"></div>
+
+<script>
+const KF=[{p:0,c:['#0A0F24','#121838','#20264C']},{p:.20,c:['#2E4A7D','#7FA3CE','#E8C9A6']},
+ {p:.40,c:['#2F7DD1','#6FB4EA','#C3E2F7']},{p:.62,c:['#3B6FA8','#9E86A8','#E8B287']},
+ {p:.80,c:['#24304F','#6B5175','#DFA477']},{p:.92,c:['#0D1330','#161E42','#2A2F58']},
+ {p:1,c:['#0A0F24','#121838','#20264C']}];
+const BAND=t=>t<.20?'새벽':t<.44?'아침':t<.62?'낮':t<.86?'저녁':'밤';
+const WX={
+ clear :{n:'맑음',ico:'☀',t:'22°',cloud:0,  veil:'rgba(0,0,0,0)',        vo:0,sat:1,  rain:0,snow:0,sun:1},
+ cloudy:{n:'흐림',ico:'☁',t:'18°',cloud:.85,veil:'rgba(150,146,182,.34)',vo:1,sat:.58,rain:0,snow:0,sun:.16,deck:1,dim:.94},
+ rain  :{n:'비',ico:'🌧',t:'16°',cloud:1,  veil:'rgba(150,168,206,.26)', vo:1,sat:.60,rain:1,snow:0,sun:.12,deck:1,dim:.97},
+ snow  :{n:'눈',ico:'❄',t:'-1°',cloud:.85,veil:'rgba(216,230,252,.24)',vo:1,sat:.60,rain:0,snow:1,sun:.18,deck:1,dim:.97},
+};
+/* st: done(한 것) / half(일부) / miss(지나갔는데 안 함) / todo(앞으로) */
+const TODO=[
+ {k:'수면',    s:'7시간 12분', sub:'', at:.14, st:'done'},
+ {k:'물',      s:'5잔',        sub:'하루 8잔 중', at:.29, st:'done'},
+ {k:'혈압약',  s:'먹었어요',   sub:'아침 · 식사 후', at:.34, st:'done'},
+ {k:'혈압',    s:'122/78',     sub:'', at:.37, st:'done'},
+ {k:'작심삼일',s:'9일차',      sub:'오늘 절반', at:.44, st:'half'},
+ {k:'점심',    s:'비빔밥 620', sub:'', at:.53, st:'done'},
+ {k:'걷기',    s:'3,120보',    sub:'목표 4,000보', at:.61, st:'done'},
+ {k:'오후 약', s:'',           sub:'2시 · 식사 후', at:.68, st:'miss'},
+ {k:'저녁 약', s:'',           sub:'밤 9시 · 식사 후', at:.88, st:'todo'},
+];
+const cl=(v,a,b)=>Math.max(a,Math.min(b,v));
+const MESHKF=[
+ /* ★한 국면에 **네 색**을 둔다. 덩이를 작게 잡아 서로 뭉개지지 않게 —
+    크게 잡으면 겹쳐서 평균색 한 덩어리가 된다(3덩이 큰 반경으로 해 봤더니 그랬다).
+    구성은 늘 [뜨거운 / 차가운 / 금 / 네 번째 대비색]. 시간은 이 사각형을 돌린다. */
+ {p:0,   c:[[240, 60,176,.70],[ 60, 56,238,.70],[255,146, 64,.46],[ 60,214,214,.44]]}, /* 밤 */
+ {p:.20, c:[[255,102,158,.74],[ 76, 96,255,.66],[255,188,104,.62],[176, 96,255,.56]]}, /* 새벽 */
+ {p:.40, c:[[255, 88,168,.66],[ 58,150,255,.70],[255,212, 84,.62],[188, 84,255,.52]]}, /* 낮 */
+ {p:.62, c:[[255, 72,136,.72],[100, 84,255,.66],[255,186, 52,.66],[ 56,206,226,.50]]}, /* 오후 */
+ {p:.80, c:[[255, 62, 96,.78],[152, 44,214,.70],[255,146, 48,.70],[ 70, 96,240,.54]]}, /* 저녁 */
+ {p:.92, c:[[246, 62,184,.72],[ 54, 50,232,.70],[255,138, 64,.48],[ 66,206,220,.44]]}, /* 밤 */
+ {p:1,   c:[[240, 60,176,.70],[ 60, 56,238,.70],[255,146, 64,.46],[ 60,214,214,.44]]},
+];
+/* ★날씨가 메시를 물들이는 방식 (2026-09-14 개정)
+   **하나의 회색으로 lerp 하면 네 색이 같은 색으로 평균나 버린다**(실제로 그랬다).
+   인상파의 흐린 날처럼 — **채도만 내리고 색상 구분은 살린다**:
+     1) desat = 각 색을 **자기 자신의 명도** 쪽으로 당긴다 → 색상(hue)은 유지, 채도만 하락
+     2) mul  = 전체에 곱하기 틴트 → 날씨의 기온감(비는 남색, 눈은 청백)
+     3) warm/cool = 짝수 덩이는 따뜻하게, 홀수는 차갑게 → **보색 구조가 남는다**
+        (따뜻한 빛 / 차가운 그림자 — 흐린 날에 색이 살아 있는 이유) */
+const WXMESH={
+ clear :{de:0,   mul:[1,1,1],          a:1.00, wc:0},
+ cloudy:{de:.40, mul:[.90,.93,1.00],   a:.82,  wc:.10},
+ rain  :{de:.36, mul:[.94,.98,1.12],   a:.92,  wc:.12},
+ snow  :{de:.34, mul:[1.00,1.04,1.12], a:.88,  wc:.08},
+};
+const WARM=[1.10,1.00,.86], COOL=[.88,.97,1.14];
+const lum=c=>.2126*c[0]+.7152*c[1]+.0722*c[2];
+function meshAt(t,wk){
+  let i=0; while(i<MESHKF.length-2 && t>MESHKF[i+1].p) i++;
+  const a=MESHKF[i],b=MESHKF[i+1],u=cl((t-a.p)/(b.p-a.p||1),0,1);
+  const W=WXMESH[wk];
+  return a.c.map((c,j)=>{
+    let q=c.map((v,k)=>v+(b.c[j][k]-v)*u);
+    const L=lum(q);
+    q=[q[0]+(L-q[0])*W.de, q[1]+(L-q[1])*W.de, q[2]+(L-q[2])*W.de, q[3]];
+    const bias=(j%2===0)?WARM:COOL;
+    q=[q[0]*W.mul[0]*(1+(bias[0]-1)*W.wc*10)/1,
+       q[1]*W.mul[1]*(1+(bias[1]-1)*W.wc*10),
+       q[2]*W.mul[2]*(1+(bias[2]-1)*W.wc*10), q[3]];
+    return `rgba(${cl(q[0]|0,0,255)},${cl(q[1]|0,0,255)},${cl(q[2]|0,0,255)},${(q[3]*W.a).toFixed(3)})`;
+  });
+}
+
+const hx=h=>[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];
+const lc=(a,b,u)=>{const A=hx(a),B=hx(b);return `rgb(${A.map((v,i)=>Math.round(v+(B[i]-v)*u)).join(',')})`;};
+function skyAt(t){let i=0;while(i<KF.length-2&&t>KF[i+1].p)i++;const a=KF[i],b=KF[i+1],u=cl((t-a.p)/(b.p-a.p||1),0,1);
+  return a.c.map((c,j)=>lc(c,b.c[j],u));}
+const clockAt=t=>{const h=t*24;return `${Math.floor(h)%24}:${String(Math.floor((h%1)*60)).padStart(2,'0')}`;};
+const el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e;};
+
+/* ── 데이터 ─────────────────────────────────────────────────────── */
+const BALL=['#0072B2','#E69F00','#CC79A7','#F0E442','#56B4E9','#1F1F1F','#F2F2F2'];
+const SUD_GIVEN=['53..7....','6..195...','.98....6.','8...6...3','4..8.3..1','7...2...6','.6....28.','...419..5','....8..79'];
+const SUD_MINE={'02':'4','03':'6','06':'9','07':'1','08':'2','11':'7','12':'2','16':'3','17':'4',
+                '20':'1','23':'3','24':'4','31':'5','32':'9','33':'7','41':'9','42':'6'};
+const SUD_BAD=['41'];                       /* 같은 상자 안 9 중복 — 조용히 표시만 */
+const SUD_SEL=[5,1];
+/* 낱말퀴즈 — 아침밥(세로1)·산책로(세로2)·비빔밥(가로3)·민들레(가로4)·레몬(세로5) */
+/* 비타민(가로1)·민들레꽃(세로2)·아침밥(가로3)·꽃병(가로4)·비빔밥(세로1)
+   ★전부 교차한다 — 고아 슬롯 0(엔진의 풀 게이트와 같은 조건) */
+const XW=[['','','비','타','민',''],
+          ['','','빔','','들',''],
+          ['아','침','밥','','레',''],
+          ['','','','','꽃','병']];
+const XW_LOCK=['02','12','22','20','21'];   /* 다 맞힌 낱말 = 보라 잠금 */
+const XW_TYPED=['03'];                      /* 방금 넣은 글자 */
+const XW_ACT=['03','04'];                   /* 지금 고른 슬롯 */
+const XW_NUM={'02':'1','04':'2','20':'3','34':'4'};
+const KO_KEYS=[['ㅂ','ㅈ','ㄷ','ㄱ','ㅅ','ㅛ','ㅕ','ㅑ','ㅐ','ㅔ'],
+               ['ㅁ','ㄴ','ㅇ','ㄹ','ㅎ','ㅗ','ㅓ','ㅏ','ㅣ'],
+               ['⇧','ㅋ','ㅌ','ㅊ','ㅍ','ㅠ','ㅜ','ㅡ','⌫']];
+const TUBES=[[0,0,3,1],[2,4,2,6],[1,5,0,3],[6,6,1,2],[3,4,5,5],[4,1,6,0],[5,3,2,4],[],[]];
+const TUBE_SEL=2;
+/* 솔리테어(클론다이크) — 보통 난이도 진행 중.
+   파운데이션 ♠5·♥4·♦3·♣2 = 14장 → 남은 38장(27%). 더미 10장, 뒷면 13장.
+   태블로 앞면은 전부 규칙에 맞는 시퀀스다(검정↔빨강 교대, 한 끗씩 내림) */
+const SOL={
+  stock:true,
+  waste:['♣9','♦Q','♠7'],                       /* 보통 = 한 번에 3장 */
+  found:['♠5','♥4','♦3','♣2'],
+  cols:[{down:0,up:[]},                          /* 빈 열 — K 만 놓을 수 있다 */
+        {down:1,up:['♠K','♥Q','♠J','♦10']},
+        {down:2,up:['♦9','♣8','♥7']},
+        {down:1,up:['♠Q','♥J']},
+        {down:3,up:['♥10','♠9','♦8']},
+        {down:2,up:['♣7','♦6']},
+        {down:4,up:['♦J','♣10','♥9','♠8']}],
+};
+
+const MOTIF={
+ sudoku:'<svg width="46" height="46" viewBox="0 0 46 46"><rect class="ln" x="1" y="1" width="44" height="44" rx="5"/>'+
+   '<path class="ln" d="M15.7 1v44M30.3 1v44M1 15.7h44M1 30.3h44"/>'+
+   '<rect class="fl" x="2" y="17" width="12" height="12" rx="2"/><rect class="fl" x="31" y="2" width="13" height="13" rx="2"/>'+
+   '<rect class="fl" x="17" y="32" width="12" height="12" rx="2"/></svg>',
+ crossword:'<svg width="46" height="46" viewBox="0 0 46 46">'+
+   '<rect class="ln" x="1" y="12" width="44" height="11" rx="2"/><path class="ln" d="M12 12v11M23 12v11M34 12v11"/>'+
+   '<rect class="ln" x="12" y="1" width="11" height="44" rx="2"/><path class="ln" d="M12 34h11"/>'+
+   '<rect class="fl" x="12" y="12" width="11" height="11"/><rect class="fl" x="12" y="34" width="11" height="11"/>'+
+   '<rect class="fl" x="34" y="12" width="11" height="11"/></svg>',
+ sort:'<svg width="46" height="46" viewBox="0 0 46 46">'+
+   '<path class="ln" d="M9 6v27a6 6 0 0 0 12 0V6M25 6v27a6 6 0 0 0 12 0V6"/>'+
+   '<circle cx="15" cy="30" r="4.6" fill="#0072B2"/><circle cx="15" cy="20" r="4.6" fill="#E69F00"/>'+
+   '<circle cx="31" cy="30" r="4.6" fill="#F0E442"/><circle cx="31" cy="20" r="4.6" fill="#0072B2"/>'+
+   '<circle cx="31" cy="10" r="4.6" fill="#CC79A7"/></svg>',
+ solitaire:'<svg width="46" height="46" viewBox="0 0 46 46">'+
+   '<g transform="rotate(-14 12 26)"><rect class="ln" x="2" y="10" width="21" height="29" rx="3" fill="rgba(255,255,255,.5)"/></g>'+
+   '<g transform="rotate(-4 20 24)"><rect class="ln" x="11" y="7" width="21" height="29" rx="3" fill="rgba(255,255,255,.72)"/></g>'+
+   '<rect class="ln" x="22" y="6" width="21" height="29" rx="3" fill="#F8F7F3"/>'+
+   '<text x="25" y="17" font-size="9" font-weight="800" fill="#C53030" font-family="sans-serif">K</text>'+
+   '<text x="29" y="31" font-size="12" fill="#C53030" font-family="sans-serif">♥</text></svg>',
+};
+const CATALOG=[
+ {id:'sudoku',   n:'스도쿠',            t:'6~10분'},
+ {id:'crossword',n:'가로세로 낱말퀴즈', t:'15~25분'},
+ {id:'sort',     n:'색깔 정렬',         t:'4~7분'},
+ {id:'solitaire',n:'솔리테어',          t:'6~12분'},
+];
+
+const ball=(c,sz)=>`<i class="ball" style="width:${sz}px;height:${sz}px;background:${BALL[c]}"></i>`;
+
+
+function makeSky(fr){
+  const sky=el('div','sky'),stars=el('div','stars');
+  for(let i=0;i<9;i++){const s=el('i');s.style.cssText=`left:${6+i*10.5}%;top:${4+(i%4)*6}%;animation-delay:${i*.37}s`;stars.appendChild(s);}
+  const sun=el('div','sun'),moon=el('div','moon'); sky.append(stars,sun,moon);
+  const glow=el('div','glow');                       /* 천장 위에 얹는다(아래 append 순서) */
+  const sunring=el('div','sunring');
+  const clouds=el('div','clouds');
+  [[6,10,190,86,26],[38,4,240,104,34],[64,16,200,78,30],[18,26,170,66,38],[78,30,160,60,22],[48,22,150,58,42]]
+    .forEach(([x,y,cw,ch,dur])=>{const b=el('b');
+      b.style.cssText=`left:${x}%;top:${y}%;width:${cw}px;height:${ch}px;animation-duration:${dur}s;`+
+        `background:radial-gradient(circle at 40% 45%,rgba(255,255,255,.92),rgba(232,238,248,.55) 55%,rgba(210,220,235,0) 74%)`;
+      clouds.appendChild(b);});
+  const veil=el('div','veil');
+  /* 비 — 3티어 76개. 근경은 길고 굵고 빠르고 흐리다 */
+  const rain=el('div','rain');
+  const RT=[{n:72,w:1.0,h:[14,10],o:.30,b:0,   d:[1.45,.45]},
+            {n:44,w:1.6,h:[28,18],o:.48,b:.35,d:[.95,.28]},
+            {n:16,w:2.8,h:[52,30],o:.62,b:1.3, d:[.58,.16]}];
+  let rk=0;
+  RT.forEach(T=>{
+    for(let i=0;i<T.n;i++,rk++){
+      const st=el('i'), r1=(rk*37%101)/101, r2=(rk*61%97)/97, r3=(rk*23%89)/89;
+      st.style.cssText=`left:${(r1*106-3).toFixed(1)}%;width:${T.w}px;height:${(T.h[0]+r2*T.h[1]).toFixed(0)}px;`+
+        `opacity:${(T.o*(.7+r3*.5)).toFixed(2)};filter:blur(${T.b}px);`+
+        `transform-origin:50% 0;rotate:${(5.4+r3*1.4).toFixed(1)}deg;`+
+        `animation-duration:${(T.d[0]+r2*T.d[1]).toFixed(2)}s;animation-delay:${(-r1*2.2).toFixed(2)}s`;
+      rain.appendChild(st);
+    }
+  });
+  rain.appendChild(el('div','gust'));
+  /* 유리창 물방울 — 크기·위치를 흩고, 몇 개만 흘러내린다 */
+  const drops=el('div','drops');
+  for(let i=0;i<15;i++){
+    const d=document.createElement('b');
+    const sz=3+(i%5)*2.6, run=(i%5===0);
+    if(run) d.className='run';
+    d.style.cssText=`left:${(i*13.7+5)%94}%;top:${(i*17.3+7)%78}%;width:${sz}px;height:${(sz*1.12).toFixed(1)}px;`+
+      `opacity:${.45+(i%4)*.14}`+(run?`;animation-duration:${5.5+(i%3)*2.4}s;animation-delay:${-i*1.7}s`:'');
+    drops.appendChild(d);
+  }
+  /* 눈 — 낙하(track) × 흔들림(flake) 2중. 3티어 깊이로 근경은 크고 흐리고 빠르다 */
+  const snow=el('div','snow');
+  for(let i=0;i<46;i++){
+    const tier=i%3, sz=[2.6,4.6,7.6][tier], bl=[0,.7,2.0][tier];
+    const track=el('i'), flake=document.createElement('b');
+    flake.style.cssText=`width:${sz}px;height:${sz}px;filter:blur(${bl}px);`+
+      `animation-duration:${(1.6+(i%7)*.35).toFixed(2)}s;animation-delay:${-i*.29}s`;
+    track.style.cssText=`left:${(i*2.17+1)%99}%;opacity:${[.5,.72,.92][tier]};`+
+      `animation-duration:${([13,9.5,6.5][tier]+(i%5)*1.1).toFixed(1)}s;animation-delay:${-i*.52}s`;
+    track.appendChild(flake); snow.appendChild(track);
+  }
+  const mesh=el('div','mesh');
+  const deck=el('div','deck','<i class="hi"></i><i class="lo"></i>');
+  fr.append(sky,mesh,deck,el('div','ceil'),glow,sunring,clouds,veil,rain,el('div','bolt'),snow,drops,el('div','scrim'),el('div','isl'));
+  return {sky,mesh,sun,moon,stars,clouds,veil,rain,snow,glow,sunring};
+}
+function paintSky(s){
+  const t=s.t,c=skyAt(t),W=WX[WKEY];
+  s.sky.style.background=`linear-gradient(180deg,${c[0]} 0%,${c[1]} 48%,${c[2]} 100%)`;
+  s.sky.style.filter=`saturate(${(W.sat*1.4).toFixed(2)}) contrast(1.04) brightness(${W.dim||1})`;
+  /* ★메시 — 시간 × 날씨. 한 국면에 네 색, 덩이는 작게(§4-A) */
+  const mc=meshAt(t,WKEY);
+  s.mesh.style.background=
+    `radial-gradient(42% 32% at 15% 16%, ${mc[0]} 0%, transparent 64%),`+
+    `radial-gradient(40% 34% at 87% 27%, ${mc[1]} 0%, transparent 62%),`+
+    `radial-gradient(46% 34% at 26% 74%, ${mc[2]} 0%, transparent 66%),`+
+    `radial-gradient(44% 32% at 80% 88%, ${mc[3]} 0%, transparent 64%)`;
+  s.fr.dataset.wx=WKEY;
+  const dl=cl(Math.sin(Math.PI*cl((t-.16)/.72,0,1)),0,1);
+  s.clouds.style.opacity=W.cloud*(W.deck?.22:1);
+  s.clouds.style.filter=`brightness(${(.26+.74*dl).toFixed(2)}) contrast(${(1+W.cloud*.55).toFixed(2)})`;
+  s.clouds.style.mixBlendMode=dl>.35?'screen':'normal';
+  s.veil.style.background=W.veil; s.veil.style.opacity=W.vo;
+  s.rain.style.opacity=W.rain; s.snow.style.opacity=W.snow;
+  /* ★잉크 반전 폐기 (2026-09-14, §9-A 개정). 유리는 시각과 무관하게 같은 값이고 글씨는 늘 흰색이다.
+     밝은 하늘에서의 대비는 유리를 바꾸는 대신 **글씨 그림자**가 받는다(§9-C). */
+  s.stars.style.opacity=(t<.16||t>.86?.95:(t<.24||t>.78?.4:0))*(1-W.cloud*.9);
+  const shine=t>.19&&t<.83, sx=8+t*84, sy=26-Math.sin(Math.PI*t)*14;
+  s.sun.style.cssText=`left:${sx}%;top:${sy}%;opacity:${shine?W.sun:0}`;
+  s.glow.style.left=sx+'%'; s.glow.style.top=sy+'%';   /* 구름 뒤 밝은 자리는 해를 따라간다 */
+  /* 해무리 링 — 낮에만. 밤엔 달이 이미 자리를 짚는다 */
+  s.sunring.style.cssText=`left:${sx}%;top:${sy}%;opacity:${shine?(W.deck?.74:.48):0}`;
+  /* ★유리 하이라이트가 광원(해·달)을 따라 돈다 — 왼쪽 위 135° → 정수리 180° → 오른쪽 위 225° */
+  const sunN=cl((sx-8)/84,0,1);
+  s.fr.style.setProperty('--gAng', (135+sunN*90).toFixed(1)+'deg');
+  /* ★그림자는 해 반대쪽으로 눕는다 — 아침엔 오른쪽, 저녁엔 왼쪽.
+     별도 UI 없이 **빛의 방향**만으로 해의 위치가 읽힌다 */
+  s.fr.style.setProperty('--shX', ((.5-sunN)*30).toFixed(1)+'px');
+  s.moon.style.cssText=`left:${sx}%;top:${sy}%;opacity:${shine?0:.95*(1-W.cloud*.8)}`;
+}
+
+/* ── 판 그리기 ──────────────────────────────────────────────────── */
+const SUD_SOLVED=['534678912','672195348','198342567','859761423','426853791',
+                  '713924856','961537284','287419635','345286179'];
+function sudokuHTML(size,full){
+  const c=size/9; let h='';
+  for(let r=0;r<9;r++) for(let q=0;q<9;q++){
+    const k=`${r}${q}`, g=SUD_GIVEN[r][q], m=full?SUD_SOLVED[r][q]:SUD_MINE[k];
+    const v=g!=='.'?g:(m||'');
+    const cls=['','r3'][q%3===2&&q!==8?1:0]||'';
+    const cls2=(r%3===2&&r!==8)?'b3':'';
+    const edge=(q===8?'e':'')+' '+(r===8?'s':'');
+    const sel=!full&&(r===SUD_SEL[0]&&q===SUD_SEL[1]);
+    const unit=!full&&!sel&&(r===SUD_SEL[0]||q===SUD_SEL[1]||
+      (Math.floor(r/3)===Math.floor(SUD_SEL[0]/3)&&Math.floor(q/3)===Math.floor(SUD_SEL[1]/3)));
+    const bad=!full&&SUD_BAD.includes(k);
+    h+=`<b class="${cls} ${cls2} ${edge} ${g==='.'&&m?(bad?'bad':'mine'):''} ${sel?'sel':''} ${unit?'unit':''}"
+         style="font-size:calc(${(c*0.5).toFixed(1)}px * var(--fs))">${v}</b>`;
+  }
+  return `<div class="sud" style="grid-template-columns:repeat(9,${c}px);grid-template-rows:repeat(9,${c}px)">${h}</div>`;
+}
+function crosswordHTML(cw,ch){
+  let h='';
+  for(let r=0;r<XW.length;r++) for(let q=0;q<XW[0].length;q++){
+    const k=`${r}${q}`, ch2=XW[r][q];
+    if(!ch2){ h+='<b></b>'; continue; }
+    const lock=XW_LOCK.includes(k), act=XW_ACT.includes(k), typed=XW_TYPED.includes(k);
+    const show=lock||typed?ch2:'';
+    h+=`<b class="on ${lock?'lock':''} ${act?'act':''}" style="font-size:calc(${(cw*0.46).toFixed(1)}px * var(--fs));`+
+       `${typed?'color:var(--mine);font-weight:800':''}">`+
+       `${XW_NUM[k]?`<i>${XW_NUM[k]}</i>`:''}${show}</b>`;
+  }
+  return `<div class="xw" style="grid-template-columns:repeat(${XW[0].length},1fr);`+
+         `grid-template-rows:repeat(${XW.length},1fr);gap:4px">${h}</div>`;
+}
+function tubesHTML(bw){
+  const bs=Math.round(bw*.62), tw=bw, th=Math.round(bs*5+22);
+  const row=(arr,off)=>`<div class="trow">`+arr.map((t,i)=>{
+    const sel=(i+off===TUBE_SEL);
+    return `<div class="tube g ${sel?'sel':''}" style="width:${tw}px;height:${th}px">`+
+      (sel&&t.length?`<i class="ball lift" style="width:${bs}px;height:${bs}px;background:${BALL[t[t.length-1]]};top:-${bs+10}px"></i>`:'')+
+      t.slice(0,sel?t.length-1:t.length).map(c=>ball(c,bs)).join('')+`</div>`;
+  }).join('')+`</div>`;
+  return `<div class="tubes">${row(TUBES.slice(0,5),0)}${row(TUBES.slice(5),5)}</div>`;
+}
+/* ★앱 `solitaire-layout.ts` 의 비율을 그대로 쓴다 — 카드 폭·간격·겹침이 실제와 같아야
+   "이 판이 화면에 들어가는가" 를 시안으로 판단할 수 있다 */
+function solitaireHTML(boardW){
+  const cw=boardW/(7+8*0.09), gap=cw*0.09, ch=cw*1.4;
+  const colX=i=>gap+i*(cw+gap);
+  const tableauY=ch+ch*0.22, fdStep=ch*0.13, fuStep=ch*0.26, fan=cw*0.26;
+  const box=(x,y)=>`left:${x.toFixed(1)}px;top:${y.toFixed(1)}px;width:${cw.toFixed(1)}px;height:${ch.toFixed(1)}px`;
+  const slot=(x,y)=>`<i class="sl" style="${box(x,y)}"></i>`;
+  const back=(x,y)=>`<i class="cd b" style="${box(x,y)}"></i>`;
+  const face=(c,x,y)=>{
+    const suit=c[0], rank=c.slice(1), red=(suit==='♥'||suit==='♦');
+    return `<i class="cd f${red?' red':''}" style="${box(x,y)};font-size:calc(${(cw*.34).toFixed(1)}px * var(--fs))">`+
+      `<b>${rank}</b><u>${suit}</u><s style="font-size:${(cw*.5).toFixed(1)}px">${suit}</s></i>`;
+  };
+  let h=slot(colX(0),0)+(SOL.stock?back(colX(0),0):'');
+  SOL.waste.forEach((c,i)=>{h+=face(c,colX(1)+i*fan,0);});
+  SOL.found.forEach((c,i)=>{const x=colX(3+i); h+=slot(x,0)+(c?face(c,x,0):'');});
+  SOL.cols.forEach((col,i)=>{
+    const x=colX(i); let y=tableauY;
+    if(!col.down&&!col.up.length){h+=slot(x,y);return;}
+    for(let d=0;d<col.down;d++){h+=back(x,y);y+=fdStep;}
+    col.up.forEach(c=>{h+=face(c,x,y);y+=fuStep;});
+  });
+  const deep=Math.max(...SOL.cols.map(c=>c.down*fdStep+Math.max(0,c.up.length-1)*fuStep));
+  return {html:h,boardH:tableauY+deep+ch};
+}
+
+/* ── 프레임 ─────────────────────────────────────────────────────── */
+function build(key,w,h,cap){
+  const G=SCREENS[key];
+  const sc=w<600?'compact':(w<840?'medium':'expanded');
+  const land=w>h;
+  const cell=el('div','cell'); cell.appendChild(el('div','cap',cap));
+  const fr=el('div','fr'); fr.style.width=w+'px'; fr.style.height=h+'px'; fr.dataset.glass='2';
+  const sk=makeSky(fr);
+  if(!G.hub){ fr.dataset.play='1';
+    /* ★완성하면 가라앉혀 뒀던 하늘이 앞으로 나온다 — 보상은 하늘이다 */
+    if(!G.win) fr.appendChild(el('div','calm')); }
+  const sb=el('div','sb','<span class="t"></span><span>•••• ᯤ ▯</span>'); fr.appendChild(sb);
+  const pad=sc==='compact'?24:30, topPad=sc==='compact'?52:56;
+  const st={fr,...sk,sb:sb.querySelector('.t'),w,h,sc,pad,topPad,t:.53,hub:!!G.hub};
+
+  if(G.hub){ layoutHub(fr,st,G); } else { layoutGame(fr,st,G,land); }
+  cell.appendChild(fr); fr._st=st; render(st);
+  return cell;
+}
+
+/* ★★게임 허브도 **하단이 비어 있다** (2026-09-14 사용자 결정).
+   도크가 없는 건 게임이 도크 8개에 없어서고(말할 칸이 없다), **AI 바와 카메라까지 뺀 건**
+   게임 구역 전체를 하나로 보기 때문이다 — 게임 허브에서 사진을 찍거나 말을 걸 일이 없다.
+   덕분에 **깜빡임이 사라진다**: 허브에선 있다가 판에 들어가면 사라지는 대신,
+   게임에 들어갈 때 한 번 내려가고 ‹ 로 나올 때 한 번 돌아온다.
+   → **게임 구역(허브 + 판)은 하단 3층이 통째로 없다.** 나가는 길은 좌상단 ‹ 하나. */
+function layoutHub(fr,s,G){
+  const {w,h,pad,topPad,sc}=s;
+  const botPad=30;                                   /* 하단이 비었으니 시트가 더 내려간다 */
+  const back=el('div','hbtn g','‹'); back.style.cssText+=`left:${pad}px;top:${topPad}px`;
+  /* 우상단은 그 화면의 동작 — ⋯ 서랍은 홈 전용이다(§16-B) */
+  const act=el('div','hbtn g','ⓘ'); act.style.cssText+=`right:${pad}px;top:${topPad}px`;
+  const title=el('div','title',`<div class="ti" style="font-size:calc(30px * var(--fs))">두뇌 게임</div>`+
+    `<div class="su">오늘도 두뇌 운동해요</div>`);
+  title.style.cssText+=`left:${pad}px;right:${pad}px;top:${topPad+52}px`;
+  const cards=CATALOG.map(c=>`<div class="gcard"><div class="mo">${MOTIF[c.id]}</div>`+
+    `<div class="gn">${c.n}</div><div class="gs">${c.t}</div></div>`).join('');
+  /* ★카탈로그가 **주인공**(런처 대형 카드), 이어하기는 **맨 아래 보조** —
+     진행 중인 판이 있을 때만 나온다. 위에 두면 "새로 고르는 화면"이 아니라
+     "하던 것 확인하는 화면"이 된다 */
+  const sheet=el('div','sheet g',
+    `<div class="sbody">`+
+    `<div class="sh">새 게임</div><div class="g2">${cards}</div>`+
+    `<div class="sh">이어서 하기</div>`+
+    `<div class="tile rsm"><div class="rl"><div class="rt">스도쿠 · 보통</div>`+
+      `<div class="rs">34칸 남음</div></div><div class="go">이어하기</div></div>`+
+    `</div>`);
+  fr.append(back,act,title,sheet,el('div','hi'));
+  s.sheet=sheet; s.botPad=botPad;
+}
+
+/* 게임 = 하단 3층을 내린 전체 화면 */
+function layoutGame(fr,s,G,land){
+  const {w,h,pad,topPad}=s;
+  const back=el('div','hbtn g','‹'); back.style.cssText+=`left:${pad}px;top:${topPad}px`;
+  const info=el('div','hbtn g','ⓘ'); info.style.cssText+=`right:${pad}px;top:${topPad}px`;
+  const head=el('div','ghead',`<div class="gt">${G.title}</div>`);
+  head.style.cssText+=`left:${pad+50}px;top:${topPad}px`;
+  fr.append(back,info,head);
+
+  const top=topPad+38+18, bot=h-30;
+  const col=land?Math.round(w*.42):w-pad*2;
+  const rightX=pad+col+28, rightW=w-rightX-pad;
+  const hudW=land?rightW:col, hudX=land?rightX:pad;
+  const hud=el('div','hud g',
+    `<div class="z"><div class="c2">난이도</div><div class="v3">${G.diff}</div></div><div class="dv"></div>`+
+    (G.gauge!=null
+      ? `<div class="z"><div class="c2">진행</div><div class="gz"><div class="gauge">`+
+        `<i style="width:${G.gauge}%"></i></div><span>${G.gauge}%</span></div></div>`
+      : `<div class="z"><div class="c2">색</div><div class="v3">${G.colors}</div></div>`)+
+    `<div class="dv"></div><div class="z"><div class="c2">${G.remCap}</div><div class="v3">${G.rem}</div></div>`);
+  hud.style.cssText+=`left:${hudX}px;width:${hudW}px;top:${top}px;height:56px`;
+  fr.appendChild(hud);
+  s.play=true;
+  G.body(fr,s,{top,bot,col,rightX,rightW,land});
+  fr.appendChild(el('div','hi'));
+}
+
+const toolsHTML=list=>list.map(t=>
+  `<div class="tool g ${t[2]?'off':''}"><i>${t[0]}</i>${t[1]}</div>`).join('');
+
+function padRows(rows,x,w,bottom,keyH,gap){
+  const p=el('div','pad');
+  p.style.cssText+=`left:${x}px;width:${w}px;bottom:${bottom}px;gap:${gap}px`;
+  p.innerHTML=rows.map(r=>`<div class="prow" style="gap:${gap}px">`+
+    r.map(k=>`<div class="key g ${k.length>1?'sm wide':''}" style="height:${keyH}px">${k}</div>`).join('')+
+    `</div>`).join('');
+  return p;
+}
+
+/* ── 화면들 ─────────────────────────────────────────────────────── */
+function sudokuBody(fr,s,L,win){
+  const {top,bot,col,land,rightX,rightW}=L, h=s.h, pad=s.pad, botCSS=h-bot;
+  const keys=['1','2','3','4','5','6','7','8','9'];
+  const tools=[['↺','되돌리기',false],['⌫','지우기',false],['💡','한 칸 힌트',false]];
+  let boxTop,boxBot,boardX,boardMax;
+  if(land){
+    const gap=10, toolsBot=top+56+16+52;
+    const room=bot-toolsBot-24, keyH=Math.min(88,Math.round((room-gap*2)/3));
+    const padH=keyH*3+gap*2;
+    fr.appendChild(padRows([keys.slice(0,3),keys.slice(3,6),keys.slice(6)],
+      rightX,rightW,h-(toolsBot+24+(room-padH)/2+padH),keyH,gap));
+    const tl=el('div','tools'); tl.style.cssText+=`left:${rightX}px;width:${rightW}px;top:${top+56+16}px;height:52px`;
+    tl.innerHTML=toolsHTML(tools); fr.appendChild(tl);
+    boxTop=top; boxBot=bot; boardX=pad; boardMax=col;
+  }else{
+    const keyH=54,gap=8, padH=keyH*2+gap;
+    const pr=padRows([keys.slice(0,5),keys.slice(5)],pad,col,botCSS,keyH,gap);
+    if(win) pr.classList.add('faded');
+    fr.appendChild(pr);
+    const tlBottom=botCSS+padH+12;
+    const tl=el('div','tools'+(win?' faded':'')); tl.style.cssText+=`left:${pad}px;width:${col}px;bottom:${tlBottom}px;height:50px`;
+    tl.innerHTML=toolsHTML(tools); fr.appendChild(tl);
+    boxTop=top+56+16; boxBot=h-tlBottom-50-16; boardX=pad; boardMax=col;
+  }
+  const size=Math.min(boardMax,boxBot-boxTop);
+  const y=boxTop+(boxBot-boxTop-size)/2;
+  const panel=el('div','panel g'+(win?' dim':''),sudokuHTML(size,win));
+  panel.style.cssText+=`left:${boardX+(boardMax-size)/2}px;top:${y}px;width:${size}px;height:${size}px`;
+  fr.appendChild(panel);
+  if(win){
+    const cx=s.w/2, cy=y+size/2;
+    const gl=el('div','winglow'); gl.style.cssText+=`left:${cx}px;top:${cy}px`; fr.appendChild(gl);
+    /* ★유리(.g)를 쓰지 않는다 — 유리판 위의 유리는 층이 안 읽힌다 */
+    const card=el('div','win',
+      '<div class="wt">참 잘하셨어요!</div><div class="wb">퍼즐을 모두 완성했어요.</div>'+
+      '<div class="wr"><div class="btn">한 판 더 하기</div><div class="btn gh">그만하기</div></div>');
+    card.style.cssText+=`left:${pad+8}px;right:${pad+8}px;top:${cy-86}px`;
+    fr.appendChild(card);
+  }
+}
+
+const SCREENS={
+ hub:{hub:true},
+
+ sudoku:{title:'스도쿠',diff:'보통',gauge:33,rem:'34',remCap:'남은 칸',
+   body:(fr,s,L)=>sudokuBody(fr,s,L,false)},
+
+ win:{title:'스도쿠',diff:'보통',gauge:100,rem:'0',remCap:'남은 칸',win:true,
+   body:(fr,s,L)=>sudokuBody(fr,s,L,true)},
+
+ crossword:{title:'가로세로 낱말퀴즈',diff:'쉬움',gauge:40,rem:'3',remCap:'남은 단어',
+   body(fr,s,L){
+     const {top,bot,col}=L, h=s.h, pad=s.pad, botCSS=h-bot;
+     const keyH=42,gap=6, kbH=keyH*3+gap*2;
+     fr.appendChild(padRows(KO_KEYS,pad,col,botCSS,keyH,gap));
+     const tlBottom=botCSS+kbH+12;
+     const tl=el('div','tools'); tl.style.cssText+=`left:${pad}px;width:${col}px;bottom:${tlBottom}px;height:46px`;
+     tl.innerHTML=toolsHTML([['⌫','지우기',false],['💡','한 글자 보기',false],['✓','틀린 곳 확인',false]]);
+     fr.appendChild(tl);
+     const clueBottom=tlBottom+46+12;
+     const clue=el('div','clue g',
+       '<div class="ar">◀</div><div class="cx"><div class="cn">가로 1 · 세 글자</div>'+
+       '<div class="cq">몸에 꼭 필요한 영양소</div></div><div class="ar">▶</div>');
+     clue.style.cssText+=`left:${pad}px;width:${col}px;bottom:${clueBottom}px;height:66px`;
+     fr.appendChild(clue);
+     const boxTop=top+56+16, boxBot=h-clueBottom-66-16;
+     const c=Math.min((col-36)/XW[0].length,(boxBot-boxTop-40)/XW.length);
+     const pw=Math.round(c*XW[0].length+4*(XW[0].length-1)+20), ph=Math.round(c*XW.length+4*(XW.length-1)+20);
+     const panel=el('div','panel g',crosswordHTML(c,c));
+     panel.style.cssText+=`left:${pad+(col-pw)/2}px;top:${boxTop+(boxBot-boxTop-ph)/2}px;width:${pw}px;height:${ph}px`;
+     fr.appendChild(panel);
+   }},
+
+ sort:{title:'색깔 정렬',diff:'도전',gauge:null,colors:'7개',rem:'3',remCap:'남은 색',
+   body(fr,s,L){
+     const {top,bot,col}=L, h=s.h, pad=s.pad, botCSS=h-bot;
+     const tl=el('div','tools'); tl.style.cssText+=`left:${pad}px;width:${col}px;bottom:${botCSS}px;height:54px`;
+     tl.innerHTML=toolsHTML([['↺','되돌리기',false]]); fr.appendChild(tl);
+     const boxTop=top+56+16, boxBot=h-botCSS-54-18;
+     const bw=46, tubes=el('div',null,tubesHTML(bw));
+     const node=tubes.firstChild;
+     node.style.cssText+=`left:${pad}px;width:${col}px;top:${boxTop}px;height:${boxBot-boxTop}px;justify-content:center`;
+     fr.appendChild(node);
+   }},
+
+ solitaire:{title:'솔리테어',diff:'보통',gauge:27,rem:'38',remCap:'남은 카드',
+   body(fr,s,L){
+     const {top,bot,col}=L, h=s.h, pad=s.pad, botCSS=h-bot;
+     /* 도구 둘 — 되돌리기는 전 난이도 무제한. 태블로에 뒷면이 없어지면
+        「힌트」 자리를 「자동 완성」이 대신한다(설계 §15.2) */
+     const tl=el('div','tools'); tl.style.cssText+=`left:${pad}px;width:${col}px;bottom:${botCSS}px;height:54px`;
+     tl.innerHTML=toolsHTML([['↺','되돌리기',false],['💡','힌트',false]]); fr.appendChild(tl);
+     const boxTop=top+56+18;
+     const b=solitaireHTML(col);
+     const board=el('div','sol',b.html);
+     board.style.cssText+=`left:${pad}px;top:${boxTop}px;width:${col}px;height:${b.boardH.toFixed(1)}px`;
+     fr.appendChild(board);
+   }},
+};
+
+const FRAMES=[
+ ['hub',      390,844,'<b>게임 허브</b> · 390×844 <b class="ok">(주력)</b>'],
+ ['sudoku',   390,844,'<b>스도쿠</b> · 390×844'],
+ ['crossword',390,844,'<b>가로세로 낱말퀴즈</b> · 390×844'],
+ ['sort',     390,844,'<b>색깔 정렬</b> · 390×844'],
+ ['solitaire',390,844,'<b>솔리테어</b> · 390×844'],
+ ['win',      390,844,'<b>완성</b> · 390×844'],
+ ['sudoku',   951,669,'<b>스도쿠</b> · 951×669 아이패드 가로'],
+];
+
+function render(s){ s.t=TNOW; paintSky(s); s.sb.textContent=clockAt(s.t);
+  if(s.sheet){ const sb2=s.sheet.querySelector('.sbody');
+    const fs=parseFloat(getComputedStyle(s.fr).getPropertyValue('--fs'))||1;
+    const ti=30*fs, top=s.topPad+52+ti*1.04+7+15*fs*1.45+16;
+    const avail=Math.max(120,s.h-s.botPad-top);
+    s.sheet.style.cssText+=`left:${s.pad}px;top:${top}px;width:${s.w-s.pad*2}px;height:${avail}px`;
+    const cs2=getComputedStyle(sb2);
+    const need=sb2.scrollHeight-sb2.clientHeight>0?avail
+      :[...sb2.children].reduce((a,e)=>a+e.offsetHeight,0)+14*(sb2.children.length-1)
+        +parseFloat(cs2.paddingTop)+parseFloat(cs2.paddingBottom)+2;
+    s.sheet.style.height=Math.min(avail,need)+'px';
+  }
+}
+
+let TNOW=.53, WKEY='clear';
+const row=document.getElementById('deck');
+const all=FRAMES.map(([k,w,h,c])=>{const cell=build(k,w,h,c);row.appendChild(cell);return cell.querySelector('.fr')._st;});
+const redraw=()=>all.forEach(render);
+requestAnimationFrame(redraw);
+document.querySelectorAll('[data-wx]').forEach(b=>b.onclick=()=>{WKEY=b.dataset.wx;
+  document.querySelectorAll('[data-wx]').forEach(x=>x.classList.toggle('on',x===b));redraw();});
+tRange.oninput=()=>{TNOW=tRange.value/1000;tVal.textContent=clockAt(TNOW);redraw();};
+tVal.textContent=clockAt(TNOW);
+bBig.onclick=()=>{all.forEach(s=>s.fr.style.setProperty('--fs',1.25));
+  bBig.classList.add('on');bNorm.classList.remove('on');requestAnimationFrame(redraw);};
+bNorm.onclick=()=>{all.forEach(s=>s.fr.style.setProperty('--fs',1));
+  bNorm.classList.add('on');bBig.classList.remove('on');requestAnimationFrame(redraw);};
+bFit.onclick=()=>{document.body.dataset.fit='1';bFit.classList.add('on');bReal.classList.remove('on');requestAnimationFrame(redraw);};
+bReal.onclick=()=>{document.body.dataset.fit='0';bReal.classList.add('on');bFit.classList.remove('on');requestAnimationFrame(redraw);};
+
+</script>
+
+</body>
+</html>
