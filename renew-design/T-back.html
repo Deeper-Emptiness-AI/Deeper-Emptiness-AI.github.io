@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Healthya — 카드 더미 홈</title>
+<title>Healthya — 배경 고르기</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
 <style>
 :root{--f:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,sans-serif}
@@ -22,6 +22,11 @@ h1{font-size:46px;font-weight:800;letter-spacing:-.045em;line-height:1.06;margin
 .lbl{font-size:11.5px;color:rgba(255,255,255,.34);letter-spacing:.05em}
 .hint{font-size:13px;color:rgba(255,255,255,.38);flex-basis:100%;margin-top:6px}
 .try{display:inline-block;margin-top:16px;font-size:13.5px;font-weight:600;color:#0B0D11;background:#7BE0A8;padding:7px 14px;border-radius:999px}
+#deck{display:grid;gap:24px 20px;align-items:start}
+body[data-fit="1"] #deck{grid-template-columns:repeat(5,196px)}
+body[data-fit="0"] #deck{grid-template-columns:repeat(2,392px)}
+#deck .cell{width:100%;min-width:0}
+#deck .cap{width:100%;font-size:11.5px;line-height:1.4;white-space:normal;overflow:hidden}
 .deckrow{display:flex;gap:26px;align-items:flex-start;margin-top:28px;overflow-x:auto;padding:6px 4px 20px}
 .deckrow::-webkit-scrollbar{height:8px}.deckrow::-webkit-scrollbar-thumb{background:rgba(255,255,255,.16);border-radius:4px}
 body[data-fit="1"] .fr{zoom:.5}
@@ -46,6 +51,12 @@ body[data-fit="1"] .fr{zoom:.5}
 /* ★메시 — 시간 × 날씨로 도는 색 덩이 4개 (§4-A) */
 .mesh{position:absolute;inset:-14%;pointer-events:none;filter:blur(2px)}
 .veil{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .6s,background .6s}
+.terra{position:absolute;inset:0;pointer-events:none;z-index:6;opacity:0;transition:opacity .5s}
+.terra.on{opacity:1}
+.terra svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.terra .sea{position:absolute;left:0;right:0;bottom:0}
+.terra .horz{position:absolute;left:0;right:0;height:1.5px}
+.terra .glit{position:absolute;width:74px;mix-blend-mode:screen;filter:blur(7px)}
 /* ── 흐린 날 ★ ───────────────────────────────────────────────
    흐림은 「구름이 몇 개 떠 있는 하늘」이 아니라 **덮인 하늘**이다.
    개별 덩이가 보이면 그 순간 흐림이 아니라 「구름 조금」이 된다.
@@ -240,6 +251,12 @@ body[data-fit="1"] .fr{zoom:.5}
 .fr[data-glass="2"] .tile,.fr[data-glass="2"] .ghd,.fr[data-glass="2"] .railmore{
   text-shadow:0 1px 2px rgba(8,16,34,.45)}
 .fr[data-glass="2"] .top{text-shadow:0 1px 4px rgba(8,16,34,.5),0 0 18px rgba(8,16,34,.28)}
+/* ★밝은 조합 — 글씨가 잉크라 어두운 그림자를 걷는다 */
+.fr.ink[data-glass="2"] .card,.fr.ink[data-glass="2"] .di,.fr.ink[data-glass="2"] .aibar,
+.fr.ink[data-glass="2"] .chat,.fr.ink[data-glass="2"] .blob,.fr.ink[data-glass="2"] .more,
+.fr.ink[data-glass="2"] .tile,.fr.ink[data-glass="2"] .ghd,.fr.ink[data-glass="2"] .railmore,
+.fr.ink[data-glass="2"] .sb{text-shadow:none}
+.fr.ink[data-glass="2"] .top{text-shadow:0 1px 3px rgba(255,255,255,.65)}
 .fr[data-glass="2"] .sb{text-shadow:0 1px 3px rgba(8,16,34,.40)}
 
 .top{position:absolute;z-index:20}
@@ -445,8 +462,8 @@ h2{font-size:13px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.04e
 <body data-fit="1" data-onb="0" data-chat="0" data-glass="2">
 
 <header class="head">
-  <div class="k">Healthya · 일반 모드 홈 · 카드 더미</div>
-  <h1>한 것은 옆으로 빠진다</h1>
+  <div class="k">Healthya · 배경 안 · 2026-09-15 · 배경은 <b style="color:#7BE0A8">고정</b> · 색 조합은 <b style="color:#7BE0A8">광원 하나</b>가, 사진은 <b style="color:#7BE0A8">밝기·틴트</b>가 하루를 나른다</div>
+  <h1>사진 셋 · 색 조합 열</h1>
   <div class="bar-top">
     <span class="lbl">날씨</span>
     <button class="btn-t on" data-wx="clear">맑음</button>
@@ -461,12 +478,39 @@ h2{font-size:13px;font-weight:600;color:rgba(255,255,255,.4);letter-spacing:.04e
     <button class="btn-t" id="bChat">AI 채팅 펼침</button>
 
     <span class="sep"></span>
+    <span class="lbl">배치</span>
+    <button class="btn-t on" id="bLA">a 색면 여섯</button>
+    <button class="btn-t" id="bLB">b 사선 띠</button>
+    <button class="btn-t" id="bLC">c 한 색 + 한 점</button>
+    <span class="sep"></span>
+    <span class="lbl">시각</span>
+    <input id="tSl" type="range" min="0" max="999" value="500" style="width:200px;accent-color:#fff">
+    <span id="tVal">12:00</span>
+    <span class="sep"></span>
+    <button class="btn-t on" id="bSun">해·달 보임</button>
+    <span class="sep"></span>
     <button class="btn-t on" id="bFit">한눈에</button>
     <button class="btn-t" id="bReal">1:1</button>
   </div>
 </header>
 
 <div class="deckrow" id="deck"></div>
+
+<div class="notes" style="margin-top:44px">
+<div class="r">
+  <div>사진 배경</div>
+  <div>사진은 <b>자기 빛을 이미 갖고 있다</b> — 그래서 해·달을 얹는 대신 하루를 <b>밝기·채도·틴트</b>로 나른다.
+    대신 <b>대비 막</b>이 필수다: 사진마다 밝기가 제각각이라 막 없이는 흰 글씨가 무너진다.
+    카드가 앉는 띠를 얼마나 더 눌러야 하는지(<code>mid</code>)는 <b>실측값</b>이다 —
+    은하수 .06 · 안개 산 .28 · <b style="color:#FF9E9E">사막 .52</b>.
+    사막은 .52 를 걸고도 본문이 2.85:1 로 미달이고, 통과시키려면 .68 이 필요해 <b>사진이 죽는다.</b>
+    → <b>사진은 아무거나 못 쓴다. 카드가 앉는 띠가 충분히 어두운 것만 통과시킨다.</b></div>
+  <div>사진 출처</div>
+  <div>Wikimedia Commons · 전부 <b>CC0</b>(저작자 표시 의무 없음) — Unsplash 원본.
+    <code>Foggy mountain village</code> · <code>Death Dunes</code> · <code>Milky Way Lake Mountains</code>.
+    ★실제 출시에는 <b>라이선스를 확보한 사진</b>으로 교체하거나 이 셋을 그대로 쓸지 정해야 한다(CC0 이므로 상업 사용 가능).</div>
+</div>
+</div>
 
 <script>
 const KF=[{p:0,c:['#0A0F24','#121838','#20264C']},{p:.20,c:['#2E4A7D','#7FA3CE','#E8C9A6']},
@@ -584,7 +628,238 @@ const MENU=[
 ];
 let WKEY='clear';
 
-function build(w,h,cap){
+
+/* ═══════════════════════════════════════════════════════════════
+   ★배경 안 (2026-09-15) — 시간축·해·달·유리는 어느 안에서나 같다.
+   바뀌는 것은 「하늘 자리에 무엇을 놓나」 뿐이다.
+     sky   = 현행 (실제 하늘을 흉내낸다)
+     mount = 하늘 + 산 능선 3겹
+     sea   = 하늘 + 바다 (수평선 + 해 반사 기둥)
+     absA  = 색 조합 · 도는 색면   (네 색 덩이가 하루에 한 바퀴 돈다)
+     absB  = 색 조합 · 띠          (사선 띠의 각도와 색이 하루를 따라 변한다)
+     absC  = 색 조합 · 한 색 + 한 점 (깊은 단색 + 빛 덩이 하나가 가로지른다)
+   ★추상 안의 바탕은 전부 어둡다 — 흰 글씨 대비가 하루 종일 사는 것이 이 안의 실익이다. */
+const ABSKF=[
+ {p:0,   b:['#160B28','#1C1036','#241848'], c:[[255,46,136,.56],[61,43,255,.54],[0,224,198,.44],[255,176,32,.40]]},
+ {p:.20, b:['#1A1030','#241844','#33235C'], c:[[255,95,162,.58],[91,59,255,.54],[0,208,224,.44],[255,194,74,.44]]},
+ {p:.40, b:['#0E1C34','#152A48','#1E3A5E'], c:[[255,61,110,.54],[47,123,255,.56],[38,224,168,.44],[255,216,74,.42]]},
+ {p:.62, b:['#1C1234','#2A1A48','#3A2560'], c:[[255,46,106,.56],[122,59,255,.54],[0,200,216,.44],[255,180,58,.42]]},
+ {p:.80, b:['#240E22','#34142E','#46203A'], c:[[255,58,58,.56],[176,46,255,.52],[255,138,46,.48],[58,91,255,.42]]},
+ {p:.92, b:['#140A24','#1A0E32','#221444'], c:[[255,46,136,.54],[61,43,255,.54],[0,214,198,.42],[255,166,40,.38]]},
+ {p:1,   b:['#160B28','#1C1036','#241848'], c:[[255,46,136,.56],[61,43,255,.54],[0,224,198,.44],[255,176,32,.40]]},
+];
+
+/* ═══ ★고정 색 조합 + 움직이는 광원 (2026-09-15 사용자 결정) ═══
+   배경색은 하루 종일 **고정**이다. 시간을 나르는 것은 **광원 하나** —
+   해·달의 자리와 그 빛의 색·세기·번짐. 그래서
+     · 대비가 시각에 따라 흔들리지 않는다 (팔레트 명도를 우리가 정한다)
+     · 검수가 5국면 × 4날씨 = 20 → **4날씨**로 줄어든다
+     · 「내가 고른 색」이 진짜로 하루 종일 그 색이다 */
+const FIXPAL=[
+ /* ── 어두운 조합 — 글씨는 흰색 ── */
+ {n:'자정 남색', b:['#0B1230','#111A44','#1A2657'],
+  c:['rgba(255,58,138,.34)','rgba(58,86,255,.38)','rgba(0,208,196,.30)','rgba(255,176,64,.26)']},
+ {n:'자두',     b:['#1B0C28','#29113E','#391A53'],
+  c:['rgba(255,72,150,.34)','rgba(140,60,255,.36)','rgba(255,140,70,.26)','rgba(64,200,220,.24)']},
+ {n:'먹',       b:['#0C0D12','#14161E','#1C1F2A'],
+  c:['rgba(255,190,90,.26)','rgba(120,140,200,.26)','rgba(255,120,140,.18)','rgba(90,200,190,.18)']},
+ {n:'심해',     b:['#04181C','#07242B','#0C333C'],
+  c:['rgba(0,220,190,.30)','rgba(40,120,255,.32)','rgba(255,200,90,.22)','rgba(255,90,150,.20)']},
+ {n:'팥',       b:['#200A14','#31101B','#421826'],
+  c:['rgba(255,90,80,.32)','rgba(180,50,120,.32)','rgba(255,190,80,.26)','rgba(80,120,220,.22)']},
+ /* ── 밝은 조합 — 글씨가 잉크로 뒤집힌다 (§17-C″ 「밝은 화면」) ── */
+ {n:'아침 크림', ink:1, b:['#FFF4E6','#FFE9D8','#FFDCC6'],
+  c:['rgba(255,112,96,.34)','rgba(90,150,255,.30)','rgba(255,190,60,.34)','rgba(176,110,255,.24)']},
+ {n:'민트 유리', ink:1, b:['#ECF8F5','#DDF1EC','#CDE9E5'],
+  c:['rgba(0,190,170,.32)','rgba(60,130,255,.28)','rgba(180,220,60,.28)','rgba(255,120,170,.22)']},
+ {n:'연분홍',   ink:1, b:['#FFF1F5','#FFE4ED','#FFD6E6'],
+  c:['rgba(255,90,140,.32)','rgba(150,90,255,.26)','rgba(255,170,110,.30)','rgba(70,200,220,.22)']},
+ {n:'하늘 종이', ink:1, b:['#EFF5FF','#E0EBFF','#D2E2FF'],
+  c:['rgba(60,120,255,.28)','rgba(160,110,255,.26)','rgba(255,196,80,.30)','rgba(0,200,180,.24)']},
+ {n:'회벽',     ink:1, b:['#F5F3EE','#EDE9E1','#E3DDD3'],
+  c:['rgba(214,110,70,.28)','rgba(120,150,120,.26)','rgba(220,170,60,.28)','rgba(110,130,170,.24)']},
+];
+/* 빛 — 시각이 사는 유일한 자리. 여명 분홍 → 낮 흰빛 → 노을 주황 → 밤 달빛 */
+/* ★해·달의 색은 **원래 하늘 그대로** 상수다 (2026-09-15 사용자 결정).
+   해 #FFFCF0→#FFF2CE (따뜻한 흰빛) · 달 #FBFCFF→#DCE6FA (찬 흰빛) — `.sun`/`.moon` CSS 원본.
+   시각이 바꾸는 것은 **자리와 세기·번짐**뿐이다.
+   여기 상수는 그 둘의 **번짐(glow)** 색으로, `.glow` CSS 원본값과 달빛을 그대로 쓴다. */
+const GLOW_SUN=[255,248,226], GLOW_MOON=[220,230,250];
+/* 세기·번짐만 시각을 탄다 */
+const LIGHT=[
+ {p:0,   a:.30, r:280},{p:.16, a:.42, r:330},{p:.28, a:.52, r:370},
+ {p:.50, a:.60, r:400},{p:.70, a:.54, r:370},{p:.82, a:.44, r:330},
+ {p:.90, a:.30, r:280},{p:1,   a:.30, r:280},
+];
+function lightAt(t,ink){
+  let i=0; while(i<LIGHT.length-2 && t>LIGHT[i+1].p) i++;
+  const a=LIGHT[i],b=LIGHT[i+1],u=cl((t-a.p)/(b.p-a.p||1),0,1);
+  return {a:a.a+(b.a-a.a)*u, r:a.r+(b.r-a.r)*u};
+}
+/* ═══ ★사진 배경 (2026-09-15) ═══
+   CC0 사진(Wikimedia Commons · Unsplash 원본). 사진은 **자기 빛을 이미 갖고 있다** —
+   그래서 해·달을 얹는 대신 하루를 **밝기·채도·틴트**로 나른다.
+   ★대비 막은 필수다: 사진마다 밝기가 제각각이라 막 없이는 흰 글씨가 무너진다. */
+/* ★scrim = 위/아래 막 · mid = **카드가 앉는 띠**를 얼마나 더 눌러야 하나.
+   mid 는 실측에서 나온 값이다 — 본문(흰 글씨 α.70)이 4.5:1 을 넘는 최소치.
+   사막처럼 밝은 사진은 .52 가 필요하고, 그만큼 사진이 죽는다. 이것이 「사진은 아무거나 못 쓴다」의 증거다. */
+const PHOTOS=[
+ {n:'안개 산', f:'assets/bg/fog.jpg',  scrim:.30, mid:.28},
+ {n:'사막',   f:'assets/bg/dune.jpg', scrim:.26, mid:.52},
+ {n:'은하수', f:'assets/bg/star.jpg', scrim:.08, mid:.06},
+];
+const PHOTO_T=[
+ {p:0,   b:.40, sa:.72, t:[10,18,48,.55]},
+ {p:.16, b:.62, sa:.86, t:[255,170,140,.20]},
+ {p:.28, b:.88, sa:1.00,t:[255,210,170,.12]},
+ {p:.50, b:1.00,sa:1.05,t:[255,255,255,0]},
+ {p:.70, b:.94, sa:1.06,t:[255,190,120,.14]},
+ {p:.82, b:.76, sa:1.02,t:[255,130,70,.22]},
+ {p:.90, b:.44, sa:.76, t:[14,22,56,.50]},
+ {p:1,   b:.40, sa:.72, t:[10,18,48,.55]},
+];
+function photoAt(t){
+  let i=0; while(i<PHOTO_T.length-2 && t>PHOTO_T[i+1].p) i++;
+  const a=PHOTO_T[i],b=PHOTO_T[i+1],u=cl((t-a.p)/(b.p-a.p||1),0,1);
+  const lerp=(x,y)=>x+(y-x)*u;
+  return {b:lerp(a.b,b.b), sa:lerp(a.sa,b.sa),
+          t:a.t.map((v,k)=>k<3?Math.round(lerp(v,b.t[k])):+lerp(v,b.t[k]).toFixed(3))};
+}
+const rgbA=str=>str.match(/\d+/g).map(Number);
+const mixc=(a,b,u)=>[0,1,2].map(i=>Math.round(a[i]+(b[i]-a[i])*u));
+const INK=[7,11,24];
+function absAt(t){
+  let i=0; while(i<ABSKF.length-2 && t>ABSKF[i+1].p) i++;
+  const a=ABSKF[i],b=ABSKF[i+1],u=cl((t-a.p)/(b.p-a.p||1),0,1);
+  return {base:a.b.map((h,j)=>lc(h,b.b[j],u)),
+          cols:a.c.map((c,j)=>{const q=c.map((v,k)=>v+(b.c[j][k]-v)*u);
+            return `rgba(${q[0]|0},${q[1]|0},${q[2]|0},${q[3].toFixed(3)})`;})};
+}
+const RIDGE=['M0,66 L10,61 L19,64 L30,57 L41,63 L52,59 L63,64 L74,58 L85,63 L94,60 L100,62 L100,100 L0,100 Z',
+             'M0,74 L12,69 L23,73 L35,67 L47,73 L58,70 L70,75 L82,69 L92,74 L100,71 L100,100 L0,100 Z',
+             'M0,83 L14,79 L27,84 L40,79 L53,85 L66,80 L79,85 L90,81 L100,83 L100,100 L0,100 Z'];
+function paintBG(s,t,W,dl,sx,sy,shine){
+  const mode=s.bg, isMt=mode==='mount', isSea=mode==='sea', abs=mode.slice(0,3)==='abs';
+  if(mode[0]==='f'){                           /* ★사진 배경 */
+    const P=PHOTOS[+mode.slice(1)], A=photoAt(t);
+    s.fr.classList.remove('ink');
+    s.sky.style.background=`url(${P.f}) center/cover no-repeat`;
+    s.sky.style.filter=`brightness(${(A.b*(W.dim||1)).toFixed(2)}) saturate(${(A.sa*W.sat).toFixed(2)})`;
+    s.mesh.style.background='none';
+    /* 대비 막 + 그 시각의 틴트 — terra 레이어(inset:0)를 쓴다 */
+    const sc=P.scrim, [tr,tg,tb,ta]=A.t;
+    s.terra.classList.add('on');
+    [s.mt,s.sea,s.horz,s.glit].forEach(e=>e.style.display='none');
+    const md=P.mid, bot=Math.max(md,sc*.9);
+    s.terra.style.background=
+      `linear-gradient(180deg, rgba(${tr},${tg},${tb},${ta}) 0%, rgba(${tr},${tg},${tb},${ta}) 100%),`+
+      `linear-gradient(180deg, rgba(6,10,22,${(sc+.06).toFixed(2)}) 0%, rgba(6,10,22,${(sc*.18).toFixed(2)}) 18%,`+
+      `rgba(6,10,22,0) 34%, rgba(6,10,22,${(md*.72).toFixed(2)}) 49%, rgba(6,10,22,${md.toFixed(2)}) 58%,`+
+      `rgba(6,10,22,${bot.toFixed(2)}) 76%, rgba(6,10,22,${(sc+.34).toFixed(2)}) 100%)`;
+    s.clouds.style.opacity=0; s.stars.style.opacity=0;
+    /* 사진은 이미 빛을 갖고 있다 → 우리 광원은 절반 이하로 */
+    s.glow.style.opacity=document.body.dataset.sun==='0'?0:0.28;
+    s.sunring.style.filter='';
+    if(document.body.dataset.sun==='0') [s.sun,s.moon,s.sunring].forEach(e=>e.style.opacity=0);
+    return;
+  }
+  if(mode[0]==='p'){                           /* ★색 조합 × 배치(전역 a·b·c) */
+    const LAY=LAYOUT, P=FIXPAL[+mode.slice(1)], L=lightAt(t,P.ink);
+    s.fr.classList.toggle('ink', !!P.ink);     /* ★밝은 조합은 글씨가 잉크로 뒤집힌다 */
+    s.terra.classList.remove('on'); s.terra.style.background='none';
+    /* ★색 덩이를 또렷하게 — 배치(a·b·c)가 읽히려면 알파가 필요하다 */
+    const amp=LAY==='a'?2.05:1.45, cap=LAY==='a'?.80:.52;
+    const C=P.c.map(v=>v.replace(/([\d.]+)\)$/,(m,a)=>Math.min(cap,+a*amp).toFixed(2)+')'));
+    s.sky.style.background=`linear-gradient(180deg,${P.b[0]} 0%,${P.b[1]} 52%,${P.b[2]} 100%)`;
+    s.sky.style.filter=`saturate(${(W.sat*1.1).toFixed(2)}) brightness(${W.dim||1})`;
+    s.mesh.style.background=
+      LAY==='a' ?        /* ★덩이 여섯 — 작게 흩고 겹치는 자리에서 색이 섞인다 */
+        `radial-gradient(38% 28% at 14% 14%, ${C[0]} 0%, transparent 62%),`+
+        `radial-gradient(36% 30% at 88% 24%, ${C[1]} 0%, transparent 60%),`+
+        `radial-gradient(40% 30% at 24% 72%, ${C[2]} 0%, transparent 64%),`+
+        `radial-gradient(38% 28% at 82% 86%, ${C[3]} 0%, transparent 62%),`+
+        `radial-gradient(30% 24% at 58% 48%, ${C[0]} 0%, transparent 62%),`+
+        `radial-gradient(28% 22% at 6% 46%, ${C[2]} 0%, transparent 64%)`
+    : LAY==='b' ?
+        `linear-gradient(62deg, ${C[0]} 0%, transparent 34%),`+
+        `linear-gradient(62deg, transparent 20%, ${C[1]} 44%, transparent 66%),`+
+        `linear-gradient(62deg, transparent 50%, ${C[2]} 72%, transparent 92%),`+
+        `linear-gradient(62deg, transparent 76%, ${C[3]} 100%)`
+    :
+        `radial-gradient(78% 56% at 26% 104%, ${C[1]} 0%, transparent 70%),`+
+        `radial-gradient(56% 40% at 84% -6%, ${C[0]} 0%, transparent 66%)`;
+    const [r,g,b]=shine?GLOW_SUN:GLOW_MOON;   /* ★원래 하늘의 해·달 빛 그대로 */
+    s.glow.style.cssText=`left:${sx}%;top:${sy}%;width:${L.r.toFixed(0)}px;height:${L.r.toFixed(0)}px;`+
+      `mix-blend-mode:${P.ink?'normal':'screen'};opacity:${(L.a*(W.sun||.3)+.12).toFixed(2)};`+
+      `background:radial-gradient(circle,rgba(${r},${g},${b},.80) 0%,rgba(${r},${g},${b},.34) 28%,`+
+      `rgba(${r},${g},${b},.12) 52%,rgba(${r},${g},${b},0) 72%)`;
+    /* ★해무리 링은 흰 선이라 밝은 바탕에서 사라진다 → 뒤집어 어둡게 */
+    s.sunring.style.filter=P.ink?'invert(1) opacity(.55)':'';
+    s.mesh.style.filter=LAY==='a'?'blur(2px) saturate(1.38) contrast(1.06)':'blur(2px)';
+    s.clouds.style.opacity=0; s.stars.style.opacity=0;
+    if(document.body.dataset.sun==='0'){ [s.sun,s.moon,s.sunring].forEach(e=>e.style.opacity=0); s.glow.style.opacity=0; }
+    return;
+  }
+  s.terra.classList.toggle('on', isMt||isSea);
+  s.mt.style.display=isMt?'block':'none';
+  [s.sea,s.horz,s.glit].forEach(e=>e.style.display=isSea?'block':'none');
+  if(isMt){
+    const bot=rgbA(skyAt(t)[2]), top=rgbA(skyAt(t)[0]);
+    /* ★원경은 하늘빛에 잠기고(대기 원근), 근경은 잉크에 가깝다 */
+    [[.52,.34],[.74,.16],[.90,.06]].forEach(([u,haze],i)=>{
+      const base=mixc(bot,INK,u);
+      const c=mixc(base,top,haze*.5);
+      s.ridges[i].setAttribute('d',RIDGE[i]);
+      s.ridges[i].setAttribute('fill',`rgb(${c.join(',')})`);
+    });
+  }
+  if(isSea){
+    const bot=rgbA(skyAt(t)[2]);
+    /* ★수평선 바로 아래는 하늘을 되비추고(밝다), 발밑으로 갈수록 깊어진다 */
+    const refl=mixc(bot,INK,.26), mid=mixc(bot,INK,.68), deep=mixc(bot,INK,.90);
+    s.sea.style.cssText=`display:block;top:46%;background:linear-gradient(180deg,`+
+      `rgb(${refl.join(',')}) 0%,rgb(${mid.join(',')}) 16%,rgb(${deep.join(',')}) 100%)`;
+    s.horz.style.cssText=`display:block;top:46%;background:rgba(255,255,255,${(.10+.30*dl).toFixed(2)});`+
+      `box-shadow:0 0 12px rgba(255,255,255,${(.06+.18*dl).toFixed(2)})`;
+    s.glit.style.cssText=`display:block;left:${sx}%;translate:-50% 0;top:46%;bottom:0;opacity:${(dl*.85+.15).toFixed(2)};`+
+      `background:linear-gradient(180deg,rgba(255,246,214,${((shine?.72:.32)*(W.sun||.22)).toFixed(2)}) 0%,rgba(255,236,190,0) 72%)`;
+  }
+  if(abs){
+    const A=absAt(t);
+    /* ★absD — 같은 색 조합을 명도만 눌러 잡은 안. 「대비를 설계로 통제한다」는 것이 이 안의 논점이다 */
+    if(mode==='absD'){
+      A.base=A.base.map(c=>{const q=rgbA(c);return `rgb(${q.map(v=>Math.round(v*.62)).join(',')})`;});
+      A.cols=A.cols.map(c=>{const q=c.match(/[\d.]+/g).map(Number);
+        return `rgba(${Math.round(q[0]*.72)},${Math.round(q[1]*.72)},${Math.round(q[2]*.72)},${(q[3]*.62).toFixed(3)})`;});
+    }
+    s.sky.style.background=`linear-gradient(180deg,${A.base[0]} 0%,${A.base[1]} 52%,${A.base[2]} 100%)`;
+    s.sky.style.filter=`saturate(${(W.sat*1.15).toFixed(2)}) brightness(${W.dim||1})`;
+    if(mode==='absA'){
+      const ang=t*Math.PI*2;
+      s.mesh.style.background=[0,1,2,3].map(k=>{
+        const a2=ang+k*Math.PI/2, x=50+Math.cos(a2)*34, y=50+Math.sin(a2)*30;
+        return `radial-gradient(46% 38% at ${x.toFixed(1)}% ${y.toFixed(1)}%, ${A.cols[k]} 0%, transparent 66%)`;
+      }).join(',');
+    }else if(mode==='absB'){
+      const g=(62+t*196).toFixed(1)+'deg';
+      s.mesh.style.background=
+        `linear-gradient(${g}, ${A.cols[0]} 0%, transparent 32%),`+
+        `linear-gradient(${g}, transparent 20%, ${A.cols[1]} 44%, transparent 66%),`+
+        `linear-gradient(${g}, transparent 50%, ${A.cols[2]} 72%, transparent 90%),`+
+        `linear-gradient(${g}, transparent 76%, ${A.cols[3]} 100%)`;
+    }else{   /* absC · absD */
+      s.mesh.style.background=
+        `radial-gradient(54% 42% at ${sx}% ${(sy+8).toFixed(1)}%, ${A.cols[3]} 0%, transparent 62%),`+
+        `radial-gradient(74% 54% at ${(100-sx).toFixed(1)}% 94%, ${A.cols[1]} 0%, transparent 70%)`;
+    }
+    s.clouds.style.opacity=0; s.stars.style.opacity=0;
+  }
+  const hide=document.body.dataset.sun==='0';
+  if(hide){ [s.sun,s.moon,s.sunring].forEach(e=>e.style.opacity=0); }
+  s.glow.style.opacity=hide?'0':'';
+}
+
+function build(w,h,cap,bg){
   const sc=w<600?'compact':(w<840?'medium':'expanded');
   const cell=el('div','cell'); const capEl=el('div','cap',cap); cell.appendChild(capEl);
   const fr=el('div','fr'); fr.style.width=w+'px'; fr.style.height=h+'px';
@@ -642,7 +917,13 @@ function build(w,h,cap){
   }
   const mesh=el('div','mesh');
   const deck=el('div','deck','<i class="hi"></i><i class="lo"></i>');
-  fr.append(sky,mesh,deck,el('div','ceil'),glow,sunring,clouds,veil,rain,el('div','bolt'),snow,drops,el('div','scrim'),el('div','isl'));
+  /* ★지형 — 하늘 뒤가 아니라 하늘 「앞」. 비·눈은 그 앞에서 내린다 */
+  const terra=el('div','terra');
+  terra.innerHTML=
+    '<svg class="mt" viewBox="0 0 100 100" preserveAspectRatio="none">'+
+      '<path class="r0"/><path class="r1"/><path class="r2"/></svg>'+
+    '<div class="sea"></div><div class="horz"></div><div class="glit"></div>';
+  fr.append(sky,mesh,deck,el('div','ceil'),glow,sunring,clouds,veil,terra,rain,el('div','bolt'),snow,drops,el('div','scrim'),el('div','isl'));
   const sb=el('div','sb','<span class="t"></span><span>•••• ᯤ ▯</span>'); fr.appendChild(sb);
 
   const pad=sc==='compact'?24:30, topPad=sc==='compact'?52:56;
@@ -836,7 +1117,9 @@ function build(w,h,cap){
   fr.append(aibar,scrimC,goo,cam,more,chatScrim,chat,chatfull,onb,el('div','hi'));
 
   cell.appendChild(fr);
-  const st={fr,sky,mesh,sun,moon,stars,clouds,veil,rain,snow,sb:sb.querySelector('.t'),top,cards,
+  const st={fr,sky,mesh,sun,moon,stars,clouds,veil,rain,snow,sb:sb.querySelector('.t'),top,cards,bg,terra,
+    mt:terra.querySelector('.mt'),ridges:[...terra.querySelectorAll('path')],sea:terra.querySelector('.sea'),
+    horz:terra.querySelector('.horz'),glit:terra.querySelector('.glit'),
     w,h,sc,pad,edgeW,peek,frontL,frontW,frontH,pileH,boardH,botPad,board,boardTop,chatH,aiH,aiB,t:.50,base:.50,
     glow,sunring,trail,blobs,scrimC,cam,camS,camB,p:0,pileOut,pileW,pileStep,oneRow,wide,camCX,aiW,dock,dis,
     moreBtns:[more,...dis.filter(e=>e.classList.contains('railmore'))],menuveil,
@@ -883,6 +1166,7 @@ function render(s){
   const seg=(a,b)=>{let d='';for(let i=0;i<=14;i++){const [x,y]=pt(a+(b-a)*i/14);
     d+=(i?'L':'M')+x.toFixed(1)+' '+y.toFixed(1);}return d;};
   s.trail.querySelector('.full').setAttribute('d',seg(0,1));
+  paintBG(s,t,W,dl,sx,sy,shine);
 
   /* 더미 = 한 것(done/half) · 덱 = 안 한 것(miss 먼저, 그다음 앞으로 올 것) */
   const doneIdx=[], deckIdx=[];
@@ -1083,17 +1367,24 @@ function wire(s){
   s._place=place;
 }
 
-const SZ=[[344,882,'<b>344 × 882</b> · 갤럭시 Z 폴드 커버 <b style="color:#FF9E9E">(가장 좁음)</b>'],
-          [390,844,'<b>390 × 844</b> · 아이폰 표준 <b style="color:#7BE0A8">(주력)</b>'],
-          [466,678,'<b>466 × 678</b> · Duo 닫힘 <b style="color:#FFD98E">(가장 빡빡)</b>'],
-          [669,951,'<b>669 × 951</b> · Duo 펼침 세로'],
-          [775,931,'<b>775 × 931</b> · 갤럭시 Z 폴드 내부 세로 (≈4:3)'],
-          [931,775,'<b>931 × 775</b> · 갤럭시 Z 폴드 내부 가로'],
-          [951,669,'<b>951 × 669</b> · Duo 펼침 가로 / 아이패드']];
+let LAYOUT='a';
+const BGS=[['sky','<b>하늘</b> · 현행 (기준점)']]
+  .concat(PHOTOS.map((P,k)=>['f'+k, `<b>사진 — ${P.n}</b> · CC0`]))
+  .concat(FIXPAL.map((P,k)=>['p'+k, `<b>${P.n}</b> · ${P.ink?'밝음 · 잉크 글씨':'어두움 · 흰 글씨'}`]));
 const row=document.getElementById('deck');
-const all=SZ.map(([w,h,c])=>{const cell=build(w,h,c);row.appendChild(cell);return cell.querySelector('.fr')._st;});
+const all=BGS.map(([bg,cap])=>{const cell=build(390,844,cap,bg);row.appendChild(cell);return cell.querySelector('.fr')._st;});
 const redraw=()=>all.forEach(render);
 requestAnimationFrame(redraw);
+tSl.oninput=()=>{const t=cl(+tSl.value/1000,0,.999);
+  all.forEach(s=>{s.t=t;render(s);}); tVal.textContent=clockAt(t);};
+[['bLA','a'],['bLB','b'],['bLC','c']].forEach(([id,L])=>{
+  document.getElementById(id).onclick=()=>{LAYOUT=L;
+    ['bLA','bLB','bLC'].forEach(x=>document.getElementById(x).classList.toggle('on',x===id));
+    redraw();};
+});
+bSun.onclick=()=>{const on=document.body.dataset.sun==='0';
+  document.body.dataset.sun=on?'1':'0'; bSun.classList.toggle('on',on);
+  bSun.textContent=on?'해·달 보임':'해·달 숨김'; redraw();};
 document.querySelectorAll('[data-wx]').forEach(b=>b.onclick=()=>{WKEY=b.dataset.wx;
   document.querySelectorAll('[data-wx]').forEach(x=>x.classList.toggle('on',x===b));redraw();});
 bBig.onclick=()=>{all.forEach(s=>s.fr.style.setProperty('--fs',1.25));
