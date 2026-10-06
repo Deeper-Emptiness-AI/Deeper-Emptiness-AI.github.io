@@ -135,28 +135,38 @@
     <!-- ===================== ENGLISH ===================== -->
     <article data-lang-block="en">
       <h1>Account Deletion Request</h1>
-      <p class="meta">Last updated: July 9, 2026</p>
+      <p class="meta">Last updated: October 6, 2026</p>
 
       <div class="callout primary">
-        <p>Use this form to request deletion of your account and associated personal data. Select your app, enter the login ID (email or phone number) you use to sign in, and submit. Your request is sent by email to our privacy team for verification and processing.</p>
+        <p>Use this form to request deletion of your account and associated personal data. Select your app, enter the phone number you sign in with (or the security email you added), and submit. Your request is sent by email to our privacy team for verification and processing.</p>
+      </div>
+
+      <div class="callout">
+        <p><strong>The fastest way is in the app.</strong> In either app, go to <em>Settings → Delete account</em> and confirm with a one-time SMS code (and your security email, if you added one). You can keep using the app for 7 days and cancel there. The Healthya app can also <em>erase your records but keep the account</em>, and lets you download a copy of your data first.</p>
+        <p><strong>One phone number is one account.</strong> If you use both Healthya and Healthya Family with the same number, deleting the account removes your data from both apps.</p>
       </div>
 
       <div class="callout warn">
-        <p><strong>This action is permanent.</strong> Once verified, your account and personal data are deleted within 30 days and cannot be recovered. We may retain a minimal amount of data where required by law (e.g., transaction or legal records).</p>
+        <p><strong>There is a 7-day grace period, then it is permanent.</strong> Once verified, deletion is scheduled 7 days out. For a request made through this form, contact us during those 7 days to cancel it (you may not be able to sign in while it is pending). After that the account, all records, and stored photos are removed and cannot be recovered. We keep a minimal record that a deletion happened, and data the law requires us to retain.</p>
       </div>
     </article>
 
     <!-- ===================== KOREAN ===================== -->
     <article data-lang-block="ko">
       <h1>계정 삭제 요청</h1>
-      <p class="meta">최종 업데이트: 2026년 7월 9일</p>
+      <p class="meta">최종 업데이트: 2026년 10월 6일</p>
 
       <div class="callout primary">
-        <p>이 양식으로 계정 및 관련 개인정보의 삭제를 요청할 수 있습니다. 사용하는 앱을 선택하고, 로그인에 사용하는 로그인 ID(이메일 또는 전화번호)를 입력한 뒤 제출하세요. 요청은 본인 확인 및 처리를 위해 개인정보 담당팀에게 이메일로 전송됩니다.</p>
+        <p>이 양식으로 계정 및 관련 개인정보의 삭제를 요청할 수 있습니다. 사용하는 앱을 선택하고, 로그인에 쓰는 전화번호(또는 등록한 보안 이메일)를 입력한 뒤 제출하세요. 요청은 본인 확인 및 처리를 위해 개인정보 담당팀에게 이메일로 전송됩니다.</p>
+      </div>
+
+      <div class="callout">
+        <p><strong>앱에서 하는 것이 가장 빠릅니다.</strong> 두 앱 모두 <em>설정 → 계정 삭제</em>에서 SMS 일회용 코드(보안 이메일을 등록했다면 그 확인까지)로 삭제할 수 있습니다. 7일 동안 앱을 계속 쓰면서 앱에서 취소할 수 있습니다. Healthya 앱에서는 <em>계정은 두고 기록만 지우기</em>도 할 수 있고, 지우기 전에 내 데이터 사본을 내려받을 수 있습니다.</p>
+        <p><strong>전화번호 하나가 계정 하나입니다.</strong> 같은 번호로 Healthya 와 Healthya Family 를 모두 쓰신다면, 계정을 삭제하면 두 앱의 데이터가 함께 지워집니다.</p>
       </div>
 
       <div class="callout warn">
-        <p><strong>이 작업은 되돌릴 수 없습니다.</strong> 본인 확인 후 계정과 개인정보는 30일 이내에 삭제되며 복구할 수 없습니다. 법령상 보관이 요구되는 최소한의 데이터(예: 거래·법적 기록)는 보관될 수 있습니다.</p>
+        <p><strong>7일의 유예가 있고, 그 뒤에는 되돌릴 수 없습니다.</strong> 본인 확인 후 삭제가 7일 뒤로 예약됩니다. 이 양식으로 요청한 삭제는 그 7일 안에 당사에 연락해야 취소할 수 있습니다(예약 중에는 로그인이 안 될 수 있습니다). 이후 계정과 모든 기록, 저장된 사진이 삭제되며 복구할 수 없습니다. 삭제가 있었다는 최소한의 기록과 법령상 보관해야 하는 데이터는 남습니다.</p>
       </div>
     </article>
 
@@ -180,19 +190,19 @@
 
       <div class="field" id="field-login">
         <label for="login">
-          <span data-lang-inline="en">Login ID (email or phone number)</span>
-          <span data-lang-inline="ko">로그인 ID (이메일 또는 전화번호)</span>
+          <span data-lang-inline="en">Phone number you sign in with (or your security email)</span>
+          <span data-lang-inline="ko">로그인에 쓰는 전화번호 (또는 보안 이메일)</span>
         </label>
         <input type="text" id="login" name="login" autocomplete="off"
-               inputmode="email" autocapitalize="off" spellcheck="false"
-               placeholder="you@example.com" required />
+               inputmode="text" autocapitalize="off" spellcheck="false"
+               placeholder="+1 555 123 4567" required />
         <p class="hint">
-          <span data-lang-inline="en">Enter the exact ID you use to sign in, so we can locate your account.</span>
-          <span data-lang-inline="ko">계정을 찾을 수 있도록, 로그인에 사용하는 ID를 정확히 입력해 주세요.</span>
+          <span data-lang-inline="en">Enter the phone number you sign in with, including the country code, so we can locate your account.</span>
+          <span data-lang-inline="ko">계정을 찾을 수 있도록, 로그인에 쓰는 전화번호를 국가번호까지 정확히 입력해 주세요.</span>
         </p>
         <p class="error">
-          <span data-lang-inline="en">Please enter your login ID.</span>
-          <span data-lang-inline="ko">로그인 ID를 입력해 주세요.</span>
+          <span data-lang-inline="en">Please enter your phone number.</span>
+          <span data-lang-inline="ko">전화번호를 입력해 주세요.</span>
         </p>
       </div>
 
@@ -213,8 +223,8 @@
       <p class="status" id="form-status" role="status" aria-live="polite"></p>
 
       <p class="hint" style="margin-top:16px;">
-        <span data-lang-inline="en">Submitting sends your request directly to our privacy team. If it does not go through, please email us at <a href="mailto:hello@healthia.app">hello@healthia.app</a>.</span>
-        <span data-lang-inline="ko">제출하면 요청이 개인정보 담당팀에게 바로 전송됩니다. 전송이 안 되면 <a href="mailto:hello@healthia.app">hello@healthia.app</a> 으로 메일을 보내주세요.</span>
+        <span data-lang-inline="en">Submitting sends your request directly to our privacy team. If it does not go through, please email us at <a href="mailto:hello@healthya.app">hello@healthya.app</a>.</span>
+        <span data-lang-inline="ko">제출하면 요청이 개인정보 담당팀에게 바로 전송됩니다. 전송이 안 되면 <a href="mailto:hello@healthya.app">hello@healthya.app</a> 으로 메일을 보내주세요.</span>
       </p>
     </form>
   </main>
@@ -296,13 +306,13 @@
           sending: 'Sending your request…',
           ok: 'Your request has been sent. Our privacy team will verify and process it. You can close this page.',
           rate: 'Too many requests. Please try again later.',
-          fail: 'We could not send your request. Please email us directly at hello@healthia.app.'
+          fail: 'We could not send your request. Please email us directly at hello@healthya.app.'
         },
         ko: {
           sending: '요청을 전송하는 중…',
           ok: '요청이 전송되었습니다. 개인정보 담당팀이 본인 확인 후 처리합니다. 이 페이지를 닫으셔도 됩니다.',
           rate: '요청이 너무 많습니다. 잠시 후 다시 시도해 주세요.',
-          fail: '요청을 전송하지 못했습니다. hello@healthia.app 으로 직접 메일을 보내주세요.'
+          fail: '요청을 전송하지 못했습니다. hello@healthya.app 으로 직접 메일을 보내주세요.'
         }
       };
       function msg(key) {
