@@ -116,6 +116,29 @@
        주입하는 html[data-inapp="1"] 일 때만 노출. 공개 웹에서는 절대 보이지 않는다. */
     .app-only { display: none; }
     html[data-inapp="1"] .app-only { display: block; }
+    /* 넓은 화면(패드 가로 · 데스크톱) — 목차를 본문 왼쪽에 고정한다(읽기 순서대로 「무엇이 있나」를 먼저 본다). 긴 문서에서 지금 어디쯤인지와 다른 항목으로
+       가는 길이 늘 보인다(2026-10-14). 본문 폭(720)은 그대로, 좁은 화면은 지금처럼 목차가 본문 위에 선다 */
+    @media (min-width: 1000px) {
+      main { max-width: 1060px; }
+      html[data-lang="en"] article[data-lang-block="en"],
+      html[data-lang="ko"] article[data-lang-block="ko"],
+      html:not([data-lang]) article[data-lang-block="en"] {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 720px);
+        column-gap: 48px;
+        align-items: start;
+      }
+      article > * { grid-column: 2; }
+      article > .toc {
+        grid-column: 1;
+        grid-row: 1 / span 999;
+        position: sticky;
+        top: 72px;
+        max-height: calc(100vh - 96px);
+        overflow-y: auto;
+        margin: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -135,7 +158,7 @@
     <!-- ===================== ENGLISH ===================== -->
     <article data-lang-block="en">
     <h1>Healthya Privacy Policy</h1>
-    <p class="meta">Applies to: Healthya · Effective: June 21, 2026 · Last updated: October 9, 2026 · Consent version: 2026-09-14</p>
+    <p class="meta">Applies to: Healthya · Effective: June 21, 2026 · Last updated: October 13, 2026 · Consent version: 2026-09-14</p>
 
     <div class="callout">
       <p><strong>At a glance.</strong> Healthya is an all-in-one AI assistant that helps you manage your own life — meals, medications, sleep, exercise, appointments, and everyday conversation. It is open to any adult and works on its own; linking a family member is optional. This policy explains what we collect, with whom we share it, and how you can exercise your rights. We do not sell or share your personal information for advertising.</p>
@@ -181,6 +204,7 @@
         <tr><td>Device information</td><td>Device name as set on your phone, model, OS and app version, display language, and first / last sign-in time (shown to you under <em>My devices</em>, including devices that have since signed out; up to three devices can be signed in per app); a device public key used to confirm sensitive actions with your device&rsquo;s own lock (we receive no biometric data); your IP address, kept for about a day to prevent abuse</td></tr>
         <tr><td>Geolocation — approximate (optional)</td><td>City / district level, used for local personalization (e.g., weather-based conversation) and to find nearby care facilities such as hospitals and pharmacies (rounded to roughly 1&nbsp;km before being sent to our maps provider — see section 5). We do not store precise coordinates for these purposes. Optionally, a generalized "activity area" (last 7 days, rounded to roughly 2&nbsp;km blocks) may be shared with your linked family.</td></tr>
         <tr><td>Geolocation — precise (optional, emergency readiness)</td><td>If you grant emergency location sharing to a linked family member, the app refreshes a single stored precise location about every 5 minutes <strong>while the app is open on your screen</strong>, so that a usable location already exists the moment you call 911. Only the most recent one is kept — each refresh overwrites the last, so no trail or history is stored. When you tap 911, the app also tries once to take a fresh precise reading. Nothing is collected while the app is in the background or closed. A family member you granted can view it only for 24 hours after your 911 alert. See section 7.</td></tr>
+        <tr><td>Geolocation — precise, used only on your phone (optional, golf)</td><td>When you start a new golf game and location is allowed, the app takes one precise reading and compares it, <strong>on your phone</strong>, with the list of golf courses in your US state to suggest the course you are at. This reading is <strong>not stored and is not sent to us or anyone else</strong>. To get that course list, our servers receive only the US state your phone works out from that reading (near a state line, the neighboring state as well) and, if you pick a course, its ID. See section 5 (OpenGolfAPI).</td></tr>
         <tr><td>Audio / visual (optional)</td><td>Microphone signal (real-time only, not stored); meal, medication / prescription, and symptom photos you choose to upload (symptom photos are deleted right after analysis)</td></tr>
         <tr><td>Home camera photos and camera history (optional)</td><td>When you take or choose a photo with the home camera, a reduced copy of it is sent to our AI provider to recognize what it shows (food, medicine, a sore spot, a sick or hurt pet, a checkup report, text, or something else) and, for text, to read the words in it. QR codes are read on your phone and are not sent to us unless you ask to translate their text. The recognition copy is not stored. Photos recognized as food, medicine, a sore spot, a pet, or a checkup report then continue into those features under the terms described for them in this policy. For results we show you directly &mdash; read text and explanations of other things &mdash; we keep a <strong>camera history</strong> under your account so you can reopen it on any of your devices: the photo (resized, with location and other metadata removed), the names the photo was recognized as, the text that was read and its language, the last translation you made, and the AI explanation. Your camera history is visible only to you &mdash; <strong>never</strong> to your linked family &mdash; and you can delete any entry in the app. Separately, when a photo is recognized as &ldquo;something else&rdquo;, the short names and the AI explanation (never the photo) are kept to improve the service and are reviewed only as aggregate statistics.</td></tr>
         <tr><td>Health &amp; fitness from connected health apps (optional)</td><td>Read-only measurements imported from Apple Health or Google Health Connect: sleep and sleep stages, steps, distance, active energy, and workout sessions; vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate); blood sugar and weight; fitness and gait (VO2 max, heart rate variability, walking steadiness / speed); and mental wellness (mindfulness sessions and mood). See section 8.</td></tr>
@@ -188,7 +212,7 @@
         <tr><td>Health activity records</td><td>Meal logs (time, type, optional photo / nutrition analysis), exercise (duration, type), medication (name, dose, schedule, intake), hydration (intake events), sleep (start / end times)</td></tr>
         <tr><td>Supplement suggestions (optional)</td><td>If you ask for supplement suggestions: the result we build for you &mdash; the nutrients chosen, their grade and target amount, any matching product from our catalog, the reason codes, and a plain-language explanation &mdash; plus a note of which of your records were considered (counts and dates only, e.g., &ldquo;6 medications, checkup from March&rdquo;). The suggestions are computed by our own rules from records you already gave us (your medications, your latest checkup values, the last 28 days of meals, exercise and sleep, your age band and sex, your weight, and your country of residence); we collect nothing new for them.</td></tr>
         <tr><td>Follow-along workout records (optional)</td><td>If you use the follow-along workout feature: the routine you played (a catalog key naming a public YouTube video), how many minutes you followed it, whether you finished, the weekly routine plan we compose for you, and your workout settings (focus, minutes, posture, days per week, level, video-language preference, and any body areas or conditions you mark — for example a sore knee, osteoporosis or high blood pressure). The video itself is played inside YouTube&rsquo;s official embedded player and is never downloaded or stored by us.</td></tr>
-        <tr><td>Golf game records (optional)</td><td>If you use the golf scorekeeping feature: game name, holes and par, per-hole scores, handicap, standings, and the join code. These are shared with the other players in that game (your display name, handicap, and scores are visible to them). Names you type for guests (friends without the app) are stored as part of that game. When you invite a friend by phone number, we check whether that number belongs to a Healthia account in order to deliver the invitation; the number is not stored with the game and the invitation shows your display name to the invitee. If the host turns on the optional side bets (Skins per hole and/or a per-stroke bet), the stakes and currency the host chose and, when the game ends, each player's resulting position (who owes whom, as a figure) are stored with the game and shown to its players. Healthia does not process, hold, or transfer any money; settling up happens outside the app.</td></tr>
+        <tr><td>Golf game records (optional)</td><td>If you use the golf scorekeeping feature: game name, holes and par, per-hole scores, handicap, standings, and the join code. These are shared with the other players in that game (your display name, handicap, and scores are visible to them). Names you type for guests (friends without the app) are stored as part of that game. When you invite a friend by phone number, we check whether that number belongs to a Healthia account in order to deliver the invitation; the number is not stored with the game and the invitation shows your display name to the invitee. If the host turns on the optional side bets (Skins per hole and/or a per-stroke bet), the stakes and currency the host chose and, when the game ends, each player's resulting position (who owes whom, as a figure) are stored with the game and shown to its players. Healthia does not process, hold, or transfer any money; settling up happens outside the app. If you pick a golf course (US courses only), its holes and par are filled in from public course data and its name becomes the game name, which you can change before you start. The course you pick (its course ID and US state) is stored with the game. We use it only in statistics that add up all players &mdash; which courses are played most and how long rounds take &mdash; and courses with fewer than 5 players are left out of those statistics. The list of courses you recently played (name, city and state) is remembered on your phone only.</td></tr>
         <tr><td>Travel planning (optional)</td><td>If you use the travel planner: the destination you type or pick, trip dates or length, itinerary pace, an optional one-line note about the kind of trip you want, and the itinerary, budget estimate and destination guide generated for you. If you ask for a trip <em>recommended for you</em>, a neutral traveler profile (activity level, interests, morning / evening preference, travel companions, places you have mentioned, and a few short reasons) is derived from what the assistant has learned about you and from your last 30 days of daily summaries, and is stored with that plan; it is checked so that it never contains conditions, symptoms or medication names. If you use the flight price search, the departure city and your recent searches are kept <strong>only on your phone</strong> and are not sent to our servers (see section 5 for what your phone sends to Google when the results page opens). Travel plans are not visible to linked family.</td></tr>
         <tr><td>Health checkup reports (optional)</td><td>If you add a health-checkup report: the photos of its pages; the values, reference ranges and flags read from them (names, dates of birth, ID numbers, contact details and labelled addresses are masked before storage); plain-language explanations, lifestyle tips, next-checkup dates and year-to-year trends. Checkup reports are <strong>never</strong> visible to your linked family.</td></tr>
         <tr><td>Pet care questions (optional)</td><td>If you ask about a pet that seems unwell: your description of its symptoms, its species, an optional photo (deleted once analysed), and the guidance shown to you.</td></tr>
@@ -220,6 +244,7 @@
       <li>Your phone's built-in calendar, only with your permission — read on the device, not collected by us (section 8)</li>
       <li>Information your linked family provides via the family app</li>
       <li>Outputs from third-party services (e.g., Vertex AI responses)</li>
+      <li>Public golf course data (course names, locations, holes and par) from OpenGolfAPI, compiled by OpenStreetMap contributors &mdash; when you pick a course for a golf game</li>
     </ul>
 
     <h2 id="en-purposes">4. Purposes of use</h2>
@@ -237,7 +262,7 @@
       <li>Home camera (optional) — recognizing what a photo shows and taking you to the right feature, reading and translating text in a photo, explaining other things in plain language, and keeping your camera history so you can look back at those results</li>
       <li>Local personalization (approximate location for weather-based conversation)</li>
       <li>Family support (optional) — short summaries to enable family caregiving</li>
-      <li>Golf with friends (optional) — sharing scores and standings with the players you invite, delivering invitations by phone number, and recording a finished round as exercise in your daily summary</li>
+      <li>Golf with friends (optional) — finding the golf course you are at and filling in its holes and par, sharing scores and standings with the players you invite, delivering invitations by phone number, recording a finished round as exercise in your daily summary, and statistics that add up all players on which courses are played most and how long rounds take</li>
       <li>Travel planning (optional) — building a day-by-day itinerary, budget estimate and destination guide for a place you choose, and opening flight prices for a route you enter in the in-app browser</li>
       <li>Account management, including recovering your account through your security email and managing your signed-in devices</li>
       <li>Legal compliance, fraud prevention, and security auditing</li>
@@ -258,6 +283,7 @@
         <tr><td>Google Search (via Vertex AI grounding)</td><td>Your web-lookup question text, together with your home country (from your phone number) and, if you allow location, your current city / region so the answer fits where you are; generic region-scoped news queries; generic destination-guide queries for the travel planner (destination and month only)</td><td>Real-time factual lookup during conversation, the daily news brief, and destination guides. Not used for advertising.</td></tr>
         <tr><td>OpenWeather</td><td>Approximate (city / district level) location</td><td>Weather information used to start friendly conversation. Precise coordinates are not sent.</td></tr>
         <tr><td>USDA FoodData Central</td><td>Food names only (no personal identifiers)</td><td>Nutrition reference lookup for meals.</td></tr>
+        <tr><td>OpenGolfAPI (golf course data)</td><td>US state codes, or the ID of the golf course you picked, sent by our server &mdash; no personal identifier, location, or device IP</td><td>Fetching public golf course lists and their holes and par for golf games. The course data comes from OpenStreetMap contributors under the Open Database License (ODbL); we keep a shared copy on our servers and refresh it about every 30 days.</td></tr>
         <tr><td>NIH Dietary Supplement Label Database (DSLD) and openFDA food-recall data</td><td>Nothing personal — our server checks the products in our supplement catalog by label ID and company name</td><td>Keeping the supplement catalog accurate: whether a product is still on the market, its label amounts, and any recalls. No user data is involved.</td></tr>
         <tr><td>U.S. government health services — RxNorm / RxNav, openFDA, MedlinePlus, DailyMed (NLM / FDA), CMS Care Compare</td><td>Medication names, or a hospital's ZIP / name for ratings (no personal identifiers)</td><td>Standardizing medication information, drug labels / images, health-topic summaries, and hospital quality data. Public services.</td></tr>
         <tr><td>Google Maps (Android) / Apple Maps (iOS)</td><td>Your device's IP address and the map area being displayed</td><td>Drawing the map when you look for nearby care. No account identifier is sent.</td></tr>
@@ -366,13 +392,13 @@
     </div>
 
     <h2 id="en-spi">10. Sensitive Personal Information</h2>
-    <p>SPI under CPRA includes health information, audio signals, precise geolocation, and religious or philosophical beliefs. We collect precise geolocation <strong>only</strong> for 911 emergency readiness and family sharing (section 7) — with your opt-in, only while the app is open on your screen, keeping only the single most recent location, and never for advertising. We collect faith affiliation <strong>only</strong> if you volunteer it in conversation, solely for occasional faith-friendly greetings — never inferred, never shared with family, and removable anytime in <em>Settings → What the AI has learned</em>. We do not use SPI beyond service delivery and the purposes you have explicitly consented to. You may restrict SPI use via the in-app <em>Consent history</em> screen. (CPRA §1798.121 — Right to Limit Use of SPI)</p>
+    <p>SPI under CPRA includes health information, audio signals, precise geolocation, and religious or philosophical beliefs. We collect precise geolocation <strong>only</strong> for 911 emergency readiness and family sharing (section 7) — with your opt-in, only while the app is open on your screen, keeping only the single most recent location, and never for advertising. When you start a golf game, the app also uses one precise reading on your phone to find the golf course you are at; that reading is not stored and never leaves your phone, so we do not collect it (section 2). The course you then pick is stored with the game as part of your golf game records (section 2). We collect faith affiliation <strong>only</strong> if you volunteer it in conversation, solely for occasional faith-friendly greetings — never inferred, never shared with family, and removable anytime in <em>Settings → What the AI has learned</em>. We do not use SPI beyond service delivery and the purposes you have explicitly consented to. You may restrict SPI use via the in-app <em>Consent history</em> screen. (CPRA §1798.121 — Right to Limit Use of SPI)</p>
 
     <h2 id="en-retention">11. Retention</h2>
     <ul>
       <li>Active retention while your account is in use.</li>
       <li>Account deletion: scheduled with a 7-day grace period, then the account and all data are removed (well within 30 days). You can cancel at any point during the grace period. A minimal record that the deletion happened (when and why it was requested) is kept; your consent history is deleted with the account.</li>
-      <li>Record deletion (account kept): same 7-day grace period, then your records are erased while your account remains. Kept with your account: points and badges, family links, golf games, goals tied to a Goal Pod with their check-ins and messages, your devices and settings, your consent history, security and rights-request records, and the log of when the voice assistant was connected (used for the hourly voice limit; it is removed when you delete your account).</li>
+      <li>Record deletion (account kept): same 7-day grace period, then your records are erased while your account remains. Kept with your account: points and badges, family links, golf games played with other app users (games no other app user was in — solo rounds, or rounds with only guests — are erased), goals tied to a Goal Pod with their check-ins and messages, your devices and settings, your consent history, security and rights-request records, and the log of when the voice assistant was connected (used for the hourly voice limit; it is removed when you delete your account).</li>
       <li>Conversation text and AI memory: kept until you erase your records or delete your account. Deleting messages in the AI conversation screen hides them from that screen only (the app says so when you delete): the text stays in your conversation record &mdash; where it can still inform your daily summaries and the assistant&rsquo;s memory, and is included in your data export &mdash; until you erase your records or delete your account. You can review and delete what the assistant has learned in <em>Settings → What the AI has learned</em>.</li>
       <li>Health-checkup reports: photos are deleted 7 days after upload (sooner if you turn off medical photo analysis); the results are kept until you delete the report, erase your records, or delete your account.</li>
       <li>Pet care questions: photos are deleted once analysed; the question and guidance are kept until you erase your records or delete your account.</li>
@@ -381,7 +407,7 @@
       <li>Activity-area location: auto-deleted on a rolling 7-day window. Withdrawing the consent stops new points being recorded; points already recorded age out within that same 7-day window.</li>
       <li>Emergency alert records: see section 7.</li>
       <li>Travel plans: kept until you delete the plan in the app, erase your records, or delete your account. Place details fetched from Google for itineraries are cached on our server for at most 30 days (Google&rsquo;s terms) and hold no personal data. Flight searches are stored only on your phone.</li>
-      <li>Golf games: a finished game is kept as the shared history of all its players. When you delete your account, your link to those games is removed and your name in them is replaced with a neutral label; the other players keep their history.</li>
+      <li>Golf games: a game played with other app users is kept as the shared history of its players. When you delete your account, your link to those games is removed and your name in them is replaced with a neutral label; the other players keep their history. A game that no other app user is in any more (a solo round, or one with only guests) is erased together with your account, since no one else can open it.</li>
       <li>Supplement suggestions: each result is kept so you can look back at it, until you erase your records or delete your account. While your records are unchanged, the same result is shown again for up to 30 days (or until our product catalog is re-checked, which happens weekly) instead of building a new one.</li>
       <li>Follow-along workouts: workout sessions, weekly plans and settings are kept until you erase your records or delete your account. No video content is stored.</li>
       <li>Camera history: each entry, with its photo, is kept until you delete it in the app, erase your records, or delete your account. The reduced copy sent only to recognize what a photo shows is not kept. The short names and AI explanations kept to improve the service (no photo) are erased when you erase your records or delete your account.</li>
@@ -492,7 +518,7 @@
     <!-- ===================== 한국어 ===================== -->
     <article data-lang-block="ko">
     <h1>Healthya 개인정보처리방침</h1>
-    <p class="meta">적용 대상: Healthya · 시행일: 2026년 6월 21일 · 최종 수정: 2026년 10월 9일 · 동의 버전: 2026-09-14</p>
+    <p class="meta">적용 대상: Healthya · 시행일: 2026년 6월 21일 · 최종 수정: 2026년 10월 13일 · 동의 버전: 2026-09-14</p>
 
     <div class="callout">
       <p><strong>핵심 요약.</strong> Healthya는 식사·복약·수면·운동·약속과 일상 대화까지, 내 생활 전반을 관리하는 종합 AI 도우미 앱입니다. 성인 누구나 이용할 수 있고, 앱 하나만으로도 온전히 쓸 수 있습니다(가족 연동은 선택 사항). 본 방침은 어떤 정보를 수집하고, 누구와 공유하며, 어떻게 권리를 행사할 수 있는지 설명합니다. 저희는 광고 목적으로 개인정보를 판매하거나 공유하지 않습니다.</p>
@@ -538,6 +564,7 @@
         <tr><td>기기 정보</td><td>휴대폰에 설정된 기기 이름, 모델, OS·앱 버전, 표시 언어, 최초·최근 로그인 시각(<em>내 기기 관리</em>에서 본인에게 표시 — 로그아웃한 기기 포함; 앱마다 기기 3대까지 동시 로그인); 중요한 작업을 기기 자체 잠금으로 확인하는 데 쓰는 기기 공개키(생체정보는 받지 않음); 남용 방지를 위해 하루 정도 보관하는 IP 주소</td></tr>
         <tr><td>위치 — 대략(선택)</td><td>시·구 단위로, 지역 맞춤(예: 날씨 기반 대화)과 근처 병원·약국 등 케어 시설 찾기에 활용합니다(지도 제공자에 전송하기 전 약 1&nbsp;km 단위로 반올림 — 5항 참조). 이 목적들로 정밀 좌표를 저장하지 않습니다. 선택 시, 최근 7일의 일반화된 "활동 영역"(약 2&nbsp;km 블록 단위로 반올림)을 연결된 가족에게 공유할 수 있습니다.</td></tr>
         <tr><td>위치 — 정밀(선택, 응급 대비)</td><td>연결된 가족에게 응급 위치 공유 권한을 부여하시면, 911 발신 순간에 쓸 수 있는 위치가 미리 확보되어 있도록 <strong>앱이 화면에 열려 있는 동안</strong> 약 5분마다 저장된 정밀 위치 1건을 갱신합니다. 가장 최근 1건만 보관하며 갱신 시 이전 값을 덮어쓰므로 이동 경로나 이력은 저장되지 않습니다. 911 을 누르면 그 순간 정밀 위치를 한 번 더 잡으려 합니다. 앱이 백그라운드에 있거나 종료된 동안에는 수집하지 않습니다. 권한을 준 가족은 911 알림 뒤 24시간 동안만 볼 수 있습니다. 7항 참조.</td></tr>
+        <tr><td>위치 — 정밀, 휴대폰 안에서만 사용(선택, 골프)</td><td>새 골프 게임을 만들 때 위치가 허용되어 있으면, 앱이 정밀 위치를 한 번 읽어 <strong>휴대폰 안에서</strong> 회원님이 계신 미국 주의 골프장 목록과 비교해 지금 계신 골프장을 제안합니다. 이 위치는 <strong>저장하지 않으며 당사나 다른 누구에게도 전송되지 않습니다</strong>. 골프장 목록을 받기 위해 당사 서버가 받는 것은 휴대폰이 그 위치로 정한 미국 주(주 경계 근처면 이웃 주도)와, 골프장을 고르신 경우 그 골프장의 ID 뿐입니다. 5항(OpenGolfAPI) 참조.</td></tr>
         <tr><td>음성/영상(선택)</td><td>마이크 신호(실시간 처리만, 저장 안 함); 직접 업로드한 식사·약/처방전·증상 사진(증상 사진은 분석 직후 삭제)</td></tr>
         <tr><td>홈 카메라 사진과 카메라 기록(선택)</td><td>홈 카메라로 사진을 찍거나 고르시면, 무엇을 찍었는지(음식·약·아픈 곳·아프거나 다친 반려동물·검진 결과서·글·그 밖의 것) 알아보고 글이면 글자를 읽기 위해 줄인 사본을 AI 제공자에게 보냅니다. QR 코드는 휴대폰에서 읽으며, 그 글의 번역을 요청하지 않는 한 당사로 보내지 않습니다. 이 판정용 사본은 저장하지 않습니다. 음식·약·아픈 곳·반려동물·검진 결과서로 판정된 사진은 이어서 해당 기능으로 넘어가며, 본 방침에 적은 그 기능의 기준을 따릅니다. 바로 보여 드리는 결과 &mdash; 읽은 글과 그 밖의 것에 대한 해설 &mdash; 는 회원님의 어느 기기에서든 다시 열어 보실 수 있도록 회원님 계정에 <strong>카메라 기록</strong>으로 보관합니다: 사진(크기를 줄이고 위치 등 부가 정보를 지운 것), 사진에서 알아본 이름, 읽은 글과 그 언어, 마지막으로 하신 번역, AI 해설. 카메라 기록은 회원님만 보실 수 있으며 연결된 가족에게는 <strong>절대</strong> 보이지 않고, 앱에서 한 건씩 언제든 지우실 수 있습니다. 이와 별도로 사진이 「그 밖의 것」으로 판정되면 짧은 이름과 AI 해설(사진은 제외)을 서비스 개선을 위해 보관하며, 모아서 본 통계로만 검토합니다.</td></tr>
         <tr><td>건강 앱에서 가져온 건강·운동 정보(선택)</td><td>Apple 건강 또는 Google Health Connect에서 읽어오는 측정값(읽기 전용): 수면·수면 단계, 걸음 수, 거리, 활동 칼로리, 운동 세션; 활력징후(심박·혈압·산소·체온·호흡수); 혈당·체중; 체력·보행(VO2max·심박변이도·보행 안정성/속도); 정신건강(마음챙김·기분). 8항 참조.</td></tr>
@@ -545,7 +572,7 @@
         <tr><td>건강 활동 기록</td><td>식사 기록(시각, 종류, 선택 사진/영양 분석), 운동(시간, 종류), 복약(이름, 용량, 일정, 복용), 수분(섭취), 수면(시작/종료 시각)</td></tr>
         <tr><td>영양제 추천(선택)</td><td>영양제 추천을 요청하시는 경우: 회원님을 위해 만든 결과 &mdash; 고른 성분, 등급과 목표 용량, 당사 목록에서 맞는 상품, 이유 코드, 쉬운 설명 &mdash; 와 어떤 기록을 참고했는지의 표시(개수·날짜만, 예: &ldquo;약 6개, 3월 검진&rdquo;). 추천은 이미 주신 기록(복용 중인 약, 최근 검진 값, 최근 28일의 식사·운동·수면, 나이대·성별, 체중, 거주 국가)으로 당사 규칙이 계산하며, 이를 위해 새로 수집하는 정보는 없습니다.</td></tr>
         <tr><td>따라하는 운동 기록(선택)</td><td>따라하는 운동 기능을 쓰면: 재생한 루틴(공개 유튜브 영상을 가리키는 카탈로그 키), 따라 한 시간(분), 완료 여부, 저희가 짜 드린 주간 루틴 계획, 운동 설정(초점·시간·자세·주당 횟수·단계·영상 언어 선호, 그리고 표시하신 아픈 부위나 상태 — 예: 무릎 통증·골다공증·고혈압). 영상 자체는 유튜브 공식 임베디드 플레이어 안에서 재생되며 저희가 내려받거나 저장하지 않습니다.</td></tr>
-        <tr><td>골프 게임 기록(선택)</td><td>골프 점수 기록 기능을 쓰시는 경우: 게임 이름, 홀 수·파, 홀별 점수, 핸디캡, 순위, 입장 코드. 이 정보는 같은 게임의 다른 참가자와 공유됩니다(닉네임·핸디캡·점수가 그들에게 보입니다). 앱이 없는 친구를 게스트로 적으신 이름은 그 게임의 일부로 저장됩니다. 전화번호로 친구를 초대하시면 초대를 전달하기 위해 그 번호가 헬시야 계정인지 확인하며, 번호 자체는 게임에 저장하지 않고 초대에는 회원님의 닉네임이 표시됩니다. 방장이 선택 기능인 내기(홀당 Skins·타당 스트로크)를 켜면 방장이 정한 금액·통화와, 게임이 끝났을 때의 각 참가자 정산 결과(누가 누구에게 얼마인지의 숫자)가 게임 정보로 저장되어 그 게임의 참가자에게 보입니다. 헬시야는 어떤 돈도 결제·보관·이체하지 않으며, 정산은 앱 밖에서 이루어집니다.</td></tr>
+        <tr><td>골프 게임 기록(선택)</td><td>골프 점수 기록 기능을 쓰시는 경우: 게임 이름, 홀 수·파, 홀별 점수, 핸디캡, 순위, 입장 코드. 이 정보는 같은 게임의 다른 참가자와 공유됩니다(닉네임·핸디캡·점수가 그들에게 보입니다). 앱이 없는 친구를 게스트로 적으신 이름은 그 게임의 일부로 저장됩니다. 전화번호로 친구를 초대하시면 초대를 전달하기 위해 그 번호가 헬시야 계정인지 확인하며, 번호 자체는 게임에 저장하지 않고 초대에는 회원님의 닉네임이 표시됩니다. 방장이 선택 기능인 내기(홀당 Skins·타당 스트로크)를 켜면 방장이 정한 금액·통화와, 게임이 끝났을 때의 각 참가자 정산 결과(누가 누구에게 얼마인지의 숫자)가 게임 정보로 저장되어 그 게임의 참가자에게 보입니다. 헬시야는 어떤 돈도 결제·보관·이체하지 않으며, 정산은 앱 밖에서 이루어집니다. 골프장을 고르시면(미국 골프장만) 공개 골프장 데이터로 홀 수·파가 채워지고 골프장 이름이 게임 이름이 되며, 시작하기 전에 바꾸실 수 있습니다. 고르신 골프장(골프장 ID·주)은 게임과 함께 저장됩니다. 이 정보는 전체 이용자를 합친 통계(많이 가는 골프장·라운드 시간)에만 쓰며, 친 사람이 5명 미만인 골프장은 그 통계에서 뺍니다. 최근에 치신 골프장 목록(이름·도시·주)은 휴대폰에만 기억됩니다.</td></tr>
         <tr><td>여행 계획(선택)</td><td>여행 플래너를 쓰시는 경우: 직접 입력하거나 고른 여행지, 여행 날짜 또는 기간, 일정 밀도, 원하는 여행의 성격을 적은 한 줄 메모(선택), 그리고 생성된 일정·예상 비용·여행지 안내. <em>나에게 맞는 추천</em>을 요청하시면 AI가 학습한 정보와 최근 30일의 하루 요약에서 중립적인 여행 성향(활동 강도, 관심사, 아침형/저녁형, 동행, 언급한 장소, 짧은 근거 몇 줄)을 도출해 그 계획과 함께 저장하며, 질환·증상·약 이름이 담기지 않도록 검사합니다. 항공권 가격 찾기를 쓰시는 경우 출발 도시와 최근 검색은 <strong>휴대폰에만</strong> 보관되며 당사 서버로 전송되지 않습니다(결과 화면을 열 때 휴대폰이 Google에 보내는 정보는 5항 참조). 여행 계획은 연결된 가족에게 보이지 않습니다.</td></tr>
         <tr><td>건강검진 결과서(선택)</td><td>건강검진 결과서를 추가하시는 경우: 결과서 각 장의 사진; 거기서 읽어 낸 수치·정상범위·판정(이름·생년월일·번호·연락처·표시된 주소는 저장 전에 가림); 쉬운 설명·생활 가이드·다음 검진일·해마다의 추이. 검진 결과는 연결된 가족에게 <strong>절대</strong> 보이지 않습니다.</td></tr>
         <tr><td>반려동물 상담(선택)</td><td>아파 보이는 반려동물에 대해 물으시는 경우: 증상 설명, 동물 종류, 선택 사진(분석 후 삭제), 보여 드린 안내 결과.</td></tr>
@@ -577,6 +604,7 @@
       <li>휴대폰 기본 캘린더 — 이용자가 허용한 경우에 한하며, 기기에서만 읽고 당사가 수집하지 않음(8항)</li>
       <li>연결된 가족이 가족 앱을 통해 제공하는 정보</li>
       <li>제3자 서비스의 출력 결과(예: Vertex AI 응답)</li>
+      <li>공개 골프장 데이터(골프장 이름·위치·홀 수·파) — OpenStreetMap 기여자들이 만든 데이터를 OpenGolfAPI 에서 받음, 골프 게임에서 골프장을 고르실 때</li>
     </ul>
 
     <h2 id="ko-purposes">4. 이용 목적</h2>
@@ -594,7 +622,7 @@
       <li>홈 카메라(선택) — 사진에 무엇이 찍혔는지 알아보고 맞는 기능으로 안내, 사진 속 글을 읽고 번역, 그 밖의 것을 쉬운 말로 설명, 그리고 그 결과를 다시 볼 수 있도록 카메라 기록 보관</li>
       <li>지역 맞춤(날씨 기반 대화를 위한 대략 위치)</li>
       <li>가족 지원(선택) — 가족 돌봄을 위한 짧은 요약</li>
-      <li>친구와 골프(선택) — 초대한 참가자와 점수·순위 공유, 전화번호를 통한 초대 전달, 끝난 라운드를 하루 요약의 운동으로 기록</li>
+      <li>친구와 골프(선택) — 지금 계신 골프장 찾기와 홀 수·파 채우기, 초대한 참가자와 점수·순위 공유, 전화번호를 통한 초대 전달, 끝난 라운드를 하루 요약의 운동으로 기록, 전체 이용자를 합친 골프장 이용 통계(많이 가는 골프장·라운드 시간)</li>
       <li>여행 계획(선택) — 고른 여행지의 하루하루 일정·예상 비용·여행지 안내 생성, 입력한 경로의 항공권 가격을 앱 안 브라우저로 열기</li>
       <li>계정 관리 — 보안 이메일을 통한 계정 복구와 로그인된 기기 관리 포함</li>
       <li>법규 준수, 부정 방지, 보안 감사</li>
@@ -615,6 +643,7 @@
         <tr><td>Google Search(Vertex AI grounding 경유)</td><td>웹 조회 질문 텍스트와, 답이 회원님이 계신 곳에 맞도록 함께 보내는 본국(전화번호 국가)·현재 시·도(위치를 허용하신 경우에만); 지역 범위의 일반 뉴스 질의; 여행 플래너의 일반적인 여행지 안내 질의(여행지·월만)</td><td>대화 중 실시간 사실 조회, 매일 뉴스 브리핑, 여행지 안내. 광고 미사용.</td></tr>
         <tr><td>OpenWeather</td><td>대략(시·구 단위) 위치</td><td>친근한 대화 시작을 위한 날씨 정보. 정밀 좌표는 전송 안 함.</td></tr>
         <tr><td>USDA FoodData Central</td><td>음식 이름만(개인 식별자 없음)</td><td>식사 영양 정보 조회.</td></tr>
+        <tr><td>OpenGolfAPI(골프장 데이터)</td><td>미국 주 코드(들) 또는 고르신 골프장의 ID &mdash; 당사 서버가 보내며 개인 식별자·위치·기기 IP 없음</td><td>골프 게임용 공개 골프장 목록과 홀 수·파 조회. 골프장 데이터는 OpenStreetMap 기여자들의 데이터(ODbL 라이선스)이며, 당사 서버에 공용 사본을 두고 약 30일마다 새로 받습니다.</td></tr>
         <tr><td>NIH 영양보충제 라벨 데이터베이스(DSLD) · openFDA 식품 리콜 정보</td><td>개인정보 없음 — 당사 서버가 영양제 카탈로그 상품을 라벨 ID·회사명으로 조회</td><td>영양제 카탈로그 정확성 유지(판매 여부·라벨 함량·리콜 확인). 이용자 데이터는 관여하지 않음.</td></tr>
         <tr><td>미국 정부 건강 서비스 — RxNorm / RxNav, openFDA, MedlinePlus, DailyMed(NLM / FDA), CMS Care Compare</td><td>약 이름, 또는 평가 조회용 병원 ZIP/이름(개인 식별자 없음)</td><td>약품 정보 표준화, 의약품 라벨/이미지, 건강 주제 요약, 병원 품질 정보. 공공 서비스.</td></tr>
         <tr><td>Google 지도(Android) / Apple 지도(iOS)</td><td>기기 IP 주소와 화면에 표시 중인 지도 영역</td><td>근처 케어 시설을 찾을 때의 지도 표시. 계정 식별자는 전송하지 않음.</td></tr>
@@ -723,13 +752,13 @@
     </div>
 
     <h2 id="ko-spi">10. 민감 개인정보(SPI)</h2>
-    <p>CPRA상 SPI에는 건강정보, 음성 신호, 정밀 위치, 종교·철학적 신념이 포함됩니다. 당사는 정밀 위치를 <strong>오직</strong> 911 응급 대비 및 가족 공유(7항)를 위해 수집합니다 — 이용자 옵트인하에, 앱이 화면에 열려 있는 동안에만, 가장 최근 1건만 보관하며, 광고에는 절대 사용하지 않습니다. 신앙 정보는 이용자가 대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에만 사용합니다 — 추론하지 않고, 가족과 공유하지 않으며, <em>설정 → AI가 학습한 정보</em>에서 언제든 삭제할 수 있습니다. SPI는 서비스 제공과 이용자가 명시적으로 동의한 목적 외에는 사용하지 않습니다. 앱 내 <em>동의 이력</em> 화면에서 SPI 이용을 제한할 수 있습니다. (CPRA §1798.121 — SPI 이용 제한권)</p>
+    <p>CPRA상 SPI에는 건강정보, 음성 신호, 정밀 위치, 종교·철학적 신념이 포함됩니다. 당사는 정밀 위치를 <strong>오직</strong> 911 응급 대비 및 가족 공유(7항)를 위해 수집합니다 — 이용자 옵트인하에, 앱이 화면에 열려 있는 동안에만, 가장 최근 1건만 보관하며, 광고에는 절대 사용하지 않습니다. 골프 게임을 만들 때는 지금 계신 골프장을 찾기 위해 휴대폰 안에서 정밀 위치를 한 번 사용하지만, 이 위치는 저장하지 않고 휴대폰 밖으로 나가지 않으므로 당사가 수집하지 않습니다(2항). 그 뒤 고르신 골프장은 골프 게임 기록의 일부로 게임과 함께 저장됩니다(2항). 신앙 정보는 이용자가 대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에만 사용합니다 — 추론하지 않고, 가족과 공유하지 않으며, <em>설정 → AI가 학습한 정보</em>에서 언제든 삭제할 수 있습니다. SPI는 서비스 제공과 이용자가 명시적으로 동의한 목적 외에는 사용하지 않습니다. 앱 내 <em>동의 이력</em> 화면에서 SPI 이용을 제한할 수 있습니다. (CPRA §1798.121 — SPI 이용 제한권)</p>
 
     <h2 id="ko-retention">11. 보유 기간</h2>
     <ul>
       <li>계정 이용 중에는 활성 보유.</li>
       <li>계정 삭제: 7일 유예 후 계정과 모든 데이터를 삭제합니다(30일 이내). 유예 기간에는 언제든 취소할 수 있습니다. 삭제가 있었다는 최소한의 기록(언제·왜 요청됐는지)은 남으며, 동의 이력은 계정과 함께 삭제됩니다.</li>
-      <li>기록 삭제(계정 유지): 같은 7일 유예 후 기록만 지우고 계정은 남습니다. 계정과 함께 남는 것: 포인트·배지, 가족 연결, 골프 게임, 목표 함께하기 방에 묶인 목표와 그 체크인·메시지, 기기와 설정, 동의 이력, 보안·권리 요청 기록, 음성 도우미 연결 기록(시간당 음성 한도에 쓰며, 계정을 삭제하면 함께 지워짐).</li>
+      <li>기록 삭제(계정 유지): 같은 7일 유예 후 기록만 지우고 계정은 남습니다. 계정과 함께 남는 것: 포인트·배지, 가족 연결, 앱을 쓰는 다른 분과 함께 친 골프 게임(혼자 치셨거나 게스트와만 친 게임은 지웁니다), 목표 함께하기 방에 묶인 목표와 그 체크인·메시지, 기기와 설정, 동의 이력, 보안·권리 요청 기록, 음성 도우미 연결 기록(시간당 음성 한도에 쓰며, 계정을 삭제하면 함께 지워짐).</li>
       <li>대화 글과 AI 기억: 내 기록 지우기나 계정 삭제 전까지 보관. AI 대화 화면에서 대화를 골라 삭제하면 그 화면에서만 사라집니다(삭제할 때 앱이 그렇게 안내합니다). 글은 대화 기록에 남아 &mdash; 하루 요약과 도우미의 기억에 계속 쓰일 수 있고 데이터 내보내기에도 포함되며 &mdash; 내 기록 지우기나 계정 삭제 때 지워집니다. 도우미가 학습한 내용은 <em>설정 → AI가 학습한 정보</em>에서 보고 지울 수 있습니다.</li>
       <li>건강검진 결과서: 사진은 올린 뒤 7일(의료 사진 분석 동의를 끄면 더 일찍) 자동 삭제, 결과는 앱에서 결과서를 지우거나 기록 지우기·계정 삭제 때까지 보관.</li>
       <li>반려동물 상담: 사진은 분석 후 삭제, 질문과 안내 결과는 기록 지우기·계정 삭제 때까지 보관.</li>
@@ -738,7 +767,7 @@
       <li>활동 영역 위치: 7일 롤링 단위로 자동 삭제. 동의를 철회하면 새로 기록되지 않고, 이미 기록된 것은 7일 롤링으로 사라집니다.</li>
       <li>응급 알림 기록: 7항 참조.</li>
       <li>여행 계획: 앱에서 계획을 삭제하거나 기록을 지우거나 계정을 삭제할 때까지 보관합니다. 일정 생성을 위해 Google에서 가져온 장소 정보는 당사 서버에 최대 30일(Google 약관) 캐시되며 개인정보를 담지 않습니다. 항공권 검색은 휴대폰에만 저장됩니다.</li>
-      <li>골프 게임: 종료된 게임은 참가자 전원의 공동 이력으로 보관됩니다. 계정을 삭제하시면 그 게임들과의 연결이 해제되고 게임 안의 이름은 중립적인 표시로 바뀌며, 다른 참가자의 이력은 유지됩니다.</li>
+      <li>골프 게임: 앱을 쓰는 다른 분과 함께 친 게임은 참가자들의 공동 이력으로 보관됩니다. 계정을 삭제하시면 그 게임들과의 연결이 해제되고 게임 안의 이름은 중립적인 표시로 바뀌며, 다른 참가자의 이력은 유지됩니다. 다른 앱 사용자가 더는 없는 게임(혼자 치신 게임, 게스트와만 친 게임)은 다른 누구도 열 수 없으므로 계정과 함께 지웁니다.</li>
       <li>영양제 추천: 결과는 다시 볼 수 있도록 기록 삭제 또는 계정 삭제까지 보관합니다. 기록이 바뀌지 않으면 최대 30일(또는 매주 하는 상품 목록 재확인 때까지) 새로 만들지 않고 같은 결과를 다시 보여 줍니다.</li>
       <li>따라하는 운동: 운동 세션·주간 계획·설정은 「기록만 지우기」 또는 계정 삭제 때까지 보관합니다. 영상 자체는 저장하지 않습니다.</li>
       <li>카메라 기록: 각 기록은 사진과 함께, 앱에서 지우시거나 「기록만 지우기」 또는 계정 삭제 때까지 보관합니다. 무엇인지 알아보기 위해서만 보낸 줄인 사본은 보관하지 않습니다. 서비스 개선을 위해 보관하는 짧은 이름과 AI 해설(사진 제외)은 「기록만 지우기」 또는 계정 삭제 때 함께 지웁니다.</li>

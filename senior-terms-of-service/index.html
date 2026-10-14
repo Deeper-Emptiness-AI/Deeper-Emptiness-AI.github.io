@@ -80,6 +80,29 @@
     html[data-lang="en"] [data-lang-block="en"] { display: block; }
     html[data-lang="ko"] [data-lang-block="ko"] { display: block; }
     html:not([data-lang]) [data-lang-block="en"] { display: block; }
+    /* 넓은 화면(패드 가로 · 데스크톱) — 목차를 본문 왼쪽에 고정한다(읽기 순서대로 「무엇이 있나」를 먼저 본다). 긴 문서에서 지금 어디쯤인지와 다른 항목으로
+       가는 길이 늘 보인다(2026-10-14). 본문 폭(720)은 그대로, 좁은 화면은 지금처럼 목차가 본문 위에 선다 */
+    @media (min-width: 1000px) {
+      main { max-width: 1060px; }
+      html[data-lang="en"] article[data-lang-block="en"],
+      html[data-lang="ko"] article[data-lang-block="ko"],
+      html:not([data-lang]) article[data-lang-block="en"] {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 720px);
+        column-gap: 48px;
+        align-items: start;
+      }
+      article > * { grid-column: 2; }
+      article > .toc {
+        grid-column: 1;
+        grid-row: 1 / span 999;
+        position: sticky;
+        top: 72px;
+        max-height: calc(100vh - 96px);
+        overflow-y: auto;
+        margin: 0;
+      }
+    }
   </style>
 </head>
 <body>
@@ -99,7 +122,7 @@
     <!-- ===================== ENGLISH ===================== -->
     <article data-lang-block="en">
     <h1>Healthya Terms of Service</h1>
-    <p class="meta">Applies to: Healthya · Effective: May 28, 2026 · Last updated: October 9, 2026</p>
+    <p class="meta">Applies to: Healthya · Effective: May 28, 2026 · Last updated: October 10, 2026</p>
 
     <div class="callout">
       <p><strong>Most important note up front.</strong> Healthya is an all-in-one AI assistant for managing your own life — meals, medications, sleep, exercise, appointments, and everyday well-being. It is open to any adult, and works on its own; linking a family member is entirely optional. It is <strong>not a substitute for medical care.</strong> For any decisions about your health, please consult a doctor or pharmacist.</p>
@@ -225,12 +248,14 @@
     <ul>
       <li>Points and badges you earn in the app have no cash value and cannot be sold or transferred. We may correct points awarded in error and may change how points are earned. Any prize or exchange program is offered at our discretion under its own notice.</li>
       <li>For golf games, the app can total side bets (such as skins or stroke bets) from the scores players enter. The app does not hold, collect, or transfer money and is not a party to any bet. Any wagering is solely between the players, who are responsible for following the laws where they play.</li>
+      <li>When you start a golf game, the app can suggest the golf course you are at (US courses only) and fill in its holes and par from public course data. This information may be incomplete or out of date, so check the holes and par before you start &mdash; once a game starts, its rules are locked. You can always choose another course or enter the holes and par yourself.</li>
       <li>In shared rooms, other participants see your display name (golf) or an automatically generated nickname (goal groups), golf players can record scores for one another, and players added by name only do not need an account. The person who created a room can remove members.</li>
     </ul>
 
     <h2 id="en-thirdparty">12. Third-party services and links</h2>
     <ul>
-      <li>Some features open third-party websites or show third-party content inside the app — for example Google Flights for airfares, pages linked from QR codes, information sources, maps and place details, weather, and news. Those services are governed by their own terms and privacy policies, and we are not responsible for their content or availability.</li>
+      <li>Some features open third-party websites or show third-party content inside the app — for example Google Flights for airfares, pages linked from QR codes, information sources, maps and place details, weather, news, and golf course information. Those services are governed by their own terms and privacy policies, and we are not responsible for their content or availability.</li>
+      <li>Golf course information comes from OpenStreetMap contributors through OpenGolfAPI and is available under the Open Database License (ODbL); the course picker shows this attribution. It is not our content and we do not guarantee it.</li>
       <li>Bookings or purchases you make on a third-party site are between you and that site. We do not take or process payments.</li>
       <li>A QR code you scan opens its page directly. Check the address before entering personal or payment information.</li>
       <li>For people who use the app in a language other than English, web pages opened inside the app may be shown through Google&rsquo;s automatic web translation, which may be inaccurate.</li>
@@ -289,7 +314,7 @@
     <!-- ===================== 한국어 ===================== -->
     <article data-lang-block="ko">
     <h1>Healthya 이용약관</h1>
-    <p class="meta">적용 대상: Healthya · 시행일: 2026년 5월 28일 · 최종 수정: 2026년 10월 9일</p>
+    <p class="meta">적용 대상: Healthya · 시행일: 2026년 5월 28일 · 최종 수정: 2026년 10월 10일</p>
 
     <div class="callout">
       <p><strong>가장 중요한 안내.</strong> Healthya는 식사·복약·수면·운동·약속 등 내 생활 전반을 관리하는 종합 AI 도우미입니다. 성인 누구나 이용할 수 있고, 앱 하나만으로도 온전히 쓸 수 있습니다(가족 연동은 선택 사항). 다만 <strong>의료를 대체하지 않습니다.</strong> 건강에 관한 결정은 반드시 의사나 약사와 상담하세요.</p>
@@ -415,12 +440,14 @@
     <ul>
       <li>앱에서 받는 포인트와 배지는 현금 가치가 없으며 팔거나 양도할 수 없습니다. 잘못 지급된 포인트는 바로잡을 수 있고 적립 기준은 바뀔 수 있습니다. 경품·교환 프로그램은 당사 재량으로, 별도 안내에 따라 운영합니다.</li>
       <li>골프 게임에서 앱은 참가자가 입력한 점수로 내기(스킨스·스트로크 등)의 정산 금액을 계산해 줄 수 있습니다. 앱은 돈을 보관·수금·송금하지 않으며 내기의 당사자가 아닙니다. 내기는 전적으로 참가자들 사이의 일이며, 해당 지역의 법을 지킬 책임은 참가자에게 있습니다.</li>
+      <li>골프 게임을 만들 때 앱이 지금 계신 골프장(미국 골프장만)을 제안하고 공개 골프장 데이터로 홀 수·파를 채워 줄 수 있습니다. 이 정보는 빠지거나 오래되었을 수 있으니 시작하기 전에 홀 수·파를 확인하세요 &mdash; 게임을 시작하면 규칙이 잠깁니다. 언제든 다른 골프장을 고르거나 홀 수·파를 직접 입력하실 수 있습니다.</li>
       <li>함께하는 방에서는 다른 참가자에게 표시 이름(골프) 또는 자동으로 만든 별명(목표 함께하기)이 보이고, 골프 참가자는 서로의 점수를 기록할 수 있으며, 이름만으로 추가된 참가자는 계정이 없어도 됩니다. 방을 만든 사람은 멤버를 내보낼 수 있습니다.</li>
     </ul>
 
     <h2 id="ko-thirdparty">12. 제3자 서비스와 링크</h2>
     <ul>
-      <li>일부 기능은 앱 안에서 제3자 웹사이트를 열거나 제3자 콘텐츠를 보여 줍니다 — 예: 항공권의 Google Flights, QR 코드로 연결된 페이지, 정보 출처, 지도와 장소 정보, 날씨, 뉴스. 이 서비스들은 각자의 약관과 개인정보처리방침을 따르며, 당사는 그 내용이나 이용 가능 여부에 책임지지 않습니다.</li>
+      <li>일부 기능은 앱 안에서 제3자 웹사이트를 열거나 제3자 콘텐츠를 보여 줍니다 — 예: 항공권의 Google Flights, QR 코드로 연결된 페이지, 정보 출처, 지도와 장소 정보, 날씨, 뉴스, 골프장 정보. 이 서비스들은 각자의 약관과 개인정보처리방침을 따르며, 당사는 그 내용이나 이용 가능 여부에 책임지지 않습니다.</li>
+      <li>골프장 정보는 OpenStreetMap 기여자들의 데이터를 OpenGolfAPI 를 통해 받은 것으로 ODbL(Open Database License)에 따라 제공되며, 골프장 고르기 화면에 출처를 표시합니다. 당사의 콘텐츠가 아니며 정확성을 보증하지 않습니다.</li>
       <li>제3자 사이트에서 하는 예약·구매는 회원님과 그 사이트 사이의 거래입니다. 당사는 결제를 받거나 처리하지 않습니다.</li>
       <li>스캔한 QR 코드는 그 페이지를 바로 엽니다. 개인정보나 결제 정보를 입력하기 전에 주소를 확인하세요.</li>
       <li>앱을 영어가 아닌 언어로 쓰시면, 앱 안에서 연 웹페이지가 Google 자동 웹 번역으로 보일 수 있으며 번역은 부정확할 수 있습니다.</li>
