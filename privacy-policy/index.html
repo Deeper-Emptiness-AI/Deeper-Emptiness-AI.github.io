@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <title>Healthya Privacy Policy</title>
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="canonical" href="https://healthya.app/privacy-policy/" />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f7f9fb;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --border: #cbd5e1;
+      --primary: #0e7490;
+      --danger: #991b1b;
+      --control-bg: #ffffff;
+      --control-border: #cbd5e1;
+      --control-active-bg: #0e7490;
+      --control-active-text: #ffffff;
+    }
+    :root[data-theme="dark"] {
+      --bg: #0b1220;
+      --surface: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #cbd5e1;
+      --border: #475569;
+      --primary: #22d3ee;
+      --danger: #f87171;
+      --control-bg: #1e293b;
+      --control-border: #475569;
+      --control-active-bg: #22d3ee;
+      --control-active-text: #0b1220;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --bg: #0b1220;
+        --surface: #1e293b;
+        --text: #f8fafc;
+        --text-muted: #cbd5e1;
+        --border: #475569;
+        --primary: #22d3ee;
+        --danger: #f87171;
+        --control-bg: #1e293b;
+        --control-border: #475569;
+        --control-active-bg: #22d3ee;
+        --control-active-text: #0b1220;
+      }
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
+      font-size: 18px;
+      line-height: 1.7;
+    }
+    main { max-width: 720px; margin: 0 auto; padding: 16px 24px 96px; }
+    h1 { font-size: 28px; line-height: 1.4; margin: 0 0 8px; }
+    h2 {
+      font-size: 22px;
+      line-height: 1.4;
+      margin: 40px 0 12px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    h2:first-of-type { border-top: none; padding-top: 0; }
+    h3 { font-size: 20px; line-height: 1.4; margin: 24px 0 8px; }
+    p, li { font-size: 18px; }
+    p { margin: 12px 0; }
+    ul, ol { padding-left: 24px; margin: 12px 0; }
+    li { margin: 6px 0; }
+    .meta { color: var(--text-muted); font-size: 16px; margin: 0 0 24px; }
+    .callout {
+      background: var(--surface);
+      border-left: 4px solid var(--primary);
+      padding: 16px 20px;
+      margin: 20px 0;
+      border-radius: 6px;
+    }
+    .callout.health { border-left-color: var(--danger); }
+    table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 16px; }
+    th, td { border: 1px solid var(--border); padding: 10px 12px; text-align: left; vertical-align: top; }
+    th { background: var(--surface); font-weight: 600; }
+    .toc { background: var(--surface); padding: 16px 20px; border-radius: 8px; margin: 24px 0 32px; }
+    .toc h2 { border: none; padding: 0; margin: 0 0 8px; font-size: 18px; }
+    .toc ol { margin: 0; padding-left: 22px; }
+    .toc li { margin: 4px 0; font-size: 16px; }
+    a { color: var(--primary); text-decoration: underline; }
+
+    /* Controls bar */
+    .controls {
+      position: sticky; top: 0; z-index: 10;
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end;
+      padding: 10px 24px; background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .seg { display: inline-flex; border: 1px solid var(--control-border); border-radius: 8px; overflow: hidden; }
+    .seg button {
+      font: inherit; font-size: 14px; cursor: pointer;
+      padding: 6px 12px; border: none; background: var(--control-bg); color: var(--text);
+      min-height: 36px;
+    }
+    .seg button + button { border-left: 1px solid var(--control-border); }
+    .seg button[aria-pressed="true"] { background: var(--control-active-bg); color: var(--control-active-text); font-weight: 600; }
+
+    /* Language visibility */
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"] { display: block; }
+    html[data-lang="ko"] [data-lang-block="ko"] { display: block; }
+    html:not([data-lang]) [data-lang-block="en"] { display: block; }
+
+    /* 앱 전용 요소(예: 데이터 다운로드 링크) — 기본 숨김(fail-closed). 앱 웹뷰가
+       주입하는 html[data-inapp="1"] 일 때만 노출. 공개 웹에서는 절대 보이지 않는다. */
+    .app-only { display: none; }
+    html[data-inapp="1"] .app-only { display: block; }
+    /* 넓은 화면(패드 가로 · 데스크톱) — 목차를 본문 왼쪽에 고정한다(읽기 순서대로 「무엇이 있나」를 먼저 본다). 긴 문서에서 지금 어디쯤인지와 다른 항목으로
+       가는 길이 늘 보인다(2026-10-14). 본문 폭(720)은 그대로, 좁은 화면은 지금처럼 목차가 본문 위에 선다 */
+    @media (min-width: 1000px) {
+      main { max-width: 1060px; }
+      html[data-lang="en"] article[data-lang-block="en"],
+      html[data-lang="ko"] article[data-lang-block="ko"],
+      html:not([data-lang]) article[data-lang-block="en"] {
+        display: grid;
+        grid-template-columns: 260px minmax(0, 720px);
+        column-gap: 48px;
+        align-items: start;
+      }
+      article > * { grid-column: 2; }
+      article > .toc {
+        grid-column: 1;
+        grid-row: 1 / span 999;
+        position: sticky;
+        top: 72px;
+        max-height: calc(100vh - 96px);
+        overflow-y: auto;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="controls" role="toolbar" aria-label="Language and theme">
+    <div class="seg" role="group" aria-label="Language">
+      <button type="button" data-set-lang="en">EN</button>
+      <button type="button" data-set-lang="ko">한국어</button>
+    </div>
+    <div class="seg" role="group" aria-label="Theme">
+      <button type="button" data-set-theme="light" title="Light">☀</button>
+      <button type="button" data-set-theme="dark" title="Dark">🌙</button>
+      <button type="button" data-set-theme="system" title="System">Auto</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ===================== ENGLISH ===================== -->
+    <article data-lang-block="en">
+    <h1>Healthya Privacy Policy</h1>
+    <p class="meta">Applies to: the Healthya app, including its Family space · Effective: June 21, 2026 · Last updated: October 20, 2026 · Consent version: 2026-09-14</p>
+
+    <div class="callout">
+      <p><strong>At a glance.</strong> Healthya is an all-in-one AI assistant that helps you manage your own life — meals, medications, sleep, exercise, appointments, and everyday conversation. It is open to any adult and works fully on its own. In its <em>Family space</em> you can also, if you choose, link with family: let a family member see some of your records, view the records a family member shares with you, or both &mdash; one person can have both roles (section 6). There is one app and one policy for everyone; the separate Healthya Family app has been merged into Healthya and retired (section 6.7). This policy explains what we collect, with whom we share it, and how you can exercise your rights. We do not sell or share your personal information for advertising.</p>
+    </div>
+
+    <div class="toc" role="navigation" aria-label="Table of contents">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#en-who">Who we are</a></li>
+        <li><a href="#en-info">Information we collect</a></li>
+        <li><a href="#en-sources">Sources</a></li>
+        <li><a href="#en-purposes">Purposes</a></li>
+        <li><a href="#en-sharing">Service providers</a></li>
+        <li><a href="#en-family">Family space</a> · <a href="#en-family-share">when family sees your records</a> · <a href="#en-family-view">when you view theirs</a> · <a href="#en-family-app">Healthya Family app</a></li>
+        <li><a href="#en-emergency">Emergency location sharing (911)</a></li>
+        <li><a href="#en-health-apps">Connected health apps</a></li>
+        <li><a href="#en-sale">Do Not Sell or Share notice</a></li>
+        <li><a href="#en-spi">Sensitive Personal Information</a></li>
+        <li><a href="#en-retention">Retention</a></li>
+        <li><a href="#en-rights">Your rights</a></li>
+        <li><a href="#en-chd">Consumer Health Data (WA / NV / CT)</a></li>
+        <li><a href="#en-bipa">Biometric notice (IL BIPA)</a></li>
+        <li><a href="#en-children">Children</a></li>
+        <li><a href="#en-security">Security</a></li>
+        <li><a href="#en-international">International transfers</a></li>
+        <li><a href="#en-changes">Changes</a></li>
+        <li><a href="#en-contact">Contact</a></li>
+      </ol>
+    </div>
+
+    <h2 id="en-who">1. Who we are</h2>
+    <p>Healthya is a service operated by Deeper Emptiness AI ("we", "us"), which acts as the business/Controller of the personal information described in this policy.</p>
+    <p><strong>How this policy uses &ldquo;you&rdquo; and &ldquo;linked family&rdquo;.</strong> &ldquo;You&rdquo; means anyone who uses the Healthya app. A &ldquo;linked family member&rdquo; is anyone you have linked with in the Family space &mdash; family or someone close to you; the term implies no age, health condition or caregiving relationship. Everything in this policy applies to every member in the same way. Where one person&rsquo;s records are shown to another, they remain the records of the person they are about, who decides through their consent settings who can see them (section 6).</p>
+    <p>Contact: <a href="mailto:hello@healthya.app">hello@healthya.app</a></p>
+
+    <h2 id="en-info">2. Information we collect</h2>
+    <p>We collect the following categories (CCPA §1798.140(v)):</p>
+    <table>
+      <thead><tr><th>Category</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td>Identifiers</td><td>Phone number (used to sign in), security email address (optional — you may confirm it through your Google account), account (user) ID, device IDs, push tokens</td></tr>
+        <tr><td>Personal information (Cal. Civ. Code §1798.80)</td><td>Display name, birth year, gender (optional, only if you choose to provide it), and how you would like the assistant to address you (optional, only if you tell it)</td></tr>
+        <tr><td>Internet / electronic activity</td><td>App usage logs, feature timestamps, crash / performance reports, diagnostics for reminder buttons and watch delivery (which can note whether a paired watch has the app installed), and a record of each voice-assistant connection (when it was requested, whether it was allowed under the hourly voice limit, and which AI channel was used)</td></tr>
+        <tr><td>Device information</td><td>Device name as set on your phone, model, OS and app version, display language, and first / last sign-in time (shown to you under <em>My devices</em>, including devices that have since signed out; up to three devices can be signed in at a time); whether notifications are allowed for the app on that device; whether the Family space is turned on for that device, so that family news notifications reach it (section 6.6); a device public key used to confirm sensitive actions with your device&rsquo;s own lock (we receive no biometric data); your IP address, kept for about a day to prevent abuse</td></tr>
+        <tr><td>Geolocation — approximate (optional)</td><td>City / district level, used for local personalization (e.g., weather-based conversation) and to find nearby care facilities such as hospitals and pharmacies (rounded to roughly 1&nbsp;km before being sent to our maps provider — see section 5). We do not store precise coordinates for these purposes. Optionally, a generalized "activity area" (last 7 days, rounded to roughly 2&nbsp;km blocks) may be shared with your linked family.</td></tr>
+        <tr><td>Geolocation — precise (optional, emergency readiness)</td><td>If you grant emergency location sharing to a linked family member, the app refreshes a single stored precise location about every 5 minutes <strong>while the app is open on your screen</strong>, so that a usable location already exists the moment you call 911. Only the most recent one is kept — each refresh overwrites the last, so no trail or history is stored. When you tap 911, the app also tries once to take a fresh precise reading. Nothing is collected while the app is in the background or closed. A family member you granted can view your most recent location only for 24 hours after your 911 alert; during that time it keeps being refreshed as above while the app is open. See section 7.</td></tr>
+        <tr><td>Geolocation — precise, used only on your phone (optional, golf)</td><td>When you start a new golf game and location is allowed, the app takes one precise reading and compares it, <strong>on your phone</strong>, with the list of golf courses in your US state to suggest the course you are at. This reading is <strong>not stored and is not sent to us or anyone else</strong>. To get that course list, our servers receive only the US state your phone works out from that reading (near a state line, the neighboring state as well) and, if you pick a course, its ID. See section 5 (OpenGolfAPI).</td></tr>
+        <tr><td>Audio / visual (optional)</td><td>Microphone signal (real-time only, not stored); meal, medication / prescription, and symptom photos you choose to upload (symptom photos are deleted right after analysis)</td></tr>
+        <tr><td>Home camera photos and camera history (optional)</td><td>When you take or choose a photo with the home camera, a reduced copy of it is sent to our AI provider to recognize what it shows (food, medicine, a sore spot, a sick or hurt pet, a checkup report, text, or something else) and, for text, to read the words in it. QR codes are read on your phone and are not sent to us unless you ask to translate their text. The recognition copy is not stored. Photos recognized as food, medicine, a sore spot, a pet, or a checkup report then continue into those features under the terms described for them in this policy. For results we show you directly &mdash; read text and explanations of other things &mdash; we keep a <strong>camera history</strong> under your account so you can reopen it on any of your devices: the photo (resized, with location and other metadata removed), the names the photo was recognized as, the text that was read and its language, the last translation you made, and the AI explanation. Your camera history is visible only to you &mdash; <strong>never</strong> to your linked family &mdash; and you can delete any entry in the app. Separately, when a photo is recognized as &ldquo;something else&rdquo;, the short names and the AI explanation (never the photo) are kept to improve the service and are reviewed only as aggregate statistics.</td></tr>
+        <tr><td>Health &amp; fitness from connected health apps (optional)</td><td>Read-only measurements imported from Apple Health or Google Health Connect: sleep and sleep stages, steps, distance, active energy, and workout sessions; vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate); blood sugar and weight; fitness and gait (VO2 max, heart rate variability, walking steadiness / speed); and mental wellness (mindfulness sessions and mood). See section 8.</td></tr>
+        <tr><td>Calendar events (on-device only)</td><td>If you use the in-app schedule, the app reads and writes events in your phone's built-in calendar (Apple Calendar / Google Calendar accounts on the device) with your OS-level calendar permission. Event titles, times, locations and notes <strong>stay on your phone and are never uploaded to our servers</strong>. Only if you turn on the optional <em>AI can read my schedule</em> setting, the titles and times of upcoming events are sent to our AI provider when you ask about your schedule in a voice conversation or open the morning briefing. Your calendar is not copied to our servers, but what is said aloud in a conversation is saved in your conversation history. Reminders for events you create are saved as alerts on the event itself and delivered by your calendar app. See section 8.</td></tr>
+        <tr><td>Health activity records</td><td>Meal logs (time, type, optional photo / nutrition analysis), exercise (duration, type), medication (name, dose, schedule, intake), hydration (intake events), sleep (start / end times)</td></tr>
+        <tr><td>Supplement suggestions (optional)</td><td>If you ask for supplement suggestions: the result we build for you &mdash; the nutrients chosen, their grade and target amount, any matching product from our catalog, the reason codes, and a plain-language explanation &mdash; plus a note of which of your records were considered (counts and dates only, e.g., &ldquo;6 medications, checkup from March&rdquo;). The suggestions are computed by our own rules from records you already gave us (your medications, your latest checkup values, the last 28 days of meals, exercise and sleep, your age band and sex, your weight, and your country of residence); we collect nothing new for them.</td></tr>
+        <tr><td>Follow-along workout records (optional)</td><td>If you use the follow-along workout feature: the routine you played (a catalog key naming a public YouTube video), how many minutes you followed it, whether you finished, the weekly routine plan we compose for you, and your workout settings (focus, minutes, posture, days per week, level, video-language preference, and any body areas or conditions you mark — for example a sore knee, osteoporosis or high blood pressure). The video itself is played inside YouTube&rsquo;s official embedded player and is never downloaded or stored by us.</td></tr>
+        <tr><td>Golf game records (optional)</td><td>If you use the golf scorekeeping feature: game name, holes and par, per-hole scores, handicap, standings, and the join code. These are shared with the other players in that game (your display name, handicap, and scores are visible to them). Names you type for guests (friends without the app) are stored as part of that game. When you invite a friend by phone number, we check whether that number belongs to a Healthia account in order to deliver the invitation; the number is not stored with the game and the invitation shows your display name to the invitee. If the host turns on the optional side bets (Skins per hole and/or a per-stroke bet), the stakes and currency the host chose and, when the game ends, each player's resulting position (who owes whom, as a figure) are stored with the game and shown to its players. Healthia does not process, hold, or transfer any money; settling up happens outside the app. If you pick a golf course (US courses only), its holes and par are filled in from public course data and its name becomes the game name, which you can change before you start. The course you pick (its course ID and US state) is stored with the game. We use it only in statistics that add up all players &mdash; which courses are played most and how long rounds take &mdash; and courses with fewer than 5 players are left out of those statistics. The list of courses you recently played (name, city and state) is remembered on your phone only.</td></tr>
+        <tr><td>Travel planning (optional)</td><td>If you use the travel planner: the destination you type or pick, trip dates or length, itinerary pace, an optional one-line note about the kind of trip you want, and the itinerary, budget estimate and destination guide generated for you. If you ask for a trip <em>recommended for you</em>, a neutral traveler profile (activity level, interests, morning / evening preference, travel companions, places you have mentioned, and a few short reasons) is derived from what the assistant has learned about you and from your last 30 days of daily summaries, and is stored with that plan; it is checked so that it never contains conditions, symptoms or medication names. If you use the flight price search, the departure city and your recent searches are kept <strong>only on your phone</strong> and are not sent to our servers (see section 5 for what your phone sends to Google when the results page opens). Travel plans are not visible to linked family.</td></tr>
+        <tr><td>Health checkup reports (optional)</td><td>If you add a health-checkup report: the photos of its pages; the values, reference ranges and flags read from them (names, dates of birth, ID numbers, contact details and labelled addresses are masked before storage); plain-language explanations, lifestyle tips, next-checkup dates and year-to-year trends. Checkup reports are <strong>never</strong> visible to your linked family.</td></tr>
+        <tr><td>Pet care questions (optional)</td><td>If you ask about a pet that seems unwell: your description of its symptoms, its species, an optional photo (deleted once analysed), and the guidance shown to you.</td></tr>
+        <tr><td>Goal Pods (optional)</td><td>If you join a Goal Pod: other members of that pod see an automatically generated nickname, your goal schedule, the days and times you check in, and the prepared cheers you send — never your name or your goal&rsquo;s title. Anyone signed in can see pods that are still recruiting. Closed pods are deleted after 90 days.</td></tr>
+        <tr><td>Family space (optional)</td><td>If you link with family: your links (who is linked, in which direction, which items each person shares, and when a link began and ended and which side ended it); the link requests you send (your phone number and the other person&rsquo;s, your optional short greeting, when it was sent, the IP address and device description of the phone that sent it, and the outcome); the nickname and color you give each person you view (visible only to you); notes you leave on a family member&rsquo;s medication reviews (they can read them); your family news notification inbox; and the Family space flag on your devices. Records a family member shares with you are not stored on your device (section 6.6).</td></tr>
+        <tr><td>Body measurements (optional)</td><td>Height and weight you enter yourself, together with your sex and birth year, used only to size meal and snack suggestions. You may decline — meal suggestions still work without them. These values are stored under your own account, are <strong>never</strong> visible to your linked family, and the height and weight you type in, and any body-mass figure derived from them, are <strong>never</strong> sent to our AI provider (see section 5). If you have connected a health app, a recent weight measured by your device may be used instead of the weight you typed; that device-measured weight is one of your health-app measurements, and its change over a week or month (first and last value) can be included in what our AI provider receives to write your weekly and monthly reports (see section 5).</td></tr>
+        <tr><td>Self-reported health</td><td>Symptoms, mood, emotion notes</td></tr>
+        <tr><td>Religious / faith affiliation (optional, sensitive)</td><td>Collected only if you volunteer it in conversation, used for occasional faith-friendly greetings. We never infer it without your statement and never share it with family. See section 10.</td></tr>
+        <tr><td>Personality type (optional)</td><td>A four-letter personality type (with an optional A/T variant) that you set yourself — by answering the in-app MBTI test, by picking a type you already know, or by telling the assistant your type in conversation (recorded only when you state it yourself and no type is set yet; the assistant never guesses it from how you talk). Only the type code (for example "INFP-T") is included in the instructions given to our AI provider, solely to adjust how the assistant phrases its replies. It is <strong>never</strong> used for any health judgement or recommendation, and your individual test answers are not stored on our servers (only the total for each of the four axes is kept with your type). It is not visible to a linked family member unless you turn on <em>Share MBTI type</em> for that person in <em>Settings → Family sharing</em>; even then they see only the type code, never your answers or axis scores, and you can switch it off at any time. You can remove the type itself in <em>Settings → MBTI Test</em>. The test is an entertainment feature and not a psychological assessment (see the Terms of Service, section 5).</td></tr>
+        <tr id="en-conversation-content"><td>Conversation content</td><td>The text of your voice and text conversations (both your side and the assistant&rsquo;s), kept until you erase your records or delete your account. Messages you delete in the AI conversation screen are only hidden from that screen (see section 11). No audio recording is kept.</td></tr>
+        <tr><td>AI memory</td><td>Distilled one-line "moments" from conversation and semantic embeddings used so the assistant can remember your context (no verbatim quotes are kept)</td></tr>
+        <tr><td>Inferences</td><td>Personality, interests, and mood inferred from conversation</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>Where this information can appear on your phone or watch.</strong> Some of it is shown outside the app, where anyone holding or glancing at your phone (or your watch) may see it — this is a normal part of how reminders and widgets work, not sharing with us or anyone else:</p>
+    <ul>
+      <li><strong>Notifications</strong> — reminder text appears on your lock screen, and it contains the actual wording: a medication reminder names the medicine, a 3-Day Wins reminder shows the goal title you wrote, a travel-plan notice names the destination, and a weekly-report notice may include a one-line summary. Reminders for calendar events are shown by your calendar app. If you would rather not have these visible on a locked screen, you can hide notification content for Healthya in your phone's system settings.</li>
+      <li><strong>Home-screen and lock-screen widgets</strong> — the "Today's plan" widget shows your remaining care items and their times (medication is shown as a neutral label), and the "3-Day Wins" widget shows the goal titles you wrote yourself, including on the iOS lock screen. If you would rather not have a goal title visible there, choose a title that does not reveal anything you want kept private, or remove the widget.</li>
+      <li><strong>Answer buttons</strong> — reminder buttons such as <em>Done</em> and <em>Not yet</em> can be pressed on the lock screen (and on a paired watch) without unlocking the phone or opening the app, and the answer is recorded right away. Anyone holding your phone can therefore answer a reminder for you.</li>
+      <li><strong>Watch apps</strong> — if you install Healthya on an Apple Watch paired with your iPhone, or on a Wear OS watch (such as a Galaxy Watch) paired with your Android phone, your phone copies the reminders it has scheduled to the watch so they can ring and be answered there. These copies carry the same wording as the notifications (medication names, labels you wrote for your own reminders, and 3-Day Wins goal titles), and the watch also shows them on its own screen. The watch keeps the latest copy until a newer one replaces it; signing out of the phone app clears the reminders scheduled on the watch. When you answer on the watch, the watch sends the answer straight to our server using a code carried in that reminder, which can only record an answer for that reminder or goal — your sign-in is not copied to the watch, and the watch app uses no third-party services.</li>
+    </ul>
+
+    <h2 id="en-sources">3. Sources</h2>
+    <ul>
+      <li>Information you provide (signup, consent, conversation, photo upload)</li>
+      <li>Device-generated information (device IDs, push tokens)</li>
+      <li>Google — only if you choose to confirm your security email with it; it returns your verified email address</li>
+      <li>Connected health apps (Apple Health / Google Health Connect), only with your permission</li>
+      <li>Your phone's built-in calendar, only with your permission — read on the device, not collected by us (section 8)</li>
+      <li>Information your linked family provides through the Family space (for example, a link request or a note on your medication review) &mdash; for links made before the merge, through the Healthya Family app (section 6.7)</li>
+      <li>When a family member shares their records with you: the records they share, shown from our servers (section 6.6)</li>
+      <li>Outputs from third-party services (e.g., Vertex AI responses)</li>
+      <li>Public golf course data (course names, locations, holes and par) from OpenGolfAPI, compiled by OpenStreetMap contributors &mdash; when you pick a course for a golf game</li>
+    </ul>
+
+    <h2 id="en-purposes">4. Purposes of use</h2>
+    <ul>
+      <li>AI companion conversation and memory of your context</li>
+      <li>Speaking first-aid instructions aloud when the built-in recordings cannot play</li>
+      <li>Daily plans, meal / medication / hydration reminders, and lifestyle support</li>
+      <li>Sizing meal and snack suggestions to you, using your optional height, weight, sex, and birth year</li>
+      <li>Daily summaries combining your activity with optional health-app measurements</li>
+      <li>Emergency support — first-aid reference, one-tap 911 dialing, and optional family alerts (see section 7)</li>
+      <li>Care navigation (optional) — helping you find nearby hospitals, pharmacies or a medical specialty and showing general symptom guidance (informational only, not a diagnosis)</li>
+      <li>Health-checkup reports (optional) — reading the values in your report, explaining them in plain language with everyday tips, comparing them over the years, and taking them into account in meal and supplement suggestions (informational only, not a diagnosis)</li>
+      <li>Pet care (optional) — showing general guidance on how soon to see a vet and finding nearby animal hospitals (informational only, not a veterinary diagnosis)</li>
+      <li>Supplement information and suggestions (optional) — explaining what vitamins, minerals and other nutrients do, and suggesting a small set that fits your records, with products that carry third-party quality marks. <strong>Informational only, not medical advice:</strong> our software applies published intake guidance (NIH, USPSTF, the Dietary Guidelines) to your records; the AI provider only rewrites that result in plain language and cannot add, remove or change anything. Please confirm with your doctor or pharmacist before starting a supplement, especially alongside prescription medicines.</li>
+      <li>Home camera (optional) — recognizing what a photo shows and taking you to the right feature, reading and translating text in a photo, explaining other things in plain language, and keeping your camera history so you can look back at those results</li>
+      <li>Local personalization (approximate location for weather-based conversation)</li>
+      <li>Family space (optional) — showing the family members you choose the records and summaries you share with them, and, when a family member shares their records with you, showing you what they share, their emergency alerts and family news (section 6)</li>
+      <li>Golf with friends (optional) — finding the golf course you are at and filling in its holes and par, sharing scores and standings with the players you invite, delivering invitations by phone number, recording a finished round as exercise in your daily summary, and statistics that add up all players on which courses are played most and how long rounds take</li>
+      <li>Travel planning (optional) — building a day-by-day itinerary, budget estimate and destination guide for a place you choose, and opening flight prices for a route you enter in the in-app browser</li>
+      <li>Account management, including recovering your account through your security email and managing your signed-in devices</li>
+      <li>Legal compliance, fraud prevention, and security auditing</li>
+    </ul>
+
+    <h2 id="en-sharing">5. Service providers</h2>
+    <p>We share information only with the following providers under confidentiality and purpose-limited agreements. None of them receive your data for advertising, and we do not share with data brokers. (YouTube may show its own ads inside workout and condition videos; see the YouTube row.)</p>
+    <table>
+      <thead><tr><th>Recipient</th><th>Data sent</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td>Google Vertex AI (Gemini)</td><td>Display name, birth year, recent conversation, learned facts, meal / medication photos; for daily summaries, the next day&rsquo;s reminder plan and weekly / monthly reports, your conversation text and care records &mdash; meals, medications and your answers to reminders (including any reason you gave for a missed dose), water, sleep, exercise, symptom check-in summaries, and, from a connected health app, sleep times, steps and workouts plus, for weekly and monthly reports, averages and changes the app calculates for sleep, steps and readings such as blood pressure, blood sugar, heart rate, oxygen and weight (mindfulness and mood are not sent) &mdash; together with your home country and, if you allow location, your city / region; for remembering your context, your conversation text and, if you shared them, your faith affiliation and personality type; for symptom checks, your description, an optional photo, your sex and age range; reduced copies of photos you take with the home camera (to recognize what they show and, for other things, to write a short explanation) and the text read from a photo when you ask to translate it; for the travel planner, the destination, trip length, pace and optional trip note you enter, your departure country (from your phone number) and — for a recommended trip — what the assistant has learned about you together with 30-day activity aggregates (the resulting profile is checked so that it contains no conditions, symptoms or medication names); for supplement suggestions, only the fact table of a result our rules already built (nutrient names, grades, target amounts, product names and short reason sentences, which may name a kind of medicine or a general finding such as &lsquo;metformin&rsquo;, &lsquo;reduced kidney function&rsquo; or &lsquo;after age 50&rsquo; &mdash; no lab values, exact age or medication list); for health-checkup reports, the text read from them after names, dates of birth, ID numbers and contact details are masked (a hospital or doctor name may remain); for pet care questions, your description, your pet&rsquo;s species and an optional photo; when you view a linked family member&rsquo;s weekly report in your language, the text of that report, to translate it</td><td>Conversation understanding, daily summaries, next-day reminder plans, weekly and monthly reports, symptom guidance, meal / medication analysis, home-camera recognition, explanations and translation, plain-language wording for supplement suggestions, checkup explanations and trends, pet care guidance, and travel itineraries, guides and recommendations. Enterprise terms — not used for model training.</td></tr>
+        <tr><td>Google Vertex AI Live</td><td>Voice audio (streaming) and what you type in the conversation, the voice you chose, and the context for that conversation: display name and how you like to be addressed, your language, the assistant&rsquo;s summary of what it has learned about you, your personality type and faith affiliation (only if you set or shared them), topics you asked it to avoid, your home country (from your phone number) and, if you allow location, your current city / region. During the conversation it also receives what the assistant looks up for you: memories from past conversations, your records for a past day you ask about (meals and calories, medications and whether you took them or why you missed them, water, exercise, steps, sleep), your goals, the weather where you are, your calendar events (only with <em>AI can read my schedule</em> on), and a short summary of the app screen you are on (on the family screen, this includes your linked family members&rsquo; names)</td><td>Real-time voice conversation — the default voice path. Enterprise terms — not used for model training. We do not keep recordings.</td></tr>
+        <tr><td>Google Gemini API (Live)</td><td>Same as above</td><td>Backup voice path, used only when the default one is unavailable (older app versions use it as their default). Paid-service terms — not used for model training. We do not keep recordings; Google&rsquo;s short-term abuse-monitoring retention is governed by its API terms.</td></tr>
+        <tr><td>Google Cloud Vision</td><td>Meal and medication / prescription photos; home-camera photos recognized as text; health-checkup report photos (the full image, before masking)</td><td>Text recognition and image analysis to read labels and food, and to read the text in a photo you want translated.</td></tr>
+        <tr><td>Google Vertex AI (text embeddings)</td><td>Short conversation snippets</td><td>Semantic search so the assistant can recall relevant context.</td></tr>
+        <tr><td>Google Cloud Text-to-Speech</td><td>Fixed first-aid instructions, only when the built-in audio cannot play</td><td>Speaking first-aid instructions aloud. Your voice is not sent.</td></tr>
+        <tr><td>Google Places (Google Maps Platform)</td><td>Approximate location (rounded to ~1&nbsp;km) and a care category (hospital, pharmacy, veterinary clinic, or a medical specialty such as cardiology); for the travel planner, the destination name you enter and the names of places proposed for your itinerary (sent by our server)</td><td>Finding nearby care facilities; confirming that itinerary places really exist and fetching their photos. No personal identifier is sent; not used for advertising.</td></tr>
+        <tr><td>Google Search (via Vertex AI grounding)</td><td>Your web-lookup question text, together with your home country (from your phone number) and, if you allow location, your current city / region so the answer fits where you are; generic region-scoped news queries; generic destination-guide queries for the travel planner (destination and month only)</td><td>Real-time factual lookup during conversation, the daily news brief, and destination guides. Not used for advertising.</td></tr>
+        <tr><td>OpenWeather</td><td>Approximate (city / district level) location</td><td>Weather information used to start friendly conversation. Precise coordinates are not sent.</td></tr>
+        <tr><td>USDA FoodData Central</td><td>Food names only (no personal identifiers)</td><td>Nutrition reference lookup for meals.</td></tr>
+        <tr><td>OpenGolfAPI (golf course data)</td><td>US state codes, or the ID of the golf course you picked, sent by our server &mdash; no personal identifier, location, or device IP</td><td>Fetching public golf course lists and their holes and par for golf games. The course data comes from OpenStreetMap contributors under the Open Database License (ODbL); we keep a shared copy on our servers and refresh it about every 30 days.</td></tr>
+        <tr><td>NIH Dietary Supplement Label Database (DSLD) and openFDA food-recall data</td><td>Nothing personal — our server checks the products in our supplement catalog by label ID and company name</td><td>Keeping the supplement catalog accurate: whether a product is still on the market, its label amounts, and any recalls. No user data is involved.</td></tr>
+        <tr><td>U.S. government health services — RxNorm / RxNav, openFDA, MedlinePlus, DailyMed (NLM / FDA), CMS Care Compare</td><td>Medication names, or a hospital's ZIP / name for ratings (no personal identifiers)</td><td>Standardizing medication information, drug labels / images, health-topic summaries, and hospital quality data. Public services.</td></tr>
+        <tr><td>Google Maps (Android) / Apple Maps (iOS)</td><td>Your device's IP address and the map area being displayed &mdash; in the Family space, the area around a family member&rsquo;s shared activity area or emergency location</td><td>Drawing the map when you look for nearby care, and on the activity-area and emergency screens of the Family space. No account identifier is sent. If you tap <em>Open in Maps</em> on a family member&rsquo;s emergency screen, their location and the name shown to you are handed to your phone&rsquo;s maps app (Apple Maps on iPhone, your default maps app on Android, or Google Maps on the web if no maps app opens).</td></tr>
+        <tr><td>Google Translate (translate.google gateway)</td><td>Your device's IP address and the address of the web page being translated</td><td>When you use the app in a language other than English, web pages you open inside the app — health and pet-care articles, source links and QR-code links — are shown in your language through this gateway. Your own records are never sent.</td></tr>
+        <tr><td>Google Routes and Static Maps (Google Maps Platform)</td><td>Coordinates of the places in a generated itinerary (not your location), sent by our server</td><td>Estimating travel time between itinerary stops and drawing the day map shown in a plan. No personal identifier or device IP is sent.</td></tr>
+        <tr><td>ExchangeRate-API (open.er-api.com)</td><td>Nothing personal — our server fetches a public currency table</td><td>Showing travel budget estimates in your home currency.</td></tr>
+        <tr><td>Google Flights (google.com, opened in the in-app browser)</td><td>Your device&rsquo;s IP address and the flight search you enter (departure city, destination, dates), sent by your phone directly to Google when you open flight prices</td><td>Showing live flight prices and letting you continue to an airline or travel site. That page runs under Google&rsquo;s own privacy policy; we do not receive or store the prices or anything you do on that page.</td></tr>
+        <tr><td>YouTube (Google LLC) &mdash; embedded player and YouTube API Services</td><td>Your device&rsquo;s IP address and the video being played, sent by your phone directly to YouTube when a workout video or its preview image loads or when you tap <em>Watch video</em> to open a condition video in &ldquo;Where does it hurt?&rdquo; (the player opens paused; playback starts when you press YouTube&rsquo;s play button); your language setting, used to pick the audio track / captions. We do not send your name, account ID or health data to YouTube. A condition video is about a health topic, so YouTube can see which of these public videos you chose to open &mdash; that is why condition videos load only when you tap them; until then nothing is sent to YouTube (not even a thumbnail).</td><td>Playing follow-along workout videos and condition explainer videos (public videos chosen and reviewed by us, from hospitals, public health bodies, medical societies and licensed clinicians) inside the app. This use is governed by the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a> and the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>. Our server also checks once a day, without any personal data, whether each catalog video is still available.<br><strong>Cookies and ads:</strong> videos play in YouTube&rsquo;s privacy-enhanced mode (youtube-nocookie.com), and the app loads the player so that it does not store YouTube cookies on your device. While a video plays, YouTube may still keep limited technical information in the player&rsquo;s browser storage (for example, a connection-speed estimate), may read Google cookies that other web pages you opened inside this app have already stored, and may show ads it selects. On iPhone, the player&rsquo;s storage is discarded when it closes. This is controlled by YouTube under the Google Privacy Policy, not by us, and we receive no advertising data or revenue. The app does not sign you in to YouTube and does not access your YouTube or Google account data, so there is no account access to revoke; you can still review Google&rsquo;s access at <a href="https://security.google.com/settings/security/permissions">Google security settings</a>.</td></tr>
+        <tr><td>Twilio (SMS, through our sign-in provider)</td><td>Phone number, one-time verification code</td><td>SMS verification for sign-in, re-verification before sensitive actions, and phone-number changes.</td></tr>
+        <tr><td>Google (account confirmation)</td><td>Your Google account&rsquo;s email address and a sign-in token &mdash; only if you choose to confirm your security email with Google</td><td>Confirming that the security email belongs to you. It does not sign you in to Healthya.</td></tr>
+        <tr><td>Resend</td><td>Email address and request details</td><td>Sending account and rights-request notification emails.</td></tr>
+        <tr><td>Expo Push (relaying to Apple APNs / Google FCM)</td><td>Push tokens, notification payloads (family notifications carry only who and what happened &mdash; never medication names, readings or report contents)</td><td>Notification delivery, including family news and emergency alerts.</td></tr>
+        <tr><td>Supabase (infrastructure)</td><td>A subset of the above for storage</td><td>Service operation, with row-level security isolating your data.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>AI prompt caching.</strong> Our Google Vertex AI project is configured for memory-only (ephemeral) prompt caching. Content sent to Vertex AI may be held briefly in memory to speed up similar requests, but it is never written to Google&rsquo;s durable (at-rest) cache storage, and Google does not use it for model training.</p>
+    <p><strong>TTS audio cache.</strong> We cache synthesized audio responses keyed by a hash of the response text (no user identifier). The cache is shared across users — your individual identity is never associated with cached audio. Withdrawing TTS consent stops future synthesis requests; cache eviction is governed by our standard retention policy rather than per-user deletion.</p>
+    <p><strong>Video calling.</strong> Video calling is not offered in the current version of the app. We do not route any video or audio to a video-calling provider.</p>
+
+    <h2 id="en-family">6. Family space &mdash; linking with family</h2>
+    <p>Healthya is one app for everyone; there is no separate version for an older person or for a caregiver. In the app&rsquo;s <strong>Family space</strong> any member can link with family or someone close to them. Each link works in one direction: one person lets the other see some of their records. The same person can have both roles &mdash; letting a family member see their own records, and viewing the records another family member shares with them &mdash; and each role is described below: section 6.2 to 6.5 apply when a linked family member sees <em>your</em> records, and section 6.6 applies when <em>you</em> view theirs. Linking is optional; Healthya works fully without it.</p>
+
+    <h3 id="en-family-link">6.1 Linking and consent</h3>
+    <ul>
+      <li><strong>Asking to view.</strong> The person who wants to view sends a link request to the other person&rsquo;s phone number, with an optional short greeting. Before the request can be sent, they agree to the required <em>View family information + privacy promise</em> consent &mdash; a promise to view the information only on their own device, not to take screenshots of it or share it with others, and to use it only to support that person &mdash; and may turn on the optional <em>Family news notifications</em>. Our servers check the required consent before the request is sent and again before the link is completed.</li>
+      <li><strong>Accepting.</strong> A link starts only when the person whose records would be shown accepts the request and chooses what to share. If they decline, the person who asked is told only that the request was declined &mdash; the name of the person who declined is not included. A request that is not answered expires.</li>
+      <li><strong>Separately for each person and each item.</strong> What is shared (health activities, activity area, emergency location, MBTI type) is chosen separately for each link and can be changed at any time. It is enforced on our servers with row-level security, not only by what the app displays.</li>
+      <li><strong>Ending a link.</strong> Either side can end a link at any time &mdash; the person being viewed from the <em>Family</em> screen, and the viewer with <em>Stop viewing</em>. When the person being viewed ends it, the viewer is told if they have family news notifications on; when the viewer stops viewing, the other person is not notified. Either way, both sides&rsquo; link histories show only that the link ended. We record which side ended it, and it is included in your data download (section 12).</li>
+      <li><strong>Consent history.</strong> Every change to a consent, including family-sharing consents, is logged in your consent history (<em>Settings → My information rights → Consent history</em>) as immutable evidence (CCPA Right to Know).</li>
+    </ul>
+
+    <h3 id="en-family-share">6.2 When a linked family member sees your records &mdash; what they always see</h3>
+    <p>Sharing is <strong>opt-in</strong> and is controlled by your consent settings (<em>Settings → Data Use Consent</em>). Regardless of those settings, a family member you have linked with can see:</p>
+    <ul>
+      <li>Your display name, phone number and time zone, the fact that you are linked to them and since when, and which items you share with them.</li>
+      <li>Connection activity (link request, acceptance, ending).</li>
+    </ul>
+
+    <h3 id="en-family-health">6.3 What they see when you share health activities</h3>
+    <p>The <em>Share health activities with family</em> consent grants the linked family member read-only access to:</p>
+    <ul>
+      <li><strong>Meals</strong> — time, type (breakfast / lunch / dinner / snack), photo (only for a meal you saved &mdash; drafts and photos you discarded are never shown; it opens through a link that expires within an hour), AI nutrition analysis (food name, calories, caution notes), suggested next meal</li>
+      <li><strong>Exercise</strong> — type and duration (minutes), and distance and calories when recorded (golf rounds and follow-along workouts appear here as exercise)</li>
+      <li><strong>Medication</strong> — registered medications (name, dose, schedule), intake events and the reason you gave for a missed dose, and the results of AI medication reviews (with any notes family members added)</li>
+      <li><strong>Hydration</strong> — water intake events (shown as an approximate number of cups)</li>
+      <li><strong>Sleep</strong> — sleep start / end timestamps, sleep stages and sleep quality (including measurements imported from a connected health app, if enabled, and what you reported yourself)</li>
+      <li><strong>Reminder schedule</strong> — the times of your active care reminders, including titles you write for your own reminders</li>
+      <li><strong>3-Day Wins</strong> — your progress (counts and the days you kept), never the goal titles</li>
+      <li><strong>Symptom check-ins</strong> — notes from symptom checks and the suggested level of care</li>
+      <li><strong>Device health metrics</strong> (if you connected a health app) — steps, distance, active energy, vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate), blood sugar / weight, and fitness / gait measurements imported from Apple Health or Google Health Connect</li>
+      <li><strong>Recent activity timestamp</strong> — when you were last active in the app (shown, together with how many of yesterday&rsquo;s medication times you took, as one line on the family member&rsquo;s home screen)</li>
+      <li><strong>AI daily summary</strong> — a short AI-written paragraph about your day, the emotional tone the assistant inferred from your conversations (together with the assistant's stated reasoning), and the general <em>topics</em> you talked about. This is a summary, not a transcript: family never sees your conversations themselves. Your words are stripped out of the emotional-tone summary before it is stored; the exercise and sleep entries above may show one short quoted phrase — about a sentence at most — that the assistant kept as supporting evidence. Quoted phrases kept for meals, medication and water are removed by our server before the summary reaches your family.</li>
+      <li><strong>Weekly and monthly reports</strong> — patterns across the period (meals, medication, sleep, exercise), mood trends, the number and urgency of symptom check-ins, goal progress, health-screening flags produced by fixed rules, an AI-written recap with suggested things to ask about, and a monthly summary intended to help you and your family prepare for a doctor's visit.</li>
+    </ul>
+    <div class="callout">
+      <p><strong>What this means in practice.</strong> Because the daily summary describes your mood and the subjects you raised, a family member with health-sharing access can learn how you seemed to be feeling and what was on your mind — even though they cannot read your conversations. If you would rather they not see this, turn health sharing off in <em>Settings → Data Use Consent</em>.</p>
+    </div>
+    <p><strong>What family never sees.</strong> Transcripts of your conversations (beyond the short evidence phrases described above), your AI memory and learned preferences, your voice, your faith affiliation, your MBTI test answers, the height and weight you entered, and your consent history are <strong>never</strong> shared with family. Your MBTI type code is shared only with a family member for whom you turn on <em>Share MBTI type</em>. Mindfulness minutes and self-logged mood imported from a connected health app are also <strong>never</strong> shared — they are redacted server-side even when health-sharing consent is on.</p>
+
+    <h3 id="en-family-location">6.4 Location sharing with family (optional)</h3>
+    <ul>
+      <li><strong>Activity area</strong> — if you grant <em>Share activity area with family</em> (granted separately for each linked family member), that family member can see a generalized activity area from the last 7 days (rounded to roughly 2&nbsp;km blocks, with the days you were there; never an exact point or a live trail). Older data is automatically deleted on a rolling 7-day window.</li>
+      <li><strong>Emergency location</strong> — handled separately under section 7.</li>
+    </ul>
+
+    <h3 id="en-family-off">6.5 When sharing is off or withdrawn</h3>
+    <p>If you decline a sharing consent — or withdraw it at any time in <em>Settings → Data Use Consent</em> — the family member&rsquo;s app shows that the item is not shared, and the related categories are hidden from their view (server-side enforcement via row-level security, not just client filtering). The change takes effect the next time their app loads your records. Withdrawing a sharing consent does not end the link; ending the link (section 6.1) removes their view of everything regardless of your consent settings.</p>
+
+    <h3 id="en-family-view">6.6 When you view a family member&rsquo;s records</h3>
+    <p>When a family member or someone close to you accepts your link request, you can see their records in the Family space. The person you view is protected by sections 6.2 to 6.5 from their side; this section sets out what applies to you as the viewer.</p>
+    <ul>
+      <li><strong>What you can see.</strong> Their display name, phone number, time zone, when you linked, and which items they share with you (section 6.2). Everything else depends on the items they turned on for you, separately for each link: with health sharing, the items in section 6.3 (daily records and summaries, medications, medication reviews and notes, reminder schedule, weekly and monthly reports, and one line on your home screen &mdash; when they last used the app and yesterday&rsquo;s medication count); with activity-area sharing, their generalized activity area (section 6.4); with emergency location sharing, their most recent location for 24 hours after they tap 911 (section 7); and with MBTI sharing, their type code. The &ldquo;What family never sees&rdquo; list in section 6.3 applies in the same way. Items they do not share are shown as not shared and the app does not request them; if they turn sharing off or end the link, those records disappear from your screens the next time the app loads them.</li>
+      <li><strong>Their records are theirs.</strong> You see them because, and only for as long as, they choose to share them. You have no independent right to keep, export, or share their records; your data download (section 12) never includes them, and they exercise the rights over their own records from their own account.</li>
+      <li><strong>Nothing kept on your phone.</strong> Their records are held only in the app&rsquo;s memory while you look at them &mdash; they are not written to your phone&rsquo;s storage, and meal photos are not kept in the image cache. They are cleared when you sign out, when this device is signed out or removed in <em>My devices</em>, and when the link ends. Our servers check, each time a device reads family records, that its sign-in is still active, so a device removed in <em>My devices</em> can no longer load them from our servers; a meal-photo link it had already received expires within an hour.</li>
+      <li><strong>Protected screens.</strong> While a family member&rsquo;s screens are open, the app blocks screenshots and screen recording &mdash; on iPhone, screenshots come out blank and the screen is covered while it is being recorded or mirrored; on Android, screenshots, recordings and the recent-apps preview are blank &mdash; and it covers those screens in the app switcher. After you send your first family request, if app lock is off, the app suggests once that you turn it on. Family records appear only in the Family space and in the one line on your home screen; they are not used in home-screen widgets, the watch, voice conversations or the assistant&rsquo;s memory, photo analysis, or error reports.</li>
+      <li><strong>Family notifications.</strong> A family notification says only who and what happened (for example, &ldquo;Mom &middot; Emergency alert&rdquo;) &mdash; never medication names, readings or report contents, which you see only inside the app. Emergency alerts always reach you, whatever your settings in the app. Other family news &mdash; a new medication or medication review, a link accepted, declined or ended, and last week&rsquo;s story &mdash; comes only if <em>Family news notifications</em> is on (<em>Settings → Family</em>). A new-medication notice is sent even when that person does not share health activities with you, but then it only says that they registered a new medication. Family notifications are delivered through Expo Push and Apple / Google (section 5) and are also kept in your in-app notification inbox for 90 days. A device on which the Family space is turned on is marked to receive family news (section 2). When you sign out, family notifications are cleared from your lock screen and notification center. Turning notifications off in your phone&rsquo;s settings stops all of them, including emergency alerts.</li>
+      <li><strong>Nicknames and colors.</strong> The nickname (up to 20 characters) and color you give each person are visible only to you &mdash; never to that person. The nickname is used in the family notifications you receive. If your request is declined or expires, what you chose for it is deleted; once linked, they are deleted when the link ends, and you choose them again if you link again.</li>
+      <li><strong>What we keep.</strong> What we store about you as a viewer is listed in section 2 (<em>Family space</em>). Your data download (section 12) includes the links in which you are the viewer, your nicknames and colors, the link requests you sent and the notes you wrote. <em>Erase my records</em> keeps your links with their nicknames and colors, the link requests you sent and the notes you wrote; it erases your family news inbox and the nicknames and colors chosen for requests that are still waiting. Deleting your account removes all of them. If the person you view erases their own records, their medication reviews &mdash; with the notes you left on them &mdash; are erased too.</li>
+    </ul>
+    <div class="callout health">
+      <p><strong>Your confidentiality obligation.</strong> A linked family member&rsquo;s records are health information about them. Keep them confidential: do not copy, record or share them with anyone unrelated to their care without their prior consent, and use their emergency location only to help them in an emergency &mdash; never to monitor their movements. Misuse may breach our <a href="../terms-of-service/#en-family">Terms of Service</a> and laws that protect health information (for example WA MHMDA, CMIA (CA) and the FTC Act &sect;5).</p>
+    </div>
+
+    <h3 id="en-family-app">6.7 The Healthya Family app (merged and retired)</h3>
+    <p>Viewing a linked family member&rsquo;s records used to be done in a separate app, <strong>Healthya Family</strong>. That app has been merged into Healthya and retired; its features are now in the Family space described above, and this policy applies to them. It is the same account: sign in to the Healthya app with the phone number you used in Healthya Family, and your existing links appear in the Family space. Family members who linked through Healthya Family agreed to the same privacy promise in that app&rsquo;s consent flow.</p>
+    <p>If a copy of Healthya Family is still installed on a phone, it may keep working for some time. While it does, it may show what it showed before &mdash; including, about a person being viewed, when they joined, their birth year (if they entered one) and the email address on their account, which the Family space does not show &mdash; and, while it is signed in, it may receive emergency alerts; other family news goes to a device on which the Family space of the Healthya app is turned on. We recommend removing it and using the Healthya app. The documents that applied to that app are kept for reference: the <a href="../family-privacy-policy/archive-2026-10-20.html">Healthya Family Privacy Policy</a> and <a href="../family-terms-of-service/archive-2026-10-20.html">Terms of Service</a>.</p>
+
+    <h2 id="en-emergency">7. Emergency location sharing (911)</h2>
+    <div class="callout health">
+      <p><strong>This is the one case where we use your precise location.</strong> Healthya is not an emergency response service and cannot guarantee that help will arrive; it provides first-aid reference, one-tap 911 dialing (you place the call yourself), and optional alerts to your linked family.</p>
+    </div>
+    <ul>
+      <li><strong>Consent.</strong> Precise emergency location sharing is off until you turn it on, and you turn it on <strong>separately for each linked family member</strong>. We strongly recommend keeping it on for at least one person.</li>
+      <li><strong>When we collect it.</strong> So that a usable location exists at the moment you need it, while you have it on for at least one family member the app refreshes your stored precise location about every <strong>5 minutes while the app is open on your screen</strong>. We do this in advance because placing a 911 call sends your phone to the dialer, which would cut off a fresh GPS reading at exactly the wrong moment. <strong>Nothing is collected while the app is in the background or closed</strong>, and we never build a location history. When you tap 911 with it on, the app also tries once — for about a second — to take a fresh precise reading; if that fails, the stored one is used.</li>
+      <li><strong>What is stored.</strong> Exactly one location per person. Each refresh overwrites the previous one, so there is no trail, no route, and no record of everywhere you have been — only where you were most recently while using the app.</li>
+      <li><strong>Who can see it.</strong> A family member you have granted this permission can view your most recent stored location in their app, under row-level security, <strong>only for 24 hours after your 911 alert</strong>. During those 24 hours it is the latest one &mdash; the reading taken when you tapped 911 or, while the app is open, the one refreshed about every 5 minutes as above. Family members you have not granted it to cannot see any location, even during an emergency.</li>
+      <li><strong>When you press 911 in the app.</strong> Tapping 911 (or the emergency widget) sends a push notification to <strong>all</strong> your linked family members, whether or not you granted them location sharing. It says only who and what happened &mdash; your name (or the nickname that family member gave you) and that you pressed the 911 emergency button in the app (the app opens your phone&rsquo;s dialer; we cannot tell whether the call itself was placed); for family members you granted location sharing, it also asks them to check your location. It never contains coordinates.</li>
+      <li><strong>If the permission is off</strong> or location access is unavailable, the alert is still sent, with no location attached.</li>
+      <li><strong>When you are the family member who receives an alert.</strong> Opening it shows the person&rsquo;s most recent location if they granted it to you, until the 24 hours end; after that the app shows that the viewing period has ended. If you tap <em>Open in Maps</em>, that location and the name shown to you are handed to your phone&rsquo;s maps app (section 5). Alerts are best-effort: delivery and timeliness are not guaranteed, and an alert does not mean that 911 was reached.</li>
+      <li><strong>What we keep.</strong> The stored location is automatically deleted 7 days after it was last refreshed. Withdrawing the permission stops it being refreshed, so it ages out within that window; deleting your account removes it with everything else. Separately, the time of each 911 press (no location) is recorded for service statistics and kept until you erase your records or delete your account.</li>
+    </ul>
+
+    <h2 id="en-health-apps">8. Connected health apps (Apple Health / Google Health Connect)</h2>
+    <p>If you enable <em>Connect health app</em> (optional), Healthya reads the following from Apple Health (iOS) or Google Health Connect (Android), with your separate OS-level permission:</p>
+    <ul>
+      <li>Sleep start / end times, total sleep minutes, and sleep stages (deep / REM), where available</li>
+      <li>Steps, walking / running distance, and floors climbed</li>
+      <li>Active energy (calories)</li>
+      <li>Workout sessions (type, start time, duration)</li>
+      <li>Vital signs — heart rate, resting heart rate, walking heart-rate average (iPhone), blood pressure, oxygen saturation, body temperature, respiratory rate</li>
+      <li>Blood sugar (glucose) and body weight</li>
+      <li>Fitness and gait — VO2 max, heart rate variability, walking steadiness, walking speed, six-minute walk distance (some are iOS-only, imported where available)</li>
+      <li>Mental wellness — mindfulness session minutes and self-logged mood (Apple Health State of Mind). This category is used only for your own service &mdash; it is not sent to our AI provider &mdash; and is <strong>never</strong> shared with family (see section 6.3)</li>
+    </ul>
+    <p><strong>Read-only.</strong> Healthya only reads this data; it never writes back to your health app. We use it to make your daily summaries and <em>Health statistics</em> reflect your real measurements, and these measurements are also among the records our AI provider (Google Vertex AI) receives to plan your next day&rsquo;s reminders and to write your weekly and monthly reports (section 5). The first time you open Health statistics, up to the past 12 months are imported (on Android, with the separate permission to read past data); if health sharing is on, those past days can also appear in the daily summaries your family sees.</p>
+    <p><strong>Apple / Google requirement.</strong> Data obtained from Apple Health or Google Health Connect is never used for advertising or marketing, is never sold, and is never shared with data brokers. It is stored under your account with row-level security. You can turn the connection off at any time in <em>Settings</em>; on withdrawal we stop importing new metrics. Metrics already imported are retained unless you ask us to erase them.</p>
+
+    <h3 id="en-calendar">8.1 Your phone's calendar (schedule)</h3>
+    <p>The in-app <em>Schedule</em> screen is a window onto your phone's built-in calendar. With your OS-level calendar permission, the app reads the events in the calendars you choose to show and writes the events you create in the app straight into the calendar you choose (by default the phone's default calendar). <strong>We do not store your calendar events on our servers</strong>, they are not part of your account data export, and deleting your Healthya account does not delete them — they remain in your phone's calendar.</p>
+    <p>Reminders for events you create in the app are saved as alerts on the event itself (by default 30 minutes before; all-day events at 9:00) and are delivered by your calendar app, so they also ring on your other devices. Healthya sends no separate schedule notification. Events created elsewhere keep their own calendar alerts.</p>
+    <p>By default the AI assistant cannot read your calendar. If you turn on the optional <em>AI can read my schedule</em> setting (Settings → Data use consent), the titles and times of today's and upcoming events are sent to our AI provider (Google Vertex AI Live, or the backup Google Gemini API if it is unavailable) in two situations: when you ask about your schedule in a voice conversation, and when you open the morning briefing screen (the assistant summarises the day there without being asked). Locations and notes are never sent. Creating or changing events by voice does not require this setting, and you can turn it off at any time.</p>
+    <p><strong>One thing to know about conversations.</strong> Your calendar itself is never uploaded. But a voice or text conversation is saved as a conversation record under your account (section 2, <a href="#en-conversation-content">"Conversation content"</a>), and that record contains what was actually said — so if you dictate "dentist at three tomorrow", or the assistant reads an event back to you, that wording lives in your conversation history and may be used for the assistant's memory of your context, just like any other thing you say. You can delete it with <em>Erase my records</em> or <em>Delete account</em>; withdrawing a consent stops future collection but does not delete what is already stored.</p>
+
+    <h2 id="en-sale">9. Do Not Sell or Share notice</h2>
+    <div class="callout">
+      <p><strong>We do not sell your personal information, and we do not share it for cross-context behavioral advertising.</strong> No opt-out is required because the protection applies automatically. (CCPA §1798.120 / CPRA)</p>
+    </div>
+
+    <h2 id="en-spi">10. Sensitive Personal Information</h2>
+    <p>SPI under CPRA includes health information, audio signals, precise geolocation, and religious or philosophical beliefs. We collect precise geolocation <strong>only</strong> for 911 emergency readiness and family sharing (section 7) — with your opt-in, only while the app is open on your screen, keeping only the single most recent location, and never for advertising. When you start a golf game, the app also uses one precise reading on your phone to find the golf course you are at; that reading is not stored and never leaves your phone, so we do not collect it (section 2). The course you then pick is stored with the game as part of your golf game records (section 2). We collect faith affiliation <strong>only</strong> if you volunteer it in conversation, solely for occasional faith-friendly greetings — never inferred, never shared with family, and removable at any time with <em>Erase my records</em> or by asking us by email. We do not use SPI beyond service delivery and the purposes you have explicitly consented to. You may restrict SPI use via the in-app <em>Consent history</em> screen. (CPRA §1798.121 — Right to Limit Use of SPI)</p>
+
+    <h2 id="en-retention">11. Retention</h2>
+    <ul>
+      <li>Active retention while your account is in use.</li>
+      <li>Account deletion: scheduled with a 7-day grace period, then the account and all data are removed (well within 30 days). You can cancel at any point during the grace period. A minimal record that the deletion happened (when and why it was requested) is kept; your consent history is deleted with the account.</li>
+      <li>Record deletion (account kept): same 7-day grace period, then your records are erased while your account remains. Kept with your account: points and badges, family links (with the nicknames and colors you gave as a viewer), family link requests, notes you left on a family member&rsquo;s medication reviews, golf games played with other app users (games no other app user was in — solo rounds, or rounds with only guests — are erased), goals tied to a Goal Pod with their check-ins and messages, your devices and settings, your consent history, security and rights-request records, and the log of when the voice assistant was connected (used for the hourly voice limit; it is removed when you delete your account).</li>
+      <li>Conversation text and AI memory: kept until you erase your records or delete your account. Deleting messages in the AI conversation screen hides them from that screen only (the app says so when you delete): the text stays in your conversation record &mdash; where it can still inform your daily summaries and the assistant&rsquo;s memory, and is included in your data export &mdash; until you erase your records or delete your account. What the assistant has learned about you is erased with <em>Erase my records</em> or account deletion; to have a specific item corrected or removed, email us (section 12).</li>
+      <li>Health-checkup reports: photos are deleted 7 days after upload (sooner if you turn off medical photo analysis); the results are kept until you delete the report, erase your records, or delete your account.</li>
+      <li>Pet care questions: photos are deleted once analysed; the question and guidance are kept until you erase your records or delete your account.</li>
+      <li>In-app notification inbox: 90 days. Data-export downloads: the link works for 24 hours and the file is removed within about two days. IP addresses used to prevent abuse: about a day.</li>
+      <li>Consent withdrawal: we stop collecting and using that category from then on. Data already stored is retained unless you separately ask us to erase it (see &ldquo;Right to Delete&rdquo; below).</li>
+      <li>Activity-area location: auto-deleted on a rolling 7-day window. Withdrawing the consent stops new points being recorded; points already recorded age out within that same 7-day window.</li>
+      <li>Emergency alert records: see section 7.</li>
+      <li>Family space: another person&rsquo;s records are not stored on your device (section 6.6). Nicknames and colors are deleted when the link ends. Link requests you send (including the sending phone&rsquo;s IP address and device description) are kept until you delete your account.</li>
+      <li>Travel plans: kept until you delete the plan in the app, erase your records, or delete your account. Place details fetched from Google for itineraries are cached on our server for at most 30 days (Google&rsquo;s terms) and hold no personal data. Flight searches are stored only on your phone.</li>
+      <li>Golf games: a game played with other app users is kept as the shared history of its players. When you delete your account, your link to those games is removed and your name in them is replaced with a neutral label; the other players keep their history. A game that no other app user is in any more (a solo round, or one with only guests) is erased together with your account, since no one else can open it.</li>
+      <li>Supplement suggestions: each result is kept so you can look back at it, until you erase your records or delete your account. While your records are unchanged, the same result is shown again for up to 30 days (or until our product catalog is re-checked, which happens weekly) instead of building a new one.</li>
+      <li>Follow-along workouts: workout sessions, weekly plans and settings are kept until you erase your records or delete your account. No video content is stored.</li>
+      <li>Camera history: each entry, with its photo, is kept until you delete it in the app, erase your records, or delete your account. The reduced copy sent only to recognize what a photo shows is not kept. The short names and AI explanations kept to improve the service (no photo) are erased when you erase your records or delete your account.</li>
+      <li>Legal hold periods take precedence where applicable.</li>
+    </ul>
+
+    <h2 id="en-rights">12. Your rights</h2>
+    <p>Depending on your residency, you have the rights below. We grant the same rights to all users regardless of location.</p>
+
+    <h3>12.1 Rights granted to all users</h3>
+    <ul>
+      <li><strong>Right to Know.</strong> Request a copy of the information we hold about you.</li>
+      <li><strong>Right to Delete.</strong> Request deletion of your information.</li>
+      <li><strong>Right to Correct.</strong> Request correction of inaccurate information.</li>
+      <li><strong>Right to Portability.</strong> Receive your information in a machine-readable format (JSON / CSV).</li>
+      <li><strong>Right to Limit SPI.</strong> Restrict use of health / voice / location data.</li>
+      <li><strong>Opt-out of Sale / Share.</strong> We do not sell or share — applies automatically.</li>
+      <li><strong>Opt-out of Automated Decision-Making.</strong> Request exclusion from AI-based profiling (CPRA Reg 2025).</li>
+      <li><strong>Non-discrimination.</strong> No penalty for exercising your rights.</li>
+      <li><strong>Right to Appeal.</strong> Appeal denied requests within 60 days (VCDPA / CPA / CTDPA).</li>
+      <li><strong>Authorized Agent.</strong> A trusted family member may submit requests on your behalf (CCPA §1798.135).</li>
+    </ul>
+
+    <h3>12.2 How to exercise</h3>
+    <ul>
+      <li>In-app — <em>Settings → My information rights</em>:
+        <ul>
+          <li><strong>Right to Know</strong> — generates a downloadable ZIP (JSON + CSV) of your data within minutes. Request it via the download link at the end of this policy (in the app) or by email. Once per 30 days. Meal, medication and camera-history photos are not included in the automatic export but are available on request by email; symptom and pet photos (deleted after analysis) and checkup photos (deleted after 7 days) cannot be provided. If you view a family member&rsquo;s records, the download also includes your side of those links (section 6.6) but never their records.</li>
+          <li><strong>Right to Correct</strong> — details you entered yourself can be changed in the app; to correct anything else, including what the assistant has learned about you, email us.</li>
+          <li><strong>Right to Delete</strong> — two in-app choices: <em>Erase my records</em> (keeps your account) and <em>Delete account</em>. Both are scheduled with a 7-day grace period and can be cancelled during it.</li>
+          <li><strong>Right to Limit SPI / Withdraw Consent</strong> — per-item withdrawal in the Consent history screen.</li>
+        </ul>
+      </li>
+      <li>Email: <a href="mailto:hello@healthya.app">hello@healthya.app</a> (subject line: [Rights Request]).</li>
+      <li>Processing time: in-app deletions take effect after a 7-day grace period. Email-based requests are resolved within 45 days of receipt (one 45-day extension where permitted).</li>
+    </ul>
+
+    <h2 id="en-chd">13. Consumer Health Data (WA MHMDA · NV SB370 · CT)</h2>
+    <div class="callout health">
+      <p><strong>This section is the Consumer Health Data Privacy Policy required by Washington's My Health My Data Act and analogous laws.</strong> "Consumer Health Data" includes information related to physical or mental health status, medications, diagnoses, treatments, precise location, and inferences thereof.</p>
+    </div>
+    <h3>13.1 Categories collected</h3>
+    <ul>
+      <li>Meal, medication, hydration, sleep, and exercise records and photos</li>
+      <li>Height and weight you enter yourself (optional), and the meal / snack portion guidance derived from them</li>
+      <li>Sleep, steps, activity, vital signs (heart rate, blood pressure, oxygen, temperature, respiratory rate), blood sugar, weight, fitness / gait, and mental-wellness measurements (mindfulness, mood) imported from a connected health app, including up to 12 months of past measurements (optional)</li>
+      <li>Inferred physical / emotional state from conversation</li>
+      <li>Symptoms you report and the general symptom guidance / recommended care setting shown to you</li>
+      <li>Supplement suggestions built from your records (nutrients, grades, target amounts, matching products, and which records were considered)</li>
+      <li>Pill bottle, prescription, and symptom photos (if uploaded)</li>
+      <li>Health-checkup report photos (kept 7 days) and the values, ranges, flags, explanations and trends read from them (optional)</li>
+      <li>Body areas or conditions you mark for follow-along workouts (for example osteoporosis or high blood pressure)</li>
+      <li>Photos and text you keep in your camera history (optional) &mdash; these can include health information if you photograph something like a prescription or a medical document</li>
+      <li>Voice signals (real-time processing, not stored)</li>
+      <li>A single most-recent precise location, refreshed while the app is open so it is ready if you call 911 (optional — see section 7)</li>
+    </ul>
+    <h3>13.2 Sources</h3>
+    <ul>
+      <li>Your direct input and voice</li>
+      <li>Microphone input (optional consent)</li>
+      <li>Photo uploads (optional consent)</li>
+      <li>Connected health app (optional consent)</li>
+    </ul>
+    <h3>13.3 Purposes</h3>
+    <ul>
+      <li>Daily health support (meal / medication / hydration / sleep / exercise / mood)</li>
+      <li>Supplement information and suggestions (optional, informational only)</li>
+      <li>Health-checkup report reading and explanation (optional, informational only)</li>
+      <li>Home camera recognition, text reading / translation, and camera history (optional)</li>
+      <li>Emergency support (optional)</li>
+      <li>Family space &mdash; sharing with the family members you choose, and viewing what a family member shares with you (optional)</li>
+    </ul>
+    <h3>13.4 Third parties</h3>
+    <p>Same as section <a href="#en-sharing">5</a> (service providers) and section <a href="#en-family-share">6</a> (linked family). No advertising sharing.</p>
+    <h3>13.5 Withdrawal and deletion</h3>
+    <p>You can withdraw consent per item in the in-app <em>Consent history</em> screen. Withdrawal stops further collection, use and sharing of that category. To have Consumer Health Data already collected erased, use <em>Erase my records</em> or <em>Delete account</em> in the app, or contact us — we then delete it, including downstream processor copies, within the statutory period.</p>
+    <h3>13.6 No geofencing</h3>
+    <p>We do not use geofencing around healthcare facilities for data collection or advertising. (WA MHMDA RCW 19.373.030)</p>
+    <h3>13.7 No sale (opt-in)</h3>
+    <p>We never sell Consumer Health Data, and we do not share it without separate opt-in consent.</p>
+
+    <h2 id="en-bipa">14. Biometric notice (Illinois BIPA)</h2>
+    <p>We use your voice only to hold the conversation in real time — the AI provider processes the audio stream, and we keep no recordings. <strong>We do not generate, store, or use voiceprints (biometric identifiers).</strong></p>
+    <p>Illinois residents are protected under 740 ILCS 14 (BIPA), which includes written consent and retention policy rights. Voice features will not activate if you decline the related consent.</p>
+    <p>App lock and biometric re-verification use your device&rsquo;s own built-in check (the app-lock PIN is stored only on your device); we receive no biometric data &mdash; only a device public key.</p>
+
+    <h2 id="en-children">15. Children</h2>
+    <p>The service is intended for users 18+. If a sub-13 account is discovered we will immediately deactivate and delete the data (COPPA 16 CFR Part 312). We do not engage in targeted advertising to users under 16 (MD MODPA).</p>
+
+    <h2 id="en-security">16. Security</h2>
+    <p>We implement reasonable technical and administrative safeguards (encryption in transit and at rest, row-level security, device-keychain storage of credentials, access control, audits) consistent with the NY SHIELD Act and industry standards. No system is absolutely secure.</p>
+
+    <h2 id="en-international">17. International transfers</h2>
+    <p>The service operates in multiple countries including the United States. Information may be transferred internationally; in such cases the higher of local law or this policy applies.</p>
+
+    <h2 id="en-changes">18. Changes to this policy</h2>
+    <p>Material changes are notified in-app and by email at least 7 days before effective date. Significant scope changes require renewed consent.</p>
+
+    <h2 id="en-contact">19. Contact</h2>
+    <ul>
+      <li>Privacy contact: hello@healthya.app</li>
+      <li>Rights requests: hello@healthya.app (subject line: [Rights Request])</li>
+      <li>Operating company: Deeper Emptiness AI (mailing address available on request via hello@healthya.app)</li>
+    </ul>
+
+    <p class="meta app-only"><a href="#" onclick="if(window.ReactNativeWebView&&window.ReactNativeWebView.postMessage){window.ReactNativeWebView.postMessage('healthia:export-request');}return false;">Request a copy of my data (download)</a> — once per 30 days.</p>
+    </article>
+
+    <!-- ===================== 한국어 ===================== -->
+    <article data-lang-block="ko">
+    <h1>Healthya 개인정보처리방침</h1>
+    <p class="meta">적용 대상: Healthya 앱(가족 공간 포함) · 시행일: 2026년 6월 21일 · 최종 수정: 2026년 10월 20일 · 동의 버전: 2026-09-14</p>
+
+    <div class="callout">
+      <p><strong>핵심 요약.</strong> Healthya는 식사·복약·수면·운동·약속과 일상 대화까지, 내 생활 전반을 관리하는 종합 AI 도우미 앱입니다. 성인 누구나 이용할 수 있고, 앱 하나만으로도 온전히 쓸 수 있습니다. 원하시면 앱의 <em>가족 공간</em>에서 가족과 연결해, 내 기록 일부를 가족에게 보여 주거나, 가족이 보여 주는 기록을 보거나, 둘 다 할 수 있습니다 &mdash; 한 사람이 두 역할을 다 가질 수 있습니다(6항). 앱도 방침도 모두에게 하나이며, 별도였던 Healthya Family 앱은 Healthya 로 통합되어 종료되었습니다(6.7항). 본 방침은 어떤 정보를 수집하고, 누구와 공유하며, 어떻게 권리를 행사할 수 있는지 설명합니다. 저희는 광고 목적으로 개인정보를 판매하거나 공유하지 않습니다.</p>
+    </div>
+
+    <div class="toc" role="navigation" aria-label="목차">
+      <h2>목차</h2>
+      <ol>
+        <li><a href="#ko-who">회사 정보</a></li>
+        <li><a href="#ko-info">수집하는 정보</a></li>
+        <li><a href="#ko-sources">수집 출처</a></li>
+        <li><a href="#ko-purposes">이용 목적</a></li>
+        <li><a href="#ko-sharing">서비스 제공자(수탁자)</a></li>
+        <li><a href="#ko-family">가족 공간</a> · <a href="#ko-family-share">가족이 내 기록을 볼 때</a> · <a href="#ko-family-view">내가 가족의 기록을 볼 때</a> · <a href="#ko-family-app">Healthya Family 앱</a></li>
+        <li><a href="#ko-emergency">응급 위치 공유(911)</a></li>
+        <li><a href="#ko-health-apps">건강 앱 연동</a></li>
+        <li><a href="#ko-sale">판매·공유 금지 고지</a></li>
+        <li><a href="#ko-spi">민감 개인정보(SPI)</a></li>
+        <li><a href="#ko-retention">보유 기간</a></li>
+        <li><a href="#ko-rights">이용자의 권리</a></li>
+        <li><a href="#ko-chd">소비자 건강정보(WA / NV / CT)</a></li>
+        <li><a href="#ko-bipa">생체정보 고지(IL BIPA)</a></li>
+        <li><a href="#ko-children">아동</a></li>
+        <li><a href="#ko-security">보안</a></li>
+        <li><a href="#ko-international">국외 이전</a></li>
+        <li><a href="#ko-changes">변경</a></li>
+        <li><a href="#ko-contact">문의</a></li>
+      </ol>
+    </div>
+
+    <h2 id="ko-who">1. 회사 정보</h2>
+    <p>Healthya는 Deeper Emptiness AI("당사")가 운영하는 서비스이며, 당사는 본 방침에 기재된 개인정보의 사업자/처리자(Controller)입니다.</p>
+    <p><strong>본 방침의 「회원님」과 「연결된 가족」.</strong> 「회원님」은 Healthya 앱을 쓰는 모든 분을 가리킵니다. 「연결된 가족」은 가족 공간에서 회원님과 연결된 분 &mdash; 가족이나 가까운 분 &mdash; 이며, 나이·건강 상태·돌봄 관계를 뜻하지 않습니다. 본 방침의 모든 내용은 모든 회원에게 똑같이 적용됩니다. 한 분의 기록이 다른 분에게 보일 때도 그 기록은 기록의 주인인 분의 것이며, 누가 볼 수 있는지는 그분이 동의 설정으로 정합니다(6항).</p>
+    <p>문의: <a href="mailto:hello@healthya.app">hello@healthya.app</a></p>
+
+    <h2 id="ko-info">2. 수집하는 정보</h2>
+    <p>다음 항목을 수집합니다(CCPA §1798.140(v) 분류 기준).</p>
+    <table>
+      <thead><tr><th>분류</th><th>예시</th></tr></thead>
+      <tbody>
+        <tr><td>식별자</td><td>전화번호(로그인에 사용), 보안 이메일 주소(선택 — Google 계정으로 확인할 수 있음), 계정(사용자) ID, 기기 ID, 푸시 토큰</td></tr>
+        <tr><td>개인정보(Cal. Civ. Code §1798.80)</td><td>닉네임, 출생 연도, 성별(선택 — 직접 입력한 경우에만), 도우미가 불러 드릴 호칭(선택 — 직접 말씀하신 경우에만)</td></tr>
+        <tr><td>인터넷/전자적 활동</td><td>앱 사용 로그, 기능 사용 시각, 충돌/성능 보고, 알림 답 버튼·워치 전달 진단 기록(짝지은 워치에 앱이 설치됐는지가 남을 수 있음), 음성 도우미 연결 기록(요청 시각, 시간당 음성 한도 안에서 허용됐는지, 사용한 AI 경로)</td></tr>
+        <tr><td>기기 정보</td><td>휴대폰에 설정된 기기 이름, 모델, OS·앱 버전, 표시 언어, 최초·최근 로그인 시각(<em>내 기기 관리</em>에서 본인에게 표시 — 로그아웃한 기기 포함; 기기 3대까지 동시 로그인); 그 기기에서 앱 알림이 허용되어 있는지; 그 기기에서 가족 공간이 켜져 있는지(가족 소식 알림을 그 기기로 보내기 위해 — 6.6항); 중요한 작업을 기기 자체 잠금으로 확인하는 데 쓰는 기기 공개키(생체정보는 받지 않음); 남용 방지를 위해 하루 정도 보관하는 IP 주소</td></tr>
+        <tr><td>위치 — 대략(선택)</td><td>시·구 단위로, 지역 맞춤(예: 날씨 기반 대화)과 근처 병원·약국 등 케어 시설 찾기에 활용합니다(지도 제공자에 전송하기 전 약 1&nbsp;km 단위로 반올림 — 5항 참조). 이 목적들로 정밀 좌표를 저장하지 않습니다. 선택 시, 최근 7일의 일반화된 "활동 영역"(약 2&nbsp;km 블록 단위로 반올림)을 연결된 가족에게 공유할 수 있습니다.</td></tr>
+        <tr><td>위치 — 정밀(선택, 응급 대비)</td><td>연결된 가족에게 응급 위치 공유 권한을 부여하시면, 911 발신 순간에 쓸 수 있는 위치가 미리 확보되어 있도록 <strong>앱이 화면에 열려 있는 동안</strong> 약 5분마다 저장된 정밀 위치 1건을 갱신합니다. 가장 최근 1건만 보관하며 갱신 시 이전 값을 덮어쓰므로 이동 경로나 이력은 저장되지 않습니다. 911 을 누르면 그 순간 정밀 위치를 한 번 더 잡으려 합니다. 앱이 백그라운드에 있거나 종료된 동안에는 수집하지 않습니다. 권한을 준 가족은 911 알림 뒤 24시간 동안만 가장 최근 위치를 볼 수 있으며, 그동안에도 앱이 열려 있으면 위와 같이 갱신됩니다. 7항 참조.</td></tr>
+        <tr><td>위치 — 정밀, 휴대폰 안에서만 사용(선택, 골프)</td><td>새 골프 게임을 만들 때 위치가 허용되어 있으면, 앱이 정밀 위치를 한 번 읽어 <strong>휴대폰 안에서</strong> 회원님이 계신 미국 주의 골프장 목록과 비교해 지금 계신 골프장을 제안합니다. 이 위치는 <strong>저장하지 않으며 당사나 다른 누구에게도 전송되지 않습니다</strong>. 골프장 목록을 받기 위해 당사 서버가 받는 것은 휴대폰이 그 위치로 정한 미국 주(주 경계 근처면 이웃 주도)와, 골프장을 고르신 경우 그 골프장의 ID 뿐입니다. 5항(OpenGolfAPI) 참조.</td></tr>
+        <tr><td>음성/영상(선택)</td><td>마이크 신호(실시간 처리만, 저장 안 함); 직접 업로드한 식사·약/처방전·증상 사진(증상 사진은 분석 직후 삭제)</td></tr>
+        <tr><td>홈 카메라 사진과 카메라 기록(선택)</td><td>홈 카메라로 사진을 찍거나 고르시면, 무엇을 찍었는지(음식·약·아픈 곳·아프거나 다친 반려동물·검진 결과서·글·그 밖의 것) 알아보고 글이면 글자를 읽기 위해 줄인 사본을 AI 제공자에게 보냅니다. QR 코드는 휴대폰에서 읽으며, 그 글의 번역을 요청하지 않는 한 당사로 보내지 않습니다. 이 판정용 사본은 저장하지 않습니다. 음식·약·아픈 곳·반려동물·검진 결과서로 판정된 사진은 이어서 해당 기능으로 넘어가며, 본 방침에 적은 그 기능의 기준을 따릅니다. 바로 보여 드리는 결과 &mdash; 읽은 글과 그 밖의 것에 대한 해설 &mdash; 는 회원님의 어느 기기에서든 다시 열어 보실 수 있도록 회원님 계정에 <strong>카메라 기록</strong>으로 보관합니다: 사진(크기를 줄이고 위치 등 부가 정보를 지운 것), 사진에서 알아본 이름, 읽은 글과 그 언어, 마지막으로 하신 번역, AI 해설. 카메라 기록은 회원님만 보실 수 있으며 연결된 가족에게는 <strong>절대</strong> 보이지 않고, 앱에서 한 건씩 언제든 지우실 수 있습니다. 이와 별도로 사진이 「그 밖의 것」으로 판정되면 짧은 이름과 AI 해설(사진은 제외)을 서비스 개선을 위해 보관하며, 모아서 본 통계로만 검토합니다.</td></tr>
+        <tr><td>건강 앱에서 가져온 건강·운동 정보(선택)</td><td>Apple 건강 또는 Google Health Connect에서 읽어오는 측정값(읽기 전용): 수면·수면 단계, 걸음 수, 거리, 활동 칼로리, 운동 세션; 활력징후(심박·혈압·산소·체온·호흡수); 혈당·체중; 체력·보행(VO2max·심박변이도·보행 안정성/속도); 정신건강(마음챙김·기분). 8항 참조.</td></tr>
+        <tr><td>캘린더 일정(기기 내 처리)</td><td>앱의 일정 기능을 쓰시면, OS 캘린더 권한을 받아 휴대폰 기본 캘린더(기기에 등록된 Apple 캘린더 / Google 캘린더 계정)의 일정을 읽고 씁니다. 일정 제목·시각·장소·메모는 <strong>휴대폰에만 있으며 당사 서버로 전송되지 않습니다</strong>. 선택 설정인 <em>AI 일정 읽기</em>를 켜신 경우에만, 음성 대화 중 일정을 물으시거나 아침 브리핑을 여실 때 다가오는 일정의 제목과 시각이 AI 제공자에게 전송됩니다. 캘린더는 서버에 복사하지 않지만, 대화에서 소리 내어 오간 말은 대화 기록에 남습니다. 앱에서 만든 일정의 알림은 이벤트 자체 알림으로 저장되어 캘린더 앱이 울립니다. 8항 참조.</td></tr>
+        <tr><td>건강 활동 기록</td><td>식사 기록(시각, 종류, 선택 사진/영양 분석), 운동(시간, 종류), 복약(이름, 용량, 일정, 복용), 수분(섭취), 수면(시작/종료 시각)</td></tr>
+        <tr><td>영양제 추천(선택)</td><td>영양제 추천을 요청하시는 경우: 회원님을 위해 만든 결과 &mdash; 고른 성분, 등급과 목표 용량, 당사 목록에서 맞는 상품, 이유 코드, 쉬운 설명 &mdash; 와 어떤 기록을 참고했는지의 표시(개수·날짜만, 예: &ldquo;약 6개, 3월 검진&rdquo;). 추천은 이미 주신 기록(복용 중인 약, 최근 검진 값, 최근 28일의 식사·운동·수면, 나이대·성별, 체중, 거주 국가)으로 당사 규칙이 계산하며, 이를 위해 새로 수집하는 정보는 없습니다.</td></tr>
+        <tr><td>따라하는 운동 기록(선택)</td><td>따라하는 운동 기능을 쓰면: 재생한 루틴(공개 유튜브 영상을 가리키는 카탈로그 키), 따라 한 시간(분), 완료 여부, 저희가 짜 드린 주간 루틴 계획, 운동 설정(초점·시간·자세·주당 횟수·단계·영상 언어 선호, 그리고 표시하신 아픈 부위나 상태 — 예: 무릎 통증·골다공증·고혈압). 영상 자체는 유튜브 공식 임베디드 플레이어 안에서 재생되며 저희가 내려받거나 저장하지 않습니다.</td></tr>
+        <tr><td>골프 게임 기록(선택)</td><td>골프 점수 기록 기능을 쓰시는 경우: 게임 이름, 홀 수·파, 홀별 점수, 핸디캡, 순위, 입장 코드. 이 정보는 같은 게임의 다른 참가자와 공유됩니다(닉네임·핸디캡·점수가 그들에게 보입니다). 앱이 없는 친구를 게스트로 적으신 이름은 그 게임의 일부로 저장됩니다. 전화번호로 친구를 초대하시면 초대를 전달하기 위해 그 번호가 헬시야 계정인지 확인하며, 번호 자체는 게임에 저장하지 않고 초대에는 회원님의 닉네임이 표시됩니다. 방장이 선택 기능인 내기(홀당 Skins·타당 스트로크)를 켜면 방장이 정한 금액·통화와, 게임이 끝났을 때의 각 참가자 정산 결과(누가 누구에게 얼마인지의 숫자)가 게임 정보로 저장되어 그 게임의 참가자에게 보입니다. 헬시야는 어떤 돈도 결제·보관·이체하지 않으며, 정산은 앱 밖에서 이루어집니다. 골프장을 고르시면(미국 골프장만) 공개 골프장 데이터로 홀 수·파가 채워지고 골프장 이름이 게임 이름이 되며, 시작하기 전에 바꾸실 수 있습니다. 고르신 골프장(골프장 ID·주)은 게임과 함께 저장됩니다. 이 정보는 전체 이용자를 합친 통계(많이 가는 골프장·라운드 시간)에만 쓰며, 친 사람이 5명 미만인 골프장은 그 통계에서 뺍니다. 최근에 치신 골프장 목록(이름·도시·주)은 휴대폰에만 기억됩니다.</td></tr>
+        <tr><td>여행 계획(선택)</td><td>여행 플래너를 쓰시는 경우: 직접 입력하거나 고른 여행지, 여행 날짜 또는 기간, 일정 밀도, 원하는 여행의 성격을 적은 한 줄 메모(선택), 그리고 생성된 일정·예상 비용·여행지 안내. <em>나에게 맞는 추천</em>을 요청하시면 AI가 학습한 정보와 최근 30일의 하루 요약에서 중립적인 여행 성향(활동 강도, 관심사, 아침형/저녁형, 동행, 언급한 장소, 짧은 근거 몇 줄)을 도출해 그 계획과 함께 저장하며, 질환·증상·약 이름이 담기지 않도록 검사합니다. 항공권 가격 찾기를 쓰시는 경우 출발 도시와 최근 검색은 <strong>휴대폰에만</strong> 보관되며 당사 서버로 전송되지 않습니다(결과 화면을 열 때 휴대폰이 Google에 보내는 정보는 5항 참조). 여행 계획은 연결된 가족에게 보이지 않습니다.</td></tr>
+        <tr><td>건강검진 결과서(선택)</td><td>건강검진 결과서를 추가하시는 경우: 결과서 각 장의 사진; 거기서 읽어 낸 수치·정상범위·판정(이름·생년월일·번호·연락처·표시된 주소는 저장 전에 가림); 쉬운 설명·생활 가이드·다음 검진일·해마다의 추이. 검진 결과는 연결된 가족에게 <strong>절대</strong> 보이지 않습니다.</td></tr>
+        <tr><td>반려동물 상담(선택)</td><td>아파 보이는 반려동물에 대해 물으시는 경우: 증상 설명, 동물 종류, 선택 사진(분석 후 삭제), 보여 드린 안내 결과.</td></tr>
+        <tr><td>목표 함께하기(선택)</td><td>목표 함께하기 방에 들어가시는 경우: 같은 방 멤버에게 자동으로 만든 별명, 목표 일정, 체크인한 날짜·시각, 보내신 준비된 응원이 보입니다 — 이름이나 목표 제목은 보이지 않습니다. 로그인한 누구나 모집 중인 방을 볼 수 있습니다. 닫힌 방은 90일 뒤 삭제됩니다.</td></tr>
+        <tr><td>가족 공간(선택)</td><td>가족과 연결하시면: 연결(누구와 어느 방향으로 연결되었는지, 각자 어떤 항목을 공유하는지, 연결이 언제 시작되고 언제 어느 쪽에서 끝났는지), 보내신 연결 요청(회원님과 상대의 전화번호, 선택으로 적은 짧은 인사말, 보낸 시각, 요청을 보낸 휴대폰의 IP 주소와 기기 정보, 결과), 보시는 분마다 붙인 호칭과 색(회원님만 봄), 가족의 복약 검토에 남긴 메모(그분이 읽을 수 있음), 가족 소식 알림함, 기기의 가족 공간 표시. 가족이 보여 주는 기록 자체는 회원님 기기에 저장하지 않습니다(6.6항).</td></tr>
+        <tr><td>신체 정보(선택)</td><td>직접 입력한 키·몸무게와 성별·출생 연도로, 식사·간식 제안의 양을 정하는 데에만 사용합니다. 입력하지 않아도 되며, 그 경우에도 식사 제안은 이용할 수 있습니다. 이 값은 본인 계정에만 저장되어 연결된 가족에게 <strong>공개되지 않으며</strong>, 직접 입력한 키·몸무게와 이로부터 계산된 체질량 수치는 AI 제공자에게 <strong>전송하지 않습니다</strong>(5항 참조). 건강 앱을 연동한 경우, 직접 입력한 몸무게 대신 기기에서 최근 측정된 몸무게가 사용될 수 있습니다. 기기에서 측정된 몸무게는 건강 앱 측정값의 하나로서, 한 주·한 달 사이의 변화(처음·마지막 값)가 주간·월간 리포트를 쓰기 위해 AI 제공자에게 전달될 수 있습니다(5항 참조).</td></tr>
+        <tr><td>본인 보고 건강정보</td><td>증상, 기분, 감정 메모</td></tr>
+        <tr><td>종교/신앙(선택, 민감)</td><td>대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에 사용합니다. 언급 없이 추론하지 않고, 가족과 공유하지 않습니다. 10항 참조.</td></tr>
+        <tr><td>성격 유형(선택)</td><td>앱 안의 MBTI 검사에 답하거나, 이미 아는 유형을 직접 고르거나, 대화에서 회원님이 스스로 말씀하신 유형을 받아 정한 4글자 성격 유형(A/T 변형 포함 가능)입니다. 대화에서는 아직 유형이 없을 때 직접 말씀하신 경우에만 기록하며, 말투에서 추측하지 않습니다. AI 제공자에게 전달되는 대화 지침에는 유형 코드(예: "INFP-T")만 포함되며, AI 가 답하는 말투를 맞추는 데에만 사용합니다. 건강 판단이나 추천에는 <strong>절대</strong> 사용하지 않고, 문항별 답변은 서버에 저장하지 않습니다(네 축의 합계만 유형과 함께 보관). 연결된 가족에게는 <em>설정 → 가족별 공유</em>에서 그 가족에 대해 <em>MBTI 유형 공유</em>를 켠 경우에만 유형 코드가 보이며, 답변이나 축 점수는 어떤 경우에도 보이지 않고 언제든 끌 수 있습니다. 유형 자체는 <em>설정 → MBTI 검사</em>에서 지울 수 있습니다. 검사는 오락 기능이며 심리 평가가 아닙니다(이용약관 5항 참조).</td></tr>
+        <tr id="ko-conversation-content"><td>대화 내용</td><td>음성·텍스트 대화의 글(회원님과 도우미 양쪽), 내 기록 삭제나 계정 삭제 전까지 보관. AI 대화 화면에서 삭제한 대화는 그 화면에서만 숨겨집니다(11항 참조). 녹음은 남기지 않습니다.</td></tr>
+        <tr><td>AI 기억</td><td>대화에서 추린 한 줄 "순간"과 맥락 기억을 위한 의미 임베딩(발화 원문 인용은 보관하지 않음)</td></tr>
+        <tr><td>추론 정보</td><td>대화로부터 추론된 성향, 관심사, 기분</td></tr>
+      </tbody>
+    </table>
+
+    <p><strong>이 정보가 휴대폰·워치에서 보이는 위치.</strong> 일부 정보는 앱 밖에도 표시되어, 휴대폰(또는 워치)을 들거나 곁눈질하는 사람에게 보일 수 있습니다. 이는 알림과 위젯이 동작하는 일반적인 방식이며, 당사나 제3자와 공유하는 것이 아닙니다.</p>
+    <ul>
+      <li><strong>알림</strong> — 알림 문구가 잠금화면에 표시되며, 실제 내용이 그대로 담깁니다: 복약 알림에는 약 이름이, 작심삼일 알림에는 직접 쓰신 목표 제목이, 여행 계획 알림에는 여행지가, 주간 리포트 알림에는 한 줄 요약이 나올 수 있습니다. 캘린더 일정의 알림은 캘린더 앱이 보여 줍니다. 잠금화면에 이 내용이 보이지 않게 하시려면, 휴대폰 시스템 설정에서 Healthya의 알림 내용 숨기기를 켜실 수 있습니다.</li>
+      <li><strong>홈화면·잠금화면 위젯</strong> — "오늘의 계획" 위젯은 남은 케어 항목과 시각을 보여 주며(복약은 중립적인 라벨로 표시), "작심삼일" 위젯은 직접 지으신 목표 제목을 iOS 잠금화면을 포함해 표시합니다. 목표 제목이 그곳에 보이는 것을 원하지 않으시면, 비공개로 두고 싶은 내용이 드러나지 않는 제목을 쓰시거나 위젯을 제거하시면 됩니다.</li>
+      <li><strong>알림 답 버튼</strong> — <em>완료</em>·<em>못했어요</em> 같은 알림 버튼은 휴대폰 잠금을 풀거나 앱을 열지 않아도 잠금화면(과 짝지은 워치)에서 누를 수 있고, 누르면 바로 기록됩니다. 그래서 휴대폰을 든 다른 사람도 회원님 대신 알림에 답할 수 있습니다.</li>
+      <li><strong>워치 앱</strong> — iPhone 과 짝지은 Apple Watch, 또는 Android 휴대폰과 짝지은 Wear OS 워치(갤럭시 워치 등)에 Healthya 를 설치하시면, 워치에서도 울리고 답할 수 있도록 휴대폰에 예약된 알림을 워치로 복사합니다. 이 사본에는 알림과 같은 문구(약 이름, 직접 쓰신 알림 이름, 작심삼일 목표 제목)가 담기며, 워치 화면에도 표시됩니다. 워치는 가장 최근 사본을 새 사본이 올 때까지 보관하고, 휴대폰 앱에서 로그아웃하면 워치에 예약된 알림도 지워집니다. 워치에서 답하시면 워치가 그 알림에 담긴 코드 — 그 알림이나 목표의 답만 기록할 수 있는 코드 — 로 당사 서버에 바로 보냅니다. 로그인 정보는 워치로 복사하지 않으며, 워치 앱은 제3자 서비스를 쓰지 않습니다.</li>
+    </ul>
+
+    <h2 id="ko-sources">3. 수집 출처</h2>
+    <ul>
+      <li>이용자가 제공하는 정보(가입, 동의, 대화, 사진 업로드)</li>
+      <li>기기에서 생성되는 정보(기기 ID, 푸시 토큰)</li>
+      <li>Google — 보안 이메일을 Google 로 확인하기로 하신 경우에만, 확인된 이메일 주소를 받음</li>
+      <li>연동한 건강 앱(Apple 건강 / Google Health Connect) — 이용자가 허용한 경우에 한함</li>
+      <li>휴대폰 기본 캘린더 — 이용자가 허용한 경우에 한하며, 기기에서만 읽고 당사가 수집하지 않음(8항)</li>
+      <li>연결된 가족이 가족 공간을 통해 제공하는 정보(예: 연결 요청, 복약 검토에 남긴 메모) &mdash; 통합 전에 맺은 연결이라면 Healthya Family 앱을 통해(6.7항)</li>
+      <li>가족이 회원님께 자기 기록을 보여 주는 경우: 그분이 공유한 기록(당사 서버에서 보여 드림 — 6.6항)</li>
+      <li>제3자 서비스의 출력 결과(예: Vertex AI 응답)</li>
+      <li>공개 골프장 데이터(골프장 이름·위치·홀 수·파) — OpenStreetMap 기여자들이 만든 데이터를 OpenGolfAPI 에서 받음, 골프 게임에서 골프장을 고르실 때</li>
+    </ul>
+
+    <h2 id="ko-purposes">4. 이용 목적</h2>
+    <ul>
+      <li>AI 동반자 대화 및 이용자 맥락 기억</li>
+      <li>내장 녹음이 재생되지 않을 때 응급처치 안내를 소리로 읽어 드리기</li>
+      <li>하루 계획, 식사·복약·수분 알림 및 생활 지원</li>
+      <li>선택 입력한 키·몸무게·성별·출생 연도를 이용한 식사·간식 제안량 조정</li>
+      <li>활동 정보와 (선택) 건강 앱 측정값을 결합한 하루 요약</li>
+      <li>응급 지원 — 응급처치 안내, 원탭 911 발신, 선택적 가족 알림(7항 참조)</li>
+      <li>케어 내비게이션(선택) — 근처 병원·약국·진료과 찾기 및 일반 증상 안내 표시(정보 제공 목적이며 진단이 아님)</li>
+      <li>건강검진 결과서(선택) — 결과서 수치를 읽고 쉬운 말과 생활 팁으로 설명, 해마다 비교, 식사·영양제 추천에 참고(정보 제공 목적이며 진단이 아님)</li>
+      <li>반려동물 돌봄(선택) — 동물병원에 언제 가야 할지 일반 안내와 근처 동물병원 찾기(정보 제공 목적이며 수의학적 진단이 아님)</li>
+      <li>영양제 정보·추천(선택) — 비타민·미네랄 등 영양소가 어떤 역할을 하는지 설명하고, 회원님의 기록에 맞는 소수의 성분과 제3자 품질 인증 표지가 있는 상품을 제안합니다. <strong>정보 제공 목적이며 의료 조언이 아닙니다.</strong> 당사 소프트웨어가 공개된 섭취 지침(NIH·USPSTF·미국 식생활지침)을 회원님의 기록에 적용해 고르고, AI 제공자는 그 결과를 쉬운 말로 풀어 쓰기만 하며 추가·삭제·변경할 수 없습니다. 특히 처방약과 함께 드실 때는 시작 전 의사·약사와 확인해 주세요.</li>
+      <li>홈 카메라(선택) — 사진에 무엇이 찍혔는지 알아보고 맞는 기능으로 안내, 사진 속 글을 읽고 번역, 그 밖의 것을 쉬운 말로 설명, 그리고 그 결과를 다시 볼 수 있도록 카메라 기록 보관</li>
+      <li>지역 맞춤(날씨 기반 대화를 위한 대략 위치)</li>
+      <li>가족 공간(선택) — 회원님이 고른 가족에게 공유하신 기록과 요약을 보여 드리기, 그리고 가족이 회원님께 자기 기록을 보여 주는 경우 그분이 공유한 것·응급 알림·가족 소식을 보여 드리기(6항)</li>
+      <li>친구와 골프(선택) — 지금 계신 골프장 찾기와 홀 수·파 채우기, 초대한 참가자와 점수·순위 공유, 전화번호를 통한 초대 전달, 끝난 라운드를 하루 요약의 운동으로 기록, 전체 이용자를 합친 골프장 이용 통계(많이 가는 골프장·라운드 시간)</li>
+      <li>여행 계획(선택) — 고른 여행지의 하루하루 일정·예상 비용·여행지 안내 생성, 입력한 경로의 항공권 가격을 앱 안 브라우저로 열기</li>
+      <li>계정 관리 — 보안 이메일을 통한 계정 복구와 로그인된 기기 관리 포함</li>
+      <li>법규 준수, 부정 방지, 보안 감사</li>
+    </ul>
+
+    <h2 id="ko-sharing">5. 서비스 제공자(수탁자)</h2>
+    <p>아래 제공자에게만 기밀 유지 및 목적 제한 계약하에 정보를 제공합니다. 어느 제공자도 광고 목적으로 데이터를 받지 않으며, 데이터 브로커와 공유하지 않습니다. (운동 영상과 병명 영상 안에서는 YouTube 가 자체 광고를 보여 줄 수 있습니다 — YouTube 행 참조.)</p>
+    <table>
+      <thead><tr><th>수신자</th><th>전송 데이터</th><th>목적</th></tr></thead>
+      <tbody>
+        <tr><td>Google Vertex AI (Gemini)</td><td>닉네임, 출생 연도, 최근 대화, 학습된 사실, 식사·약 사진; 하루 요약·다음 날 알림 계획·주간/월간 리포트를 위해 대화 글과 돌봄 기록 &mdash; 식사, 약과 알림에 대한 답(못 드신 이유 포함), 물, 수면, 운동, 증상 상담 요약, 건강 앱에서 가져온 수면 시각·걸음·운동 기록과, 주간·월간 리포트용으로 앱이 계산한 수면·걸음·혈압·혈당·심박·산소·체중의 평균과 변화(마음챙김·기분은 보내지 않음) &mdash; 과 본국, 위치를 허용하신 경우 시·도; 맥락 기억을 위해 대화 글과, 말씀하신 경우 종교·성격 유형; 증상 상담은 설명·선택 사진·성별·나이대; 홈 카메라로 찍은 사진의 줄인 사본(무엇인지 알아보고, 그 밖의 것이면 짧은 해설을 쓰기 위해)과 번역을 요청하신 사진 속 글; 여행 플래너에서는 입력한 여행지·기간·밀도·컨셉 메모(선택), 출발 국가(전화번호 국가), 그리고 <em>나에게 맞는 추천</em> 시 AI가 학습한 정보와 최근 30일 활동 집계(도출된 성향 프로필은 질환·증상·약 이름이 없도록 검사); 영양제 추천에서는 당사 규칙이 이미 만든 결과의 사실표만(성분명·등급·목표 용량·상품명·짧은 이유 문장 — 이 문장에는 &lsquo;메트포르민&rsquo;, &lsquo;신장 기능 저하&rsquo;, &lsquo;50세 이후&rsquo;처럼 약의 종류나 일반 소견이 담길 수 있으며, 검진 수치·정확한 나이·복용약 목록은 보내지 않음); 건강검진 결과서는 이름·생년월일·번호·연락처를 가린 뒤 읽어 낸 글(병원·의사 이름은 남을 수 있음); 반려동물 상담은 설명·종류·선택 사진; 연결된 가족의 주간 리포트를 회원님 언어로 보실 때는 번역을 위해 그 리포트의 글</td><td>대화 이해, 하루 요약, 다음 날 알림 계획, 주간·월간 리포트, 증상 안내, 식사·약 분석, 홈 카메라 판정·해설·번역, 영양제 추천의 쉬운 설명 문장, 검진 설명·추이, 반려동물 안내, 여행 일정·안내·추천. 엔터프라이즈 약관 — 모델 학습에 사용 안 함.</td></tr>
+        <tr><td>Google Vertex AI Live</td><td>음성(스트리밍)과 대화 중 입력하신 글, 고르신 목소리, 그리고 그 대화에 필요한 맥락: 닉네임과 불러 드릴 호칭, 사용 언어, AI 가 회원님에 대해 학습한 내용의 요약, 성격 유형과 종교(직접 정하거나 말씀하신 경우에만), 피해 달라고 하신 주제, 본국(전화번호 국가), 위치를 허용하신 경우 현재 시·도. 대화 중에는 도우미가 회원님을 위해 찾아본 것도 받습니다: 지난 대화의 기억, 물어보신 지난 날의 기록(식사와 칼로리, 약과 복용 여부·못 드신 이유, 물, 운동, 걸음, 수면), 목표, 계신 곳의 날씨, 캘린더 일정(<em>AI 일정 읽기</em>를 켠 경우에만), 지금 보고 계신 앱 화면의 짧은 요약(가족 화면이면 연결된 가족의 이름 포함)</td><td>실시간 음성 대화 — 기본 음성 경로. 엔터프라이즈 약관 — 모델 학습에 사용 안 함. 당사는 녹음을 보관하지 않음.</td></tr>
+        <tr><td>Google Gemini API(Live)</td><td>위와 같음</td><td>기본 경로를 쓸 수 없을 때만 쓰는 예비 음성 경로(이전 버전 앱은 이 경로를 기본으로 씀). 유료 서비스 약관 — 모델 학습에 사용 안 함. 당사는 녹음을 보관하지 않으며, Google 측의 단기 남용 방지 보존은 Google API 약관을 따릅니다.</td></tr>
+        <tr><td>Google Cloud Vision</td><td>식사·약/처방전 사진; 홈 카메라에서 글로 판정된 사진; 건강검진 결과서 사진(가리기 전 원본)</td><td>라벨·음식 인식과 번역하실 사진 속 글을 읽기 위한 텍스트 인식 및 이미지 분석.</td></tr>
+        <tr><td>Google Vertex AI(텍스트 임베딩)</td><td>짧은 대화 조각</td><td>관련 맥락을 떠올리기 위한 의미 검색.</td></tr>
+        <tr><td>Google Cloud Text-to-Speech</td><td>내장 음성이 재생되지 않을 때의 고정 응급처치 문장</td><td>응급처치 안내를 소리로 읽기. 이용자 음성은 전송하지 않음.</td></tr>
+        <tr><td>Google Places(Google Maps Platform)</td><td>대략 위치(약 1&nbsp;km 반올림)와 케어 분류(병원·약국·동물병원, 또는 심장내과 같은 진료과); 여행 플래너에서는 입력한 여행지 이름과 일정 후보 장소의 이름(당사 서버가 전송)</td><td>근처 케어 시설 찾기; 일정 장소가 실제로 존재하는지 확인하고 사진 가져오기. 개인 식별자 미전송, 광고 미사용.</td></tr>
+        <tr><td>Google Search(Vertex AI grounding 경유)</td><td>웹 조회 질문 텍스트와, 답이 회원님이 계신 곳에 맞도록 함께 보내는 본국(전화번호 국가)·현재 시·도(위치를 허용하신 경우에만); 지역 범위의 일반 뉴스 질의; 여행 플래너의 일반적인 여행지 안내 질의(여행지·월만)</td><td>대화 중 실시간 사실 조회, 매일 뉴스 브리핑, 여행지 안내. 광고 미사용.</td></tr>
+        <tr><td>OpenWeather</td><td>대략(시·구 단위) 위치</td><td>친근한 대화 시작을 위한 날씨 정보. 정밀 좌표는 전송 안 함.</td></tr>
+        <tr><td>USDA FoodData Central</td><td>음식 이름만(개인 식별자 없음)</td><td>식사 영양 정보 조회.</td></tr>
+        <tr><td>OpenGolfAPI(골프장 데이터)</td><td>미국 주 코드(들) 또는 고르신 골프장의 ID &mdash; 당사 서버가 보내며 개인 식별자·위치·기기 IP 없음</td><td>골프 게임용 공개 골프장 목록과 홀 수·파 조회. 골프장 데이터는 OpenStreetMap 기여자들의 데이터(ODbL 라이선스)이며, 당사 서버에 공용 사본을 두고 약 30일마다 새로 받습니다.</td></tr>
+        <tr><td>NIH 영양보충제 라벨 데이터베이스(DSLD) · openFDA 식품 리콜 정보</td><td>개인정보 없음 — 당사 서버가 영양제 카탈로그 상품을 라벨 ID·회사명으로 조회</td><td>영양제 카탈로그 정확성 유지(판매 여부·라벨 함량·리콜 확인). 이용자 데이터는 관여하지 않음.</td></tr>
+        <tr><td>미국 정부 건강 서비스 — RxNorm / RxNav, openFDA, MedlinePlus, DailyMed(NLM / FDA), CMS Care Compare</td><td>약 이름, 또는 평가 조회용 병원 ZIP/이름(개인 식별자 없음)</td><td>약품 정보 표준화, 의약품 라벨/이미지, 건강 주제 요약, 병원 품질 정보. 공공 서비스.</td></tr>
+        <tr><td>Google 지도(Android) / Apple 지도(iOS)</td><td>기기 IP 주소와 화면에 표시 중인 지도 영역 &mdash; 가족 공간에서는 가족이 공유한 활동 영역이나 응급 위치 주변</td><td>근처 케어 시설을 찾을 때, 그리고 가족 공간의 활동 영역·응급 화면에서의 지도 표시. 계정 식별자는 전송하지 않음. 가족의 응급 화면에서 <em>지도 앱에서 열기</em>를 누르면 그분의 위치와 회원님 화면에 보이는 이름이 휴대폰의 지도 앱(iPhone 은 Apple 지도, Android 는 기본 지도 앱, 지도 앱이 열리지 않으면 웹의 Google 지도)으로 넘어갑니다.</td></tr>
+        <tr><td>Google 번역(translate.google 게이트웨이)</td><td>기기 IP 주소와 번역 대상 웹페이지 주소</td><td>앱을 영어가 아닌 언어로 쓰시면, 앱 안에서 여시는 웹페이지(건강·반려동물 글, 출처 링크, QR 링크)를 이 게이트웨이로 이용자 언어로 보여 줌. 본인 기록은 전송하지 않음.</td></tr>
+        <tr><td>Google Routes · Static Maps(Google Maps Platform)</td><td>생성된 일정에 포함된 장소의 좌표(이용자 위치 아님) — 당사 서버가 전송</td><td>일정 장소 간 이동 시간 계산과 계획 안의 하루 지도 그리기. 개인 식별자·기기 IP 미전송.</td></tr>
+        <tr><td>ExchangeRate-API(open.er-api.com)</td><td>개인정보 없음 — 당사 서버가 공개 환율표만 가져옴</td><td>여행 예상 비용을 자국 통화로 표시.</td></tr>
+        <tr><td>Google 항공편(google.com, 앱 안 브라우저)</td><td>기기 IP 주소와 입력한 항공권 검색 조건(출발 도시·여행지·날짜) — 항공권 가격을 열 때 휴대폰이 Google에 직접 전송</td><td>실시간 항공권 가격 표시와 항공사·여행사 사이트로 이어가기. 이 화면에는 Google의 개인정보처리방침이 적용되며, 당사는 가격이나 그 화면에서의 활동을 받거나 저장하지 않음.</td></tr>
+        <tr><td>YouTube(Google LLC) &mdash; 임베디드 플레이어 및 YouTube API 서비스</td><td>운동 영상이나 그 미리보기 이미지가 열릴 때, 또는 「어디가 아프세요」에서 병명 영상의 「영상 보기」를 눌러 플레이어를 열 때(플레이어는 멈춘 상태로 열리고, 재생은 유튜브 재생 단추를 누르면 시작) 회원님의 휴대전화가 유튜브로 직접 보내는 기기 IP 주소와 재생 영상, 그리고 오디오 트랙·자막 선택에 쓰는 언어 설정. 이름·계정 ID·건강 정보는 유튜브로 보내지 않습니다. 병명 영상은 건강 주제를 다루므로 회원님이 어떤 공개 영상을 골라 열었는지는 YouTube 가 알 수 있습니다 — 그래서 병명 영상은 누를 때만 불러오며, 그 전에는 유튜브로 아무것도(미리보기 이미지도) 보내지 않습니다.</td><td>앱 안에서 따라하는 운동 영상과 병명 영상(병원·공공기관·의학 학회·면허 의료인의 공개 영상 중 저희가 고르고 검수한 것) 재생. 이 이용에는 <a href="https://www.youtube.com/t/terms">YouTube 서비스 약관</a>과 <a href="https://policies.google.com/privacy">Google 개인정보처리방침</a>이 적용됩니다. 저희 서버는 개인정보 없이 하루 한 번 카탈로그 영상이 아직 볼 수 있는지만 확인합니다.<br><strong>쿠키·광고:</strong> 영상은 YouTube 개인정보 보호 강화 모드(youtube-nocookie.com)로 재생되며, 앱은 YouTube 쿠키가 기기에 저장되지 않도록 플레이어를 불러옵니다. 다만 영상이 재생되는 동안 YouTube 는 플레이어의 브라우저 저장소에 제한된 기술 정보(예: 통신 속도 추정값)를 남길 수 있고, 회원님이 이 앱 안에서 연 다른 웹페이지가 이미 저장한 Google 쿠키를 읽을 수 있으며, YouTube 가 정한 광고를 보여 줄 수 있습니다. iPhone 에서는 플레이어를 닫으면 이 저장소가 지워집니다. 이는 당사가 아니라 YouTube 가 Google 개인정보처리방침에 따라 정하며, 당사는 광고 데이터나 수익을 받지 않습니다. 앱은 YouTube 에 로그인시키지 않고 YouTube·Google 계정 정보에 접근하지 않으므로 철회할 계정 접근 권한이 없습니다. Google 의 접근 권한은 <a href="https://security.google.com/settings/security/permissions">Google 보안 설정</a>에서 확인할 수 있습니다.</td></tr>
+        <tr><td>Twilio(인증 제공자를 통한 문자 발송)</td><td>전화번호, 일회용 인증 코드</td><td>로그인, 중요한 작업 전 재인증, 전화번호 변경을 위한 SMS 인증.</td></tr>
+        <tr><td>Google(계정 확인)</td><td>Google 계정의 이메일 주소와 로그인 토큰 &mdash; 보안 이메일을 Google 로 확인하기로 하신 경우에만</td><td>보안 이메일이 회원님의 것인지 확인. Healthya 로그인에는 쓰이지 않습니다.</td></tr>
+        <tr><td>Resend</td><td>이메일 주소 및 요청 내용</td><td>계정 및 권리 요청 관련 안내 이메일 발송.</td></tr>
+        <tr><td>Expo Push(Apple APNs / Google FCM로 중계)</td><td>푸시 토큰, 알림 페이로드(가족 알림에는 누구와 무슨 일만 담기며, 약 이름·수치·리포트 내용은 담기지 않음)</td><td>가족 소식과 응급 알림을 포함한 알림 전달.</td></tr>
+        <tr><td>Supabase(인프라)</td><td>위 항목 중 저장에 필요한 부분</td><td>서비스 운영. 행 수준 보안(RLS)으로 본인 데이터 격리.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>AI 프롬프트 캐시.</strong> 당사의 Google Vertex AI 프로젝트는 메모리 전용(임시) 프롬프트 캐시로 설정되어 있습니다. Vertex AI로 전송된 내용은 비슷한 요청의 처리를 빠르게 하기 위해 메모리에 잠시 머물 수 있으나, Google의 디스크(영구 저장) 캐시에는 기록되지 않으며 Google의 모델 학습에도 사용되지 않습니다.</p>
+    <p><strong>TTS 오디오 캐시.</strong> 합성된 음성 응답을 응답 텍스트의 해시(사용자 식별자 없음)를 키로 캐싱합니다. 캐시는 사용자 간 공유되며, 개인 신원이 캐시된 오디오와 연결되지 않습니다. TTS 동의 철회 시 이후 합성 요청은 중단되며, 캐시 제거는 개별 삭제가 아닌 표준 보유 정책을 따릅니다.</p>
+    <p><strong>화상통화.</strong> 현재 버전에서는 화상통화를 제공하지 않습니다. 어떠한 영상·음성도 화상통화 제공자로 전송하지 않습니다.</p>
+
+    <h2 id="ko-family">6. 가족 공간 &mdash; 가족과 연결하기</h2>
+    <p>Healthya 는 누구나 같은 앱 하나를 씁니다. 어르신용이나 보호자용 앱이 따로 있지 않습니다. 앱의 <strong>가족 공간</strong>에서는 어느 회원이든 가족이나 가까운 분과 연결할 수 있습니다. 연결은 한 방향입니다: 한 분이 다른 분에게 자기 기록의 일부를 보여 줍니다. 한 사람이 두 역할을 다 가질 수 있습니다 &mdash; 내 기록을 가족에게 보여 주면서, 다른 가족이 보여 주는 기록을 볼 수도 있습니다. 그래서 아래는 역할마다 나뉩니다: 연결된 가족이 <em>회원님의</em> 기록을 볼 때는 6.2~6.5항, <em>회원님이</em> 가족의 기록을 볼 때는 6.6항이 적용됩니다. 연결은 선택이며, 연결하지 않아도 Healthya 의 모든 기능을 쓰실 수 있습니다.</p>
+
+    <h3 id="ko-family-link">6.1 연결과 동의</h3>
+    <ul>
+      <li><strong>보기를 요청할 때.</strong> 보고 싶은 쪽이 상대의 전화번호로 연결 요청을 보내며, 짧은 인사말을 붙일 수 있습니다. 요청을 보내기 전에 필수 동의 <em>가족 정보 보기 + 비밀 지키기 약속</em>에 동의합니다 &mdash; 그분의 정보를 내 기기에서만 보고, 화면을 찍거나 다른 사람과 나누지 않으며, 그분을 돕는 데에만 쓰겠다는 약속입니다. <em>가족 소식 알림</em>은 선택입니다. 당사 서버는 요청을 보내기 전과 연결이 완료되기 전에 필수 동의를 다시 확인합니다.</li>
+      <li><strong>수락할 때.</strong> 연결은 기록이 보일 쪽이 요청을 수락하면서 무엇을 보여 줄지 고를 때 시작됩니다. 거절하면 요청한 분에게는 거절되었다는 사실만 알리며, 거절한 분의 이름은 담기지 않습니다. 답하지 않은 요청은 만료됩니다.</li>
+      <li><strong>사람마다, 항목마다 따로.</strong> 보여 줄 항목(건강 활동, 활동 영역, 응급 위치, MBTI 유형)은 연결마다 따로 정하고 언제든 바꿀 수 있습니다. 이는 앱의 표시만이 아니라 당사 서버의 행 수준 보안으로 강제됩니다.</li>
+      <li><strong>연결 끝내기.</strong> 연결은 어느 쪽에서든 언제든 끝낼 수 있습니다 &mdash; 보이는 쪽은 <em>가족</em> 화면에서, 보는 쪽은 <em>그만 보기</em>로. 보이는 쪽이 끝내면 보는 쪽이 가족 소식 알림을 켠 경우 알림이 가고, 보는 쪽이 그만 보면 상대에게 알림이 가지 않습니다. 어느 경우든 양쪽 연결 이력에는 연결이 끝났다는 사실만 표시됩니다. 어느 쪽이 끝냈는지는 당사가 기록하며, 내 정보 내려받기(12항)에 포함됩니다.</li>
+      <li><strong>동의 이력.</strong> 가족 공유 동의를 포함한 모든 동의 변경은 동의 이력(<em>설정 → 내 정보 권리 → 동의 이력</em>)에 변경 불가능한 증거로 기록됩니다(CCPA 알 권리).</li>
+    </ul>
+
+    <h3 id="ko-family-share">6.2 연결된 가족이 회원님의 기록을 볼 때 &mdash; 항상 보이는 것</h3>
+    <p>공유는 <strong>옵트인</strong>이며, 동의 설정(<em>설정 → 데이터 이용 동의</em>)으로 통제됩니다. 그 설정과 상관없이 연결된 가족은 다음을 볼 수 있습니다.</p>
+    <ul>
+      <li>닉네임, 전화번호, 시간대, 가족과 연결되어 있다는 사실과 연결된 시점, 그 가족에게 어떤 항목을 공유하고 있는지.</li>
+      <li>연결 활동(연결 요청, 수락, 끝남).</li>
+    </ul>
+
+    <h3 id="ko-family-health">6.3 건강 활동을 공유할 때 보이는 것</h3>
+    <p><em>가족과 건강 활동 공유</em> 동의는 연결된 가족에게 다음에 대한 읽기 전용 접근을 부여합니다.</p>
+    <ul>
+      <li><strong>식사</strong> — 시각, 종류(아침/점심/저녁/간식), 사진(저장하신 끼니의 사진만 &mdash; 저장하지 않은 초안이나 버린 사진은 보이지 않으며, 1시간 안에 만료되는 링크로 열림), AI 영양 분석(음식명, 칼로리, 주의 메모), 다음 끼니 제안</li>
+      <li><strong>운동</strong> — 종류와 시간(분), 기록된 경우 거리와 칼로리(골프 라운드와 따라하는 운동도 운동으로 표시)</li>
+      <li><strong>복약</strong> — 등록 약(이름, 용량, 일정), 복용 기록과 놓친 복용에 대해 말씀하신 이유, AI 복약 검토 결과(가족이 남긴 메모 포함)</li>
+      <li><strong>수분</strong> — 물 섭취 기록(대략적인 잔 수로 표시)</li>
+      <li><strong>수면</strong> — 수면 시작/종료 시각, 수면 단계와 수면의 질(연동 시 건강 앱에서 가져온 측정값과 직접 말씀하신 내용 포함)</li>
+      <li><strong>알림 일정</strong> — 켜져 있는 돌봄 알림 시각(직접 쓰신 알림 제목 포함)</li>
+      <li><strong>작심삼일</strong> — 진행 상황(횟수와 지킨 날), 목표 제목은 보이지 않음</li>
+      <li><strong>증상 상담</strong> — 증상 확인 메모와 권장 진료 수준</li>
+      <li><strong>기기 건강 지표</strong>(건강 앱을 연동한 경우) — Apple 건강 또는 Google Health Connect에서 가져온 걸음 수·거리·활동 칼로리, 활력징후(심박·혈압·산소·체온·호흡수), 혈당·체중, 체력·보행 측정값</li>
+      <li><strong>최근 활동 시각</strong> — 마지막으로 앱을 사용한 시점(어제 복약 시각 중 몇 번을 드셨는지와 함께 가족의 홈 화면에 한 줄로 표시)</li>
+      <li><strong>AI 하루 요약</strong> — 하루를 서술한 짧은 AI 작성 문단, 대화에서 추론된 감정 상태(추론 근거 포함), 그리고 이야기한 <em>주제</em>. 이는 대화록이 아니라 요약입니다. 감정 상태 요약에서는 실제 발화 문장이 저장 전에 제거되며, 위의 운동·수면 항목에는 근거로 남긴 짧은 인용구(길어야 한 문장)가 하나 표시될 수 있습니다. 식사·복약·물에 남긴 인용구는 요약이 가족에게 가기 전에 당사 서버가 지웁니다. 대화 전문은 가족에게 보이지 않습니다.</li>
+      <li><strong>주간·월간 리포트</strong> — 기간 동안의 패턴(식사·복약·수면·운동), 기분 흐름, 증상 상담 횟수와 긴급도, 목표 진행, 정해진 규칙으로 산출된 건강 스크리닝 플래그, 물어볼 이야기를 곁들인 AI 작성 요약, 그리고 진료 상담 준비를 돕기 위한 월간 요약</li>
+    </ul>
+    <div class="callout">
+      <p><strong>실제로 어떤 의미인가.</strong> 하루 요약에는 기분과 이야기한 주제가 담기므로, 건강 공유 권한이 있는 가족은 대화 내용을 읽지 못하더라도 그날 기분이 어땠는지, 무엇을 마음에 두고 계셨는지는 알 수 있습니다. 원하지 않으시면 <em>설정 → 데이터 이용 동의</em>에서 건강 공유를 끄시면 됩니다.</p>
+    </div>
+    <p><strong>가족이 절대 볼 수 없는 것.</strong> 대화 전문(위에 설명한 짧은 근거 인용구 제외), AI 기억과 학습된 선호, 음성, 종교·신앙, MBTI 검사 답변, 직접 입력한 키·몸무게, 동의 이력은 <strong>절대</strong> 가족과 공유되지 않습니다. 건강 앱에서 가져온 마음챙김 시간과 본인이 기록한 기분 또한 건강 공유 동의가 켜져 있어도 서버에서 제거되어 <strong>절대</strong> 공유되지 않습니다. MBTI 유형 코드는 <em>MBTI 유형 공유</em>를 켠 가족에게만 보입니다.</p>
+
+    <h3 id="ko-family-location">6.4 가족과의 위치 공유(선택)</h3>
+    <ul>
+      <li><strong>활동 영역</strong> — <em>가족과 활동 영역 공유</em> 권한을 부여하면(연결된 가족 구성원마다 따로 부여), 해당 가족은 최근 7일의 일반화된 활동 영역(약 2&nbsp;km 블록 단위로 반올림하고 머문 날짜를 함께 표시, 정확한 지점이나 실시간 동선은 아님)을 볼 수 있습니다. 오래된 데이터는 7일 롤링 단위로 자동 삭제됩니다.</li>
+      <li><strong>응급 위치</strong> — 7항에서 별도로 다룹니다.</li>
+    </ul>
+
+    <h3 id="ko-family-off">6.5 공유가 꺼져 있거나 철회된 경우</h3>
+    <p>공유 동의를 거부하거나 <em>설정 → 데이터 이용 동의</em>에서 언제든 철회하면, 가족의 앱은 그 항목을 공유하지 않는다고 표시하고 관련 항목은 가족 화면에서 숨겨집니다(클라이언트 필터링이 아닌 행 수준 보안으로 서버에서 강제). 변경은 가족의 앱이 다음에 회원님의 기록을 불러올 때 반영됩니다. 공유 동의를 철회해도 연결은 끝나지 않으며, 연결을 끝내면(6.1항) 동의 설정과 상관없이 그 가족의 열람이 모두 사라집니다.</p>
+
+    <h3 id="ko-family-view">6.6 회원님이 가족의 기록을 볼 때</h3>
+    <p>가족이나 가까운 분이 회원님의 연결 요청을 수락하면, 가족 공간에서 그분의 기록을 볼 수 있습니다. 회원님이 보는 그분은 그분 쪽에서 6.2~6.5항의 보호를 받으며, 이 항은 보는 쪽인 회원님께 적용되는 내용입니다.</p>
+    <ul>
+      <li><strong>볼 수 있는 것.</strong> 그분의 닉네임, 전화번호, 시간대, 연결한 시각, 그리고 회원님께 어떤 항목을 공유하는지(6.2항). 그 밖의 것은 그분이 연결마다 따로 켠 항목에 따라 정해집니다: 건강 공유가 켜져 있으면 6.3항의 항목(하루 기록과 요약, 약, 복약 검토와 메모, 알림 일정, 주간·월간 리포트, 그리고 회원님 홈 화면의 한 줄 &mdash; 마지막 앱 사용 시각과 어제 복약 횟수), 활동 영역 공유가 켜져 있으면 일반화된 활동 영역(6.4항), 응급 위치 공유가 켜져 있으면 911 을 누른 뒤 24시간 동안 가장 최근 위치(7항), MBTI 공유가 켜져 있으면 유형 코드. 6.3항의 「가족이 절대 볼 수 없는 것」은 회원님이 보는 쪽일 때도 똑같이 적용됩니다. 공유하지 않은 항목은 공유하지 않음으로 표시되고 앱은 그 항목을 요청하지도 않으며, 그분이 공유를 끄거나 연결을 끊으면 앱이 다음에 불러올 때 회원님 화면에서 사라집니다.</li>
+      <li><strong>그분의 기록은 그분의 것.</strong> 회원님은 그분이 보여 주기로 한 동안에만, 보여 주기로 했기 때문에 볼 수 있습니다. 그분의 기록을 따로 보관·내보내기·공유할 권리는 없으며, 내 정보 내려받기(12항)에도 들어가지 않습니다. 그분의 기록에 대한 권리는 그분이 자신의 계정에서 행사합니다.</li>
+      <li><strong>휴대폰에 남기지 않음.</strong> 그분의 기록은 보시는 동안 앱의 메모리에만 있고 휴대폰 저장 공간에 쓰지 않으며, 식사 사진도 이미지 캐시에 남기지 않습니다. 로그아웃하시거나, 이 기기가 로그아웃되거나 <em>내 기기 관리</em>에서 내보내지거나, 연결이 끝나면 지웁니다. 당사 서버는 기기가 가족 기록을 읽을 때마다 그 기기의 로그인이 아직 유효한지 확인하므로, <em>내 기기 관리</em>에서 내보낸 기기는 더 이상 당사 서버에서 가족 기록을 불러올 수 없습니다. 그 기기가 이미 받아 둔 식사 사진 링크는 1시간 안에 만료됩니다.</li>
+      <li><strong>화면 보호.</strong> 가족의 화면이 열려 있는 동안 앱은 화면 캡처와 녹화를 막습니다 &mdash; iPhone 에서는 스크린샷이 빈 화면으로 찍히고 녹화·화면 미러링 중에는 화면이 가려지며, Android 에서는 스크린샷·녹화·최근 앱 미리보기가 빈 화면으로 나옵니다. 앱 전환 화면에서도 가려집니다. 첫 가족 요청을 보낸 뒤 앱 잠금이 꺼져 있으면 한 번 켜 두시길 권합니다. 가족의 기록은 가족 공간과 홈 화면의 한 줄에만 보이며, 홈 화면 위젯, 워치, 음성 대화와 AI 기억, 사진 분석, 오류 보고에는 쓰이지 않습니다.</li>
+      <li><strong>가족 소식 알림.</strong> 가족 알림에는 누구와 무슨 일만 담깁니다(예: 「엄마 · 응급 알림」) &mdash; 약 이름, 수치, 리포트 내용은 담기지 않고 앱 안에서만 보입니다. 응급 알림은 앱 안의 설정과 상관없이 늘 갑니다. 그 밖의 가족 소식 &mdash; 새 약 등록이나 복약 검토, 연결 수락·거절·끊김, 지난주 이야기 &mdash; 은 <em>가족 소식 알림</em>을 켠 경우에만 갑니다(<em>설정 → 가족</em>). 새 약 등록 알림은 그분이 건강 공유를 켜지 않았어도 가지만, 그때는 새 약을 등록했다는 사실만 알립니다. 가족 알림은 Expo Push 와 Apple·Google 을 거쳐 전달되며(5항) 앱 안 알림함에도 90일 동안 남습니다. 가족 공간이 켜진 기기는 가족 소식을 받는 기기로 표시됩니다(2항). 로그아웃하면 잠금 화면과 알림 센터의 가족 알림도 지웁니다. 휴대폰 설정에서 알림을 끄면 응급 알림을 포함해 모든 알림이 멈춥니다.</li>
+      <li><strong>호칭과 색.</strong> 사람마다 붙이신 호칭(20자까지)과 색은 회원님만 보며, 그분에게는 보이지 않습니다. 호칭은 회원님이 받는 가족 알림에 쓰입니다. 요청이 거절되거나 만료되면 그 요청에 고른 호칭·색은 지워지고, 연결된 뒤에는 연결이 끝날 때 함께 지워지며, 다시 연결하면 새로 정합니다.</li>
+      <li><strong>보관.</strong> 보는 쪽으로서 저장하는 회원님의 정보는 2항(<em>가족 공간</em>)에 있습니다. 내 정보 내려받기(12항)에는 회원님이 보는 쪽인 연결, 호칭·색, 보내신 연결 요청, 남기신 메모가 들어갑니다. <em>내 기록 삭제</em>를 해도 연결과 그 호칭·색, 보내신 연결 요청, 남기신 메모는 남고, 가족 소식 알림함과 아직 답을 기다리는 요청에 고른 호칭·색은 지워집니다. 계정을 삭제하면 모두 지워집니다. 회원님이 보는 분이 자기 기록을 지우면 그분의 복약 검토가 &mdash; 회원님이 남긴 메모와 함께 &mdash; 지워집니다.</li>
+    </ul>
+    <div class="callout health">
+      <p><strong>비밀 유지 의무.</strong> 연결된 가족의 기록은 그분의 건강 정보입니다. 비밀로 지켜 주세요: 그분의 사전 동의 없이 복사·녹화하거나 돌봄과 무관한 사람과 나누지 않으며, 응급 위치는 응급 상황에서 그분을 돕는 데에만 쓰고 이동을 지켜보는 데 쓰지 않습니다. 오용은 <a href="../terms-of-service/#ko-family">이용약관</a>과 건강 정보를 보호하는 법(예: 워싱턴주 MHMDA, 캘리포니아 CMIA, FTC법 &sect;5)에 위반될 수 있습니다.</p>
+    </div>
+
+    <h3 id="ko-family-app">6.7 Healthya Family 앱(통합되어 종료됨)</h3>
+    <p>연결된 가족의 기록 보기는 예전에는 별도 앱인 <strong>Healthya Family</strong>에서 했습니다. 그 앱은 Healthya 로 통합되어 종료되었고, 그 기능은 이제 위에 설명한 가족 공간에 있으며 본 방침이 적용됩니다. 계정은 같습니다: Healthya Family 에서 쓰시던 전화번호로 Healthya 앱에 로그인하시면 기존 연결이 가족 공간에 나타납니다. Healthya Family 로 연결한 가족은 그 앱의 동의 절차에서 같은 비밀 지키기 약속에 동의했습니다.</p>
+    <p>휴대폰에 Healthya Family 가 아직 설치되어 있다면 한동안 계속 동작할 수 있습니다. 그동안 그 앱은 예전에 보여 주던 것을 보여 줄 수 있으며 &mdash; 보이는 분의 가입 시기, 출생 연도(입력한 경우), 계정의 이메일 주소처럼 가족 공간에는 표시되지 않는 것을 포함합니다 &mdash;, 로그인되어 있는 동안 응급 알림을 받을 수 있습니다. 그 밖의 가족 소식은 Healthya 앱의 가족 공간이 켜진 기기로 갑니다. 그 앱은 지우시고 Healthya 앱을 쓰시길 권합니다. 그 앱에 적용되던 문서는 기록으로 남겨 둡니다: <a href="../family-privacy-policy/archive-2026-10-20.html">Healthya Family 개인정보처리방침</a> · <a href="../family-terms-of-service/archive-2026-10-20.html">이용약관</a>.</p>
+
+    <h2 id="ko-emergency">7. 응급 위치 공유(911)</h2>
+    <div class="callout health">
+      <p><strong>정밀 위치를 사용하는 유일한 경우입니다.</strong> Healthya는 응급 대응 서비스가 아니며 구조가 도착함을 보장할 수 없습니다. 응급처치 안내, 원탭 911 발신(통화는 본인이 직접 누름), 연결된 가족에 대한 선택적 알림을 제공합니다.</p>
+    </div>
+    <ul>
+      <li><strong>동의.</strong> 정밀 응급 위치 공유는 켜기 전에는 비활성이며, <strong>연결된 가족 구성원마다 따로</strong> 켜실 수 있습니다. 최소 한 분에게는 켜두실 것을 강력히 권장합니다.</li>
+      <li><strong>수집 시점.</strong> 필요한 순간에 쓸 수 있는 위치가 미리 확보되어 있도록, 한 분에게라도 이 권한을 켜 두신 동안 <strong>앱이 화면에 열려 있는 동안</strong> 약 <strong>5분마다</strong> 저장된 정밀 위치를 갱신합니다. 911을 누르면 전화 앱으로 전환되면서 바로 그 순간 GPS 측정이 끊기기 때문에, 위치는 미리 확보해 둡니다. <strong>앱이 백그라운드에 있거나 종료된 동안에는 수집하지 않으며</strong>, 이동 이력을 만들지 않습니다. 권한을 켠 상태에서 911 을 누르면 그 순간 1초 남짓 정밀 위치를 한 번 더 잡으려 하고, 실패하면 저장된 위치를 씁니다.</li>
+      <li><strong>저장 내용.</strong> 사람당 위치는 정확히 1건입니다. 갱신할 때마다 이전 값을 덮어쓰므로 이동 경로나 방문 이력은 남지 않고, 앱을 사용하던 시점의 가장 최근 위치만 남습니다.</li>
+      <li><strong>열람 범위.</strong> 권한을 부여받은 가족은 저장된 가장 최근 위치를 행 수준 보안으로 자신의 앱에서 <strong>911 알림 뒤 24시간 동안만</strong> 볼 수 있습니다. 그 24시간 동안 보이는 위치는 911 을 누른 순간 다시 잡은 위치이거나, 앱이 열려 있으면 위와 같이 약 5분마다 갱신된 가장 최근 위치입니다. 권한을 부여하지 않은 가족은 응급 상황에도 위치를 볼 수 없습니다.</li>
+      <li><strong>앱에서 911 을 누를 때.</strong> 911(또는 응급 위젯)을 누르면 위치 공유 권한과 상관없이 연결된 <strong>모든</strong> 가족에게 푸시 알림이 갑니다. 알림에는 누구와 무슨 일만 담깁니다 &mdash; 회원님의 이름(그 가족이 붙인 호칭이 있으면 호칭)과 앱의 911 응급 버튼을 눌렀다는 사실(앱은 휴대폰의 전화 화면을 열 뿐이라 실제 통화가 이어졌는지는 당사가 알 수 없습니다), 그리고 위치 공유 권한을 준 가족에게는 위치를 확인해 달라는 말. 좌표는 포함되지 않습니다.</li>
+      <li><strong>권한이 꺼져 있거나</strong> 위치 접근이 불가능하면, 알림은 위치 없이 그대로 발송됩니다.</li>
+      <li><strong>알림을 받는 가족일 때.</strong> 알림을 열면, 그분이 회원님께 권한을 준 경우 24시간이 지날 때까지 가장 최근 위치가 보이고, 그 뒤에는 볼 수 있는 시간이 지났다고 표시됩니다. <em>지도 앱에서 열기</em>를 누르면 그 위치와 회원님 화면에 보이는 이름이 휴대폰의 지도 앱으로 넘어갑니다(5항). 알림은 최선의 노력으로 보내는 것으로 도착과 시각을 보장하지 않으며, 알림이 왔다고 911 에 연결되었다는 뜻은 아닙니다.</li>
+      <li><strong>보유.</strong> 저장된 위치는 마지막으로 갱신된 시점으로부터 7일 후 자동 삭제됩니다. 권한을 철회하면 더 이상 갱신되지 않아 그 기간 안에 사라지고, 계정을 삭제하면 나머지와 함께 삭제됩니다. 이와 별도로, 911 을 누른 시각(위치 없음)은 서비스 통계를 위해 누를 때마다 기록되며 기록 삭제나 계정 삭제 때까지 보관됩니다.</li>
+    </ul>
+
+    <h2 id="ko-health-apps">8. 건강 앱 연동(Apple 건강 / Google Health Connect)</h2>
+    <p><em>건강 앱 연동</em>(선택)을 켜면, Healthya는 OS의 별도 권한을 받아 Apple 건강(iOS) 또는 Google Health Connect(Android)에서 다음을 읽어옵니다.</p>
+    <ul>
+      <li>수면 시작/종료 시각, 총 수면 시간(분), 수면 단계(깊은 수면/REM, 가능한 경우)</li>
+      <li>걸음 수, 걷기/달리기 거리, 오른 층수</li>
+      <li>활동 칼로리</li>
+      <li>운동 세션(종류, 시작 시각, 시간)</li>
+      <li>활력징후 — 심박수, 안정 시 심박수, 걷기 평균 심박수(iPhone), 혈압, 산소포화도, 체온, 호흡수</li>
+      <li>혈당과 체중</li>
+      <li>체력·보행 — VO2max, 심박변이도, 보행 안정성, 보행 속도, 6분 보행 거리(일부는 iOS 전용, 가능한 경우에만 가져옴)</li>
+      <li>정신건강 — 마음챙김 시간(분)과 본인이 기록한 기분(Apple 건강 State of Mind). 이 항목은 본인 서비스에만 사용되며 &mdash; AI 제공자에게 보내지 않습니다 &mdash; <strong>절대</strong> 가족과 공유되지 않습니다(6.3항 참조)</li>
+    </ul>
+    <p><strong>읽기 전용.</strong> Healthya는 이 데이터를 읽기만 하며, 건강 앱에 다시 쓰지 않습니다. 하루 요약과 <em>건강 통계</em>가 실제 측정값을 반영하도록 하는 데 사용하며, 이 측정값은 다음 날 알림 계획을 짜고 주간·월간 리포트를 쓰기 위해 AI 제공자(Google Vertex AI)가 받는 기록에도 포함됩니다(5항 참조). 건강 통계를 처음 여실 때 최근 12개월까지 가져오며(Android 는 지난 데이터 읽기 권한을 따로 받음), 건강 공유가 켜져 있으면 그 지난날도 가족이 보는 하루 요약에 나올 수 있습니다.</p>
+    <p><strong>Apple/Google 정책 요건.</strong> Apple 건강 또는 Google Health Connect에서 얻은 데이터는 광고·마케팅에 사용되지 않고, 판매되지 않으며, 데이터 브로커와 공유되지 않습니다. 행 수준 보안으로 본인 계정에 저장됩니다. <em>설정</em>에서 언제든 연동을 끌 수 있으며, 철회 시 새로운 측정값을 더 가져오지 않습니다. 이미 가져온 값은 삭제를 요청하지 않는 한 보존됩니다.</p>
+
+    <h3 id="ko-calendar">8.1 휴대폰 캘린더(일정)</h3>
+    <p>앱의 <em>일정</em> 화면은 휴대폰 기본 캘린더를 보여 주는 창입니다. OS 캘린더 권한을 받아, 보여 주기로 선택하신 캘린더의 일정을 읽고, 앱에서 만드신 일정은 선택하신 캘린더(기본값은 휴대폰 기본 캘린더)에 그대로 저장합니다. <strong>당사는 캘린더 일정을 서버에 저장하지 않으며</strong>, 계정 데이터 내보내기에 포함되지 않고, Healthya 계정을 삭제해도 일정은 삭제되지 않습니다 — 휴대폰 캘린더에 그대로 남습니다.</p>
+    <p>앱에서 만든 일정의 알림은 이벤트 자체 알림(기본 30분 전, 종일 일정은 9:00)으로 저장되어 캘린더 앱이 울리므로 다른 기기에서도 울립니다. Healthya 는 따로 일정 알림을 보내지 않습니다. 다른 곳에서 만든 일정은 그 캘린더의 알림을 그대로 따릅니다.</p>
+    <p>기본적으로 AI 도우미는 캘린더를 읽을 수 없습니다. 선택 설정인 <em>AI 일정 읽기</em>(설정 → 데이터 활용 동의)를 켜시면, 오늘과 다가오는 일정의 제목·시각이 AI 제공자(Google Vertex AI Live, 장애 시 예비 경로인 Google Gemini API)에게 전송되는 경우가 두 가지입니다: 음성 대화 중 일정을 물으실 때, 그리고 아침 브리핑 화면을 여실 때(이 화면에서는 묻지 않으셔도 도우미가 하루를 요약해 드립니다). 장소와 메모는 전송되지 않습니다. 말로 일정을 만들거나 고치는 데에는 이 설정이 필요하지 않으며, 언제든 끄실 수 있습니다.</p>
+    <p><strong>대화 기록에 대해 알아 두실 점.</strong> 캘린더 자체는 서버로 올라가지 않습니다. 다만 음성·텍스트 대화는 이용자 계정의 대화 기록으로 저장되며(2항 <a href="#ko-conversation-content">"대화 내용"</a>), 그 기록에는 실제로 오간 말이 담깁니다 — 따라서 "내일 세 시에 치과"라고 말씀하시거나 도우미가 일정을 읽어 드리면, 그 표현은 다른 대화와 마찬가지로 대화 기록에 남고 도우미가 맥락을 기억하는 데 쓰일 수 있습니다. 대화 기록은 <em>내 기록 삭제</em>나 <em>계정 삭제</em>로 지울 수 있습니다. 동의 철회는 앞으로의 수집만 멈추며 이미 저장된 것은 지우지 않습니다.</p>
+
+    <h2 id="ko-sale">9. 판매·공유 금지 고지</h2>
+    <div class="callout">
+      <p><strong>당사는 개인정보를 판매하지 않으며, 교차 맥락 행동 광고를 위해 공유하지 않습니다.</strong> 보호가 자동 적용되므로 별도 옵트아웃이 필요 없습니다. (CCPA §1798.120 / CPRA)</p>
+    </div>
+
+    <h2 id="ko-spi">10. 민감 개인정보(SPI)</h2>
+    <p>CPRA상 SPI에는 건강정보, 음성 신호, 정밀 위치, 종교·철학적 신념이 포함됩니다. 당사는 정밀 위치를 <strong>오직</strong> 911 응급 대비 및 가족 공유(7항)를 위해 수집합니다 — 이용자 옵트인하에, 앱이 화면에 열려 있는 동안에만, 가장 최근 1건만 보관하며, 광고에는 절대 사용하지 않습니다. 골프 게임을 만들 때는 지금 계신 골프장을 찾기 위해 휴대폰 안에서 정밀 위치를 한 번 사용하지만, 이 위치는 저장하지 않고 휴대폰 밖으로 나가지 않으므로 당사가 수집하지 않습니다(2항). 그 뒤 고르신 골프장은 골프 게임 기록의 일부로 게임과 함께 저장됩니다(2항). 신앙 정보는 이용자가 대화에서 직접 언급한 경우에만 수집하며, 가벼운 신앙 인사에만 사용합니다 — 추론하지 않고, 가족과 공유하지 않으며, <em>내 기록 삭제</em>로 또는 이메일로 요청하셔서 언제든 지울 수 있습니다. SPI는 서비스 제공과 이용자가 명시적으로 동의한 목적 외에는 사용하지 않습니다. 앱 내 <em>동의 이력</em> 화면에서 SPI 이용을 제한할 수 있습니다. (CPRA §1798.121 — SPI 이용 제한권)</p>
+
+    <h2 id="ko-retention">11. 보유 기간</h2>
+    <ul>
+      <li>계정 이용 중에는 활성 보유.</li>
+      <li>계정 삭제: 7일 유예 후 계정과 모든 데이터를 삭제합니다(30일 이내). 유예 기간에는 언제든 취소할 수 있습니다. 삭제가 있었다는 최소한의 기록(언제·왜 요청됐는지)은 남으며, 동의 이력은 계정과 함께 삭제됩니다.</li>
+      <li>기록 삭제(계정 유지): 같은 7일 유예 후 기록만 지우고 계정은 남습니다. 계정과 함께 남는 것: 포인트·배지, 가족 연결(보는 쪽으로서 붙인 호칭·색 포함), 가족 연결 요청, 가족의 복약 검토에 남긴 메모, 앱을 쓰는 다른 분과 함께 친 골프 게임(혼자 치셨거나 게스트와만 친 게임은 지웁니다), 목표 함께하기 방에 묶인 목표와 그 체크인·메시지, 기기와 설정, 동의 이력, 보안·권리 요청 기록, 음성 도우미 연결 기록(시간당 음성 한도에 쓰며, 계정을 삭제하면 함께 지워짐).</li>
+      <li>대화 글과 AI 기억: 내 기록 삭제나 계정 삭제 전까지 보관. AI 대화 화면에서 대화를 골라 삭제하면 그 화면에서만 사라집니다(삭제할 때 앱이 그렇게 안내합니다). 글은 대화 기록에 남아 &mdash; 하루 요약과 도우미의 기억에 계속 쓰일 수 있고 데이터 내보내기에도 포함되며 &mdash; 내 기록 삭제나 계정 삭제 때 지워집니다. 도우미가 회원님에 대해 학습한 내용은 내 기록 삭제나 계정 삭제 때 지워지며, 특정 항목의 정정·삭제는 이메일로 요청하실 수 있습니다(12항).</li>
+      <li>건강검진 결과서: 사진은 올린 뒤 7일(의료 사진 분석 동의를 끄면 더 일찍) 자동 삭제, 결과는 앱에서 결과서를 지우거나 기록 지우기·계정 삭제 때까지 보관.</li>
+      <li>반려동물 상담: 사진은 분석 후 삭제, 질문과 안내 결과는 기록 지우기·계정 삭제 때까지 보관.</li>
+      <li>앱 안 알림함: 90일. 데이터 내보내기: 다운로드 링크는 24시간 유효하며 파일은 이틀 안팎에 삭제. 남용 방지용 IP 주소: 하루 정도.</li>
+      <li>동의 철회: 그 항목의 수집·이용을 그 시점부터 중단합니다. 이미 저장된 데이터는 별도로 삭제를 요청하지 않는 한 보존됩니다(아래 &ldquo;삭제권&rdquo; 참조).</li>
+      <li>활동 영역 위치: 7일 롤링 단위로 자동 삭제. 동의를 철회하면 새로 기록되지 않고, 이미 기록된 것은 7일 롤링으로 사라집니다.</li>
+      <li>응급 알림 기록: 7항 참조.</li>
+      <li>가족 공간: 다른 분의 기록은 회원님 기기에 저장하지 않습니다(6.6항). 호칭·색은 연결이 끝나면 지워집니다. 보내신 연결 요청(요청을 보낸 휴대폰의 IP 주소와 기기 정보 포함)은 계정을 삭제할 때까지 보관됩니다.</li>
+      <li>여행 계획: 앱에서 계획을 삭제하거나 기록을 지우거나 계정을 삭제할 때까지 보관합니다. 일정 생성을 위해 Google에서 가져온 장소 정보는 당사 서버에 최대 30일(Google 약관) 캐시되며 개인정보를 담지 않습니다. 항공권 검색은 휴대폰에만 저장됩니다.</li>
+      <li>골프 게임: 앱을 쓰는 다른 분과 함께 친 게임은 참가자들의 공동 이력으로 보관됩니다. 계정을 삭제하시면 그 게임들과의 연결이 해제되고 게임 안의 이름은 중립적인 표시로 바뀌며, 다른 참가자의 이력은 유지됩니다. 다른 앱 사용자가 더는 없는 게임(혼자 치신 게임, 게스트와만 친 게임)은 다른 누구도 열 수 없으므로 계정과 함께 지웁니다.</li>
+      <li>영양제 추천: 결과는 다시 볼 수 있도록 기록 삭제 또는 계정 삭제까지 보관합니다. 기록이 바뀌지 않으면 최대 30일(또는 매주 하는 상품 목록 재확인 때까지) 새로 만들지 않고 같은 결과를 다시 보여 줍니다.</li>
+      <li>따라하는 운동: 운동 세션·주간 계획·설정은 「내 기록 삭제」 또는 계정 삭제 때까지 보관합니다. 영상 자체는 저장하지 않습니다.</li>
+      <li>카메라 기록: 각 기록은 사진과 함께, 앱에서 지우시거나 「내 기록 삭제」 또는 계정 삭제 때까지 보관합니다. 무엇인지 알아보기 위해서만 보낸 줄인 사본은 보관하지 않습니다. 서비스 개선을 위해 보관하는 짧은 이름과 AI 해설(사진 제외)은 「내 기록 삭제」 또는 계정 삭제 때 함께 지웁니다.</li>
+      <li>법정 보존 의무가 있는 경우 이를 우선 적용.</li>
+    </ul>
+
+    <h2 id="ko-rights">12. 이용자의 권리</h2>
+    <p>거주지에 따라 아래 권리를 가집니다. 당사는 위치와 무관하게 모든 이용자에게 동일한 권리를 부여합니다.</p>
+
+    <h3>12.1 모든 이용자에게 부여되는 권리</h3>
+    <ul>
+      <li><strong>알 권리.</strong> 보유 중인 본인 정보의 사본 요청.</li>
+      <li><strong>삭제권.</strong> 본인 정보의 삭제 요청.</li>
+      <li><strong>정정권.</strong> 부정확한 정보의 정정 요청.</li>
+      <li><strong>이동권.</strong> 기계 판독 가능 형식(JSON / CSV)으로 정보 수령.</li>
+      <li><strong>SPI 제한권.</strong> 건강/음성/위치 데이터 이용 제한.</li>
+      <li><strong>판매·공유 옵트아웃.</strong> 당사는 판매·공유하지 않음 — 자동 적용.</li>
+      <li><strong>자동화 의사결정 옵트아웃.</strong> AI 기반 프로파일링 제외 요청(CPRA Reg 2025).</li>
+      <li><strong>차별 금지.</strong> 권리 행사로 불이익 없음.</li>
+      <li><strong>이의제기권.</strong> 거부된 요청에 대해 60일 이내 이의제기(VCDPA / CPA / CTDPA).</li>
+      <li><strong>대리인.</strong> 신뢰하는 가족이 본인을 대신해 요청 제출 가능(CCPA §1798.135).</li>
+    </ul>
+
+    <h3>12.2 행사 방법</h3>
+    <ul>
+      <li>앱 내 — <em>설정 → 내 정보 권리</em>:
+        <ul>
+          <li><strong>알 권리</strong> — 본인 데이터를 수 분 내 다운로드 가능한 ZIP(JSON + CSV)으로 생성. 본 방침 하단의 다운로드 링크(앱에서) 또는 이메일로 요청. 30일 1회. 식사·복약·카메라 기록 사진은 자동 내보내기에 포함되지 않으며 이메일 요청 시 제공됩니다. 증상·반려동물 사진(분석 후 삭제)과 검진 사진(7일 뒤 삭제)은 제공할 수 없습니다. 가족의 기록을 보고 계시면 그 연결에서 회원님 쪽의 정보(6.6항)도 들어가며, 그분의 기록은 들어가지 않습니다.</li>
+          <li><strong>정정권</strong> — 직접 입력하신 정보는 앱에서 바꿀 수 있으며, 도우미가 학습한 내용 등 그 밖의 정정은 이메일로 요청하실 수 있습니다.</li>
+          <li><strong>삭제권</strong> — 앱에서 두 가지를 선택할 수 있습니다: <em>내 기록 삭제</em>(계정 유지)와 <em>계정 삭제</em>. 둘 다 7일 유예 후 실행되며 그 사이 취소할 수 있습니다.</li>
+          <li><strong>SPI 제한 / 동의 철회</strong> — 동의 이력 화면에서 항목별 철회.</li>
+        </ul>
+      </li>
+      <li>이메일: <a href="mailto:hello@healthya.app">hello@healthya.app</a> (제목: [Rights Request]).</li>
+      <li>처리 기한: 앱 내 삭제는 7일 유예 후 실행됩니다. 이메일 요청은 접수 후 45일 이내 처리(허용 시 45일 1회 연장).</li>
+    </ul>
+
+    <h2 id="ko-chd">13. 소비자 건강정보(WA MHMDA · NV SB370 · CT)</h2>
+    <div class="callout health">
+      <p><strong>본 항목은 워싱턴주 My Health My Data Act 및 유사 법령이 요구하는 소비자 건강정보 처리방침입니다.</strong> "소비자 건강정보"에는 신체·정신 건강 상태, 약물, 진단, 치료, 정밀 위치 및 이에 대한 추론이 포함됩니다.</p>
+    </div>
+    <h3>13.1 수집 항목</h3>
+    <ul>
+      <li>식사, 복약, 수분, 수면, 운동 기록 및 사진</li>
+      <li>직접 입력한 키·몸무게(선택)와 이로부터 산출된 식사·간식 양 안내</li>
+      <li>연동한 건강 앱에서 가져온 수면·걸음·활동, 활력징후(심박·혈압·산소·체온·호흡수), 혈당·체중, 체력·보행, 정신건강 측정값(마음챙김·기분), 최근 12개월까지의 지난 측정값 포함(선택)</li>
+      <li>대화로부터 추론된 신체/감정 상태</li>
+      <li>이용자가 보고한 증상 및 표시되는 일반 증상 안내/권장 진료 세팅</li>
+      <li>기록으로 만든 영양제 추천(성분·등급·목표 용량·맞는 상품·참고한 기록)</li>
+      <li>약통·처방전·증상 사진(업로드 시)</li>
+      <li>건강검진 결과서 사진(7일 보관)과 거기서 읽어 낸 수치·범위·판정·설명·추이(선택)</li>
+      <li>따라하는 운동을 위해 표시하신 아픈 부위나 상태(예: 골다공증·고혈압)</li>
+      <li>카메라 기록에 남긴 사진과 글(선택) &mdash; 처방전이나 의료 서류 같은 것을 찍으시면 건강 정보가 들어 있을 수 있습니다</li>
+      <li>음성 신호(실시간 처리, 저장 안 함)</li>
+      <li>911 발신에 대비해 앱이 열려 있는 동안 갱신되는 가장 최근 정밀 위치 1건(선택 — 7항 참조)</li>
+    </ul>
+    <h3>13.2 출처</h3>
+    <ul>
+      <li>이용자의 직접 입력 및 음성</li>
+      <li>마이크 입력(선택 동의)</li>
+      <li>사진 업로드(선택 동의)</li>
+      <li>건강 앱 연동(선택 동의)</li>
+    </ul>
+    <h3>13.3 목적</h3>
+    <ul>
+      <li>일상 건강 지원(식사/복약/수분/수면/운동/기분)</li>
+      <li>영양제 정보·추천(선택, 정보 제공 목적)</li>
+      <li>건강검진 결과서 읽기와 설명(선택, 정보 제공 목적)</li>
+      <li>홈 카메라 판정·글 읽기/번역·카메라 기록(선택)</li>
+      <li>응급 지원(선택)</li>
+      <li>가족 공간 &mdash; 회원님이 고른 가족과의 공유, 그리고 가족이 보여 주는 기록 보기(선택)</li>
+    </ul>
+    <h3>13.4 제3자</h3>
+    <p><a href="#ko-sharing">5항</a>(서비스 제공자) 및 <a href="#ko-family-share">6항</a>(연결된 가족)과 동일합니다. 광고 목적 공유 없음.</p>
+    <h3>13.5 철회 및 삭제</h3>
+    <p>앱 내 <em>동의 이력</em> 화면에서 항목별로 동의를 철회할 수 있습니다. 철회하면 그 항목의 추가 수집·이용·공유가 중단됩니다. 이미 수집된 소비자 건강정보의 삭제를 원하시면 앱의 <em>내 기록 삭제</em> 또는 <em>계정 삭제</em>를 이용하거나 문의해 주세요 — 그 경우 다운스트림 수탁자 사본을 포함해 법정 기한 내 삭제합니다.</p>
+    <h3>13.6 지오펜싱 금지</h3>
+    <p>당사는 의료시설 주변 지오펜싱을 데이터 수집이나 광고에 사용하지 않습니다. (WA MHMDA RCW 19.373.030)</p>
+    <h3>13.7 판매 금지(옵트인)</h3>
+    <p>당사는 소비자 건강정보를 판매하지 않으며, 별도 옵트인 동의 없이 공유하지 않습니다.</p>
+
+    <h2 id="ko-bipa">14. 생체정보 고지(일리노이 BIPA)</h2>
+    <p>음성은 실시간 대화를 위해서만 씁니다 — AI 제공자가 음성 흐름을 처리하며, 당사는 녹음을 보관하지 않습니다. <strong>당사는 음성 지문(생체 식별자)을 생성·저장·이용하지 않습니다.</strong></p>
+    <p>일리노이 거주자는 740 ILCS 14(BIPA)의 보호를 받으며, 여기에는 서면 동의 및 보유 정책에 관한 권리가 포함됩니다. 관련 동의를 거부하면 음성 기능이 활성화되지 않습니다.</p>
+    <p>앱 잠금과 생체 재인증은 기기에 내장된 확인 기능을 씁니다(앱 잠금 PIN 은 기기에만 저장). 당사는 생체정보를 받지 않으며, 기기 공개키만 받습니다.</p>
+
+    <h2 id="ko-children">15. 아동</h2>
+    <p>본 서비스는 18세 이상을 대상으로 합니다. 만 13세 미만 계정이 발견되면 즉시 비활성화하고 데이터를 삭제합니다(COPPA 16 CFR Part 312). 만 16세 미만 이용자에 대한 타게팅 광고를 하지 않습니다(MD MODPA).</p>
+
+    <h2 id="ko-security">16. 보안</h2>
+    <p>당사는 전송·저장 시 암호화, 행 수준 보안, 자격증명의 기기 키체인 저장, 접근 통제, 감사 등 합리적인 기술적·관리적 보호조치를 NY SHIELD Act 및 업계 표준에 부합하게 적용합니다. 어떤 시스템도 절대적으로 안전하지는 않습니다.</p>
+
+    <h2 id="ko-international">17. 국외 이전</h2>
+    <p>본 서비스는 미국을 포함한 여러 국가에서 운영됩니다. 정보가 국외로 이전될 수 있으며, 그 경우 현지법과 본 방침 중 더 높은 보호가 적용됩니다.</p>
+
+    <h2 id="ko-changes">18. 방침 변경</h2>
+    <p>중대한 변경은 시행일 최소 7일 전 앱 내 및 이메일로 통지합니다. 중대한 범위 변경은 재동의가 필요합니다.</p>
+
+    <h2 id="ko-contact">19. 문의</h2>
+    <ul>
+      <li>개인정보 문의: hello@healthya.app</li>
+      <li>권리 요청: hello@healthya.app (제목: [Rights Request])</li>
+      <li>운영 회사: Deeper Emptiness AI (주소는 hello@healthya.app로 요청 시 제공)</li>
+    </ul>
+
+    <p class="meta app-only"><a href="#" onclick="if(window.ReactNativeWebView&&window.ReactNativeWebView.postMessage){window.ReactNativeWebView.postMessage('healthia:export-request');}return false;">내 데이터 사본 요청(다운로드)</a> — 30일 1회.</p>
+    </article>
+  </main>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var params = new URLSearchParams(location.search);
+      var store = {
+        get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+        set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+      };
+
+      function setActive(attr, value) {
+        var nodes = document.querySelectorAll('[' + attr + ']');
+        for (var i = 0; i < nodes.length; i++) {
+          nodes[i].setAttribute('aria-pressed', nodes[i].getAttribute(attr) === value ? 'true' : 'false');
+        }
+      }
+
+      // ----- Theme: ?theme= (app) > saved (browser) > system (default light) -----
+      function applyTheme(mode) {
+        if (mode === 'light' || mode === 'dark') root.setAttribute('data-theme', mode);
+        else root.removeAttribute('data-theme'); // 'system' → follow OS via media query (default light)
+        setActive('data-set-theme', mode);
+      }
+      var qpTheme = params.get('theme');
+      var themeMode = (qpTheme === 'light' || qpTheme === 'dark' || qpTheme === 'system')
+        ? qpTheme
+        : (store.get('healthia-doc-theme') || 'system');
+      applyTheme(themeMode);
+
+      // ----- Language: ?lang= (app) > saved (browser) > navigator > en -----
+      function browserLang() {
+        return (navigator.language || 'en').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en';
+      }
+      function applyLang(l) {
+        root.setAttribute('data-lang', l);
+        root.setAttribute('lang', l);
+        setActive('data-set-lang', l);
+      }
+      var qpLang = params.get('lang');
+      var lang = (qpLang === 'ko' || qpLang === 'en')
+        ? qpLang
+        : (store.get('healthia-doc-lang') || browserLang());
+      applyLang(lang);
+
+      // ----- Manual toggles (browser); persisted -----
+      function wire(attr, key, apply) {
+        var nodes = document.querySelectorAll('[' + attr + ']');
+        for (var i = 0; i < nodes.length; i++) {
+          (function (node) {
+            node.addEventListener('click', function () {
+              var v = node.getAttribute(attr);
+              store.set(key, v);
+              apply(v);
+            });
+          })(nodes[i]);
+        }
+      }
+      wire('data-set-theme', 'healthia-doc-theme', applyTheme);
+      wire('data-set-lang', 'healthia-doc-lang', applyLang);
+    })();
+  </script>
+</body>
+</html>
