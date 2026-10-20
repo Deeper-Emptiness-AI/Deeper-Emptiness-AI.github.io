@@ -562,6 +562,7 @@
   .lnote{margin-top:22px;font-family:var(--fm);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
 
   .lg{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .lg.one{grid-template-columns:1fr}
   @media (max-width:820px){ .lg{grid-template-columns:1fr} }
   .lgroup{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:transparent}
   .lghead{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--line-2);
@@ -915,7 +916,7 @@
         <div class="row"><span class="n">06</span><span class="t" data-i18n="f_games_t">Daily brain games</span><span class="d" data-i18n="f_games_p">Six light puzzles — sudoku, crossword, solitaire, colour sort, connect the dots and parking escape — for a gentle daily mind workout.</span></div>
         <div class="row"><span class="n">07</span><span class="t" data-i18n="f_hydra_t">Hydration &amp; exercise</span><span class="d" data-i18n="f_hydra_p">Water reminders at the times you choose, a cup-by-cup water log, and light activity tracking.</span></div>
         <div class="row"><span class="n">08</span><span class="t" data-i18n="f_health_t">Connected health apps</span><span class="d" data-i18n="f_health_p">Optionally read sleep, steps, heart rate, blood pressure and more from Apple Health or Google Health Connect — read-only, only if you turn it on.</span></div>
-        <div class="row"><span class="n">09</span><span class="t" data-i18n="f_sos_t">Emergency help</span><span class="d" data-i18n="f_sos_p">Offline first-aid guides and a big 911 button, one tap from the home-screen widget. Healthya is not an emergency response service.</span></div>
+        <div class="row"><span class="n">09</span><span class="t" data-i18n="f_sos_t">Emergency help</span><span class="d" data-i18n="f_sos_p">Offline first-aid guides and a big emergency button that opens your phone with the local number (911 in the US, 119 in Korea), one tap from the home-screen widget. Healthya is not an emergency response service.</span></div>
         <div class="row"><span class="n">10</span><span class="t" data-i18n="f_checkup_t">Checkup report, explained</span><span class="d" data-i18n="f_checkup_p">Photograph your health-checkup report page by page or pick it from your album. The numbers are read, explained in plain words with everyday tips, and compared year to year. Photos are deleted after 7 days. Not a diagnosis.</span></div>
         <div class="row"><span class="n">11</span><span class="t" data-i18n="f_supp_t">Supplement guide</span><span class="d" data-i18n="f_supp_p">Plain-language notes drawn from NIH sources, plus suggestions that take your medicines and latest checkup into account. Not medical advice.</span></div>
         <div class="row"><span class="n">12</span><span class="t" data-i18n="f_lens_t">One camera for everything</span><span class="d" data-i18n="f_lens_p">Point it at a meal, a pill bottle, a sore spot, a sick pet, a checkup report or a sign — it works out what it is and takes you to the right place, or reads and translates the text.</span></div>
@@ -934,14 +935,14 @@
       <div class="sh reveal">
         <span class="k" data-i18n="fam_k">06 — optional</span>
         <h2><span data-i18n="fam_t">Close, without hovering.</span></h2>
-        <p data-i18n="fam_s">A separate Family app lets you manage care for someone you're linked with — a parent, a grandparent, or any adult in your family — seeing only what they have consented to share.</p>
+        <p data-i18n="fam_s">The Family space in the Healthya app lets you look after someone you're linked with — a parent, a grandparent, or any adult in your family — seeing only what they have consented to share. No second app to install.</p>
       </div>
       <div class="fam reveal">
         <div>
           <ul>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam1">Summaries, not transcripts — daily, weekly and monthly overviews with only short quoted phrases, never full conversations.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam2">A generalized activity area on about a 2 km grid (kept 7 days), and your exact location only after a 911 call — visible to family for 24 hours.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam3">An alert to every linked family member when they call 911 from the app.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam2">A generalized activity area on about a 2 km grid (kept 7 days), and your exact location only after they press the emergency button — visible to family for 24 hours.</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam3">An alert to every linked family member when they press the emergency button in the app.</span></li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="fam4">Every share is decided by the person being cared for — set when approving the link, and can be turned off anytime.</span></li>
           </ul>
         </div>
@@ -994,30 +995,17 @@
       <div class="sh reveal">
         <span class="k" data-i18n="legal_k">08 — legal</span>
         <h2><span data-i18n="legal_t">Legal &amp; privacy documents</span></h2>
-        <p data-i18n="legal_s">Full policies for both apps, plus how to request account deletion.</p>
+        <p data-i18n="legal_s">One privacy policy and one set of terms for everyone using the Healthya app, including its Family space, and how to request account deletion. The earlier Healthya Family app has been merged into Healthya.</p>
       </div>
-      <div class="lg reveal">
+      <div class="lg one reveal">
         <div class="lgroup">
-          <div class="lghead"><span data-i18n="legal_g_senior">Healthya app</span></div>
-          <a href="senior-privacy-policy/" class="lcard">
+          <div class="lghead"><span data-i18n="legal_g_senior">Healthya app · for everyone</span></div>
+          <a href="privacy-policy/" class="lcard">
             <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
             <span><span class="lt" data-i18n="legal_privacy">Privacy Policy</span><span class="ls" data-i18n="legal_privacy_s">How your data is handled</span></span>
             <span class="la">→</span>
           </a>
-          <a href="senior-terms-of-service/" class="lcard">
-            <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
-            <span><span class="lt" data-i18n="legal_terms">Terms of Service</span><span class="ls" data-i18n="legal_terms_s">Rules for using the app</span></span>
-            <span class="la">→</span>
-          </a>
-        </div>
-        <div class="lgroup">
-          <div class="lghead"><span data-i18n="legal_g_family">Family app</span></div>
-          <a href="family-privacy-policy/" class="lcard">
-            <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></span>
-            <span><span class="lt" data-i18n="legal_privacy">Privacy Policy</span><span class="ls" data-i18n="legal_privacy_s">How your data is handled</span></span>
-            <span class="la">→</span>
-          </a>
-          <a href="family-terms-of-service/" class="lcard">
+          <a href="terms-of-service/" class="lcard">
             <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
             <span><span class="lt" data-i18n="legal_terms">Terms of Service</span><span class="ls" data-i18n="legal_terms_s">Rules for using the app</span></span>
             <span class="la">→</span>
@@ -1026,7 +1014,7 @@
       </div>
       <a href="account-deletion/" class="lcard danger reveal">
         <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg></span>
-        <span><span class="lt" data-i18n="legal_del">Request account deletion</span><span class="ls" data-i18n="legal_del_s">Applies to both apps · removes your account and data</span></span>
+        <span><span class="lt" data-i18n="legal_del">Request account deletion</span><span class="ls" data-i18n="legal_del_s">One account for Healthya and the earlier Family app · removes your account and data</span></span>
         <span class="la">→</span>
       </a>
     </div>
@@ -1048,16 +1036,11 @@
     <div class="mdlg" role="dialog" aria-modal="true" aria-labelledby="storeModalTitle">
       <button class="mx" type="button" data-store-close aria-label="Close">&times;</button>
       <h2 id="storeModalTitle" data-i18n="store_title">Get the app</h2>
-      <p class="msub" data-i18n="store_sub">Choose the app that's right for you.</p>
+      <p class="msub" data-i18n="store_sub">One app for your own health and for looking after family.</p>
       <div class="sopts">
         <a class="scard" data-store-app="senior" href="#">
           <span class="sn" data-i18n="store_senior_name">Healthya</span>
-          <span class="sd" data-i18n="store_senior_desc">For managing your own health. A voice-first assistant for meals, medications, and everyday well-being.</span>
-          <span class="sc" data-store-cta></span>
-        </a>
-        <a class="scard" data-store-app="family" href="#">
-          <span class="sn" data-i18n="store_family_name">Healthya Family</span>
-          <span class="sd" data-i18n="store_family_desc">For looking after someone. Manage a senior's or family member's daily care in one place.</span>
+          <span class="sd" data-i18n="store_senior_desc">A voice-first assistant for meals, medications, and everyday well-being — with a Family space for looking after someone you're linked with.</span>
           <span class="sc" data-store-cta></span>
         </a>
       </div>
@@ -1161,7 +1144,7 @@
       f_games_t:"Daily brain games", f_games_p:"Six light puzzles — sudoku, crossword, solitaire, colour sort, connect the dots and parking escape — for a gentle daily mind workout.",
       f_hydra_t:"Hydration & exercise", f_hydra_p:"Water reminders at the times you choose, a cup-by-cup water log, and light activity tracking.",
       f_health_t:"Connected health apps", f_health_p:"Optionally read sleep, steps, heart rate, blood pressure and more from Apple Health or Google Health Connect — read-only, only if you turn it on.",
-      f_sos_t:"Emergency help", f_sos_p:"Offline first-aid guides and a big 911 button, one tap from the home-screen widget. Healthya is not an emergency response service.",
+      f_sos_t:"Emergency help", f_sos_p:"Offline first-aid guides and a big emergency button that opens your phone with the local number (911 in the US, 119 in Korea), one tap from the home-screen widget. Healthya is not an emergency response service.",
       f_checkup_t:"Checkup report, explained", f_checkup_p:"Photograph your health-checkup report page by page or pick it from your album. The numbers are read, explained in plain words with everyday tips, and compared year to year. Photos are deleted after 7 days. Not a diagnosis.",
       f_supp_t:"Supplement guide", f_supp_p:"Plain-language notes drawn from NIH sources, plus suggestions that take your medicines and latest checkup into account. Not medical advice.",
       f_lens_t:"One camera for everything", f_lens_p:"Point it at a meal, a pill bottle, a sore spot, a sick pet, a checkup report or a sign — it works out what it is and takes you to the right place, or reads and translates the text.",
@@ -1172,10 +1155,10 @@
       f_golf_t:"Golf with friends", f_golf_p:"Invite by phone or QR, keep one shared scorecard, and let the app total skins or stroke bets — it never handles money.",
 
       fam_k:"06 — optional", fam_t:"Close, without hovering.",
-      fam_s:"A separate Family app lets you manage care for someone you're linked with — a parent, a grandparent, or any adult in your family — seeing only what they have consented to share.",
+      fam_s:"The Family space in the Healthya app lets you look after someone you're linked with — a parent, a grandparent, or any adult in your family — seeing only what they have consented to share. No second app to install.",
       fam1:"Summaries, not transcripts — daily, weekly and monthly overviews with only short quoted phrases, never full conversations.",
-      fam2:"A generalized activity area on about a 2 km grid (kept 7 days), and your exact location only after a 911 call — visible to family for 24 hours.",
-      fam3:"An alert to every linked family member when they call 911 from the app.",
+      fam2:"A generalized activity area on about a 2 km grid (kept 7 days), and your exact location only after they press the emergency button — visible to family for 24 hours.",
+      fam3:"An alert to every linked family member when they press the emergency button in the app.",
       fam4:"Every share is decided by the person being cared for — set when approving the link, and can be turned off anytime.",
       fam_vt:"Mom is doing well today", fam_vd:"Breakfast logged · medication on track · active this morning",
 
@@ -1195,16 +1178,15 @@
       launch_cta:"Get the app", launch_note:"Developed by Deeper Emptiness AI · hello@healthya.app",
 
       legal_k:"08 — legal", legal_t:"Legal & privacy documents",
-      legal_s:"Full policies for both apps, plus how to request account deletion.",
-      legal_g_senior:"Healthya app", legal_g_family:"Family app",
+      legal_s:"One privacy policy and one set of terms for everyone using the Healthya app, including its Family space, and how to request account deletion. The earlier Healthya Family app has been merged into Healthya.",
+      legal_g_senior:"Healthya app · for everyone",
       legal_privacy:"Privacy Policy", legal_privacy_s:"How your data is handled",
       legal_terms:"Terms of Service", legal_terms_s:"Rules for using the app",
-      legal_del:"Request account deletion", legal_del_s:"Applies to both apps · removes your account and data",
+      legal_del:"Request account deletion", legal_del_s:"One account for Healthya and the earlier Family app · removes your account and data",
       footer_copy:"© 2026 Deeper Emptiness AI · Healthya",
 
-      store_title:"Get the app", store_sub:"Choose the app that's right for you.",
-      store_senior_name:"Healthya", store_senior_desc:"For managing your own health. A voice-first assistant for meals, medications, and everyday well-being.",
-      store_family_name:"Healthya Family", store_family_desc:"For looking after someone. Manage a senior's or family member's daily care in one place.",
+      store_title:"Get the app", store_sub:"One app for your own health and for looking after family.",
+      store_senior_name:"Healthya", store_senior_desc:"A voice-first assistant for meals, medications, and everyday well-being — with a Family space for looking after someone you're linked with.",
       survey_title:"Tell us what you think", survey_fallback:"Trouble loading? Open the survey in a new tab →"
     },
     ko: {
@@ -1287,7 +1269,7 @@
       f_games_t:"매일 두뇌 게임", f_games_p:"스도쿠·가로세로 낱말퀴즈·솔리테어·색깔 정렬·점 잇기·주차장 탈출, 여섯 가지 가벼운 퍼즐로 즐기는 두뇌 운동.",
       f_hydra_t:"수분 & 운동", f_hydra_p:"정한 시각의 물 알림, 한 잔씩 적는 물 기록, 가벼운 활동 기록.",
       f_health_t:"건강 앱 연동", f_health_p:"원하면 Apple 건강이나 Google Health Connect에서 수면·걸음·심박·혈압 등을 읽어옵니다 — 읽기 전용, 켠 경우에만.",
-      f_sos_t:"응급 도움", f_sos_p:"오프라인 응급처치 안내와 큰 911 버튼, 홈화면 위젯에서 한 번에. Healthya는 응급 대응 서비스가 아닙니다.",
+      f_sos_t:"응급 도움", f_sos_p:"오프라인 응급처치 안내와, 지금 있는 나라의 응급 번호(한국 119 · 미국 911)로 전화 앱을 여는 큰 응급 버튼 — 홈화면 위젯에서 한 번에. Healthya는 응급 대응 서비스가 아닙니다.",
       f_checkup_t:"건강검진 결과서 풀이", f_checkup_p:"결과서를 한 장씩 찍거나 앨범에서 고르면 수치를 쉬운 말과 생활 습관 팁으로 풀고 해마다 비교합니다. 사진은 7일 뒤 자동 삭제, 진단이 아닙니다.",
       f_supp_t:"영양제 백과·맞춤 추천", f_supp_p:"NIH 자료를 바탕으로 한 쉬운 설명과, 드시는 약·최근 검진을 고려한 추천. 의학적 조언이 아닙니다.",
       f_lens_t:"카메라 하나로", f_lens_p:"음식·약·아픈 곳·아픈 반려동물·검진표·글 — 무엇인지 알아보고 맞는 곳으로 이어 주거나, 글을 읽어 번역합니다.",
@@ -1298,10 +1280,10 @@
       f_golf_t:"친구와 골프", f_golf_p:"전화·QR 초대, 함께 쓰는 스코어카드, 스킨스·타당 내기 정산 계산까지 — 돈은 오가지 않습니다.",
 
       fam_k:"06 — 선택", fam_t:"가까이, 다만 지켜보지 않게.",
-      fam_s:"별도의 가족 앱으로 연동된 사람의 돌봄을 관리할 수 있습니다 — 부모님, 조부모님, 또는 가족 중 성인 누구든. 그분이 공유에 동의한 것만 보입니다.",
+      fam_s:"Healthya 앱의 가족 공간에서 연동된 분의 돌봄을 살필 수 있습니다 — 부모님, 조부모님, 또는 가족 중 성인 누구든. 그분이 공유에 동의한 것만 보입니다. 앱을 따로 설치할 필요가 없습니다.",
       fam1:"대화록이 아니라 요약 — 하루·주간·월간 개요에 짧은 인용만, 전체 대화는 절대 아닙니다.",
-      fam2:"약 2km 격자로 뭉뚱그린 활동 범위(7일 보관)와, 911을 눌렀을 때만 가족이 24시간 볼 수 있는 정확한 위치.",
-      fam3:"앱에서 911로 전화하면 연동된 모든 가족에게 알림이 갑니다.",
+      fam2:"약 2km 격자로 뭉뚱그린 활동 범위(7일 보관)와, 응급 버튼을 눌렀을 때만 가족이 24시간 볼 수 있는 정확한 위치.",
+      fam3:"앱에서 응급 버튼을 누르면 연동된 모든 가족에게 알림이 갑니다.",
       fam4:"모든 공유는 돌봄을 받는 본인이 정합니다 — 연동을 승인할 때 정하고, 언제든 끌 수 있습니다.",
       fam_vt:"어머니는 오늘 잘 지내세요", fam_vd:"아침 기록됨 · 복약 순조로움 · 오전에 활동함",
 
@@ -1321,16 +1303,15 @@
       launch_cta:"앱 다운로드", launch_note:"Deeper Emptiness AI 개발 · hello@healthya.app",
 
       legal_k:"08 — 약관", legal_t:"약관 & 개인정보 문서",
-      legal_s:"두 앱의 전체 방침과 계정 삭제 요청 방법입니다.",
-      legal_g_senior:"Healthya 앱", legal_g_family:"가족 앱",
+      legal_s:"가족 공간을 포함해 Healthya 앱을 쓰는 모든 분께 적용되는 개인정보처리방침과 이용약관, 그리고 계정 삭제 요청 방법입니다. 예전 Healthya Family 앱은 Healthya 로 통합되었습니다.",
+      legal_g_senior:"Healthya 앱 · 모든 회원",
       legal_privacy:"개인정보처리방침", legal_privacy_s:"데이터를 어떻게 다루는지",
       legal_terms:"이용약관", legal_terms_s:"앱 이용 규칙",
-      legal_del:"계정 삭제 요청", legal_del_s:"두 앱 공통 · 계정과 데이터 삭제",
+      legal_del:"계정 삭제 요청", legal_del_s:"Healthya·예전 Family 앱 같은 계정 · 계정과 데이터 삭제",
       footer_copy:"© 2026 Deeper Emptiness AI · Healthya",
 
-      store_title:"앱 다운로드", store_sub:"본인에게 맞는 앱을 선택하세요.",
-      store_senior_name:"Healthya", store_senior_desc:"내 건강 관리용. 식사·복약·일상 건강을 음성으로 챙기는 종합 도우미.",
-      store_family_name:"Healthya Family", store_family_desc:"가족 돌봄용. 시니어나 가족의 일상 돌봄을 한곳에서 관리합니다.",
+      store_title:"앱 다운로드", store_sub:"내 건강도, 가족 돌봄도 앱 하나로.",
+      store_senior_name:"Healthya", store_senior_desc:"식사·복약·일상 건강을 음성으로 챙기는 종합 도우미. 연동된 가족을 살피는 가족 공간도 함께 있습니다.",
       survey_title:"의견을 들려주세요", survey_fallback:"화면이 안 보이면 새 탭에서 열기 →"
     }
   };
@@ -1408,8 +1389,7 @@
        market:// , macappstore://) so the store app opens directly;
        only unknown desktop OSes fall back to the https listing. */
     var STORE = {
-      senior: { appleId: '6783849123', androidPkg: 'com.deeperemptinessai.healthia' },
-      family: { appleId: '6782605872', androidPkg: 'com.deeperemptinessai.healthiafamily' }
+      senior: { appleId: '6783849123', androidPkg: 'com.deeperemptinessai.healthia' }
     };
     function storeUrl(app, p) {
       if (p === 'android') return 'market://details?id=' + app.androidPkg;
