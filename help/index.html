@@ -499,6 +499,17 @@
         for (var i = 0; i < links.length; i++) links[i].setAttribute('aria-current', links[i].getAttribute('href') === '#' + topic ? 'true' : 'false');
       }
       window.addEventListener('hashchange', function () { goTo(location.hash); });
+      // 페이지 안 링크(#주제 · #q-질문)는 누르는 순간 옮긴다 — 해시가 같으면 hashchange 가 없어, 이미 고른 주제를
+      // 다시 눌러도(스크롤해 내려간 뒤) 제자리였다(2026-10-27 리뷰). 해시가 다를 때만 기록을 남긴다(뒤로 가기는 hashchange 가 맡는다).
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+        if (!a) return;
+        var hash = a.getAttribute('href');
+        if (!document.getElementById(lang() + '-' + hash.slice(1))) return;
+        e.preventDefault();
+        if (location.hash !== hash) history.pushState(null, '', hash);
+        goTo(hash);
+      });
       function runSearch() {
         var q = input.value.trim().toLowerCase();
         var root2 = block();
