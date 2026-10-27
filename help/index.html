@@ -1,0 +1,525 @@
+<!doctype html>
+<!-- 생성 파일 — 고치지 마세요. 원본: apps/healthia/src/features/support/content/help-faq.json · 생성: pnpm help:build -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <title>Help &amp; contact · Healthya</title>
+  <meta name="description" content="Answers to common questions about Healthya, and how to reach us." />
+  <link rel="icon" href="../favicon.ico" sizes="any" />
+  <link rel="canonical" href="https://healthya.app/help/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&display=swap" />
+  <style>
+    :root { --bg:#FBF7EC; --bg-top:#CFE4F1; --card:#FFFFFF; --text:#0A0A08; --text-2:#2C2B26; --muted:#5F5B52; --line:rgba(10,10,8,.12);
+      --chip:#F2F5F4; --accent:#D2FF32; --accent-ink:#0A0A08; --inv-bg:#0A0A08; --inv-text:#FFFFFF; --inv-muted:#E4E2DA;
+      --warn-bg:#FFE9DE; --warn-text:#6E2307; --focus:#0A0A08;
+      --fd:"Bricolage Grotesque",-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+      --fb:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0B0D11; --bg-top:#16202B; --card:#1B1E25; --text:#F4F4F0; --text-2:#DCDBD4;
+      --muted:#B4B1A8; --line:rgba(255,255,255,.14); --chip:#262A33; --inv-bg:#F4F4F0; --inv-text:#0A0A08; --inv-muted:#2C2B26;
+      --warn-bg:#3A1D12; --warn-text:#FFD9C7; --focus:#F4F4F0; } }
+    :root[data-theme="dark"] { --bg:#0B0D11; --bg-top:#16202B; --card:#1B1E25; --text:#F4F4F0; --text-2:#DCDBD4;
+      --muted:#B4B1A8; --line:rgba(255,255,255,.14); --chip:#262A33; --inv-bg:#F4F4F0; --inv-text:#0A0A08; --inv-muted:#2C2B26;
+      --warn-bg:#3A1D12; --warn-text:#FFD9C7; --focus:#F4F4F0; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body { background: linear-gradient(180deg, var(--bg-top) 0, var(--bg) 460px, var(--bg) 100%); color: var(--text);
+      font-family: var(--fb); font-size: 17px; line-height: 1.7; -webkit-text-size-adjust: 100%; }
+    :root[lang="ko"] body { word-break: keep-all; overflow-wrap: break-word; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .site-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; flex-wrap: wrap; }
+    .brand { font-family: var(--fd); font-weight: 800; font-size: 21px; letter-spacing: .02em; text-decoration: none; }
+    .brand em { font-style: normal; background: var(--accent); color: var(--accent-ink); padding: 0 4px; border-radius: 6px; margin-left: 1px; }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; }
+    .seg button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--text-2); border-radius: 999px; padding: 4px 14px; min-height: 36px; cursor: pointer; }
+    .seg button[aria-pressed="true"] { background: var(--inv-bg); color: var(--inv-text); font-weight: 700; }
+    .hero { padding: 32px 0 8px; }
+    .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px; }
+    h1 { font-family: var(--fd); font-weight: 700; font-size: clamp(34px, 5vw, 56px); line-height: 1.12; letter-spacing: -.02em; margin: 0 0 8px; }
+    .search-label { display: block; font-size: 15px; color: var(--text-2); margin: 16px 0 10px; }
+    .search { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 0 20px; max-width: 640px; min-height: 56px; }
+    .search input { flex: 1 1 auto; min-width: 0; border: 0; outline: none; background: transparent; color: var(--text); font: inherit; font-size: 17px; min-height: 52px; }
+    .search input::placeholder { color: var(--muted); }
+    .notice { background: var(--warn-bg); color: var(--warn-text); border-radius: 20px; padding: 16px 20px; margin: 24px 0 32px; font-size: 15px; line-height: 1.6; }
+    [data-lang-block] { display: none; }
+    html[data-lang="en"] [data-lang-block="en"], html:not([data-lang]) [data-lang-block="en"], html[data-lang="ko"] [data-lang-block="ko"] { display: block; }
+    .topics { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 12px; margin: 0 0 8px; scrollbar-width: none; }
+    .topics a { flex-shrink: 0; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); text-decoration: none; font-size: 15px; white-space: nowrap; }
+    .topics a[aria-current="true"] { background: var(--inv-bg); color: var(--inv-text); border-color: transparent; font-weight: 700; }
+    section.topic { scroll-margin-top: 16px; margin: 0 0 32px; }
+    section.topic h2 { font-family: var(--fd); font-size: 26px; font-weight: 700; margin: 0 0 12px; line-height: 1.3; }
+    details.faq { background: var(--card); border: 1px solid var(--line); border-radius: 20px; margin: 0 0 10px; scroll-margin-top: 16px; }
+    details.faq > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; min-height: 60px; font-weight: 700; font-size: 18px; line-height: 1.45; }
+    details.faq > summary::-webkit-details-marker { display: none; }
+    details.faq > summary::after { content: ""; flex-shrink: 0; width: 10px; height: 10px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin: -4px 4px 0 0; }
+    details.faq[open] > summary::after { transform: rotate(-135deg); margin-top: 4px; }
+    .answer { padding: 0 22px 20px; color: var(--text-2); }
+    .answer p { margin: 0 0 12px; }
+    .answer h4 { font-size: 16px; margin: 18px 0 6px; color: var(--text); }
+    .answer ol, .answer ul { margin: 0 0 12px; padding-left: 24px; }
+    .answer li { margin: 6px 0; }
+    .answer b { color: var(--text); }
+    .answer .tip { background: var(--chip); border-radius: 14px; padding: 12px 14px; font-size: 16px; }
+    .empty { display: none; background: var(--card); border-radius: 20px; padding: 24px 22px; color: var(--text-2); }
+    .empty.show { display: block; }
+    .updated { color: var(--muted); font-size: 14px; }
+    section.contact { margin: 48px 0 40px; background: var(--inv-bg); color: var(--inv-text); border-radius: 28px; padding: 36px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+    section.contact h2 { font-family: var(--fd); font-size: 30px; margin: 0 0 10px; line-height: 1.25; }
+    section.contact p { margin: 0; color: var(--inv-muted); font-size: 16px; line-height: 1.7; }
+    .contact-copy { flex: 1 1 340px; }
+    .mail { display: inline-flex; align-items: center; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 700; font-size: 17px; border-radius: 999px; padding: 0 26px; min-height: 56px; }
+    footer { display: flex; flex-wrap: wrap; gap: 16px 24px; justify-content: space-between; padding: 24px 0 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+    footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
+    @media (min-width: 1000px) {
+      .layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 44px; align-items: start; }
+      .topics { position: sticky; top: 20px; flex-direction: column; overflow: visible; padding: 0; }
+      .topics a { border: 0; background: transparent; border-radius: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <nav class="site-nav" aria-label="Site">
+      <a class="brand" href="/">HEALTHY<em>A</em></a>
+      <div class="seg" role="group" aria-label="Language">
+        <button type="button" data-set-lang="en">EN</button>
+        <button type="button" data-set-lang="ko">한국어</button>
+      </div>
+    </nav>
+    <label class="search-label" for="faq-search"><span data-lang-block="en">Search the common questions first.</span><span data-lang-block="ko">자주 묻는 질문에서 먼저 찾아보세요.</span></label>
+    <div class="search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
+      <input id="faq-search" type="search" data-ph-en="e.g. My reminders aren't coming through" data-ph-ko="예: 알림이 오지 않아요" />
+    </div>
+
+    <div class="faq-root" data-lang-block="en">
+      <header class="hero">
+        <p class="eyebrow">Help & contact</p>
+        <h1>How can we help?</h1>
+      </header>
+      <div class="notice" role="note"><b>Healthya doesn't replace medical care.</b> In an emergency, call 911 (or your local emergency number) right away. We can't give medical advice by email.</div>
+      <div class="layout">
+        <nav class="topics" aria-label="Topics"><a href="#basics">Getting around</a><a href="#account">Sign-in &amp; account</a><a href="#privacy">Privacy &amp; AI</a><a href="#alarms">Reminders &amp; alarms</a><a href="#care">Medications, meals &amp; camera</a><a href="#reports">Reports</a><a href="#family">Family space</a><a href="#emergency">Emergencies</a><a href="#watch">Watch</a><a href="#trouble">Troubleshooting</a></nav>
+        <div>
+
+        <section class="topic" id="en-basics" data-topic="basics">
+          <h2>Getting around</h2>
+          <details class="faq" id="en-q-find-menu">
+            <summary>Where are the menu and Settings?</summary>
+            <div class="answer"><p>Every part of the app is listed in one place: the <b>Full menu</b>.</p><ol class="steps"><li>On the Home screen, tap the <b>⋯</b> button in the top-right corner. On wider screens, such as a tablet, it sits at the top of the vertical bar on the right.</li><li>The menu opens in groups: <b>Favorites</b>, <b>Today</b>, <b>Food · water</b>, <b>Meds · supplements</b>, <b>Activity · goals</b>, <b>Records · reports</b>, <b>When unwell</b>, <b>Fun</b>, and <b>Settings · account</b>. You can also type what you're looking for in the search box at the top.</li><li><b>Settings</b> is in the <b>Settings · account</b> group.</li></ol><p>Tap the same button again (it turns into ✕) to close the menu. To go back to the previous screen, tap <b>‹</b> in the top-left corner.</p></div>
+          </details>
+          <details class="faq" id="en-q-dock-camera">
+            <summary>What are the button bar at the bottom (the dock) and the camera button?</summary>
+            <div class="answer"><p>The <b>dock</b> at the bottom shows on almost every screen. Its first spot is always <b>Home</b>; the other three are your favorite menus. On wider screens, such as a tablet, the dock becomes a vertical bar on the right.</p><p>The round <b>camera button</b> above the dock takes a photo right away. Snap food, a medicine, a sore spot, a sick pet, a checkup report or some text, and the app recognizes it and takes you to the right screen. Drag the camera button upward to open four shortcuts.</p><h4>Change the dock and shortcuts</h4><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>.</li><li>In the <b>Display</b> group, tap <b>Edit favorites</b>.</li><li>Pick the menus for the three dock spots and the four shortcuts.</li></ol><p class="tip">The dock steps aside on full-screen views such as game boards, the camera and follow-along workout videos. It comes back when you tap ‹.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-account" data-topic="account">
+          <h2>Sign-in &amp; account</h2>
+          <details class="faq" id="en-q-sms-code">
+            <summary>I'm not getting the verification text</summary>
+            <div class="answer"><p>If the text hasn't arrived after a few minutes, check these in order.</p><ol class="steps"><li>On the sign-in screen, tap <b>Change phone number</b>, make sure the country and number are right, and request a new code.</li><li>Check your phone's spam or blocked messages for the code.</li><li>If you see &quot;Too many attempts,&quot; wait a little while and try again.</li></ol><p class="tip">Still nothing? Tap <b>Help &amp; contact</b> › <b>Contact us</b> at the bottom of the sign-in screen and email us. You don't need to be signed in.</p></div>
+          </details>
+          <details class="faq" id="en-q-phone-number-changed">
+            <summary>My phone number changed</summary>
+            <div class="answer"><p>You can change just the number and keep your account and records. Follow the part that fits your situation.</p><h4>If you're still signed in to the app</h4><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Account · security</b> › <b>Change number</b>.</li><li>First, confirm it's you: enter the code sent to your <b>security email</b>, or use <b>Confirm with biometrics</b> on this phone. If neither works, tap <b>Register security email</b> first.</li><li>Enter your new number, then the code sent to it. When you see &quot;Your phone number has been changed,&quot; you're done.</li></ol><h4>If you can't sign in because the old number no longer works</h4><ol class="steps"><li>On the sign-in screen, tap <b>Changed your number and can't sign in?</b></li><li>Enter the <b>security email address</b> saved on your account and tap <b>Send code</b>.</li><li>Enter the code from the email, then tap <b>Yes, switch over</b> when asked to switch to your previous account.</li></ol><p class="tip">For your safety, you can change the number 72 hours after adding or changing a security email. If you can't sign in and have no security email, send us a message with <b>Contact us</b> and we'll help.</p></div>
+          </details>
+          <details class="faq" id="en-q-new-phone">
+            <summary>I'm moving to a new phone</summary>
+            <div class="answer"><ol class="steps"><li>Install Healthya on the new phone and sign in with the same phone number. Your records are stored with your account, so everything carries over.</li><li>Open the app once on the new phone. That's when your reminders are scheduled on it.</li><li>For a phone you no longer use, open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>My devices</b> and tap <b>Remove device</b> on it. That phone is signed out right away.</li></ol><p>Up to 3 devices can stay signed in to one account. If you go over, the app asks you to choose a device to sign out.</p><p class="tip">Settings kept only on a phone, such as your <b>Favorites</b>, need to be set again on the new phone. If your number changed too, see &quot;My phone number changed&quot; first.</p></div>
+          </details>
+          <details class="faq" id="en-q-delete">
+            <summary>I want to erase my records or delete my account</summary>
+            <div class="answer"><p>There are two options. <b>Erase my records</b> keeps your account and erases only your records. <b>Delete account</b> removes the account and all records. Either way, nothing is erased until <b>7 days</b> after you ask, and you can cancel at any time before then.</p><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>.</li><li>In the <b>Account</b> group at the bottom, tap <b>Erase my records</b> or <b>Delete account</b>.</li><li>Read what will be erased and what stays, then check the box.</li><li>Tap <b>Send verification code</b> and enter the 6-digit code sent to your phone. The deletion is then scheduled.</li></ol><h4>To cancel</h4><p>For those 7 days, a &quot;Deletion is scheduled&quot; notice appears at the top of Home and Settings. Tap <b>Cancel</b> in it. You can keep using the app until then.</p><p class="tip"><b>Erase my records</b> keeps your account and sign-in, family links, points and badges, golf games played with other app users, and goals tied to a Together group.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-privacy" data-topic="privacy">
+          <h2>Privacy &amp; AI</h2>
+          <details class="faq" id="en-q-where-stored">
+            <summary>Where is my data stored, and who can see it?</summary>
+            <div class="answer"><p>Your records are stored on Healthya's servers and encrypted both in transit and at rest. On our servers they're kept separate from everyone else's, so only <b>you</b> and the <b>family members you've chosen to share with</b> can see them.</p></div>
+          </details>
+          <details class="faq" id="en-q-ai-memory">
+            <summary>What does the AI remember about me?</summary>
+            <div class="answer"><p>The AI remembers short facts worth keeping from your conversations (for example, &quot;enjoys gardening&quot;) and the thread of what you talked about, so it can pick up where you left off. No voice recordings are kept.</p><ul><li>What the AI remembers is <b>never shown to your family.</b></li><li>To remove conversations from your records and the AI's memory, use <b>Erase my records</b>. Deleting on the AI chat screen hides them from that screen.</li><li>If there's something specific you'd like corrected or removed, send us a message with <b>Contact us</b> and we'll take care of it.</li></ul></div>
+          </details>
+          <details class="faq" id="en-q-family-sees">
+            <summary>What can my family see?</summary>
+            <div class="answer"><p>You choose what to share <b>separately for each family member</b>. You pick when you approve the link, and you can change it any time.</p><ul><li><b>Share health activities</b> — meals, exercise, medications, water and sleep, the AI daily summary, and weekly and monthly reports</li><li><b>Share usual activity area</b> — the rough area where you've spent most of the last 7 days</li><li><b>Share exact location in emergencies</b> — your exact location for 24 hours after you press the emergency number in the app</li><li><b>Share MBTI type</b> — just the type letters</li></ul><p>Even with everything off, your name, phone number, time zone and link status are visible. Your conversations themselves, what the AI remembers, your voice, the height and weight you typed in, your religion and your MBTI test answers are <b>never</b> visible.</p><h4>Change what you share</h4><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>.</li><li>In the <b>Privacy &amp; security</b> group, tap <b>Data use consent</b>.</li><li>Turn items on or off for each family member.</li></ol></div>
+          </details>
+          <details class="faq" id="en-q-download-data">
+            <summary>Can I download a copy of my data?</summary>
+            <div class="answer"><p>Yes. You can request it from the Privacy policy screen in the app.</p><ol class="steps"><li>Open <b>Full menu (⋯)</b> and tap <b>Privacy policy</b> at the bottom.</li><li>At the very bottom, tap <b>Request a copy of my data (download)</b>.</li><li>When the file is ready, your phone's share sheet opens. Save it to Files or email it to yourself.</li></ol><ul><li>Your records come as a ZIP file of JSON and CSV files.</li><li>You can request a copy once every 30 days.</li><li>If you'd also like your meal, medication and camera photos, send us a message with <b>Contact us</b> and we'll send them separately.</li></ul></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-alarms" data-topic="alarms">
+          <h2>Reminders &amp; alarms</h2>
+          <details class="faq" id="en-q-not-ringing">
+            <summary>My reminders aren't coming through</summary>
+            <div class="answer"><p>Check these in order.</p><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>, then <b>Notifications</b> in the <b>Notifications</b> group.</li><li>Make sure <b>Notifications</b> at the top is on. If you see &quot;Please enable notifications in your device settings,&quot; tap <b>Open settings</b> and allow notifications for Healthya.</li><li>Under <b>Reminder types</b>, make sure the ones you want are on: medication, meal, water, exercise, morning briefing and evening check-in.</li><li>Open the app once. Reminders are rescheduled when the app opens, which matters most after a new phone or a reinstall.</li></ol><p class="tip">Still nothing? Check that Do Not Disturb, a Focus mode or battery optimization isn't holding back Healthya. Menu names vary a little from phone to phone.</p></div>
+          </details>
+          <details class="faq" id="en-q-wrong-time">
+            <summary>Changing reminder times, or reminders come at the wrong time</summary>
+            <div class="answer"><h4>Change a time</h4><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>, then <b>Alarm times</b> in the <b>Notifications</b> group.</li><li>Tap the reminder you want to change, adjust the time and repeat days, and tap <b>Save</b>. Use <b>Add medication alarm</b> for medicines and <b>Add custom alarm</b> for anything else.</li></ol><h4>When times are off while traveling</h4><p>Reminders follow your phone's time zone. After you arrive somewhere new, open the app once. That's when your reminders are rescheduled for the new time zone.</p></div>
+          </details>
+          <details class="faq" id="en-q-language">
+            <summary>Changing the app and reminder language</summary>
+            <div class="answer"><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>.</li><li>In the <b>Display</b> group, tap <b>Language</b> and choose English or 한국어.</li></ol><p>The language is saved with your account, so it applies on your other devices too, and reminders already scheduled switch to the new language. The AI's replies and the morning briefing follow it as well.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-care" data-topic="care">
+          <h2>Medications, meals &amp; camera</h2>
+          <details class="faq" id="en-q-add-medication">
+            <summary>How do I add a medication?</summary>
+            <div class="answer"><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Meds · supplements</b> › <b>Register medication</b>.</li><li>Choose <b>Photo</b>, <b>Speak</b> or <b>Type</b>.</li><li><b>Photo</b>: snap the bottle or prescription, and &quot;Please confirm your medications&quot; appears. Check the name and the times, then save.</li><li><b>Speak</b>: tell the AI the medicine's name and when you take it. <b>Type</b>: enter the name and times yourself.</li></ol><p>You'll get a reminder at the times you set. Taking a photo of a medicine with the camera button leads to the same screen.</p></div>
+          </details>
+          <details class="faq" id="en-q-edit-medication">
+            <summary>A medication's details are wrong</summary>
+            <div class="answer"><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Meds · supplements</b> › <b>Current medications</b>.</li><li>Tap the medication you want to fix.</li><li>Tap <b>Edit medication</b>, correct the name, dose or times, and save.</li></ol><p class="tip">If a photo analysis failed, try <b>Analyze again</b> on that screen.</p></div>
+          </details>
+          <details class="faq" id="en-q-log-meal">
+            <summary>How do I log a meal, and what if the analysis is wrong?</summary>
+            <div class="answer"><ol class="steps"><li>Take a photo of your food with the camera button, or open <b>Full menu (⋯)</b> › <b>Food · water</b> › <b>Log meal</b> and tap <b>Record a meal with a photo</b>.</li><li>On &quot;Meal analysis,&quot; check the food and calories, and pick the meal under <b>Which meal is this?</b></li><li>Tap <b>Save this entry</b>.</li></ol><h4>If the result is wrong</h4><ul><li>Before saving: tap <b>Retake</b> or <b>Choose again</b>. To skip logging it, tap <b>Delete and exit</b>.</li><li>After saving: use <b>Delete this record</b> on that entry, then log it again.</li></ul></div>
+          </details>
+          <details class="faq" id="en-q-calories">
+            <summary>How are calories calculated?</summary>
+            <div class="answer"><p>The AI looks at your meal photo, estimates what the food is and how much there is, and works out the calories from that. So calories are an <b>estimate</b> and may differ from the real amount.</p><p>Nutrition for next-meal suggestions is based on the U.S. Department of Agriculture's (USDA) food nutrition data.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-reports" data-topic="reports">
+          <h2>Reports</h2>
+          <details class="faq" id="en-q-report-when">
+            <summary>When and where can I see my weekly and monthly reports?</summary>
+            <div class="answer"><ul><li><b>Last week's story</b> (weekly report): made every Sunday from the previous week's records (Sunday to Saturday). With notifications on, we let you know between 8 a.m. and noon on Sunday (your local time), with a one-line preview.</li><li><b>This month's recap</b> (monthly report): made between the 1st and 3rd of each month from the previous month's records.</li></ul><h4>Where to find them</h4><p><b>Full menu (⋯)</b> › <b>Records · reports</b> › <b>Last week's story</b> or <b>This month's recap</b></p><h4>Turn on the weekly report notification</h4><p><b>Settings</b> › <b>Notifications</b> (in the Notifications group) › <b>Weekly report notifications</b></p></div>
+          </details>
+          <details class="faq" id="en-q-report-basis">
+            <summary>What are reports based on?</summary>
+            <div class="answer"><p>Reports pull together what you logged that week or month — meals, medications, water, sleep and exercise — along with your AI conversations, symptom check-in summaries, and measurements from a connected health app (Apple Health or Health Connect) such as sleep, steps, heart rate, blood pressure, blood sugar and weight.</p><p>A report is a <b>summary of your daily life, not a diagnosis.</b> If you're worried about your health, talk with your doctor.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-family" data-topic="family">
+          <h2>Family space</h2>
+          <details class="faq" id="en-q-family-connect">
+            <summary>How do I connect with family?</summary>
+            <div class="answer"><p>The person who <b>wants to view</b> sends a request, and the person who <b>will share</b> approves it.</p><h4>Send a request — the person who wants to view</h4><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Manage family</b>.</li><li>Under <b>Family I look after</b>, tap <b>Add family</b>.</li><li>Enter your family member's phone number. If you like, add what you call them, a family color and a short note.</li><li>Check the required consent and tap <b>Send request</b>.</li></ol><h4>Approve — the person who will share</h4><ol class="steps"><li>You'll get a notification. Tap it, or open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Manage family</b>.</li><li>Under <b>Family link requests</b>, check who sent it and their note, then tap <b>Approve</b>.</li><li>On &quot;What would you like to share?&quot;, choose what to share and tap <b>Approve with these choices</b>. You can also link without sharing anything.</li></ol><p class="tip">A request is valid for 48 hours; after that it needs to be sent again. You can look after up to 4 family members.</p></div>
+          </details>
+          <details class="faq" id="en-q-family-stop">
+            <summary>I want to end a family link</summary>
+            <div class="answer"><h4>If you're sharing your records</h4><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Manage family</b>.</li><li>Tap <b>Unlink</b> next to the family member and confirm.</li></ol><p>Once unlinked, they can no longer see your records.</p><h4>If you're viewing a family member's records</h4><ol class="steps"><li>In <b>Manage family</b>, under <b>Family I look after</b>, tap the edit button for that person (it changes their name and color).</li><li>Tap <b>Stop viewing</b>, then <b>Stop viewing</b> again to confirm.</li></ol><p>They won't be notified. To see their records again, you'll need to send a new request.</p></div>
+          </details>
+          <details class="faq" id="en-q-family-alerts">
+            <summary>What notifications does my family get?</summary>
+            <div class="answer"><ul><li>Emergency alerts — when you press the emergency number in the app</li><li>Family link requests, approvals and declines, and when a link ends</li><li>Medication review results</li><li>When a weekly report is ready</li></ul><p>Notifications say only who did what — never medication names, readings or report contents. Emergency alerts always go through, whatever your family's notification settings are.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-emergency" data-topic="emergency">
+          <h2>Emergencies</h2>
+          <details class="faq" id="en-q-call-button">
+            <summary>Does the emergency call button call right away?</summary>
+            <div class="answer"><p>No. It opens your phone's dialer <b>with the number already entered</b>, and you tap the call button yourself. Before the dialer opens, the app sends an emergency alert to all your linked family.</p><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>When unwell</b> › <b>Emergency first aid</b>.</li><li>Tap <b>Emergency Call</b>.</li><li>On &quot;Who would you like to call?&quot;, choose the emergency number (for example, <b>Call 911</b>) or a family member.</li></ol></div>
+          </details>
+          <details class="faq" id="en-q-abroad">
+            <summary>Does the emergency number work when I'm abroad?</summary>
+            <div class="answer"><p>Yes. The app uses the emergency number for the country you're in — for example 911 in the U.S., Canada and Mexico, 119 in Korea, Japan and Taiwan, 999 in the U.K., 000 in Australia, 111 in New Zealand and 112 in the European Union.</p><p>If your location isn't available, it goes by your phone's region setting. If that's not available either, or the country isn't on the list, it uses 911.</p></div>
+          </details>
+          <details class="faq" id="en-q-offline">
+            <summary>Can I see first-aid steps without internet?</summary>
+            <div class="answer"><p>Yes. The first-aid steps and their voice guidance are built into the app, so they open without internet.</p><p>If the app can't get past the start screen because you're offline, tap <b>Open first aid</b> on that screen.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-watch" data-topic="watch">
+          <h2>Watch</h2>
+          <details class="faq" id="en-q-watch-setup">
+            <summary>Can I get reminders on my watch?</summary>
+            <div class="answer"><p>Yes. You can get reminders and answer them on an Apple Watch paired with your iPhone, or on a Wear OS watch (such as a Galaxy Watch) paired with your Android phone.</p><h4>Apple Watch</h4><ol class="steps"><li>The watch app comes with Healthya on your iPhone.</li><li>In the iPhone's <b>Watch</b> app, check that Healthya is installed on the watch. If it isn't, tap <b>Install</b>.</li><li>Open Healthya on your iPhone once, and your scheduled reminders are copied to the watch.</li></ol><h4>Galaxy Watch · Wear OS</h4><ol class="steps"><li>Make sure your watch is connected to your phone.</li><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>, then tap <b>Install the watch app</b> in the <b>Watch</b> group. The group only appears while a watch is connected.</li><li>When the Play Store opens on your watch, tap <b>Install</b>. Once it's done, Settings shows &quot;<b>Watch app</b> · <b>Installed</b>.&quot;</li><li>Open Healthya on your phone once, and your scheduled reminders are copied to the watch.</li></ol><p class="tip">Signing out of the phone app also clears the reminders scheduled on your watch.</p></div>
+          </details>
+          <details class="faq" id="en-q-watch-answer">
+            <summary>Can I answer reminders on my watch?</summary>
+            <div class="answer"><p>Yes. When a reminder arrives, tap <b>Done</b> or <b>Missed</b> right on the watch. For goals, it's <b>Did it today!</b> or <b>Not yet</b>. Your answer is recorded right away, without opening your phone.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="en-trouble" data-topic="trouble">
+          <h2>Troubleshooting</h2>
+          <details class="faq" id="en-q-frozen">
+            <summary>The app freezes or doesn't respond</summary>
+            <div class="answer"><ol class="steps"><li>Fully close the app and open it again — swipe Healthya away from your recent apps.</li><li>Update Healthya to the latest version from the store.</li></ol><p>If it keeps happening, tell us with <b>Contact us</b>. Let us know when it happened, on which screen and what you tapped, and keep <b>Include device info</b> on — it helps us find the cause much faster.</p></div>
+          </details>
+          <details class="faq" id="en-q-update-prompt">
+            <summary>The update message keeps showing up</summary>
+            <div class="answer"><p>Update Healthya to the latest version from the App Store or Google Play, and it goes away.</p><ul><li>Tapping <b>Later</b> hides it for 7 days. It can come back sooner if a newer version is released.</li><li>When an update is required, you'll see only the <b>Update</b> button, without <b>Later</b>. You'll need to update to keep using the app.</li></ul></div>
+          </details>
+          <details class="faq" id="en-q-text-size">
+            <summary>The text is too small</summary>
+            <div class="answer"><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>.</li><li>In the <b>Display</b> group, tap <b>Font size</b> and choose <b>Large</b>.</li></ol><p>The app also follows your phone's own text size. For even larger text, increase the text size in your phone's settings too.</p></div>
+          </details>
+        </section>
+          <p class="empty">No matching questions. Email us instead — the address is below.</p>
+          <p class="updated">Last updated: 2026-10-27</p>
+        </div>
+      </div>
+      <section class="contact">
+        <div class="contact-copy"><h2>Still need help?</h2><p>Email us at hello@healthya.app. Telling us your app version and phone model helps us answer faster.<br>Using the app? Open <b>Help &amp; contact</b> › <b>Contact us</b> to send a message, and read our reply under <b>My messages</b>.</p></div>
+        <a class="mail" href="mailto:hello@healthya.app">hello@healthya.app</a>
+      </section>
+      <footer><nav><a href="/privacy-policy/">Privacy policy</a><a href="/terms-of-service/">Terms of service</a><a href="/account-deletion/">Account deletion</a></nav><span>Deeper Emptiness AI · hello@healthya.app</span></footer>
+    </div>
+
+    <div class="faq-root" data-lang-block="ko">
+      <header class="hero">
+        <p class="eyebrow">도움말 · 문의</p>
+        <h1>무엇을 도와드릴까요?</h1>
+      </header>
+      <div class="notice" role="note"><b>Healthya는 진료를 대신하지 않아요.</b> 응급 상황이라면 바로 911(또는 계신 나라의 응급 번호)에 전화하세요. 메일로는 의료 상담을 해 드릴 수 없어요.</div>
+      <div class="layout">
+        <nav class="topics" aria-label="주제"><a href="#basics">기본 사용법</a><a href="#account">로그인·계정</a><a href="#privacy">개인정보·AI</a><a href="#alarms">알림·알람</a><a href="#care">약·식사·카메라</a><a href="#reports">리포트</a><a href="#family">가족 공간</a><a href="#emergency">응급</a><a href="#watch">워치</a><a href="#trouble">문제 해결</a></nav>
+        <div>
+
+        <section class="topic" id="ko-basics" data-topic="basics">
+          <h2>기본 사용법</h2>
+          <details class="faq" id="ko-q-find-menu">
+            <summary>메뉴와 설정은 어디에 있나요?</summary>
+            <div class="answer"><p>앱의 모든 메뉴는 <b>전체 메뉴</b> 한 곳에 모여 있어요.</p><ol class="steps"><li>홈 화면 오른쪽 위의 <b>⋯</b> 버튼을 누르세요. 태블릿처럼 넓은 화면에서는 오른쪽 세로 막대 맨 위에 있어요.</li><li>메뉴가 <b>자주 쓰는 메뉴</b>, <b>오늘</b>, <b>식사 · 물</b>, <b>약 · 영양제</b>, <b>운동 · 목표</b>, <b>기록 · 리포트</b>, <b>아플 때</b>, <b>즐길거리</b>, <b>관리</b> 묶음으로 펼쳐져요. 맨 위 검색 칸에 찾는 기능을 적어도 돼요.</li><li><b>설정</b>은 <b>관리</b> 묶음에 있어요.</li></ol><p>같은 자리의 버튼(✕로 바뀌어요)을 다시 누르면 메뉴가 닫혀요. 이전 화면으로 돌아가려면 화면 왼쪽 위의 <b>‹</b> 를 누르세요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-dock-camera">
+            <summary>화면 아래 버튼 줄(도크)과 카메라 버튼은 무엇인가요?</summary>
+            <div class="answer"><p>화면 아래의 <b>도크</b>는 거의 모든 화면에 떠 있어요. 첫 칸은 늘 <b>홈</b>이고, 나머지 세 칸은 자주 쓰는 메뉴예요. 태블릿처럼 넓은 화면에서는 도크가 오른쪽 세로 막대로 바뀌어요.</p><p>도크 위의 동그란 <b>카메라 버튼</b>을 누르면 바로 사진을 찍을 수 있어요. 음식, 약, 아픈 곳, 아픈 반려동물, 건강검진 결과지, 글씨 등을 찍으면 앱이 무엇인지 알아보고 알맞은 화면으로 이어 드려요. 카메라 버튼을 위로 끌어 올리면 바로가기 4칸이 펼쳐져요.</p><h4>도크와 바로가기 칸 바꾸기</h4><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b>을 여세요.</li><li><b>화면</b> 묶음의 <b>자주 쓰는 메뉴 바꾸기</b>를 누르세요.</li><li>도크 3칸과 바로가기 4칸에 넣을 메뉴를 고르세요.</li></ol><p class="tip">게임판, 카메라, 운동 따라하기 영상처럼 화면을 크게 써야 하는 곳에서는 도크가 잠시 숨어요. ‹ 로 나오면 다시 보여요.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-account" data-topic="account">
+          <h2>로그인·계정</h2>
+          <details class="faq" id="ko-q-sms-code">
+            <summary>인증 문자가 오지 않아요</summary>
+            <div class="answer"><p>몇 분이 지나도 문자가 오지 않으면 아래 순서대로 확인해 주세요.</p><ol class="steps"><li>로그인 화면에서 <b>전화번호 다시 입력</b>을 누르고, 국가와 전화번호가 맞는지 확인한 뒤 다시 요청하세요.</li><li>휴대폰의 스팸 문자함이나 차단 목록에 인증 문자가 들어가 있지 않은지 확인하세요.</li><li>「시도가 너무 많았어요」라는 안내가 보이면 잠시 기다렸다가 다시 시도하세요.</li></ol><p class="tip">그래도 오지 않으면 로그인 화면 아래의 <b>도움말·문의</b> › <b>문의 보내기</b>에서 메일로 알려 주세요. 로그인하지 않아도 보낼 수 있어요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-phone-number-changed">
+            <summary>전화번호가 바뀌었어요</summary>
+            <div class="answer"><p>계정과 기록은 그대로 두고 번호만 바꿀 수 있어요. 지금 상황에 맞는 쪽을 따라 해 주세요.</p><h4>아직 앱에 로그인돼 있다면</h4><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>계정 · 보안</b> › <b>전화번호 변경</b>을 여세요.</li><li>먼저 본인 확인을 해요. 등록한 <b>보안 이메일</b>로 받은 인증번호를 입력하거나, 이 휴대폰의 <b>생체 인증으로 확인하기</b>를 쓰세요. 둘 다 안 되면 <b>보안 이메일 등록하기</b>부터 해 주세요.</li><li>새 전화번호를 입력하고, 그 번호로 온 인증번호를 입력하세요. 「전화번호가 변경되었어요」가 보이면 끝이에요.</li></ol><h4>옛 번호를 더 쓸 수 없어 로그인이 안 된다면</h4><ol class="steps"><li>로그인 화면의 <b>전화번호가 바뀌어 로그인할 수 없나요?</b>를 누르세요.</li><li>계정에 등록해 둔 <b>보안 이메일 주소</b>를 입력하고 <b>인증번호 받기</b>를 누르세요.</li><li>메일로 온 인증번호를 입력하고, 「이전 계정으로 전환할까요?」에서 <b>네, 전환할게요</b>를 누르세요.</li></ol><p class="tip">안전을 위해 보안 이메일을 등록하거나 바꾸고 72시간이 지나면 번호를 바꿀 수 있어요. 보안 이메일이 없어 로그인이 어렵다면 <b>문의 보내기</b>로 알려 주세요. 도와드릴게요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-new-phone">
+            <summary>새 휴대폰으로 옮기고 싶어요</summary>
+            <div class="answer"><ol class="steps"><li>새 휴대폰에 Healthya를 설치하고, 쓰던 전화번호로 로그인하세요. 기록은 계정에 저장돼 있어 그대로 이어져요.</li><li>새 휴대폰에서 앱을 한 번 열어 두세요. 그때 알림이 새 휴대폰에 다시 예약돼요.</li><li>더 쓰지 않는 휴대폰은 <b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>내 기기 관리</b>에서 그 기기의 <b>기기 삭제</b>를 누르세요. 그 휴대폰은 바로 로그아웃돼요.</li></ol><p>한 계정으로 기기 3대까지 함께 로그인할 수 있어요. 3대를 넘으면 로그아웃할 기기를 고르는 화면이 나와요.</p><p class="tip"><b>자주 쓰는 메뉴</b> 구성처럼 휴대폰에만 저장되는 설정은 새 휴대폰에서 다시 정해 주세요. 번호도 함께 바뀌었다면 「전화번호가 바뀌었어요」를 먼저 봐 주세요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-delete">
+            <summary>기록이나 계정을 지우고 싶어요</summary>
+            <div class="answer"><p>두 가지가 있어요. <b>내 기록 삭제</b>는 계정은 두고 기록만 지우고, <b>계정 삭제</b>는 계정과 모든 기록을 지워요. 둘 다 요청한 날로부터 <b>7일 뒤</b>에 실제로 지워지고, 그 전에는 언제든 취소할 수 있어요.</p><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b>을 여세요.</li><li>맨 아래 <b>계정</b> 묶음에서 <b>내 기록 삭제</b> 또는 <b>계정 삭제</b>를 누르세요.</li><li>지워지는 것과 남는 것을 읽고, 동의에 체크하세요.</li><li><b>인증 문자 받기</b>를 눌러 휴대폰으로 온 6자리 번호를 입력하면 삭제가 예약돼요.</li></ol><h4>취소하려면</h4><p>7일 동안 홈과 설정 화면 위에 「삭제가 예약돼 있어요」 안내가 보여요. 그 안의 <b>취소하기</b>를 누르면 돼요. 그때까지는 앱을 그대로 쓰실 수 있어요.</p><p class="tip"><b>내 기록 삭제</b>를 해도 계정과 로그인, 가족 연결, 포인트와 배지, 다른 사용자와 함께 친 골프 기록, 함께하기 방에 묶인 목표는 남아요.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-privacy" data-topic="privacy">
+          <h2>개인정보·AI</h2>
+          <details class="faq" id="ko-q-where-stored">
+            <summary>제 기록은 어디에 저장되고, 누가 볼 수 있나요?</summary>
+            <div class="answer"><p>기록은 Healthya 서버에 저장되고, 주고받을 때와 저장할 때 모두 암호화돼요. 서버에서 다른 사람의 기록과 분리되어 있어서 <b>본인</b>과, 본인이 공유를 허락한 <b>가족</b>만 볼 수 있어요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-ai-memory">
+            <summary>AI는 저에 대해 무엇을 기억하나요?</summary>
+            <div class="answer"><p>AI는 대화에서 기억해 둘 만한 짧은 사실(예: 「정원 일을 좋아하세요」)과 대화의 흐름을 기억해서 다음 대화에 이어 써요. 목소리 녹음은 남기지 않아요.</p><ul><li>AI가 기억한 내용은 <b>가족에게 보이지 않아요.</b></li><li>기록과 AI의 기억까지 지우려면 <b>내 기록 삭제</b>를 이용하세요. AI 대화 화면에서 지우는 것은 그 화면에서만 감춰요.</li><li>기억한 내용 중 고치거나 지우고 싶은 것이 있으면 <b>문의 보내기</b>로 알려 주세요. 확인한 뒤 고치거나 지워 드려요.</li></ul></div>
+          </details>
+          <details class="faq" id="ko-q-family-sees">
+            <summary>가족은 제 기록 중 무엇을 볼 수 있나요?</summary>
+            <div class="answer"><p>무엇을 보여 줄지는 <b>가족 한 사람마다 따로</b> 정해요. 연결을 승인할 때 고르고, 나중에 언제든 바꿀 수 있어요.</p><ul><li><b>건강 활동 공유</b> — 식사·운동·복약·물·수면 기록, AI 하루 요약, 주간·월간 리포트</li><li><b>평소 활동 지역 공유</b> — 최근 7일 동안 주로 지낸 대략의 지역</li><li><b>응급 시 정확한 위치 공유</b> — 앱에서 응급 번호를 눌렀을 때부터 24시간 동안의 정확한 위치</li><li><b>MBTI 유형 공유</b> — 유형 글자만</li></ul><p>공유를 모두 꺼도 이름, 전화번호, 시간대와 연결 상태는 보여요. 대화 원문, AI가 기억한 내용, 목소리, 직접 입력한 키·몸무게, 종교, MBTI 검사 답변은 <b>어떤 경우에도</b> 보이지 않아요.</p><h4>공유 범위 바꾸기</h4><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b>을 여세요.</li><li><b>개인정보 · 보안</b> 묶음의 <b>데이터 활용 동의</b>를 누르세요.</li><li>가족별로 항목을 켜거나 끄세요.</li></ol></div>
+          </details>
+          <details class="faq" id="ko-q-download-data">
+            <summary>제 기록을 파일로 받을 수 있나요?</summary>
+            <div class="answer"><p>네. 앱의 개인정보 처리방침 화면에서 요청할 수 있어요.</p><ol class="steps"><li><b>전체 메뉴(⋯)</b> 맨 아래의 <b>개인정보 처리방침</b>을 여세요.</li><li>맨 아래의 <b>내 데이터 사본 요청(다운로드)</b>을 누르세요.</li><li>파일이 준비되면 휴대폰의 공유 화면이 열려요. 파일 앱에 저장하거나 메일로 보내 보관하세요.</li></ol><ul><li>기록은 JSON·CSV 파일을 묶은 ZIP 파일로 만들어져요.</li><li>30일에 한 번 요청할 수 있어요.</li><li>식사·복약·카메라 사진도 필요하시면 <b>문의 보내기</b>로 알려 주세요. 따로 보내 드려요.</li></ul></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-alarms" data-topic="alarms">
+          <h2>알림·알람</h2>
+          <details class="faq" id="ko-q-not-ringing">
+            <summary>알림이 오지 않아요</summary>
+            <div class="answer"><p>아래 순서대로 확인해 주세요.</p><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b> › <b>알림</b> 묶음의 <b>알림</b>을 여세요.</li><li>맨 위 <b>알림</b>이 켜져 있는지 확인하세요. 「기기 설정에서 알림을 켜주세요」가 보이면 <b>설정 열기</b>를 눌러 휴대폰 설정에서 Healthya 알림을 허용하세요.</li><li><b>알림 종류</b>에서 받고 싶은 알림(복약·식사·물·운동·아침 브리핑·저녁 점검)이 켜져 있는지 확인하세요.</li><li>앱을 한 번 열어 두세요. 앱을 열 때 알림이 다시 예약돼요. 휴대폰을 바꾸거나 앱을 다시 설치했다면 특히 필요해요.</li></ol><p class="tip">그래도 오지 않으면 휴대폰의 방해 금지·집중 모드나 절전(배터리 최적화) 설정이 Healthya를 막고 있지 않은지 확인해 주세요. 메뉴 이름은 휴대폰마다 조금씩 달라요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-wrong-time">
+            <summary>알림 시간을 바꾸고 싶어요 · 알림 시간이 맞지 않아요</summary>
+            <div class="answer"><h4>시간 바꾸기</h4><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b> › <b>알림</b> 묶음의 <b>알림 시간</b>을 여세요.</li><li>바꿀 알림을 눌러 시간과 반복 요일을 고치고 <b>저장</b>을 누르세요. 약 알림은 <b>복약 알람 추가</b>, 그 밖의 알림은 <b>맞춤 알람 추가</b>로 새로 만들 수 있어요.</li></ol><h4>여행 중 시간이 어긋날 때</h4><p>알림은 휴대폰의 시간대를 따라요. 다른 시간대에 도착하면 그곳에서 앱을 한 번 열어 주세요. 그때 새 시간대에 맞춰 알림이 다시 예약돼요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-language">
+            <summary>앱과 알림의 언어를 바꾸고 싶어요</summary>
+            <div class="answer"><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b>을 여세요.</li><li><b>화면</b> 묶음의 <b>언어</b>를 누르고 한국어 또는 English를 고르세요.</li></ol><p>언어는 계정에 저장되어 다른 기기에도 똑같이 적용되고, 이미 예약된 알림도 새 언어로 다시 맞춰져요. AI의 대답과 아침 브리핑도 같은 언어를 따라요.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-care" data-topic="care">
+          <h2>약·식사·카메라</h2>
+          <details class="faq" id="ko-q-add-medication">
+            <summary>약은 어떻게 등록하나요?</summary>
+            <div class="answer"><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>약 · 영양제</b> › <b>약 등록</b>을 여세요.</li><li><b>사진</b>, <b>말로</b>, <b>직접</b> 중 하나를 고르세요.</li><li><b>사진</b>: 약통이나 처방전을 찍으면 「약 정보를 확인해 주세요」 화면이 나와요. 약 이름과 먹는 시간이 맞는지 확인하고 저장하세요.</li><li><b>말로</b>: AI에게 약 이름과 먹는 시간을 말해 주세요. <b>직접</b>: 약 이름과 시간을 입력하세요.</li></ol><p>등록한 약은 정해 둔 시간에 알림이 와요. 카메라 버튼으로 약을 바로 찍어도 같은 화면으로 이어져요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-edit-medication">
+            <summary>등록한 약 정보가 틀렸어요</summary>
+            <div class="answer"><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>약 · 영양제</b> › <b>현재 복약 목록</b>을 여세요.</li><li>고칠 약을 누르세요.</li><li><b>약 정보 수정</b>을 눌러 이름, 양, 시간을 고치고 저장하세요.</li></ol><p class="tip">사진 분석이 실패했다면 그 화면의 <b>다시 분석</b>을 눌러 보세요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-log-meal">
+            <summary>식사는 어떻게 기록하나요? 분석이 틀렸으면요?</summary>
+            <div class="answer"><ol class="steps"><li>카메라 버튼으로 음식을 찍으세요. <b>전체 메뉴(⋯)</b> › <b>식사 · 물</b> › <b>식사 기록</b>의 <b>사진으로 식사 기록하기</b>도 같아요.</li><li>「식사 분석 결과」에서 음식과 칼로리를 확인하고, <b>어떤 식사인가요?</b>에서 아침·점심 같은 끼니를 고르세요.</li><li><b>이대로 기록하기</b>를 누르면 저장돼요.</li></ol><h4>결과가 틀렸다면</h4><ul><li>저장하기 전: <b>다시 찍기</b>나 <b>다시 고르기</b>를 누르세요. 기록하지 않으려면 <b>삭제하고 나가기</b>를 누르세요.</li><li>저장한 뒤: 그 기록의 <b>이 기록 지우기</b>로 지우고 다시 기록하시면 돼요.</li></ul></div>
+          </details>
+          <details class="faq" id="ko-q-calories">
+            <summary>칼로리는 어떻게 계산하나요?</summary>
+            <div class="answer"><p>식사 사진을 AI가 보고 음식 종류와 양을 짐작해 칼로리를 계산해요. 그래서 칼로리는 <b>추정치</b>이고 실제와 다를 수 있어요.</p><p>다음 끼니 추천의 영양 정보는 미국 농무부(USDA)의 식품 영양 데이터를 바탕으로 계산해요.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-reports" data-topic="reports">
+          <h2>리포트</h2>
+          <details class="faq" id="ko-q-report-when">
+            <summary>주간·월간 리포트는 언제, 어디서 보나요?</summary>
+            <div class="answer"><ul><li><b>지난주 이야기</b>(주간 리포트): 매주 일요일에 지난주(일요일~토요일) 기록으로 만들어져요. 알림을 켜 두시면 일요일 오전 8시~12시(계신 곳 시간)에 한 줄 요약과 함께 알려 드려요.</li><li><b>이번 달 정리</b>(월간 리포트): 매달 1일~3일 사이에 지난달 기록으로 만들어져요.</li></ul><h4>보는 곳</h4><p><b>전체 메뉴(⋯)</b> › <b>기록 · 리포트</b> › <b>지난주 이야기</b> 또는 <b>이번 달 정리</b></p><h4>주간 리포트 알림 켜기</h4><p><b>설정</b> › <b>알림</b> 묶음의 <b>알림</b> › <b>주간 리포트 알림</b></p></div>
+          </details>
+          <details class="faq" id="ko-q-report-basis">
+            <summary>리포트는 무엇을 근거로 하나요?</summary>
+            <div class="answer"><p>그 주(그 달)에 남기신 식사·복약·물·수면·운동 기록, AI와 나눈 대화, 증상 상담 요약, 그리고 연결하신 건강 앱(Apple 건강·Health Connect)의 수면·걸음·심박·혈압·혈당·체중 같은 측정값을 바탕으로 정리해요.</p><p>리포트는 생활 기록을 정리한 <b>참고 자료이고 진단이 아니에요.</b> 몸이 걱정되시면 의사와 상의해 주세요.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-family" data-topic="family">
+          <h2>가족 공간</h2>
+          <details class="faq" id="ko-q-family-connect">
+            <summary>가족과 어떻게 연결하나요?</summary>
+            <div class="answer"><p>기록을 <b>보고 싶은 사람</b>이 요청을 보내고, <b>보여 줄 사람</b>이 승인하면 연결돼요.</p><h4>요청 보내기 — 보고 싶은 사람</h4><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>가족 관리</b>를 여세요.</li><li><b>내가 챙기는 가족</b>의 <b>가족 추가</b>를 누르세요.</li><li>가족의 전화번호를 입력하세요. 원하면 내가 부르는 이름, 가족 색, 한마디도 적으세요.</li><li>필수 동의에 체크하고 <b>요청 보내기</b>를 누르세요.</li></ol><h4>승인하기 — 보여 줄 사람</h4><ol class="steps"><li>요청이 오면 알림이 와요. 알림을 누르거나 <b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>가족 관리</b>를 여세요.</li><li><b>받은 연동 요청</b>에서 보낸 사람과 인사말을 확인하고 <b>승인</b>을 누르세요.</li><li>「무엇을 공유할까요?」에서 보여 줄 항목을 고르고 <b>이대로 승인하기</b>를 누르세요. 아무것도 공유하지 않고 연결만 할 수도 있어요.</li></ol><p class="tip">요청은 48시간 동안 유효해요. 지나면 다시 보내야 해요. 챙기는 가족은 4명까지 연결할 수 있어요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-family-stop">
+            <summary>가족 연결을 끊고 싶어요</summary>
+            <div class="answer"><h4>내 기록을 보여 주고 있다면</h4><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>가족 관리</b>를 여세요.</li><li>연결된 가족 옆의 <b>연동 해제</b>를 누르고 확인하세요.</li></ol><p>해제하면 그 가족은 더 이상 회원님의 기록을 볼 수 없어요.</p><h4>가족의 기록을 보고 있다면</h4><ol class="steps"><li><b>가족 관리</b>의 <b>내가 챙기는 가족</b>에서 그 가족의 호칭·색 바꾸기 버튼을 누르세요.</li><li><b>그만 보기</b>를 누르고 한 번 더 <b>그만 보기</b>로 확인하세요.</li></ol><p>상대에게는 알림이 가지 않아요. 다시 보려면 새로 요청해야 해요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-family-alerts">
+            <summary>가족은 어떤 알림을 받나요?</summary>
+            <div class="answer"><ul><li>응급 알림 — 앱에서 응급 번호를 눌렀을 때</li><li>가족 연결 요청, 승인·거절, 연결 해제 소식</li><li>약 검토 결과</li><li>주간 리포트 완성 소식</li></ul><p>알림에는 누가 무엇을 했는지만 담기고, 약 이름·수치·리포트 내용은 담기지 않아요. 응급 알림은 가족의 알림 설정과 상관없이 늘 가요.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-emergency" data-topic="emergency">
+          <h2>응급</h2>
+          <details class="faq" id="ko-q-call-button">
+            <summary>응급 전화 버튼을 누르면 바로 전화가 걸리나요?</summary>
+            <div class="answer"><p>아니요. <b>번호가 입력된 전화 화면</b>이 열리고, 통화 버튼은 직접 누르셔야 전화가 걸려요. 전화 화면이 열리기 전에 연결된 가족 모두에게 응급 알림을 먼저 보내요.</p><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>아플 때</b> › <b>응급처치</b>를 여세요.</li><li><b>긴급 전화</b>를 누르세요.</li><li>「누구에게 전화할까요?」에서 응급 번호(예: <b>911에 전화</b>)나 가족을 고르세요.</li></ol></div>
+          </details>
+          <details class="faq" id="ko-q-abroad">
+            <summary>해외에서도 응급 번호가 맞게 나오나요?</summary>
+            <div class="answer"><p>네. 지금 계신 나라의 응급 번호가 입력돼요. 예를 들어 미국·캐나다·멕시코는 911, 한국·일본·대만은 119, 영국은 999, 호주는 000, 뉴질랜드는 111, 유럽연합 나라들은 112예요.</p><p>위치를 알 수 없으면 휴대폰의 지역 설정을 따르고, 그것도 알 수 없거나 목록에 없는 나라라면 911이 입력돼요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-offline">
+            <summary>인터넷이 없을 때도 응급처치 안내를 볼 수 있나요?</summary>
+            <div class="answer"><p>네. 응급처치 안내와 안내 음성은 앱 안에 들어 있어 인터넷 없이도 열려요.</p><p>인터넷이 없어 앱이 시작 화면에서 넘어가지 못하면, 그 화면의 <b>응급처치 보기</b>를 누르세요.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-watch" data-topic="watch">
+          <h2>워치</h2>
+          <details class="faq" id="ko-q-watch-setup">
+            <summary>워치에서도 알림을 받을 수 있나요?</summary>
+            <div class="answer"><p>네. iPhone과 짝지은 Apple Watch, 안드로이드 휴대폰과 짝지은 Wear OS 워치(갤럭시 워치 등)에서 알림을 받고 바로 답할 수 있어요.</p><h4>Apple Watch</h4><ol class="steps"><li>iPhone에 Healthya가 설치돼 있으면 워치 앱도 함께 들어 있어요.</li><li>iPhone의 <b>Watch</b> 앱에서 Healthya가 워치에 설치돼 있는지 확인하고, 없으면 <b>설치</b>를 누르세요.</li><li>iPhone에서 Healthya를 한 번 열면 예약된 알림이 워치로 옮겨져요.</li></ol><h4>갤럭시 워치 · Wear OS</h4><ol class="steps"><li>워치가 휴대폰과 연결돼 있는지 확인하세요.</li><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b>을 열고, <b>워치</b> 묶음의 <b>워치 앱 설치</b>를 누르세요. 이 묶음은 워치가 연결돼 있을 때만 보여요.</li><li>워치에 Play 스토어가 열리면 <b>설치</b>를 누르세요. 설치가 끝나면 설정에 「<b>워치 앱</b> · <b>설치됨</b>」이 보여요.</li><li>휴대폰에서 Healthya를 한 번 열면 예약된 알림이 워치로 옮겨져요.</li></ol><p class="tip">휴대폰 앱에서 로그아웃하면 워치에 예약된 알림도 지워져요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-watch-answer">
+            <summary>워치에서 알림에 답할 수 있나요?</summary>
+            <div class="answer"><p>네. 알림이 오면 워치 화면에서 <b>완료</b> 또는 <b>못했어요</b>를 바로 누르실 수 있어요. 목표 알림은 <b>오늘 했어요!</b> 또는 <b>아직</b>이에요. 누른 답은 휴대폰을 열지 않아도 바로 기록돼요.</p></div>
+          </details>
+        </section>
+
+        <section class="topic" id="ko-trouble" data-topic="trouble">
+          <h2>문제 해결</h2>
+          <details class="faq" id="ko-q-frozen">
+            <summary>앱이 멈추거나 눌러도 반응이 없어요</summary>
+            <div class="answer"><ol class="steps"><li>앱을 완전히 종료한 뒤 다시 열어 주세요. 최근 앱 목록에서 Healthya를 위로 밀어 닫으면 돼요.</li><li>스토어에서 Healthya를 최신 버전으로 업데이트하세요.</li></ol><p>그래도 같다면 <b>문의 보내기</b>로 알려 주세요. 언제, 어느 화면에서, 무엇을 눌렀을 때 그랬는지 적어 주시고 <b>기기 정보 함께 보내기</b>를 켜 두시면 원인을 찾는 데 큰 도움이 돼요.</p></div>
+          </details>
+          <details class="faq" id="ko-q-update-prompt">
+            <summary>업데이트 안내가 계속 떠요</summary>
+            <div class="answer"><p>앱 스토어나 Google Play에서 Healthya를 최신 버전으로 업데이트하면 사라져요.</p><ul><li><b>나중에</b>를 누르면 7일 동안 다시 묻지 않아요. 그사이 새 버전이 나오면 다시 보일 수 있어요.</li><li>꼭 필요한 업데이트일 때는 <b>나중에</b> 없이 <b>업데이트</b> 버튼만 보여요. 업데이트해야 계속 쓰실 수 있어요.</li></ul></div>
+          </details>
+          <details class="faq" id="ko-q-text-size">
+            <summary>글자가 너무 작아요</summary>
+            <div class="answer"><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b>을 여세요.</li><li><b>화면</b> 묶음의 <b>글자 크기</b>에서 <b>크게</b>를 고르세요.</li></ol><p>휴대폰 자체의 글자 크기 설정도 앱에 반영돼요. 더 크게 보고 싶으면 휴대폰 설정의 글자 크기도 키워 보세요.</p></div>
+          </details>
+        </section>
+          <p class="empty">찾는 질문이 없어요. 아래 메일로 물어봐 주세요.</p>
+          <p class="updated">최종 수정: 2026-10-27</p>
+        </div>
+      </div>
+      <section class="contact">
+        <div class="contact-copy"><h2>해결되지 않으셨나요?</h2><p>hello@healthya.app로 메일을 보내 주세요. 앱 버전과 휴대폰 기종을 함께 적어 주시면 더 빨리 도와드릴 수 있어요.<br>앱을 쓰고 계시면 <b>도움말·문의</b> › <b>문의 보내기</b>로 보내시고, 답변은 <b>내 문의</b>에서 보실 수 있어요.</p></div>
+        <a class="mail" href="mailto:hello@healthya.app">hello@healthya.app</a>
+      </section>
+      <footer><nav><a href="/privacy-policy/">개인정보 처리방침</a><a href="/terms-of-service/">이용약관</a><a href="/account-deletion/">계정 삭제</a></nav><span>Deeper Emptiness AI · hello@healthya.app</span></footer>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var params = new URLSearchParams(location.search);
+      var store = {
+        get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+        set: function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+      };
+      var input = document.getElementById('faq-search');
+      var qpTheme = params.get('theme');
+      if (qpTheme === 'light' || qpTheme === 'dark') root.setAttribute('data-theme', qpTheme);
+      function lang() { return root.getAttribute('data-lang') === 'ko' ? 'ko' : 'en'; }
+      function block() { return document.querySelector('.faq-root[data-lang-block="' + lang() + '"]'); }
+      function applyLang(l) {
+        root.setAttribute('data-lang', l);
+        root.setAttribute('lang', l);
+        document.title = l === 'ko' ? '도움말·문의 · Healthya' : 'Help & contact · Healthya';
+        input.setAttribute('placeholder', input.getAttribute('data-ph-' + l));
+        var btns = document.querySelectorAll('[data-set-lang]');
+        for (var i = 0; i < btns.length; i++) btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-set-lang') === l ? 'true' : 'false');
+        runSearch();
+        if (location.hash) goTo(location.hash);
+      }
+      var langBtns = document.querySelectorAll('[data-set-lang]');
+      for (var b = 0; b < langBtns.length; b++) {
+        langBtns[b].addEventListener('click', function (e) {
+          var v = e.currentTarget.getAttribute('data-set-lang');
+          store.set('healthia-doc-lang', v);
+          applyLang(v);
+        });
+      }
+      // 주소의 #주제 · #q-질문 은 언어와 무관한 이름 — 보이는 언어 쪽 요소(ko-… / en-…)로 옮긴다
+      function goTo(hash) {
+        var el = document.getElementById(lang() + '-' + hash.replace(/^#/, ''));
+        if (!el) return;
+        if (el.tagName === 'DETAILS') el.open = true;
+        el.scrollIntoView({ block: 'start' });
+        var section = el.tagName === 'SECTION' ? el : el.closest('section.topic');
+        var topic = section ? section.getAttribute('data-topic') : null;
+        var links = block().querySelectorAll('.topics a');
+        for (var i = 0; i < links.length; i++) links[i].setAttribute('aria-current', links[i].getAttribute('href') === '#' + topic ? 'true' : 'false');
+      }
+      window.addEventListener('hashchange', function () { goTo(location.hash); });
+      function runSearch() {
+        var q = input.value.trim().toLowerCase();
+        var root2 = block();
+        var items = root2.querySelectorAll('details.faq');
+        var shown = [];
+        for (var i = 0; i < items.length; i++) {
+          var hit = !q || items[i].textContent.toLowerCase().indexOf(q) >= 0;
+          items[i].hidden = !hit;
+          if (hit && q) shown.push(items[i]);
+        }
+        var sections = root2.querySelectorAll('section.topic');
+        for (var s = 0; s < sections.length; s++) sections[s].hidden = sections[s].querySelectorAll('details.faq:not([hidden])').length === 0;
+        if (q && shown.length <= 3) for (var k = 0; k < shown.length; k++) shown[k].open = true;
+        root2.querySelector('.empty').className = 'empty' + (q && shown.length === 0 ? ' show' : '');
+      }
+      input.addEventListener('input', runSearch);
+      var qpLang = params.get('lang');
+      var saved = store.get('healthia-doc-lang');
+      var nav = (navigator.language || 'en').toLowerCase().indexOf('ko') === 0 ? 'ko' : 'en';
+      applyLang(qpLang === 'ko' || qpLang === 'en' ? qpLang : saved === 'ko' || saved === 'en' ? saved : nav);
+    })();
+  </script>
+</body>
+</html>

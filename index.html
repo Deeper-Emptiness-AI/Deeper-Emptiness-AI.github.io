@@ -249,8 +249,9 @@
   }
 
   /* ── nav ───────────────────────────────────────────────────── */
+  :root{ --navpad:clamp(18px,4.4vw,64px); --striph:0px }
   nav{position:fixed;inset:0 0 auto 0;z-index:60;display:flex;align-items:center;justify-content:space-between;
-    gap:16px;padding:13px clamp(18px,4.4vw,64px);
+    gap:16px;padding:13px var(--navpad);
     background:var(--surface);backdrop-filter:blur(16px) saturate(1.3);
     border-bottom:1px solid var(--line-2);transition:background .7s ease,border-color .7s ease}
   .brand{font-family:var(--fd);font-weight:800;font-size:19px;letter-spacing:-.06em;color:var(--ink);
@@ -266,10 +267,41 @@
   .nav-cta{background:var(--volt);color:var(--volt-ink)!important;border-radius:var(--pill);padding:11px 20px;font-family:var(--fm);
     font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;white-space:nowrap}
   .nav-cta:hover{color:var(--volt-ink)!important}
+  .nav-menu{position:relative}
+  .nav-menu>button{background:none;border:0;padding:0;cursor:pointer;font:inherit;font-size:14px;font-weight:500;
+    color:var(--ink-2);display:inline-flex;align-items:center;gap:5px;transition:color .25s}
+  .nav-menu>button:hover,.nav-menu>button[aria-expanded="true"]{color:var(--ink)}
+  .nav-menu>button svg{width:10px;height:10px;transition:transform .25s}
+  .nav-menu>button[aria-expanded="true"] svg{transform:rotate(180deg)}
+  .nav-pop{position:absolute;right:-12px;top:calc(100% + 14px);min-width:210px;padding:6px;
+    background:var(--card-solid);border:1px solid var(--line);border-radius:var(--r-sm);
+    box-shadow:0 18px 40px -18px rgba(0,0,0,.45);display:flex;flex-direction:column}
+  .nav-pop[hidden]{display:none}
+  .nav-pop>a,.nav-pop>span{display:flex;align-items:center;justify-content:space-between;gap:12px;
+    padding:10px 12px;border-radius:var(--r-xs);font-size:14px;white-space:nowrap}
+  .nav-pop>a{color:var(--ink)!important;font-weight:600}
+  .nav-pop>a:hover,.nav-pop>a:focus-visible{background:var(--surface)}
+  .nav-pop>span{color:var(--ink-3);cursor:default}
+  .nav-pop .badge{font-family:var(--fm);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;
+    padding:3px 8px;border-radius:var(--pill);border:1px solid var(--line)}
+  .nav-pop a .badge{background:var(--volt);color:var(--volt-ink);border-color:transparent}
   @media (max-width:1040px){ .nav-only-wide{display:none} }
+  /* where the survey menu is hidden (phones · tablets), the open survey gets its own strip under the bar */
+  .survey-strip{display:none}
+  @media (max-width:1040px){
+    :root{--striph:40px}
+    .survey-strip{position:absolute;left:0;right:0;top:100%;height:var(--striph);display:flex;align-items:center;
+      justify-content:space-between;gap:12px;padding:0 var(--navpad);
+      background:var(--card-solid);border-bottom:1px solid var(--line-2);
+      text-decoration:none;color:var(--ink);font-size:13.5px;font-weight:600}
+    .survey-strip>span{display:inline-flex;align-items:center;gap:9px;min-width:0}
+    .survey-strip>span>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .survey-strip i{width:7px;height:7px;flex:none;border-radius:50%;background:var(--hot);box-shadow:0 0 0 4px color-mix(in srgb, var(--hot) 22%, transparent)}
+    .survey-strip b{flex:none;font-family:var(--fm);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;color:var(--hot)}
+  }
 
   /* ── hero ──────────────────────────────────────────────────── */
-  .hero{min-height:calc(100svh - var(--barh));display:flex;flex-direction:column;justify-content:center;padding:88px 0 0;position:relative}
+  .hero{min-height:calc(100svh - var(--barh));display:flex;flex-direction:column;justify-content:center;padding:calc(88px + var(--striph)) 0 0;position:relative}
   .hero-in{display:grid;grid-template-columns:1.12fr .88fr;gap:clamp(24px,4vw,72px);align-items:center}
   @media (max-width:1000px){ .hero-in{grid-template-columns:1fr;gap:40px} }
   .tag{display:inline-flex;align-items:center;gap:9px;background:var(--volt);color:var(--volt-ink);
@@ -292,7 +324,7 @@
   .chips svg{width:11px;height:11px;color:var(--hot)}
   /* short laptop screens: keep the whole hero above the clock bar */
   @media (min-width:1001px) and (max-height:880px){
-    .hero{padding-top:68px} .tag{margin-bottom:14px}
+    .hero{padding-top:calc(68px + var(--striph))} .tag{margin-bottom:14px}
     h1{font-size:clamp(40px,7.2vw,96px)}
     .lede{margin-top:18px;font-size:15.5px}
     .hero-cta{margin-top:20px} .chips{margin-top:16px}
@@ -641,13 +673,21 @@
       <a href="#together" class="nav-only-wide" data-i18n="nav_together">Together</a>
       <a href="#privacy" class="nav-only-wide" data-i18n="nav_privacy">Privacy</a>
       <a href="#legal" class="nav-only-wide" data-i18n="nav_legal">Legal</a>
-      <a href="#survey" class="nav-only-wide" data-i18n="nav_survey" data-survey-trigger>Survey</a>
+      <a href="help/" class="nav-only-wide" data-i18n="nav_help">Help</a>
+      <div class="nav-menu nav-only-wide" id="surveyMenu">
+        <button type="button" aria-expanded="false" aria-controls="surveyMenuPop"><span data-i18n="nav_survey">Survey</span><svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        <div class="nav-pop" id="surveyMenuPop" hidden>
+          <a href="#survey" data-survey-trigger><span data-i18n="nav_survey_2">Survey 2</span><b class="badge" data-i18n="survey_open">Open</b></a>
+          <span aria-disabled="true"><span data-i18n="nav_survey_1">Survey 1</span><b class="badge" data-i18n="survey_closed">Closed</b></span>
+        </div>
+      </div>
       <div class="seg" role="group" aria-label="Language">
         <button type="button" data-set-lang="en">EN</button>
         <button type="button" data-set-lang="ko">KO</button>
       </div>
       <a href="#launch" class="nav-cta" data-i18n="nav_cta" data-store-link>Get the app</a>
     </div>
+    <a href="#survey" class="survey-strip" data-survey-trigger><span><i aria-hidden="true"></i><span data-i18n="strip_survey">Survey 2 is open</span></span><b data-i18n="strip_survey_cta">Take it →</b></a>
   </nav>
 
   <!-- ══ HERO ══════════════════════════════════════════════════ -->
@@ -992,6 +1032,11 @@
             <span><span class="lt" data-i18n="legal_terms">Terms of Service</span><span class="ls" data-i18n="legal_terms_s">Rules for using the app</span></span>
             <span class="la">→</span>
           </a>
+          <a href="help/" class="lcard">
+            <span class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg></span>
+            <span><span class="lt" data-i18n="legal_help">Help &amp; contact</span><span class="ls" data-i18n="legal_help_s">Common questions and how to reach us</span></span>
+            <span class="la">→</span>
+          </a>
         </div>
       </div>
       <a href="account-deletion/" class="lcard danger reveal">
@@ -1007,7 +1052,7 @@
       <div class="fmark" aria-hidden="true">HEALTHYA</div>
       <div class="frow">
         <span data-i18n="footer_copy">© 2026 Deeper Emptiness AI · Healthya</span>
-        <span><a href="mailto:hello@healthya.app">hello@healthya.app</a></span>
+        <span><a href="help/" data-i18n="footer_help">Help &amp; contact</a> · <a href="mailto:hello@healthya.app">hello@healthya.app</a></span>
       </div>
     </div>
   </footer>
@@ -1032,7 +1077,9 @@
   var I18N = {
     en: {
       nav_day:"The day", nav_insight:"Insights", nav_goals:"3-Day Wins", nav_together:"Together",
-      nav_privacy:"Privacy", nav_legal:"Legal", nav_survey:"Survey", nav_cta:"Get the app",
+      nav_privacy:"Privacy", nav_legal:"Legal", nav_help:"Help", nav_survey:"Survey", nav_cta:"Get the app",
+      nav_survey_2:"Survey 2", nav_survey_1:"Survey 1", survey_open:"Open", survey_closed:"Closed",
+      strip_survey:"Survey 2 is open", strip_survey_cta:"Take it →",
 
       hero_tag:"Voice-first · it comes to you",
       hero_t1:"Right", hero_t2:"on time.", hero_t3:"Every time.",
@@ -1151,6 +1198,7 @@
       legal_g_app:"Healthya",
       legal_privacy:"Privacy Policy", legal_privacy_s:"How your data is handled",
       legal_terms:"Terms of Service", legal_terms_s:"Rules for using the app",
+      legal_help:"Help & contact", legal_help_s:"Common questions and how to reach us", footer_help:"Help & contact",
       legal_del:"Request account deletion", legal_del_s:"Deletes your Healthya account and data",
       footer_copy:"© 2026 Deeper Emptiness AI · Healthya",
 
@@ -1158,7 +1206,9 @@
     },
     ko: {
       nav_day:"하루", nav_insight:"인사이트", nav_goals:"작심삼일", nav_together:"함께하기",
-      nav_privacy:"개인정보", nav_legal:"약관", nav_survey:"설문", nav_cta:"앱 다운로드",
+      nav_privacy:"개인정보", nav_legal:"약관", nav_help:"도움말", nav_survey:"설문", nav_cta:"앱 다운로드",
+      nav_survey_2:"2차 설문", nav_survey_1:"1차 설문", survey_open:"진행 중", survey_closed:"종료",
+      strip_survey:"2차 설문이 열렸어요", strip_survey_cta:"참여하기 →",
 
       hero_tag:"음성 중심 · 먼저 찾아옵니다",
       hero_t1:"필요한", hero_t2:"바로 그때.", hero_t3:"언제나.",
@@ -1277,6 +1327,7 @@
       legal_g_app:"Healthya",
       legal_privacy:"개인정보처리방침", legal_privacy_s:"내 데이터를 어떻게 다루는지",
       legal_terms:"이용약관", legal_terms_s:"앱 이용 규칙",
+      legal_help:"도움말·문의", legal_help_s:"자주 묻는 질문과 문의 방법", footer_help:"도움말·문의",
       legal_del:"계정 삭제 요청", legal_del_s:"Healthya 계정과 데이터 삭제",
       footer_copy:"© 2026 Deeper Emptiness AI · Healthya",
 
@@ -1381,8 +1432,9 @@
     }
     refreshStore();
 
-    /* ── survey (Google Form in a modal, loaded on first open) ── */
-    var SURVEY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSe9xj3Ru3vRkthyoWMwOWc1F7B45mU-4CNR9Sd_3g1UhucX9A/viewform';
+    /* ── survey (Google Form in a modal, loaded on first open) ──
+       Survey 1 (…1FAIpQLSe9xj3Ru3vRkthyoWMwOWc1F7B45mU-4CNR9Sd_3g1UhucX9A) is closed — only Survey 2 opens. */
+    var SURVEY_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScVAxbIDqR6p-6_AjSpJixTThFGVfOLiTEh3vgCrPDtDSeCww/viewform';
     var surveyModal = document.getElementById('surveyModal');
     var surveyFrame = document.getElementById('surveyFrame');
     function surveySrc() { return SURVEY_FORM_URL + '?embedded=true&hl=' + currentLang(); }
@@ -1394,14 +1446,26 @@
       surveyModal.hidden = false; document.body.style.overflow = 'hidden';
     }
     function closeSurvey() { surveyModal.hidden = true; document.body.style.overflow = ''; }
+    var surveyMenu = document.getElementById('surveyMenu');
+    var surveyMenuBtn = surveyMenu.querySelector('button');
+    var surveyMenuPop = document.getElementById('surveyMenuPop');
+    function setSurveyMenu(open) {
+      surveyMenuPop.hidden = !open;
+      surveyMenuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    }
+    surveyMenuBtn.addEventListener('click', function () { setSurveyMenu(surveyMenuPop.hidden); });
+    document.addEventListener('click', function (e) {
+      if (!surveyMenuPop.hidden && !surveyMenu.contains(e.target)) setSurveyMenu(false);
+    });
     document.querySelectorAll('[data-survey-trigger]').forEach(function (el) {
-      el.addEventListener('click', function (e) { e.preventDefault(); openSurvey(); });
+      el.addEventListener('click', function (e) { e.preventDefault(); setSurveyMenu(false); openSurvey(); });
     });
     document.querySelectorAll('[data-survey-close]').forEach(function (el) {
       el.addEventListener('click', closeSurvey);
     });
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
+      if (!surveyMenuPop.hidden) { setSurveyMenu(false); surveyMenuBtn.focus(); }
       if (!surveyModal.hidden) closeSurvey();
     });
 
