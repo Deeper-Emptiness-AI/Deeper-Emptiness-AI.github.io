@@ -6,124 +6,229 @@
   <title>Healthya Terms of Service</title>
   <link rel="icon" href="../favicon.ico" sizes="any" />
   <link rel="canonical" href="https://healthya.app/terms-of-service/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   <style>
+    /* Healthya 문서 공통 모양(방침 · 약관) — 홈페이지 · 도움말과 같은 토큰: bone 바탕 · ink 글자 · volt 강조 · hot 경고.
+       두 문서의 이 <style> 은 같은 내용이다(하나를 고치면 다른 하나도). 도움말은 .github/build-help-page.mjs 가 같은 토큰을 쓴다. */
     :root {
-      --bg: #ffffff;
-      --surface: #f7f9fb;
-      --text: #0f172a;
-      --text-muted: #475569;
-      --border: #cbd5e1;
-      --primary: #0e7490;
-      --danger: #991b1b;
-      --control-bg: #ffffff;
-      --control-border: #cbd5e1;
-      --control-active-bg: #0e7490;
-      --control-active-text: #ffffff;
+      --bg: #FBFAF6; --bg-top: #E6EFF4; --surface: #F3F1EA; --card: #FFFFFF;
+      --text: #0A0A08; --text-2: #2C2B26; --muted: #66625A;
+      --line: rgba(10,10,8,.12); --line-2: rgba(10,10,8,.06);
+      --accent: #D2FF32; --accent-ink: #0A0A08; --bar: #0A0A08;
+      --hot: #C2410C; --hot-bg: #FFF1E9; --hot-bar: #FF4F1F;
+      --link-line: rgba(10,10,8,.32); --mark: #D2FF32;
+      --header: rgba(251,250,246,.86);
+      --fd: "Bricolage Grotesque", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, sans-serif;
+      --fb: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      --r: 18px; --r-sm: 12px; --pill: 999px; --hh: 64px;
+      color-scheme: light;
     }
     :root[data-theme="dark"] {
-      --bg: #0b1220;
-      --surface: #1e293b;
-      --text: #f8fafc;
-      --text-muted: #cbd5e1;
-      --border: #475569;
-      --primary: #22d3ee;
-      --danger: #f87171;
-      --control-bg: #1e293b;
-      --control-border: #475569;
-      --control-active-bg: #22d3ee;
-      --control-active-text: #0b1220;
+      --bg: #0B0D11; --bg-top: #121A23; --surface: #161A20; --card: #1B1E25;
+      --text: #F4F4F0; --text-2: #DCDBD4; --muted: #A9A69C;
+      --line: rgba(255,255,255,.14); --line-2: rgba(255,255,255,.07);
+      --bar: #D2FF32; --hot: #FF9B73; --hot-bg: #2A1710; --hot-bar: #FF7A50;
+      --link-line: rgba(210,255,50,.55); --mark: rgba(210,255,50,.22);
+      --header: rgba(11,13,17,.82);
+      color-scheme: dark;
     }
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme]) {
-        --bg: #0b1220;
-        --surface: #1e293b;
-        --text: #f8fafc;
-        --text-muted: #cbd5e1;
-        --border: #475569;
-        --primary: #22d3ee;
-        --danger: #f87171;
-        --control-bg: #1e293b;
-        --control-border: #475569;
-        --control-active-bg: #22d3ee;
-        --control-active-text: #0b1220;
+        --bg: #0B0D11; --bg-top: #121A23; --surface: #161A20; --card: #1B1E25;
+        --text: #F4F4F0; --text-2: #DCDBD4; --muted: #A9A69C;
+        --line: rgba(255,255,255,.14); --line-2: rgba(255,255,255,.07);
+        --bar: #D2FF32; --hot: #FF9B73; --hot-bg: #2A1710; --hot-bar: #FF7A50;
+        --link-line: rgba(210,255,50,.55); --mark: rgba(210,255,50,.22);
+        --header: rgba(11,13,17,.82);
+        color-scheme: dark;
       }
     }
     * { box-sizing: border-box; }
-    html, body {
-      margin: 0; padding: 0;
-      background: var(--bg); color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", sans-serif;
-      font-size: 18px; line-height: 1.7;
+    html { -webkit-text-size-adjust: 100%; scroll-padding-top: calc(var(--hh) + 20px); }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(180deg, var(--bg-top) 0, var(--bg) 520px, var(--bg) 100%) no-repeat, var(--bg);
+      color: var(--text); font-family: var(--fb); font-size: 17px; line-height: 1.75;
+      font-feature-settings: "ss01", "tnum";
     }
-    main { max-width: 720px; margin: 0 auto; padding: 16px 24px 96px; }
-    h1 { font-size: 28px; line-height: 1.4; margin: 0 0 8px; }
-    h2 { font-size: 22px; line-height: 1.4; margin: 40px 0 12px; padding-top: 24px; border-top: 1px solid var(--border); }
-    h2:first-of-type { border-top: none; padding-top: 0; }
-    h3 { font-size: 20px; line-height: 1.4; margin: 24px 0 8px; }
-    p, li { font-size: 18px; }
-    p { margin: 12px 0; }
-    ul, ol { padding-left: 24px; margin: 12px 0; }
-    li { margin: 6px 0; }
-    .meta { color: var(--text-muted); font-size: 16px; margin: 0 0 24px; }
-    .callout { background: var(--surface); border-left: 4px solid var(--primary); padding: 16px 20px; margin: 20px 0; border-radius: 6px; }
-    .callout.warn { border-left-color: var(--danger); }
-    .toc { background: var(--surface); padding: 16px 20px; border-radius: 8px; margin: 24px 0 32px; }
-    .toc h2 { border: none; padding: 0; margin: 0 0 8px; font-size: 18px; }
-    .toc ol { margin: 0; padding-left: 22px; }
-    .toc li { margin: 4px 0; font-size: 16px; }
-    a { color: var(--primary); text-decoration: underline; }
-    .controls { position: sticky; top: 0; z-index: 10; display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; padding: 10px 24px; background: var(--bg); border-bottom: 1px solid var(--border); }
-    .seg { display: inline-flex; border: 1px solid var(--control-border); border-radius: 8px; overflow: hidden; }
-    .seg button { font: inherit; font-size: 14px; cursor: pointer; padding: 6px 12px; border: none; background: var(--control-bg); color: var(--text); min-height: 36px; }
-    .seg button + button { border-left: 1px solid var(--control-border); }
-    .seg button[aria-pressed="true"] { background: var(--control-active-bg); color: var(--control-active-text); font-weight: 600; }
+    :root[lang="ko"] body { word-break: keep-all; overflow-wrap: break-word; }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
+    :focus-visible { outline: 3px solid var(--text); outline-offset: 2px; border-radius: 4px; }
+
+    /* ── 머리 줄 ───────────────────────────── */
+    .site { position: sticky; top: 0; z-index: 20; background: var(--header);
+      -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+      border-bottom: 1px solid var(--line-2); }
+    .site-in { max-width: 1180px; margin: 0 auto; padding: 0 24px; min-height: var(--hh);
+      display: flex; align-items: center; gap: 12px 20px; flex-wrap: wrap; }
+    .brand { font-family: "Bricolage Grotesque", var(--fb); font-weight: 800; font-size: 19px; letter-spacing: -.06em;
+      color: var(--text); text-decoration: none; margin-right: auto; }
+    .brand em { font-style: normal; color: var(--hot-bar); }
+    .docnav { display: flex; gap: 2px; }
+    .docnav a { font-size: 14px; font-weight: 600; color: var(--muted); text-decoration: none;
+      padding: 7px 12px; border-radius: var(--pill); min-height: 36px; display: inline-flex; align-items: center; }
+    .docnav a:hover { color: var(--text); background: var(--line-2); }
+    .docnav a[aria-current="page"] { color: var(--text); background: var(--line-2); }
+    .controls { display: flex; gap: 8px; }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--pill); padding: 3px; gap: 2px; background: var(--card); }
+    .seg button { font: inherit; font-size: 13px; font-weight: 600; cursor: pointer; border: 0; background: transparent;
+      color: var(--muted); border-radius: var(--pill); padding: 4px 12px; min-height: 32px; min-width: 36px; }
+    .seg button:hover { color: var(--text); }
+    .seg button[aria-pressed="true"] { background: var(--text); color: var(--bg); }
+    .progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; pointer-events: none; }
+    .progress i { display: block; height: 100%; width: calc(var(--p, 0) * 100%); background: var(--bar); transition: width .1s linear; }
+
+    /* ── 언어 ─────────────────────────────── */
     [data-lang-block] { display: none; }
-    html[data-lang="en"] [data-lang-block="en"] { display: block; }
-    html[data-lang="ko"] [data-lang-block="ko"] { display: block; }
+    html[data-lang="en"] [data-lang-block="en"], html[data-lang="ko"] [data-lang-block="ko"],
     html:not([data-lang]) [data-lang-block="en"] { display: block; }
-    /* 넓은 화면(패드 가로 · 데스크톱) — 목차를 본문 왼쪽에 고정한다(읽기 순서대로 「무엇이 있나」를 먼저 본다). 긴 문서에서 지금 어디쯤인지와 다른 항목으로
-       가는 길이 늘 보인다(2026-10-14). 본문 폭(720)은 그대로, 좁은 화면은 지금처럼 목차가 본문 위에 선다 */
+    html[data-lang="en"] span[data-lang-block="en"], html[data-lang="ko"] span[data-lang-block="ko"],
+    html:not([data-lang]) span[data-lang-block="en"] { display: inline; }
+
+    /* 앱 전용 요소(예: 데이터 다운로드 링크) — 기본 숨김(fail-closed). 앱 웹뷰가
+       주입하는 html[data-inapp="1"] 일 때만 노출. 공개 웹에서는 절대 보이지 않는다. */
+    .app-only { display: none; }
+    html[data-inapp="1"] .app-only { display: block; }
+    /* 앱이 ?theme= 를 붙여 연 웹뷰 — 홈페이지로 나가는 길(문서 이동 · 아래 링크)은 감춘다 */
+    html[data-embed="app"] .docnav, html[data-embed="app"] .site-foot nav { display: none; }
+    html[data-embed="app"] .brand { pointer-events: none; }
+
+    /* ── 본문 ─────────────────────────────── */
+    main { max-width: 1180px; margin: 0 auto; padding: 40px 24px 96px; }
+    article { max-width: 760px; margin: 0 auto; }
+    h1 { font-family: var(--fd); font-weight: 800; font-size: clamp(32px, 4.6vw, 52px); line-height: 1.1;
+      letter-spacing: -.035em; margin: 0 0 16px; text-wrap: balance; }
+    :root[lang="ko"] h1 { font-family: var(--fb); letter-spacing: -.04em; line-height: 1.2; }
+    .meta { color: var(--muted); font-size: 14px; line-height: 1.7; margin: 0 0 28px; padding: 0 0 22px;
+      border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+    h2 { font-size: 23px; font-weight: 750; line-height: 1.35; letter-spacing: -.015em; color: var(--text);
+      margin: 56px 0 14px; padding-top: 36px; border-top: 1px solid var(--line); }
+    article > h2:first-of-type { border-top: 0; padding-top: 0; }
+    h3 { font-size: 18.5px; font-weight: 700; line-height: 1.45; margin: 30px 0 8px; color: var(--text); }
+    p, li { color: var(--text-2); }
+    p { margin: 12px 0; }
+    ul, ol { padding-left: 22px; margin: 12px 0; }
+    li { margin: 6px 0; padding-left: 2px; }
+    li::marker { color: var(--muted); }
+    strong, b { color: var(--text); font-weight: 700; }
+    a { color: var(--text); text-decoration: underline; text-decoration-color: var(--link-line);
+      text-decoration-thickness: 1px; text-underline-offset: 3px; transition: background .15s, text-decoration-color .15s; }
+    article a:hover { background: var(--mark); text-decoration-color: currentColor; border-radius: 3px; }
+    code { font-size: .9em; background: var(--surface); border-radius: 6px; padding: 1px 6px; }
+
+    .callout { position: relative; background: var(--surface); border: 1px solid var(--line-2); border-radius: var(--r);
+      padding: 18px 22px 18px 26px; margin: 22px 0; }
+    .callout::before { content: ""; position: absolute; left: 0; top: 16px; bottom: 16px; width: 3px; border-radius: 0 3px 3px 0; background: var(--bar); }
+    .callout > :first-child { margin-top: 0; } .callout > :last-child { margin-bottom: 0; }
+    .callout.health, .callout.warn { background: var(--hot-bg); }
+    .callout.health::before, .callout.warn::before { background: var(--hot-bar); }
+
+    table { width: 100%; border-collapse: separate; border-spacing: 0; margin: 18px 0; font-size: 15px; line-height: 1.6;
+      border: 1px solid var(--line); border-radius: var(--r-sm); overflow: hidden; background: var(--card); }
+    th, td { padding: 12px 14px; text-align: left; vertical-align: top; border-top: 1px solid var(--line-2); color: var(--text-2); }
+    th + th, td + td { border-left: 1px solid var(--line-2); }
+    tr:first-child > th, tr:first-child > td { border-top: 0; }
+    thead th, tr:first-child > th { background: var(--surface); color: var(--text); font-weight: 700; font-size: 14px; }
+    tbody td:first-child { color: var(--text); font-weight: 600; }
+    /* 3칸 표(5항 수탁자)는 휴대폰 폭에 다 들어가지 않는다 — 단어를 쪼개지 않고 이 상자 안에서 가로로 민다(2026-10-30) */
+    .table-scroll { overflow-x: auto; margin: 18px 0; border-radius: var(--r-sm); }
+    .table-scroll > table { margin: 0; }
+
+    /* ── 목차 ─────────────────────────────── */
+    .toc { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 18px 20px; margin: 28px 0 36px; }
+    .toc h2 { border: 0; padding: 0; margin: 0 0 10px; font-size: 12px; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--muted); }
+    .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: toc; }
+    .toc li { counter-increment: toc; margin: 0; padding: 0; position: relative; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
+    .toc li::before { content: counter(toc, decimal-leading-zero); position: absolute; left: 10px; top: 9px;
+      font-size: 11px; font-variant-numeric: tabular-nums; color: var(--muted); opacity: .7; }
+    .toc li { padding: 6px 8px 6px 38px; border-radius: 10px; }
+    .toc a { color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--text); }
+    .toc li.on { background: var(--line-2); }
+    .toc li.on::before { color: var(--text); opacity: 1; }
+    .toc a[aria-current="true"] { color: var(--text); font-weight: 650; }
+    @media (min-width: 640px) and (max-width: 999px) { .toc ol { columns: 2; column-gap: 16px; } .toc li { break-inside: avoid; } }
+
+    /* 넓은 화면 — 목차를 본문 왼쪽에 고정(읽기 순서대로 「무엇이 있나」를 먼저 본다). 본문 폭은 760 그대로 */
     @media (min-width: 1000px) {
-      main { max-width: 1060px; }
       html[data-lang="en"] article[data-lang-block="en"],
       html[data-lang="ko"] article[data-lang-block="ko"],
       html:not([data-lang]) article[data-lang-block="en"] {
-        display: grid;
-        grid-template-columns: 260px minmax(0, 720px);
-        column-gap: 48px;
-        align-items: start;
+        display: grid; grid-template-columns: 250px minmax(0, 740px); column-gap: 56px; align-items: start; max-width: none;
       }
       article > * { grid-column: 2; }
       article > .toc {
-        grid-column: 1;
-        grid-row: 1 / span 999;
-        position: sticky;
-        top: 72px;
-        max-height: calc(100vh - 96px);
-        overflow-y: auto;
-        margin: 0;
+        grid-column: 1; grid-row: 1 / span 999; position: sticky; top: calc(var(--hh) + 24px);
+        max-height: calc(100vh - var(--hh) - 48px); overflow-y: auto; margin: 0;
+        background: transparent; border: 0; padding: 4px 0; scrollbar-width: thin;
       }
+      .toc h2 { padding-left: 8px; }
+    }
+
+    /* ── 아래 ─────────────────────────────── */
+    .site-foot { max-width: 1180px; margin: 0 auto; padding: 28px 24px 48px; border-top: 1px solid var(--line);
+      display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; font-size: 14px; color: var(--muted); }
+    .site-foot nav { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+    .site-foot a { color: var(--muted); text-decoration: none; }
+    .site-foot a:hover { color: var(--text); }
+    .to-top { position: fixed; right: 20px; bottom: 20px; z-index: 15; width: 44px; height: 44px; border-radius: var(--pill);
+      border: 1px solid var(--line); background: var(--card); color: var(--text); cursor: pointer; font: inherit; font-size: 18px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.10); opacity: 0; transform: translateY(8px); pointer-events: none; transition: opacity .2s, transform .2s; }
+    .to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+
+    @media (max-width: 720px) {
+      .site-in { padding: 8px 16px; gap: 8px 12px; }
+      /* 폰 — 머리 줄은 한 줄만(문서 사이 이동은 아래 줄 링크) */
+      .docnav { display: none; }
+      :root { --hh: 56px; }
+      main { padding: 28px 16px 72px; }
+      .site-foot { padding: 24px 16px 40px; }
+      body { font-size: 16.5px; }
+      h2 { font-size: 21px; margin-top: 44px; padding-top: 28px; }
+      th, td { padding: 10px 12px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+    @media print {
+      .site, .to-top, .toc, .site-foot { display: none !important; }
+      body { background: #fff; color: #000; font-size: 11pt; }
+      main { padding: 0; } article { display: block !important; max-width: none; }
+      a { color: #000; } h2 { break-after: avoid; } table, .callout { break-inside: avoid; }
     }
   </style>
 </head>
 <body>
-  <div class="controls" role="toolbar" aria-label="Language and theme">
-    <div class="seg" role="group" aria-label="Language">
-      <button type="button" data-set-lang="en">EN</button>
-      <button type="button" data-set-lang="ko">한국어</button>
+  <header class="site">
+    <div class="site-in">
+      <a class="brand" href="/" aria-label="Healthya">HEALTHY<em>A</em></a>
+      <nav class="docnav" aria-label="Documents">
+        <a href="/privacy-policy/"><span data-lang-block="en">Privacy</span><span data-lang-block="ko">개인정보 처리방침</span></a>
+        <a href="/terms-of-service/" aria-current="page"><span data-lang-block="en">Terms</span><span data-lang-block="ko">이용약관</span></a>
+        <a href="/help/"><span data-lang-block="en">Help</span><span data-lang-block="ko">도움말</span></a>
+      </nav>
+      <div class="controls" role="toolbar" aria-label="Language and theme">
+        <div class="seg" role="group" aria-label="Language">
+          <button type="button" data-set-lang="en">EN</button>
+          <button type="button" data-set-lang="ko">한국어</button>
+        </div>
+        <div class="seg" role="group" aria-label="Theme">
+          <button type="button" data-set-theme="light" title="Light">☀</button>
+          <button type="button" data-set-theme="dark" title="Dark">🌙</button>
+          <button type="button" data-set-theme="system" title="System">Auto</button>
+        </div>
+      </div>
     </div>
-    <div class="seg" role="group" aria-label="Theme">
-      <button type="button" data-set-theme="light" title="Light">☀</button>
-      <button type="button" data-set-theme="dark" title="Dark">🌙</button>
-      <button type="button" data-set-theme="system" title="System">Auto</button>
-    </div>
-  </div>
+    <div class="progress" aria-hidden="true"><i></i></div>
+  </header>
 
   <main>
     <!-- ===================== ENGLISH ===================== -->
     <article data-lang-block="en">
     <h1>Healthya Terms of Service</h1>
-    <p class="meta">Applies to: the Healthya app, including its Family space · Effective: May 28, 2026 · Last updated: October 30, 2026</p>
+    <p class="meta">Applies to: the Healthya app, including its Family space · Effective: May 28, 2026 · Last updated: November 19, 2026</p>
 
     <div class="callout">
       <p><strong>Most important note up front.</strong> Healthya is an all-in-one AI assistant for managing your own life — meals, medications, sleep, exercise, appointments, and everyday well-being. It is open to any adult and works fully on its own. In its Family space you can also link with family &mdash; letting them see some of your records, viewing what they share with you, or both. It is <strong>not a substitute for medical care.</strong> For any decisions about your health, please consult a doctor or pharmacist.</p>
@@ -175,7 +280,8 @@
       <li>Accounts are personal and may not be transferred or shared.</li>
       <li>You are responsible for the security of your credentials (password, one-time codes). Do not let others sign in to your account &mdash; to let family see your records, use the Family space instead (section 10).</li>
       <li>You may add a security email (for example by confirming it with your Google account). It lets you recover your account if you lose access to your phone number, and it is used as an extra check for sensitive actions such as changing your number or deleting your account.</li>
-      <li>You can be signed in to this app on up to three devices at a time. To sign in on a fourth, you choose one of your signed-in devices to sign out. Signing out affects only that device. You can turn on an app lock (PIN or biometrics), which is checked and stored only on your device; if you reset a forgotten app-lock PIN, you are signed out on all your devices.</li>
+      <li>You can be signed in to this app on up to three devices at a time. To sign in on a fourth, you choose one of your signed-in devices to sign out. Signing out affects only that device. You can turn on an app lock (PIN or biometrics), which is checked and stored only on your device. If you forget your PIN and choose <em>Can&rsquo;t unlock?</em>, you are signed out on that device only; when you sign back in there, the app lock starts off.</li>
+      <li>On Android, if you move to a new phone by restoring a backup or transferring your data, the app may sign you in on the new phone automatically, without a new SMS code, using a sign-in key it saved for that purpose. The new phone counts toward your three devices, and deleting your account still requires a new code. Signing out on a device removes its sign-in key.</li>
       <li>Suspected account compromise: contact <a href="mailto:hello@healthya.app">hello@healthya.app</a> immediately.</li>
     </ul>
 
@@ -204,6 +310,8 @@
       <li>Supplement information and suggestions are general wellness information, not medical advice. Statements about dietary supplements have not been evaluated by the FDA, and supplements are not intended to diagnose, treat, cure, or prevent any disease. Showing a product is not an endorsement, and we do not sell supplements. Check with your doctor or pharmacist before starting one, especially if you take medication.</li>
       <li>Pet care consultation is general information for pet owners, not a veterinary diagnosis. If your pet may be in an emergency, contact a veterinarian or an emergency animal hospital right away.</li>
       <li>The MBTI test in the app is an entertainment and self-reflection feature. Its questions and type descriptions are our own; it is not the official MBTI&reg; instrument (MBTI is a trademark of The Myers &amp; Briggs Foundation), and your result is not a psychological or medical assessment. The app never uses your type for health judgements or recommendations — only to adjust how the AI assistant phrases its replies.</li>
+      <li>In <em>Health stats</em>, diary and reports, ratings (such as Good, Fair or Low), comparisons with people of your age and sex, and notes on what a high or low value can mean are general information based on your device readings and published reference data. Device readings can be inaccurate, and none of this is a diagnosis.</li>
+      <li>Alerts your watch or phone recorded &mdash; for example falls, irregular heart rhythm, or breathing disturbances during sleep &mdash; appear in Healthya only after it reads your health app. Healthya does not watch for them as they happen and does not notify you, your family or emergency services about them. Rely on your device&rsquo;s own alerts and emergency features.</li>
       <li>Information about a linked family member shown in the Family space &mdash; including AI-written summaries and suggested things to ask about in reports &mdash; is supportive information about their day. It may be inaccurate or out of date and does not replace medical advice about them.</li>
       <li>Korea Checkup Trip course suggestions help you choose the scope and timing of a checkup; they are not a diagnosis (section 13).</li>
       <li>The service is not certified as a medical device by the FDA or any equivalent authority.</li>
@@ -232,9 +340,9 @@
 
     <h2 id="en-healthapps">8. Connected health apps</h2>
     <ul>
-      <li>If you enable it, the app reads sleep and sleep stages, steps, distance, activity, workouts, vital signs, blood sugar, weight, and fitness / gait and mental-wellness measurements from Apple Health or Google Health Connect on a <strong>read-only</strong> basis to improve your daily summary. See the <a href="../privacy-policy/#en-health-apps">Privacy Policy</a> for the full list.</li>
+      <li>If you enable it, the app reads sleep and sleep stages (including heart rate, breathing and blood oxygen while you sleep), steps, distance, activity, workouts, vital signs, blood sugar, weight and body composition, and fitness / gait and mental-wellness measurements from Apple Health or Google Health Connect on a <strong>read-only</strong> basis &mdash; and, from Apple Health, alerts and ECG results your devices recorded (such as irregular rhythm, fall and breathing-disturbance alerts). It uses them in your daily summary, diary, <em>Health stats</em> and weekly and monthly reports. See the <a href="../privacy-policy/#en-health-apps">Privacy Policy</a> for the full list.</li>
+      <li>The app reads your health app when you open it and may also read it in the background while the connection is on. If you use Healthya on more than one device, your health-app data is read from one device at a time (a phone is preferred over an iPad).</li>
       <li>This requires your separate OS-level permission and can be turned off at any time in <em>Settings</em>.</li>
-      <li>Health-app data is never used for advertising and is never sold (see the <a href="../privacy-policy/#en-health-apps">Privacy Policy</a>).</li>
     </ul>
 
     <h2 id="en-youtube">9. YouTube videos</h2>
@@ -264,6 +372,7 @@
     <h2 id="en-thirdparty">12. Third-party services and links</h2>
     <ul>
       <li>Some features open third-party websites or show third-party content inside the app — for example Google Flights for airfares, Google Hotels for hotels, pages linked from QR codes, information sources, maps and place details, weather, news, and golf course information. Those services are governed by their own terms and privacy policies, and we are not responsible for their content or availability.</li>
+      <li>Some screens in the app (such as the games) may show ads from third-party advertising partners. Ads are provided by the advertisers, and showing an ad does not mean we endorse what it offers. Tapping an ad may open the advertiser&rsquo;s website or app store page; anything you do there is between you and the advertiser. Ads are not personalized, and your health information is never used to choose them (see the <a href="../privacy-policy/#en-ads">Privacy Policy</a>, section 5). Where ads appear and which partners provide them may change; the current partners are listed in the Privacy Policy.</li>
       <li>Golf course information comes from OpenStreetMap contributors through OpenGolfAPI and is available under the Open Database License (ODbL); the course picker shows this attribution. It is not our content and we do not guarantee it.</li>
       <li>Bookings or purchases you make on a third-party site are between you and that site. We do not take or process payments.</li>
       <li>A QR code you scan opens its page directly. Check the address before entering personal or payment information.</li>
@@ -287,7 +396,6 @@
     <ul>
       <li>Content you provide (conversations, photos, records, and the notes and greetings you leave for linked family) belongs to you.</li>
       <li>You grant us a non-exclusive, revocable license to store, analyze, and display it as needed to operate the service.</li>
-      <li>We do not use your content for advertising or external sale.</li>
       <li>Do not submit content that infringes third-party rights.</li>
     </ul>
 
@@ -326,7 +434,7 @@
     <p>US residents: California law. Other residents: mandatory consumer protections of your jurisdiction first, otherwise California law.</p>
 
     <h2 id="en-changes">22. Changes</h2>
-    <p>Material changes are notified in-app or by email at least 7 days before the effective date. Significant changes require separate consent. If you do not agree, you may delete your account.</p>
+    <p>We may add, change or end features and the service providers we use. We notify you of material changes to these terms in the app (and by email if we have your address) at least 15 days before they take effect; continuing to use the service after that means you accept them, and if you do not agree you may delete your account. Changes to how we handle personal information follow the Privacy Policy (section 18) &mdash; where they need your consent, we ask in the app.</p>
 
     <h2 id="en-contact">23. Contact</h2>
     <ul>
@@ -338,7 +446,7 @@
     <!-- ===================== 한국어 ===================== -->
     <article data-lang-block="ko">
     <h1>Healthya 이용약관</h1>
-    <p class="meta">적용 대상: Healthya 앱(가족 공간 포함) · 시행일: 2026년 5월 28일 · 최종 수정: 2026년 10월 30일</p>
+    <p class="meta">적용 대상: Healthya 앱(가족 공간 포함) · 시행일: 2026년 5월 28일 · 최종 수정: 2026년 11월 19일</p>
 
     <div class="callout">
       <p><strong>가장 중요한 안내.</strong> Healthya는 식사·복약·수면·운동·약속 등 내 생활 전반을 관리하는 종합 AI 도우미입니다. 성인 누구나 이용할 수 있고, 앱 하나만으로도 온전히 쓸 수 있습니다. 원하시면 가족 공간에서 가족과 연결해, 내 기록 일부를 보여 주거나 가족이 보여 주는 기록을 보거나 둘 다 할 수 있습니다. 다만 <strong>의료를 대체하지 않습니다.</strong> 건강에 관한 결정은 반드시 의사나 약사와 상담하세요.</p>
@@ -390,7 +498,8 @@
       <li>계정은 개인용이며 양도·공유할 수 없습니다.</li>
       <li>자격증명(비밀번호, 일회용 코드)의 보안은 본인 책임입니다. 다른 사람이 회원님 계정으로 로그인하게 하지 마세요 &mdash; 가족에게 기록을 보여 주려면 가족 공간을 이용하세요(10항).</li>
       <li>보안 이메일을 등록할 수 있습니다(예: Google 계정으로 확인). 전화번호를 쓸 수 없게 됐을 때 계정을 되찾는 데 쓰이고, 번호 변경·계정 삭제처럼 중요한 작업의 추가 확인에도 쓰입니다.</li>
-      <li>이 앱은 한 계정으로 기기 3대까지 동시에 로그인할 수 있습니다. 4번째 기기에서 로그인하려면 로그인된 기기 중 하나를 골라 로그아웃해야 합니다. 로그아웃은 그 기기에만 적용됩니다. 앱 잠금(PIN 또는 생체 인증)을 켤 수 있으며, 확인과 저장은 기기 안에서만 이루어집니다. 앱 잠금 PIN 을 잊어 초기화하면 모든 기기에서 로그아웃됩니다.</li>
+      <li>이 앱은 한 계정으로 기기 3대까지 동시에 로그인할 수 있습니다. 4번째 기기에서 로그인하려면 로그인된 기기 중 하나를 골라 로그아웃해야 합니다. 로그아웃은 그 기기에만 적용됩니다. 앱 잠금(PIN 또는 생체 인증)을 켤 수 있으며, 확인과 저장은 기기 안에서만 이루어집니다. PIN 을 잊어 <em>잠금을 풀 수 없어요</em>를 고르면 그 기기에서만 로그아웃되며, 그 기기에서 다시 로그인하면 앱 잠금이 꺼진 상태로 시작합니다.</li>
+      <li>안드로이드에서 백업 복원이나 데이터 옮기기로 새 휴대폰으로 옮기면, 앱이 그 용도로 저장해 둔 로그인 키로 새 SMS 코드 없이 새 휴대폰에서 자동으로 로그인될 수 있습니다. 새 휴대폰도 기기 3대에 포함되며, 계정 삭제에는 여전히 새 코드가 필요합니다. 기기에서 로그아웃하면 그 기기의 로그인 키는 지워집니다.</li>
       <li>계정 도용이 의심되면 즉시 <a href="mailto:hello@healthya.app">hello@healthya.app</a>로 연락하세요.</li>
     </ul>
 
@@ -419,6 +528,9 @@
       <li>영양제 정보와 제안은 일반적인 건강 생활 정보이며 의학적 조언이 아닙니다. 영양제에 관한 내용은 FDA 의 평가를 받지 않았고, 영양제는 질병의 진단·치료·치유·예방을 위한 것이 아닙니다. 앱에 상품이 보이는 것은 보증이나 추천 광고가 아니며 당사는 영양제를 판매하지 않습니다. 특히 약을 드시는 경우 시작 전에 의사나 약사와 상의하세요.</li>
       <li>반려동물 상담은 보호자를 위한 일반 정보이며 수의학적 진단이 아닙니다. 반려동물이 응급 상황일 수 있다면 즉시 동물병원이나 응급 동물병원에 연락하세요.</li>
       <li>앱의 MBTI 검사는 오락·자기 이해 목적의 기능입니다. 문항과 유형 설명은 당사가 자체 제작한 것으로 공식 MBTI&reg; 검사가 아니며(MBTI 는 The Myers &amp; Briggs Foundation 의 상표입니다), 결과는 심리·의학적 평가가 아닙니다. 앱은 유형을 건강 판단이나 추천에 사용하지 않으며, AI 도우미가 답하는 말투를 맞추는 데에만 사용합니다.</li>
+      <li><em>건강 통계</em>·다이어리·리포트의 평가(좋음·보통·아쉬움 등), 나이·성별이 같은 또래와의 비교, 값이 높거나 낮을 때의 의미 안내는 기기 측정값과 공개된 기준 자료에 바탕을 둔 일반 정보입니다. 기기 측정값은 부정확할 수 있으며, 이 중 어느 것도 진단이 아닙니다.</li>
+      <li>워치나 휴대폰이 기록한 알림(예: 넘어짐, 불규칙한 심장 리듬, 수면 중 호흡 방해)은 Healthya 가 건강 앱을 읽은 뒤에야 앱에 보입니다. Healthya 는 이를 실시간으로 지켜보지 않으며, 회원님·가족·응급 기관에 알리지 않습니다. 기기 자체의 알림과 응급 기능을 이용하세요.</li>
+      <li>가족 공간에 보이는 연결된 가족의 정보(AI 가 쓴 요약과, 리포트에서 여쭤볼 만하다고 제안하는 것 포함)는 그분의 하루를 돕기 위한 참고 정보입니다. 부정확하거나 지난 내용일 수 있으며, 그분에 관한 의학적 조언을 대신하지 않습니다.</li>
       <li>한국 건강검진 여행의 코스 추천은 검진 범위와 시기를 고르는 참고이며 진단이 아닙니다(13항).</li>
       <li>본 서비스는 FDA 등 어떤 기관으로부터도 의료기기로 인증받지 않았습니다.</li>
     </ul>
@@ -446,9 +558,9 @@
 
     <h2 id="ko-healthapps">8. 건강 앱 연동</h2>
     <ul>
-      <li>연동을 켜면 앱은 Apple 건강 또는 Google Health Connect에서 수면·수면 단계, 걸음·거리·활동·운동, 활력징후, 혈당, 체중, 체력·보행 및 정신건강 측정값을 <strong>읽기 전용</strong>으로 가져와 하루 요약을 개선합니다. 전체 목록은 <a href="../privacy-policy/#ko-health-apps">개인정보처리방침</a>을 참조하세요.</li>
+      <li>연동을 켜면 앱은 Apple 건강 또는 Google Health Connect에서 수면·수면 단계(자는 동안의 심박·호흡·산소포화도 포함), 걸음·거리·활동·운동, 활력징후, 혈당, 체중·체성분, 체력·보행 및 정신건강 측정값을 <strong>읽기 전용</strong>으로 가져오고, Apple 건강에서는 기기가 기록한 알림과 심전도 결과(불규칙한 리듬·넘어짐·호흡 방해 알림 등)도 가져옵니다. 이 값은 하루 요약, 다이어리, <em>건강 통계</em>, 주간·월간 리포트에 쓰입니다. 전체 목록은 <a href="../privacy-policy/#ko-health-apps">개인정보처리방침</a>을 참조하세요.</li>
+      <li>앱은 열 때 건강 앱을 읽으며, 연동이 켜져 있는 동안 백그라운드에서도 읽을 수 있습니다. 여러 기기에서 Healthya 를 쓰시면 건강 앱 데이터는 한 번에 한 기기에서만 읽습니다(아이패드보다 휴대폰이 우선).</li>
       <li>이는 OS의 별도 권한이 필요하며 <em>설정</em>에서 언제든 끌 수 있습니다.</li>
-      <li>건강 앱 데이터는 광고에 사용되거나 판매되지 않습니다(<a href="../privacy-policy/#ko-health-apps">개인정보처리방침</a> 참조).</li>
     </ul>
 
     <h2 id="ko-youtube">9. YouTube 영상</h2>
@@ -478,6 +590,7 @@
     <h2 id="ko-thirdparty">12. 제3자 서비스와 링크</h2>
     <ul>
       <li>일부 기능은 앱 안에서 제3자 웹사이트를 열거나 제3자 콘텐츠를 보여 줍니다 — 예: 항공권의 Google Flights, 숙소의 Google Hotels, QR 코드로 연결된 페이지, 정보 출처, 지도와 장소 정보, 날씨, 뉴스, 골프장 정보. 이 서비스들은 각자의 약관과 개인정보처리방침을 따르며, 당사는 그 내용이나 이용 가능 여부에 책임지지 않습니다.</li>
+      <li>앱의 일부 화면(게임 등)에는 제3자 광고 파트너의 광고가 나올 수 있습니다. 광고 내용은 광고주가 제공하며, 광고가 보인다고 당사가 그 상품을 보증하는 것은 아닙니다. 광고를 누르면 광고주의 웹사이트나 앱 스토어 페이지가 열릴 수 있고, 그곳에서의 일은 회원님과 광고주 사이의 일입니다. 광고는 맞춤형이 아니며, 회원님의 건강 정보로 광고를 고르지 않습니다(<a href="../privacy-policy/#ko-ads">개인정보처리방침</a> 5항 참조). 광고가 나오는 화면과 광고 파트너는 바뀔 수 있으며, 현재 파트너는 개인정보처리방침에 있습니다.</li>
       <li>골프장 정보는 OpenStreetMap 기여자들의 데이터를 OpenGolfAPI 를 통해 받은 것으로 ODbL(Open Database License)에 따라 제공되며, 골프장 고르기 화면에 출처를 표시합니다. 당사의 콘텐츠가 아니며 정확성을 보증하지 않습니다.</li>
       <li>제3자 사이트에서 하는 예약·구매는 회원님과 그 사이트 사이의 거래입니다. 당사는 결제를 받거나 처리하지 않습니다.</li>
       <li>스캔한 QR 코드는 그 페이지를 바로 엽니다. 개인정보나 결제 정보를 입력하기 전에 주소를 확인하세요.</li>
@@ -501,7 +614,6 @@
     <ul>
       <li>이용자가 제공한 콘텐츠(대화, 사진, 기록, 연결된 가족에게 남긴 메모·인사말)는 이용자에게 귀속됩니다.</li>
       <li>서비스 운영에 필요한 범위에서 저장·분석·표시할 수 있는 비독점적·철회 가능 라이선스를 당사에 부여합니다.</li>
-      <li>당사는 이용자 콘텐츠를 광고나 외부 판매에 사용하지 않습니다.</li>
       <li>제3자 권리를 침해하는 콘텐츠를 제출하지 마세요.</li>
     </ul>
 
@@ -540,7 +652,7 @@
     <p>미국 거주자: 캘리포니아주 법. 그 외 거주자: 거주지의 강행 소비자 보호가 우선하며, 그 외에는 캘리포니아주 법.</p>
 
     <h2 id="ko-changes">22. 변경</h2>
-    <p>중대한 변경은 시행일 최소 7일 전 앱 내 또는 이메일로 통지합니다. 중대한 변경은 별도 동의가 필요합니다. 동의하지 않으시면 계정을 삭제할 수 있습니다.</p>
+    <p>당사는 기능과 이용하는 서비스 제공자를 더하거나 바꾸거나 끝낼 수 있습니다. 이 약관의 중대한 변경은 시행 최소 15일 전에 앱에서(이메일이 있으면 이메일로도) 알려 드리며, 그 뒤에도 서비스를 계속 이용하시면 변경에 동의하신 것으로 봅니다. 동의하지 않으시면 계정을 삭제하실 수 있습니다. 개인정보 처리의 변경은 개인정보처리방침(18항)을 따르며, 동의가 필요한 변경은 앱에서 따로 여쭙니다.</p>
 
     <h2 id="ko-contact">23. 문의</h2>
     <ul>
@@ -549,6 +661,18 @@
     </ul>
     </article>
   </main>
+
+  <footer class="site-foot">
+    <nav aria-label="Legal">
+      <a href="/"><span data-lang-block="en">Home</span><span data-lang-block="ko">홈</span></a>
+      <a href="/privacy-policy/"><span data-lang-block="en">Privacy policy</span><span data-lang-block="ko">개인정보 처리방침</span></a>
+      <a href="/terms-of-service/"><span data-lang-block="en">Terms of service</span><span data-lang-block="ko">이용약관</span></a>
+      <a href="/account-deletion/"><span data-lang-block="en">Account deletion</span><span data-lang-block="ko">계정 삭제</span></a>
+      <a href="/help/"><span data-lang-block="en">Help &amp; contact</span><span data-lang-block="ko">도움말 · 문의</span></a>
+    </nav>
+    <span>Deeper Emptiness AI · <a href="mailto:hello@healthya.app">hello@healthya.app</a></span>
+  </footer>
+  <button type="button" class="to-top" aria-label="Back to top">&uarr;</button>
 
   <script>
     (function () {
@@ -586,6 +710,46 @@
       }
       wire('data-set-theme', 'healthia-doc-theme', applyTheme);
       wire('data-set-lang', 'healthia-doc-lang', applyLang);
+    })();
+  </script>
+  <script>
+    (function () {
+      var root = document.documentElement;
+      // 앱은 ?theme= 를 붙여 웹뷰로 연다(packages/core legal-urls withLegalDocPreferences) — 그때는 홈페이지로 나가는 길을 감춘다
+      if (new URLSearchParams(location.search).has('theme')) root.setAttribute('data-embed', 'app');
+      var bar = document.querySelector('.progress');
+      var top = document.querySelector('.to-top');
+      top.addEventListener('click', function () { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+      function article() { return document.querySelector('article[data-lang-block="' + (root.getAttribute('data-lang') === 'ko' ? 'ko' : 'en') + '"]'); }
+      function targets(a) {
+        var links = a.querySelectorAll('.toc a[href^="#"]'), out = [];
+        for (var i = 0; i < links.length; i++) {
+          var el = document.getElementById(links[i].getAttribute('href').slice(1));
+          if (el) out.push({ link: links[i], el: el });
+        }
+        return out;
+      }
+      var ticking = false;
+      function update() {
+        ticking = false;
+        var h = document.documentElement.scrollHeight - innerHeight;
+        root.style.setProperty('--p', h > 0 ? Math.min(1, scrollY / h).toFixed(4) : '0');
+        top.classList.toggle('show', scrollY > 900);
+        var a = article(); if (!a) return;
+        var list = targets(a), line = 120, current = null;
+        for (var i = 0; i < list.length; i++) if (list[i].el.getBoundingClientRect().top <= line) current = list[i].link;
+        for (var j = 0; j < list.length; j++) {
+          var on = list[j].link === current;
+          list[j].link.setAttribute('aria-current', on ? 'true' : 'false');
+          var li = list[j].link.closest('li');
+          if (li) li.classList.toggle('on', li.querySelector('a[aria-current="true"]') !== null);
+        }
+      }
+      function request() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+      addEventListener('scroll', request, { passive: true });
+      addEventListener('resize', request);
+      document.addEventListener('click', function (e) { if (e.target.closest && e.target.closest('[data-set-lang]')) setTimeout(request, 0); });
+      update();
     })();
   </script>
 </body>

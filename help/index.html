@@ -11,74 +11,113 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&display=swap" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
   <style>
-    :root { --bg:#FBF7EC; --bg-top:#CFE4F1; --card:#FFFFFF; --text:#0A0A08; --text-2:#2C2B26; --muted:#5F5B52; --line:rgba(10,10,8,.12);
-      --chip:#F2F5F4; --accent:#D2FF32; --accent-ink:#0A0A08; --inv-bg:#0A0A08; --inv-text:#FFFFFF; --inv-muted:#E4E2DA;
-      --warn-bg:#FFE9DE; --warn-text:#6E2307; --focus:#0A0A08;
-      --fd:"Bricolage Grotesque",-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Noto Sans KR",sans-serif;
-      --fb:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif; }
-    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0B0D11; --bg-top:#16202B; --card:#1B1E25; --text:#F4F4F0; --text-2:#DCDBD4;
-      --muted:#B4B1A8; --line:rgba(255,255,255,.14); --chip:#262A33; --inv-bg:#F4F4F0; --inv-text:#0A0A08; --inv-muted:#2C2B26;
-      --warn-bg:#3A1D12; --warn-text:#FFD9C7; --focus:#F4F4F0; } }
-    :root[data-theme="dark"] { --bg:#0B0D11; --bg-top:#16202B; --card:#1B1E25; --text:#F4F4F0; --text-2:#DCDBD4;
-      --muted:#B4B1A8; --line:rgba(255,255,255,.14); --chip:#262A33; --inv-bg:#F4F4F0; --inv-text:#0A0A08; --inv-muted:#2C2B26;
-      --warn-bg:#3A1D12; --warn-text:#FFD9C7; --focus:#F4F4F0; }
+    /* 홈페이지 · 방침 · 약관과 같은 토큰: bone 바탕 · ink 글자 · volt 강조 · hot 경고 */
+    :root { --bg:#FBFAF6; --bg-top:#D9E8F1; --card:#FFFFFF; --surface:#F3F1EA; --text:#0A0A08; --text-2:#2C2B26; --muted:#66625A;
+      --line:rgba(10,10,8,.12); --line-2:rgba(10,10,8,.06); --accent:#D2FF32; --accent-ink:#0A0A08; --hot:#FF4F1F;
+      --inv-bg:#0A0A08; --inv-text:#FFFFFF; --inv-muted:#D9D7CF; --warn-bg:#FFF1E9; --warn-text:#6E2307; --focus:#0A0A08;
+      --shadow:0 1px 2px rgba(10,10,8,.04), 0 8px 24px rgba(10,10,8,.05);
+      --fd:"Bricolage Grotesque","Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;
+      --fb:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Segoe UI",sans-serif; color-scheme: light; }
+    @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --bg:#0B0D11; --bg-top:#142030; --card:#1B1E25; --surface:#161A20; --text:#F4F4F0; --text-2:#DCDBD4;
+      --muted:#A9A69C; --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.07); --hot:#FF7A50; --inv-bg:#F4F4F0; --inv-text:#0A0A08; --inv-muted:#3A3934;
+      --warn-bg:#2A1710; --warn-text:#FFD9C7; --focus:#F4F4F0; --shadow:none; color-scheme: dark; } }
+    :root[data-theme="dark"] { --bg:#0B0D11; --bg-top:#142030; --card:#1B1E25; --surface:#161A20; --text:#F4F4F0; --text-2:#DCDBD4;
+      --muted:#A9A69C; --line:rgba(255,255,255,.14); --line-2:rgba(255,255,255,.07); --hot:#FF7A50; --inv-bg:#F4F4F0; --inv-text:#0A0A08; --inv-muted:#3A3934;
+      --warn-bg:#2A1710; --warn-text:#FFD9C7; --focus:#F4F4F0; --shadow:none; color-scheme: dark; }
     * { box-sizing: border-box; }
+    html { scroll-padding-top: 20px; -webkit-text-size-adjust: 100%; }
     html, body { margin: 0; padding: 0; }
-    body { background: linear-gradient(180deg, var(--bg-top) 0, var(--bg) 460px, var(--bg) 100%); color: var(--text);
-      font-family: var(--fb); font-size: 17px; line-height: 1.7; -webkit-text-size-adjust: 100%; }
+    body { background: linear-gradient(180deg, var(--bg-top) 0, var(--bg) 520px, var(--bg) 100%) no-repeat, var(--bg); color: var(--text);
+      font-family: var(--fb); font-size: 17px; line-height: 1.7; }
     :root[lang="ko"] body { word-break: keep-all; overflow-wrap: break-word; }
+    ::selection { background: var(--accent); color: var(--accent-ink); }
     a { color: inherit; }
     :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
-    .site-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; flex-wrap: wrap; }
-    .brand { font-family: var(--fd); font-weight: 800; font-size: 21px; letter-spacing: .02em; text-decoration: none; }
-    .brand em { font-style: normal; background: var(--accent); color: var(--accent-ink); padding: 0 4px; border-radius: 6px; margin-left: 1px; }
-    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; }
-    .seg button { font: inherit; font-size: 14px; border: 0; background: transparent; color: var(--text-2); border-radius: 999px; padding: 4px 14px; min-height: 36px; cursor: pointer; }
-    .seg button[aria-pressed="true"] { background: var(--inv-bg); color: var(--inv-text); font-weight: 700; }
-    .hero { padding: 32px 0 8px; }
-    .eyebrow { font-size: 14px; font-weight: 700; letter-spacing: .08em; color: var(--muted); margin: 0 0 12px; }
-    h1 { font-family: var(--fd); font-weight: 700; font-size: clamp(34px, 5vw, 56px); line-height: 1.12; letter-spacing: -.02em; margin: 0 0 8px; }
-    .search-label { display: block; font-size: 15px; color: var(--text-2); margin: 16px 0 10px; }
-    .search { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 0 20px; max-width: 640px; min-height: 56px; }
-    .search input { flex: 1 1 auto; min-width: 0; border: 0; outline: none; background: transparent; color: var(--text); font: inherit; font-size: 17px; min-height: 52px; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+    .site-nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; flex-wrap: wrap; }
+    .brand { font-family: "Bricolage Grotesque", var(--fb); font-weight: 800; font-size: 19px; letter-spacing: -.06em; text-decoration: none; }
+    .brand em { font-style: normal; color: var(--hot); }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; gap: 2px; background: var(--card); }
+    .seg button { font: inherit; font-size: 13px; font-weight: 600; border: 0; background: transparent; color: var(--muted); border-radius: 999px; padding: 4px 14px; min-height: 32px; cursor: pointer; }
+    .seg button:hover { color: var(--text); }
+    .seg button[aria-pressed="true"] { background: var(--inv-bg); color: var(--inv-text); }
+    .hero { padding: 44px 0 4px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--text-2); margin: 0 0 14px; }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(10,10,8,.85); }
+    h1 { font-family: var(--fd); font-weight: 800; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -.035em; margin: 0; text-wrap: balance; }
+    :root[lang="ko"] h1 { font-family: var(--fb); letter-spacing: -.045em; line-height: 1.15; }
+    .search-label { display: block; font-size: 15px; color: var(--muted); margin: 26px 0 10px; }
+    .search { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 0 22px; max-width: 680px; min-height: 60px;
+      box-shadow: var(--shadow); transition: border-color .15s, box-shadow .15s; color: var(--muted); }
+    .search:focus-within { border-color: var(--text); color: var(--text); }
+    .search input { flex: 1 1 auto; min-width: 0; border: 0; outline: none; background: transparent; color: var(--text); font: inherit; font-size: 17px; min-height: 56px; }
     .search input::placeholder { color: var(--muted); }
-    .notice { background: var(--warn-bg); color: var(--warn-text); border-radius: 20px; padding: 16px 20px; margin: 24px 0 32px; font-size: 15px; line-height: 1.6; }
+    .notice { position: relative; background: var(--warn-bg); color: var(--warn-text); border-radius: 18px; padding: 15px 20px 15px 54px; margin: 28px 0 40px; font-size: 15px; line-height: 1.6; }
+    .notice::before { content: "!"; position: absolute; left: 20px; top: 16px; display: grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--hot); color: #fff; font-weight: 800; font-size: 13px; }
     [data-lang-block] { display: none; }
     html[data-lang="en"] [data-lang-block="en"], html:not([data-lang]) [data-lang-block="en"], html[data-lang="ko"] [data-lang-block="ko"] { display: block; }
-    .topics { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 12px; margin: 0 0 8px; scrollbar-width: none; }
-    .topics a { flex-shrink: 0; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); text-decoration: none; font-size: 15px; white-space: nowrap; }
+    html[data-lang="en"] span[data-lang-block="en"], html:not([data-lang]) span[data-lang-block="en"], html[data-lang="ko"] span[data-lang-block="ko"] { display: inline; }
+    .topics { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 12px; margin: 0 0 12px; scrollbar-width: none; }
+    .topics a { flex-shrink: 0; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); text-decoration: none; font-size: 15px; white-space: nowrap; color: var(--text-2); }
+    .topics a .n { font-size: 12px; font-variant-numeric: tabular-nums; color: var(--muted); }
+    .topics a:hover { color: var(--text); }
     .topics a[aria-current="true"] { background: var(--inv-bg); color: var(--inv-text); border-color: transparent; font-weight: 700; }
-    section.topic { scroll-margin-top: 16px; margin: 0 0 32px; }
-    section.topic h2 { font-family: var(--fd); font-size: 26px; font-weight: 700; margin: 0 0 12px; line-height: 1.3; }
-    details.faq { background: var(--card); border: 1px solid var(--line); border-radius: 20px; margin: 0 0 10px; scroll-margin-top: 16px; }
-    details.faq > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; min-height: 60px; font-weight: 700; font-size: 18px; line-height: 1.45; }
+    .topics a[aria-current="true"] .n { color: inherit; opacity: .7; }
+    section.topic { scroll-margin-top: 20px; margin: 0 0 40px; }
+    section.topic h2 { font-family: var(--fd); font-size: 26px; font-weight: 750; letter-spacing: -.02em; margin: 0 0 14px; line-height: 1.3; }
+    :root[lang="ko"] section.topic h2 { font-family: var(--fb); letter-spacing: -.03em; }
+    details.faq { background: var(--card); border: 1px solid var(--line); border-radius: 18px; margin: 0 0 10px; scroll-margin-top: 20px; transition: border-color .15s, box-shadow .15s; }
+    details.faq:hover { border-color: rgba(10,10,8,.24); }
+    details.faq[open] { box-shadow: var(--shadow); border-color: var(--line); }
+    details.faq > summary { list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 22px; min-height: 60px; font-weight: 650; font-size: 17.5px; line-height: 1.45; }
     details.faq > summary::-webkit-details-marker { display: none; }
-    details.faq > summary::after { content: ""; flex-shrink: 0; width: 10px; height: 10px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin: -4px 4px 0 0; }
-    details.faq[open] > summary::after { transform: rotate(-135deg); margin-top: 4px; }
-    .answer { padding: 0 22px 20px; color: var(--text-2); }
+    details.faq > summary::after { content: ""; flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%; background: var(--surface)
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none' stroke='%2366625A' stroke-width='1.8' stroke-linecap='round'%3E%3Cpath d='M6 2v8M2 6h8'/%3E%3C/svg%3E") center no-repeat; transition: transform .2s; }
+    details.faq[open] > summary::after { transform: rotate(45deg); }
+    .answer { padding: 0 22px 22px; color: var(--text-2); }
+    .answer > :first-child { margin-top: 0; padding-top: 16px; border-top: 1px solid var(--line-2); }
     .answer p { margin: 0 0 12px; }
     .answer h4 { font-size: 16px; margin: 18px 0 6px; color: var(--text); }
-    .answer ol, .answer ul { margin: 0 0 12px; padding-left: 24px; }
-    .answer li { margin: 6px 0; }
+    .answer ol, .answer ul { margin: 0 0 12px; padding-left: 0; list-style: none; }
+    .answer ul li { position: relative; padding-left: 18px; margin: 6px 0; }
+    .answer ul li::before { content: ""; position: absolute; left: 4px; top: .7em; width: 5px; height: 5px; border-radius: 50%; background: var(--muted); }
+    .answer ol.steps { counter-reset: step; }
+    .answer ol.steps li { counter-increment: step; position: relative; padding-left: 36px; margin: 8px 0; }
+    .answer ol.steps li::before { content: counter(step); position: absolute; left: 0; top: 2px; width: 24px; height: 24px; border-radius: 50%; background: var(--accent); color: var(--accent-ink);
+      display: grid; place-items: center; font-size: 13px; font-weight: 800; }
     .answer b { color: var(--text); }
-    .answer .tip { background: var(--chip); border-radius: 14px; padding: 12px 14px; font-size: 16px; }
-    .empty { display: none; background: var(--card); border-radius: 20px; padding: 24px 22px; color: var(--text-2); }
+    .answer .tip { background: var(--surface); border-radius: 14px; padding: 12px 16px; font-size: 15.5px; }
+    .empty { display: none; background: var(--card); border: 1px dashed var(--line); border-radius: 18px; padding: 24px 22px; color: var(--text-2); }
     .empty.show { display: block; }
     .updated { color: var(--muted); font-size: 14px; }
-    section.contact { margin: 48px 0 40px; background: var(--inv-bg); color: var(--inv-text); border-radius: 28px; padding: 36px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
-    section.contact h2 { font-family: var(--fd); font-size: 30px; margin: 0 0 10px; line-height: 1.25; }
+    section.contact { margin: 56px 0 40px; background: var(--inv-bg); color: var(--inv-text); border-radius: 28px; padding: 40px; display: flex; flex-wrap: wrap; gap: 24px; align-items: center; justify-content: space-between; }
+    section.contact h2 { font-family: var(--fd); font-size: 32px; letter-spacing: -.02em; margin: 0 0 10px; line-height: 1.2; }
+    :root[lang="ko"] section.contact h2 { font-family: var(--fb); letter-spacing: -.03em; }
     section.contact p { margin: 0; color: var(--inv-muted); font-size: 16px; line-height: 1.7; }
+    section.contact b { color: var(--inv-text); }
     .contact-copy { flex: 1 1 340px; }
-    .mail { display: inline-flex; align-items: center; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 700; font-size: 17px; border-radius: 999px; padding: 0 26px; min-height: 56px; }
+    .mail { display: inline-flex; align-items: center; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 700; font-size: 17px; border-radius: 999px; padding: 0 26px; min-height: 56px; transition: transform .15s; }
+    .mail:hover { transform: translateY(-1px); }
     footer { display: flex; flex-wrap: wrap; gap: 16px 24px; justify-content: space-between; padding: 24px 0 40px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
     footer nav { display: flex; gap: 20px; flex-wrap: wrap; }
-    @media (min-width: 1000px) {
-      .layout { display: grid; grid-template-columns: 240px minmax(0, 1fr); column-gap: 44px; align-items: start; }
-      .topics { position: sticky; top: 20px; flex-direction: column; overflow: visible; padding: 0; }
-      .topics a { border: 0; background: transparent; border-radius: 14px; }
+    footer a { text-decoration: none; }
+    footer a:hover { color: var(--text); }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 16px; }
+      .hero { padding-top: 28px; }
+      details.faq > summary { padding: 16px 18px; font-size: 17px; }
+      .answer { padding: 0 18px 20px; }
+      section.contact { padding: 28px 24px; border-radius: 24px; }
     }
+    @media (min-width: 1000px) {
+      .layout { display: grid; grid-template-columns: 250px minmax(0, 1fr); column-gap: 56px; align-items: start; }
+      .topics { position: sticky; top: 20px; flex-direction: column; gap: 2px; overflow: visible; padding: 0; }
+      .topics a { justify-content: space-between; border: 0; background: transparent; border-radius: 12px; min-height: 42px; }
+      .topics a:hover { background: var(--line-2); }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
   </style>
 </head>
 <body>
@@ -90,6 +129,10 @@
         <button type="button" data-set-lang="ko">한국어</button>
       </div>
     </nav>
+    <header class="hero">
+      <p class="eyebrow"><span data-lang-block="en">Help & contact</span><span data-lang-block="ko">도움말 · 문의</span></p>
+      <h1><span data-lang-block="en">How can we help?</span><span data-lang-block="ko">무엇을 도와드릴까요?</span></h1>
+    </header>
     <label class="search-label" for="faq-search"><span data-lang-block="en">Search the common questions first.</span><span data-lang-block="ko">자주 묻는 질문에서 먼저 찾아보세요.</span></label>
     <div class="search">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg>
@@ -97,13 +140,9 @@
     </div>
 
     <div class="faq-root" data-lang-block="en">
-      <header class="hero">
-        <p class="eyebrow">Help & contact</p>
-        <h1>How can we help?</h1>
-      </header>
       <div class="notice" role="note"><b>Healthya doesn't replace medical care.</b> In an emergency, call 911 (or your local emergency number) right away. We can't give medical advice by email.</div>
       <div class="layout">
-        <nav class="topics" aria-label="Topics"><a href="#basics">Getting around</a><a href="#account">Sign-in &amp; account</a><a href="#privacy">Privacy &amp; AI</a><a href="#alarms">Reminders &amp; alarms</a><a href="#care">Meds, meals &amp; records</a><a href="#reports">Reports</a><a href="#family">Family space</a><a href="#emergency">Emergencies</a><a href="#watch">Watch</a><a href="#trouble">Troubleshooting</a></nav>
+        <nav class="topics" aria-label="Topics"><a href="#basics"><span>Getting around</span><span class="n">3</span></a><a href="#account"><span>Sign-in &amp; account</span><span class="n">5</span></a><a href="#privacy"><span>Privacy &amp; AI</span><span class="n">5</span></a><a href="#alarms"><span>Reminders &amp; alarms</span><span class="n">4</span></a><a href="#care"><span>Meds, meals &amp; records</span><span class="n">7</span></a><a href="#reports"><span>Reports</span><span class="n">2</span></a><a href="#family"><span>Family space</span><span class="n">3</span></a><a href="#emergency"><span>Emergencies</span><span class="n">3</span></a><a href="#watch"><span>Watch</span><span class="n">2</span></a><a href="#trouble"><span>Troubleshooting</span><span class="n">4</span></a></nav>
         <div>
 
         <section class="topic" id="en-basics" data-topic="basics">
@@ -142,7 +181,7 @@
           </details>
           <details class="faq" id="en-q-delete">
             <summary>I want to erase my records or delete my account</summary>
-            <div class="answer"><p>There are two options. <b>Erase my records</b> keeps your account and erases only your records. <b>Delete account</b> removes the account and all records. Either way, nothing is erased until <b>7 days</b> after you ask, and you can cancel at any time before then.</p><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>.</li><li>In the <b>Account</b> group at the bottom, tap <b>Erase my records</b> or <b>Delete account</b>.</li><li>Read what will be erased and what stays, then check the box.</li><li>Tap <b>Send verification code</b> and enter the 6-digit code sent to your phone. If you've registered a security email, also enter the code sent there. Finally, on &quot;Delete in 7 days?&quot; (or &quot;Erase records in 7 days?&quot;), tap <b>Schedule deletion</b> (or <b>Schedule record deletion</b>).</li></ol><h4>To cancel</h4><p>For those 7 days, a &quot;Deletion is scheduled&quot; notice appears at the top of <b>Settings</b>. Tap <b>Cancel</b> in it. On the phone where you scheduled it, a card on Home also shows the days left; tapping its <b>Cancel</b> takes you to Settings. You can keep using the app until then.</p><p class="tip"><b>Erase my records</b> keeps your account and sign-in, family links, points and badges, golf games played with other app users, and goals tied to a Together group.</p></div>
+            <div class="answer"><p>There are two options. <b>Erase my records</b> keeps your account and erases only your records. <b>Delete account</b> removes the account and all records. Either way, nothing is erased until <b>7 days</b> after you ask, and you can cancel at any time before then.</p><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b>.</li><li>In the <b>Account</b> group at the bottom, tap <b>Erase my records</b> or <b>Delete account</b>.</li><li>Read what will be erased and what stays, then check the box.</li><li>Tap <b>Send verification code</b> and enter the 6-digit code sent to your phone. If you've registered a security email, also enter the code sent there. Finally, on &quot;Delete in 7 days?&quot; (or &quot;Erase records in 7 days?&quot;), tap <b>Schedule deletion</b> (or <b>Schedule record deletion</b>).</li></ol><h4>To cancel</h4><p>For those 7 days, a &quot;Deletion is scheduled&quot; notice appears at the top of <b>Settings</b>. Tap <b>Cancel</b> in it. A card on Home also shows the days left (on your other phones too, once you open the app again); tapping its <b>Cancel</b> takes you to Settings. You can keep using the app until then.</p><p class="tip"><b>Erase my records</b> keeps your account and sign-in, family links, points and badges, golf games played with other app users, and goals tied to a Together group.</p></div>
           </details>
         </section>
 
@@ -198,11 +237,11 @@
           </details>
           <details class="faq" id="en-q-edit-medication">
             <summary>A medication's details are wrong</summary>
-            <div class="answer"><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Meds · supplements</b> › <b>Current medications</b>.</li><li>Tap the medication you want to fix.</li><li>Under <b>Edit medication</b>, tap the right <b>Medication type</b> and <b>When to take</b> (such as after breakfast); changes save right away. Change alarm times in <b>Alarm</b> above it.</li><li>The name and dose can't be edited. If they're wrong, tap <b>I no longer take this</b> (or <b>I no longer use this</b>, depending on the type) at the bottom, then register the medicine again.</li></ol><p class="tip">If the result on the confirmation screen is wrong before you register, tap <b>Analyze again</b>. If the analysis failed, tap <b>Try again</b>.</p></div>
+            <div class="answer"><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Meds · supplements</b> › <b>Current medications</b>.</li><li>Tap the medication you want to fix.</li><li>In <b>When to take</b>, tap a mealtime (such as After breakfast) to pick a different one, or tap the alarm time next to it to change the time. To change the medication type, tap <b>Change</b> on the <b>Medication type</b> row below. Your choices save right away.</li><li>The name and dose can't be edited. If they're wrong, tap <b>I no longer take this</b> (or <b>I no longer use this</b>, depending on the type) at the bottom, then register the medicine again.</li></ol><p class="tip">If the result on the confirmation screen is wrong before you register, or you see &quot;We couldn't analyze your medication,&quot; tap <b>Analyze again</b>. To drop a failed registration, tap <b>Cancel analysis</b>.</p></div>
           </details>
           <details class="faq" id="en-q-log-meal">
             <summary>How do I log a meal, and what if the analysis is wrong?</summary>
-            <div class="answer"><ol class="steps"><li>Take a photo of your food with the camera button, or open <b>Full menu (⋯)</b> › <b>Food · water</b> › <b>Log meal</b> and tap <b>Photo</b>.</li><li>The analysis keeps going after you're back on Home. When &quot;Your meal analysis is ready&quot; appears, tap <b>View</b> to open &quot;Meal analysis.&quot;</li><li>Check the food and calories, pick the meal under <b>Which meal is this?</b>, and tap <b>Save this entry</b>. Leaving the screen keeps the entry too.</li></ol><p>You can also just tell the AI what you ate, or tap <b>Type</b> on <b>Log meal</b> to write it down.</p><h4>If the result is wrong</h4><ul><li>Before saving: tap <b>Retake</b> or <b>Choose again</b>. To skip logging it, tap <b>Delete and exit</b>.</li><li>After saving: on <b>Log meal</b>, tap the entry in today's list to expand it, tap <b>Delete this record</b>, then log it again. Meals from past days are fixed in the diary.</li></ul></div>
+            <div class="answer"><ol class="steps"><li>Take a photo of your food with the camera button, or open <b>Full menu (⋯)</b> › <b>Food · water</b> › <b>Log meal</b> and tap <b>Photo</b>.</li><li>The analysis keeps going after you're back on Home. When &quot;Your meal analysis is ready&quot; appears, tap <b>View</b> to open &quot;Meal analysis.&quot;</li><li>Check the food and calories, pick the meal under <b>Which meal is this?</b>, and tap <b>Save this entry</b>. Leaving the screen keeps the entry too.</li></ol><p>You can also just tell the AI what you ate, or tap <b>Type</b> on <b>Log meal</b> to write it down.</p><h4>If the result is wrong</h4><ul><li>Before saving: tap <b>Retake</b> or <b>Choose again</b>. To skip logging it, tap <b>Delete and exit</b>.</li><li>After saving: open <b>Full menu (⋯)</b> › <b>Records · reports</b> › <b>Diary</b>, pick the day, open <b>Meals</b>, and tap <b>Edit</b> on that entry to enter it again. Once you save, the new entry replaces the old one; if you leave before saving, the old entry stays. To just remove it, tap the entry on <b>Log meal</b> to open it (on a wide screen it opens on the right), then tap <b>Delete this record</b>.</li></ul></div>
           </details>
           <details class="faq" id="en-q-calories">
             <summary>How are calories calculated?</summary>
@@ -218,7 +257,7 @@
           </details>
           <details class="faq" id="en-q-fix-past-day">
             <summary>I want to fix or add a record for a past day</summary>
-            <div class="answer"><p>In the <b>Diary</b>, you can fix or add records for any of the past 60 days.</p><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Records · reports</b> › <b>Diary</b>.</li><li>Pick the day on the calendar, then tap <b>Add record</b> (＋) in the top-right corner.</li><li>Under &quot;What would you like to record?&quot;, choose <b>Meals</b>, <b>Meds</b>, <b>Water</b>, <b>Exercise</b> or <b>Sleep</b>.</li><li>Add a meal with a photo from your album or by typing it. For meds, water, exercise and sleep, make your changes on that day's records screen and save. Saving updates that day in your diary.</li></ol><ul><li>If that day already has that record, you'll see a notice that it's already recorded. Tap <b>Edit</b> to go to the screen where you can change it.</li><li>Exercise and sleep that came from your health app can't be edited. You can add a separate workout, or add how well you slept.</li><li>For past days, medication times follow your current medication schedule.</li></ul><h4>For today</h4><p>Review and fix today's records in <b>Full menu (⋯)</b> › <b>Today</b> › <b>Evening check-in</b>. They show up in the diary once they're put together the next morning.</p><p class="tip">For days more than 60 days ago, you can only add plans.</p></div>
+            <div class="answer"><p>In the <b>Diary</b>, you can fix or add records for any of the past 60 days.</p><ol class="steps"><li>Open <b>Full menu (⋯)</b> › <b>Records · reports</b> › <b>Diary</b>.</li><li>Pick the day on the calendar, then tap <b>Add record</b> (＋) in the top-right corner.</li><li>Under &quot;What would you like to record?&quot;, choose <b>Meals</b>, <b>Meds</b>, <b>Water</b>, <b>Exercise</b> or <b>Sleep</b>.</li><li>Add a meal with a photo from your album or by typing it. For meds, water, exercise and sleep, make your changes on that day's records screen and save. Saving updates that day in your diary. To fix a meal that's already there, open that day's <b>Meals</b> and tap <b>Edit</b> on the entry.</li></ol><ul><li>If that day already has that record, you'll see a notice that it's already recorded. Tap <b>Edit</b> to go to the screen where you can change it.</li><li>Exercise and sleep that came from your health app can't be edited. You can add a separate workout, or add how well you slept.</li><li>For past days, medication times follow your current medication schedule.</li></ul><h4>For today</h4><p>Review and fix today's records in <b>Full menu (⋯)</b> › <b>Today</b> › <b>Evening check-in</b>. They show up in the diary once they're put together the next morning.</p><p class="tip">For days more than 60 days ago, you can only add plans.</p></div>
           </details>
         </section>
 
@@ -226,7 +265,7 @@
           <h2>Reports</h2>
           <details class="faq" id="en-q-report-when">
             <summary>When and where can I see my weekly and monthly reports?</summary>
-            <div class="answer"><ul><li><b>Last week's story</b> (weekly report): made every Sunday (Monday at the latest) from the previous week's records (Sunday to Saturday). With notifications on, we let you know once it's ready, between 8 a.m. and 9 p.m. your local time, with a one-line preview.</li><li><b>This month's recap</b> (monthly report): made between the 1st and 3rd of each month from the previous month's records.</li></ul><p>If there isn't much to go on (fewer than 3 daily summaries in a week, or fewer than 7 recorded days in a month), there's no written recap, and you'll see that there's not much to recap. No weekly notification is sent then either.</p><h4>Where to find them</h4><p><b>Full menu (⋯)</b> › <b>Records · reports</b> › <b>Last week's story</b> or <b>This month's recap</b></p><h4>Turn on the weekly report notification</h4><p><b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b> › <b>Notifications</b> (in the Notifications group), then turn on <b>Notify me when it's ready</b> under <b>Weekly report notifications</b>. You can also tap <b>Turn on notifications</b> on <b>Last week's story</b>. It starts off.</p></div>
+            <div class="answer"><ul><li><b>Weekly report</b>: made every Sunday (Monday at the latest) from the previous week's records (Sunday to Saturday). With notifications on, we let you know once it's ready, between 8 a.m. and 9 p.m. your local time, with a one-line preview.</li><li><b>Monthly report</b>: made between the 1st and 3rd of each month from the previous month's records. The month in progress shows up once it ends.</li><li>If the records for that period change after the report is made (for example, a watch syncs late), we put it together again a few hours later. There's no notification then; the report shows &quot;Updated because the records changed&quot; at the top.</li></ul><p>If there isn't much to go on (fewer than 3 daily summaries in a week, or fewer than 7 recorded days in a month), there's no written recap, and you'll see that there's not much to recap. No weekly notification is sent then either.</p><h4>Where to find them</h4><p><b>Full menu (⋯)</b> › <b>Records · reports</b> › <b>Weekly report</b> or <b>Monthly report</b>. Use ‹ › at the top to browse earlier reports.</p><h4>Turn on the weekly report notification</h4><p><b>Full menu (⋯)</b> › <b>Settings · account</b> › <b>Settings</b> › <b>Notifications</b> (in the Notifications group), then turn on <b>Notify me when it's ready</b> under <b>Weekly report notifications</b>. You can also tap <b>Turn on notifications</b> on <b>Weekly report</b>. It starts off.</p></div>
           </details>
           <details class="faq" id="en-q-report-basis">
             <summary>What are reports based on?</summary>
@@ -298,7 +337,7 @@
           </details>
         </section>
           <p class="empty">No matching questions. Email us instead — the address is below.</p>
-          <p class="updated">Last updated: 2026-11-10</p>
+          <p class="updated">Last updated: 2026-11-19</p>
         </div>
       </div>
       <section class="contact">
@@ -309,13 +348,9 @@
     </div>
 
     <div class="faq-root" data-lang-block="ko">
-      <header class="hero">
-        <p class="eyebrow">도움말 · 문의</p>
-        <h1>무엇을 도와드릴까요?</h1>
-      </header>
       <div class="notice" role="note"><b>Healthya는 진료를 대신하지 않아요.</b> 응급 상황이라면 바로 911(또는 계신 나라의 응급 번호)에 전화하세요. 메일로는 의료 상담을 해 드릴 수 없어요.</div>
       <div class="layout">
-        <nav class="topics" aria-label="주제"><a href="#basics">기본 사용법</a><a href="#account">로그인·계정</a><a href="#privacy">개인정보·AI</a><a href="#alarms">알림·알람</a><a href="#care">약·식사·기록</a><a href="#reports">리포트</a><a href="#family">가족 공간</a><a href="#emergency">응급</a><a href="#watch">워치</a><a href="#trouble">문제 해결</a></nav>
+        <nav class="topics" aria-label="주제"><a href="#basics"><span>기본 사용법</span><span class="n">3</span></a><a href="#account"><span>로그인·계정</span><span class="n">5</span></a><a href="#privacy"><span>개인정보·AI</span><span class="n">5</span></a><a href="#alarms"><span>알림·알람</span><span class="n">4</span></a><a href="#care"><span>약·식사·기록</span><span class="n">7</span></a><a href="#reports"><span>리포트</span><span class="n">2</span></a><a href="#family"><span>가족 공간</span><span class="n">3</span></a><a href="#emergency"><span>응급</span><span class="n">3</span></a><a href="#watch"><span>워치</span><span class="n">2</span></a><a href="#trouble"><span>문제 해결</span><span class="n">4</span></a></nav>
         <div>
 
         <section class="topic" id="ko-basics" data-topic="basics">
@@ -354,7 +389,7 @@
           </details>
           <details class="faq" id="ko-q-delete">
             <summary>기록이나 계정을 지우고 싶어요</summary>
-            <div class="answer"><p>두 가지가 있어요. <b>내 기록 삭제</b>는 계정은 두고 기록만 지우고, <b>계정 삭제</b>는 계정과 모든 기록을 지워요. 둘 다 요청한 날로부터 <b>7일 뒤</b>에 실제로 지워지고, 그 전에는 언제든 취소할 수 있어요.</p><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b>을 여세요.</li><li>맨 아래 <b>계정</b> 묶음에서 <b>내 기록 삭제</b> 또는 <b>계정 삭제</b>를 누르세요.</li><li>지워지는 것과 남는 것을 읽고, 동의에 체크하세요.</li><li><b>인증 문자 받기</b>를 눌러 휴대폰으로 온 6자리 번호를 입력하세요. 보안 이메일을 등록해 두셨다면 메일로 온 확인 번호도 입력해요. 마지막으로 「7일 뒤에 삭제할까요?」(기록만 지울 때는 「7일 뒤에 기록을 지울까요?」)에서 <b>삭제 예약하기</b>(<b>기록 삭제 예약하기</b>)를 누르면 예약돼요.</li></ol><h4>취소하려면</h4><p>7일 동안 <b>설정</b> 화면 맨 위에 「삭제가 예약돼 있어요」 안내가 보여요. 그 안의 <b>취소하기</b>를 누르면 돼요. 삭제를 예약한 휴대폰에서는 홈의 새 소식 카드에도 남은 날이 보이고, 카드의 <b>취소하기</b>를 누르면 설정으로 가요. 그때까지는 앱을 그대로 쓰실 수 있어요.</p><p class="tip"><b>내 기록 삭제</b>를 해도 계정과 로그인, 가족 연결, 포인트와 배지, 다른 사용자와 함께 친 골프 기록, 함께하기 방에 묶인 목표는 남아요.</p></div>
+            <div class="answer"><p>두 가지가 있어요. <b>내 기록 삭제</b>는 계정은 두고 기록만 지우고, <b>계정 삭제</b>는 계정과 모든 기록을 지워요. 둘 다 요청한 날로부터 <b>7일 뒤</b>에 실제로 지워지고, 그 전에는 언제든 취소할 수 있어요.</p><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b>을 여세요.</li><li>맨 아래 <b>계정</b> 묶음에서 <b>내 기록 삭제</b> 또는 <b>계정 삭제</b>를 누르세요.</li><li>지워지는 것과 남는 것을 읽고, 동의에 체크하세요.</li><li><b>인증 문자 받기</b>를 눌러 휴대폰으로 온 6자리 번호를 입력하세요. 보안 이메일을 등록해 두셨다면 메일로 온 확인 번호도 입력해요. 마지막으로 「7일 뒤에 삭제할까요?」(기록만 지울 때는 「7일 뒤에 기록을 지울까요?」)에서 <b>삭제 예약하기</b>(<b>기록 삭제 예약하기</b>)를 누르면 예약돼요.</li></ol><h4>취소하려면</h4><p>7일 동안 <b>설정</b> 화면 맨 위에 「삭제가 예약돼 있어요」 안내가 보여요. 그 안의 <b>취소하기</b>를 누르면 돼요. 홈의 새 소식 카드에도 남은 날이 보이고(다른 휴대폰에서도 앱을 새로 열면 보여요), 카드의 <b>취소하기</b>를 누르면 설정으로 가요. 그때까지는 앱을 그대로 쓰실 수 있어요.</p><p class="tip"><b>내 기록 삭제</b>를 해도 계정과 로그인, 가족 연결, 포인트와 배지, 다른 사용자와 함께 친 골프 기록, 함께하기 방에 묶인 목표는 남아요.</p></div>
           </details>
         </section>
 
@@ -410,11 +445,11 @@
           </details>
           <details class="faq" id="ko-q-edit-medication">
             <summary>등록한 약 정보가 틀렸어요</summary>
-            <div class="answer"><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>약 · 영양제</b> › <b>현재 복약 목록</b>을 여세요.</li><li>고칠 약을 누르세요.</li><li><b>약 정보 수정</b>에서 <b>약 종류</b>와 <b>복용 시점</b>(아침 식후 등)을 누르면 바로 고쳐져요. 알람 시각은 그 위 <b>알람</b>에서 바꾸세요.</li><li>약 이름이나 용량이 틀렸다면 고칠 수 없어요. 맨 아래 <b>이제 안 먹는 약이에요</b>(약의 종류에 따라 <b>이제 안 바르는 약이에요</b> 등)를 누른 뒤 다시 등록해 주세요.</li></ol><p class="tip">등록하기 전 확인 화면의 결과가 틀렸다면 <b>다시 분석</b>을, 분석이 실패했다면 <b>다시 시도</b>를 눌러 보세요.</p></div>
+            <div class="answer"><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>약 · 영양제</b> › <b>현재 복약 목록</b>을 여세요.</li><li>고칠 약을 누르세요.</li><li><b>먹는 때</b>에서 끼니(아침 식후 등)를 누르면 바꿀 끼니를 고를 수 있고, 옆의 알람 시각을 누르면 시각을 바꿀 수 있어요. 약 종류는 아래 <b>약 종류</b> 줄의 <b>바꾸기</b>를 눌러 고르세요. 고른 것은 바로 저장돼요.</li><li>약 이름이나 용량이 틀렸다면 고칠 수 없어요. 맨 아래 <b>이제 안 먹는 약이에요</b>(약의 종류에 따라 <b>이제 안 바르는 약이에요</b> 등)를 누른 뒤 다시 등록해 주세요.</li></ol><p class="tip">등록하기 전 확인 화면의 결과가 틀렸거나 「약 분석에 실패했어요」가 보이면 <b>다시 분석</b>을 눌러 보세요. 실패한 등록을 그만두려면 <b>분석 취소</b>를 누르세요.</p></div>
           </details>
           <details class="faq" id="ko-q-log-meal">
             <summary>식사는 어떻게 기록하나요? 분석이 틀렸으면요?</summary>
-            <div class="answer"><ol class="steps"><li>카메라 버튼으로 음식을 찍으세요. <b>전체 메뉴(⋯)</b> › <b>식사 · 물</b> › <b>식사 기록</b>의 <b>사진</b>도 같아요.</li><li>분석은 홈으로 돌아간 뒤에도 이어져요. 「식사 분석이 끝났어요」가 뜨면 <b>보기</b>를 눌러 「식사 분석 결과」를 여세요.</li><li>음식과 칼로리를 확인하고, <b>어떤 식사인가요?</b>에서 아침·점심 같은 끼니를 고른 뒤 <b>이대로 기록하기</b>를 누르세요. 그냥 나가셔도 기록은 남아요.</li></ol><p>사진 없이 AI에게 말씀하시거나, <b>식사 기록</b>의 <b>글로</b>를 눌러 적으셔도 기록돼요.</p><h4>결과가 틀렸다면</h4><ul><li>저장하기 전: <b>다시 찍기</b>나 <b>다시 고르기</b>를 누르세요. 기록하지 않으려면 <b>삭제하고 나가기</b>를 누르세요.</li><li>저장한 뒤: <b>식사 기록</b>의 오늘 목록에서 그 기록을 눌러 펼치고 <b>이 기록 지우기</b>로 지운 뒤 다시 기록하시면 돼요. 지난날의 식사는 다이어리에서 고쳐요.</li></ul></div>
+            <div class="answer"><ol class="steps"><li>카메라 버튼으로 음식을 찍으세요. <b>전체 메뉴(⋯)</b> › <b>식사 · 물</b> › <b>식사 기록</b>의 <b>사진</b>도 같아요.</li><li>분석은 홈으로 돌아간 뒤에도 이어져요. 「식사 분석이 끝났어요」가 뜨면 <b>보기</b>를 눌러 「식사 분석 결과」를 여세요.</li><li>음식과 칼로리를 확인하고, <b>어떤 식사인가요?</b>에서 아침·점심 같은 끼니를 고른 뒤 <b>이대로 기록하기</b>를 누르세요. 그냥 나가셔도 기록은 남아요.</li></ol><p>사진 없이 AI에게 말씀하시거나, <b>식사 기록</b>의 <b>글로</b>를 눌러 적으셔도 기록돼요.</p><h4>결과가 틀렸다면</h4><ul><li>저장하기 전: <b>다시 찍기</b>나 <b>다시 고르기</b>를 누르세요. 기록하지 않으려면 <b>삭제하고 나가기</b>를 누르세요.</li><li>저장한 뒤: <b>전체 메뉴(⋯)</b> › <b>기록 · 리포트</b> › <b>다이어리</b>에서 그날을 고르고 <b>식사</b>를 연 뒤, 그 기록의 <b>수정</b>을 눌러 다시 넣으세요. 새로 저장하면 원래 기록과 바뀌고, 저장하기 전에 나가면 원래 기록이 그대로 남아요. 지우기만 하려면 <b>식사 기록</b>에서 그 기록을 눌러 열고(넓은 화면은 오른쪽에 열려요) <b>이 기록 지우기</b>를 누르세요.</li></ul></div>
           </details>
           <details class="faq" id="ko-q-calories">
             <summary>칼로리는 어떻게 계산하나요?</summary>
@@ -430,7 +465,7 @@
           </details>
           <details class="faq" id="ko-q-fix-past-day">
             <summary>지난날 기록을 고치거나 빠진 기록을 넣고 싶어요</summary>
-            <div class="answer"><p>지난날 기록은 <b>다이어리</b>에서 오늘로부터 60일 전까지 고치거나 더하실 수 있어요.</p><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>기록 · 리포트</b> › <b>다이어리</b>를 여세요.</li><li>달력에서 날짜를 고르고, 오른쪽 위의 <b>기록 추가</b>(＋)를 누르세요.</li><li>「무엇을 기록할까요?」에서 <b>식사</b> · <b>복약</b> · <b>물</b> · <b>운동</b> · <b>수면</b> 중 하나를 고르세요.</li><li>식사는 앨범 사진이나 글로 넣으시고, 복약 · 물 · 운동 · 수면은 그날의 기록 화면에서 고친 뒤 저장하세요. 저장하면 그날 다이어리가 다시 정리돼요.</li></ol><ul><li>그날 그 기록이 이미 있으면 「기록이 이미 있어요」 안내가 떠요. <b>고치기</b>를 누르면 고치는 화면으로 가요.</li><li>건강 앱에서 가져온 운동과 수면은 고칠 수 없어요. 운동은 따로 하신 운동을 더하고, 수면은 잠의 질만 더하실 수 있어요.</li><li>지난날의 복약 시간은 지금의 복약 일정을 기준으로 보여 드려요.</li></ul><h4>오늘 기록은</h4><p>오늘 기록은 <b>전체 메뉴(⋯)</b> › <b>오늘</b> › <b>저녁 점검</b>에서 확인하고 고치세요. 다이어리에는 다음 날 아침에 정리되어 나타나요.</p><p class="tip">60일보다 오래된 날에는 일정만 넣을 수 있어요.</p></div>
+            <div class="answer"><p>지난날 기록은 <b>다이어리</b>에서 오늘로부터 60일 전까지 고치거나 더하실 수 있어요.</p><ol class="steps"><li><b>전체 메뉴(⋯)</b> › <b>기록 · 리포트</b> › <b>다이어리</b>를 여세요.</li><li>달력에서 날짜를 고르고, 오른쪽 위의 <b>기록 추가</b>(＋)를 누르세요.</li><li>「무엇을 기록할까요?」에서 <b>식사</b> · <b>복약</b> · <b>물</b> · <b>운동</b> · <b>수면</b> 중 하나를 고르세요.</li><li>식사는 앨범 사진이나 글로 넣으시고, 복약 · 물 · 운동 · 수면은 그날의 기록 화면에서 고친 뒤 저장하세요. 저장하면 그날 다이어리가 다시 정리돼요. 이미 있는 식사를 고치려면 그날의 <b>식사</b>를 열어 그 기록의 <b>수정</b>을 누르세요.</li></ol><ul><li>그날 그 기록이 이미 있으면 「기록이 이미 있어요」 안내가 떠요. <b>고치기</b>를 누르면 고치는 화면으로 가요.</li><li>건강 앱에서 가져온 운동과 수면은 고칠 수 없어요. 운동은 따로 하신 운동을 더하고, 수면은 잠의 질만 더하실 수 있어요.</li><li>지난날의 복약 시간은 지금의 복약 일정을 기준으로 보여 드려요.</li></ul><h4>오늘 기록은</h4><p>오늘 기록은 <b>전체 메뉴(⋯)</b> › <b>오늘</b> › <b>저녁 점검</b>에서 확인하고 고치세요. 다이어리에는 다음 날 아침에 정리되어 나타나요.</p><p class="tip">60일보다 오래된 날에는 일정만 넣을 수 있어요.</p></div>
           </details>
         </section>
 
@@ -438,7 +473,7 @@
           <h2>리포트</h2>
           <details class="faq" id="ko-q-report-when">
             <summary>주간·월간 리포트는 언제, 어디서 보나요?</summary>
-            <div class="answer"><ul><li><b>지난주 이야기</b>(주간 리포트): 매주 일요일(늦으면 월요일)에 지난주(일요일~토요일) 기록으로 만들어져요. 알림을 켜 두시면 리포트가 완성된 뒤 계신 곳 시간으로 오전 8시~오후 9시 사이에 한 줄 요약과 함께 알려 드려요.</li><li><b>이번 달 정리</b>(월간 리포트): 매달 1일~3일 사이에 지난달 기록으로 만들어져요.</li></ul><p>기록이 적으면(주간은 하루 정리가 3일, 월간은 기록한 날이 7일보다 적으면) 이야기로 정리하지 않고 「정리할 이야기가 적어요」로 보여 드려요. 이때는 주간 알림도 가지 않아요.</p><h4>보는 곳</h4><p><b>전체 메뉴(⋯)</b> › <b>기록 · 리포트</b> › <b>지난주 이야기</b> 또는 <b>이번 달 정리</b></p><h4>주간 리포트 알림 켜기</h4><p><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b> › <b>알림</b> 묶음의 <b>알림</b> › <b>주간 리포트 알림</b>의 <b>리포트가 준비되면 알림 받기</b>를 켜세요. <b>지난주 이야기</b> 화면의 <b>알림 받기</b>로도 켤 수 있어요. 처음에는 꺼져 있어요.</p></div>
+            <div class="answer"><ul><li><b>주간 리포트</b>: 매주 일요일(늦으면 월요일)에 지난주(일요일~토요일) 기록으로 만들어져요. 알림을 켜 두시면 리포트가 완성된 뒤 계신 곳 시간으로 오전 8시~오후 9시 사이에 한 줄 요약과 함께 알려 드려요.</li><li><b>월간 리포트</b>: 매달 1일~3일 사이에 지난달 기록으로 만들어져요. 진행 중인 이번 달은 달이 끝난 뒤에 볼 수 있어요.</li><li>리포트를 만든 뒤 그 기간의 기록이 바뀌면(워치가 늦게 맞춰지는 등) 몇 시간 뒤 다시 정리해요. 이때는 알림 없이 리포트 맨 위에 「기록이 바뀌어 다시 정리했어요」가 보여요.</li></ul><p>기록이 적으면(주간은 하루 정리가 3일, 월간은 기록한 날이 7일보다 적으면) 이야기로 정리하지 않고 「정리할 이야기가 적어요」로 보여 드려요. 이때는 주간 알림도 가지 않아요.</p><h4>보는 곳</h4><p><b>전체 메뉴(⋯)</b> › <b>기록 · 리포트</b> › <b>주간 리포트</b> 또는 <b>월간 리포트</b> — 화면 위의 ‹ › 로 지난 리포트를 넘겨 볼 수 있어요.</p><h4>주간 리포트 알림 켜기</h4><p><b>전체 메뉴(⋯)</b> › <b>관리</b> › <b>설정</b> › <b>알림</b> 묶음의 <b>알림</b> › <b>주간 리포트 알림</b>의 <b>리포트가 준비되면 알림 받기</b>를 켜세요. <b>주간 리포트</b> 화면의 <b>알림 받기</b>로도 켤 수 있어요. 처음에는 꺼져 있어요.</p></div>
           </details>
           <details class="faq" id="ko-q-report-basis">
             <summary>리포트는 무엇을 근거로 하나요?</summary>
@@ -510,7 +545,7 @@
           </details>
         </section>
           <p class="empty">찾는 질문이 없어요. 아래 메일로 물어봐 주세요.</p>
-          <p class="updated">최종 수정: 2026-11-10</p>
+          <p class="updated">최종 수정: 2026-11-19</p>
         </div>
       </div>
       <section class="contact">
@@ -589,6 +624,18 @@
         if (q && shown.length <= 3) for (var k = 0; k < shown.length; k++) shown[k].open = true;
         root2.querySelector('.empty').className = 'empty' + (q && shown.length === 0 ? ' show' : '');
       }
+      // 넓은 창의 주제 줄은 지금 읽는 주제를 따라간다(누를 때만이 아니라 스크롤해도)
+      var ticking = false;
+      function spy() {
+        ticking = false;
+        var sections = block().querySelectorAll('section.topic:not([hidden])');
+        var current = null;
+        for (var i = 0; i < sections.length; i++) if (sections[i].getBoundingClientRect().top <= 160) current = sections[i].getAttribute('data-topic');
+        if (current === null && sections.length) current = sections[0].getAttribute('data-topic');
+        var links = block().querySelectorAll('.topics a');
+        for (var j = 0; j < links.length; j++) links[j].setAttribute('aria-current', links[j].getAttribute('href') === '#' + current ? 'true' : 'false');
+      }
+      window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(spy); } }, { passive: true });
       input.addEventListener('input', runSearch);
       var qpLang = params.get('lang');
       var saved = store.get('healthia-doc-lang');

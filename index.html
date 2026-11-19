@@ -630,7 +630,17 @@
   .sfw iframe{display:block;width:100%;height:100%;border:0}
   .sfb{text-align:center;font-size:13px;margin-top:12px}
   .sfb a{color:var(--ink-3)}
-  </style>
+  
+  /* ── 한국어 라벨 — 모노 글꼴 · 넓은 자간 · 대문자는 영문 라벨용이다. 한글은 모노 글꼴이 없어 시스템 글꼴로 떨어지며
+        자간만 벌어져(「광 고 없 음」) 읽기 어렵다 → 한국어일 때 라벨은 Pretendard · 보통 자간 · 한 단계 큰 글자로 (2026-11-19) */
+  :root[lang="ko"] :is(.mono,.tag,.chips span,.mock-note,.nudge .nh,.nudge .nb span,.sh .k,.ic-h .kk,.ic-h .bd,
+    .bars-lg,.det span,.climb-head,.climb-arcs>i.now>em,.cell .kk,.mem .st,.lnote,.lghead,.nav-pop .badge,.survey-strip b,.nav-cta){
+    font-family:var(--fb);letter-spacing:-.005em;text-transform:none;font-weight:600}
+  :root[lang="ko"] :is(.mono,.sh .k,.lnote,.lghead,.climb-head){font-size:13px}
+  :root[lang="ko"] :is(.tag,.chips span,.mock-note,.cell .kk,.ic-h .kk,.nav-pop .badge,.survey-strip b){font-size:12.5px}
+  :root[lang="ko"] :is(.nudge .nh,.nudge .nb span,.ic-h .bd,.bars-lg,.det span,.mem .st,.climb-arcs>i.now>em){font-size:11.5px}
+  :root[lang="ko"] .nav-cta{font-size:14px;font-weight:700}
+</style>
 </head>
 <body>
 
@@ -709,7 +719,7 @@
           <a href="#day" class="btn b2" data-i18n="hero_cta_2">See a day →</a>
         </div>
         <div class="chips">
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_ads">No ads · no data sales</span></span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_ads">Stored securely</span></span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_consent">You decide what's shared</span></span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_us">Encrypted · isolated per user</span></span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg><span data-i18n="chip_ccpa">CCPA / CPRA</span></span>
@@ -747,7 +757,7 @@
         <div class="tl-h">19:30</div>
         <div class="tl-c key"><span class="ic">🌄</span><div><h3 data-i18n="d5_t">Day 3 on the hill</h3><p data-i18n="d5_p">Near the top, the tone changes. Not “you missed twice” — “one more day and this hill is yours.”</p></div></div>
         <div class="tl-h">20:00</div>
-        <div class="tl-c"><span class="ic">👥</span><div><h3 data-i18n="d6_t">Four people in your room made it today</h3><p data-i18n="d6_p">Just one line on your home screen — no push notification. If nothing happened in your room, nothing shows.</p></div></div>
+        <div class="tl-c"><span class="ic">👥</span><div><h3 data-i18n="d6_t">Four people in your group made it today</h3><p data-i18n="d6_p">No push notification — just one line on your goal, there when you open it. If no one has checked in yet, nothing shows.</p></div></div>
         <div class="tl-h">21:40</div>
         <div class="tl-c"><span class="ic">🌙</span><div><h3 data-i18n="d7_t">Evening check-in</h3><p data-i18n="d7_p">A few questions, one tap each. Then quiet until morning.</p></div></div>
       </div>
@@ -795,8 +805,8 @@
         <!-- monthly -->
         <div class="ic-card ic-w4">
           <div class="ic-h"><span class="kk" data-i18n="ins_o_k">Monthly report</span></div>
-          <h3 data-i18n="ins_o_t">One page for your doctor</h3>
-          <p data-i18n="ins_o_p">Your month, condensed into a summary you can bring to an appointment — medication, meals, sleep, and the changes worth mentioning.</p>
+          <h3 data-i18n="ins_o_t">Your month at a glance</h3>
+          <p data-i18n="ins_o_p">Your month, condensed into one summary — the story of your month, medication, meals and sleep, this month's key numbers, and the patterns we spotted.</p>
           <div class="spark" aria-hidden="true">
             <svg viewBox="0 0 260 70" preserveAspectRatio="none">
               <path d="M4 52 L34 44 L64 56 L94 30 L124 38 L154 22 L184 34 L214 16 L248 24"/>
@@ -885,7 +895,7 @@
         <div class="sh reveal">
           <span class="k" data-i18n="tg_k">04 — together</span>
           <h2><span data-i18n="tg_t1">Alone, it takes willpower.</span><br><span data-i18n="tg_t2">Together, it's just Tuesday.</span></h2>
-          <p data-i18n="tg_s">Start a room or join an open one — up to eight people keeping a similar promise. You can join until it starts; after that the group is set, so no one drops in halfway.</p>
+          <p data-i18n="tg_s">Start a group or join an open one — up to eight people keeping a similar promise. You can join until it starts; after that the group is set, so no one drops in halfway.</p>
         </div>
         <div class="fam">
           <div class="room reveal">
@@ -900,17 +910,17 @@
             <div class="cell">
               <div class="kk" data-i18n="tg1_k">Anonymous by design</div>
               <h3 data-i18n="tg1_t">No names, ever</h3>
-              <p data-i18n="tg1_p">Nicknames are generated, not chosen. No one sees your real name or your goal's title — a room shows only what it's for.</p>
+              <p data-i18n="tg1_p">Nicknames are generated, not chosen. No one sees your real name or your goal's title — a group shows only what it's for.</p>
             </div>
             <div class="cell">
               <div class="kk" data-i18n="tg2_k">35 prepared cheers</div>
               <h3 data-i18n="tg2_t">No writing messages</h3>
-              <p data-i18n="tg2_p">Send one of 35 prepared cheers — or a sticker — to one person or the whole room. No free text, by design.</p>
+              <p data-i18n="tg2_p">Send one of 35 prepared cheers — or a sticker — to one person or the whole group. No free text, by design.</p>
             </div>
             <div class="cell">
               <div class="kk" data-i18n="tg3_k">Quiet by default</div>
               <h3 data-i18n="tg3_t">No feed, no leaderboard</h3>
-              <p data-i18n="tg3_p">No rankings, no public feed — just your room's check-ins and cheers, with members listed in the order they joined.</p>
+              <p data-i18n="tg3_p">No rankings, no public feed — just your group's check-ins and cheers, with members listed in the order they joined.</p>
             </div>
           </div>
         </div>
@@ -932,21 +942,21 @@
         <div class="row"><span class="n">04</span><span class="t" data-i18n="f_med_t">Medication reminders</span><span class="d" data-i18n="f_med_p">Scan a pill bottle or prescription to look up the medicine, then get reminders and keep track of each day's doses.</span></div>
         <div class="row"><span class="n">05</span><span class="t" data-i18n="f_brief_t">Morning briefing</span><span class="d" data-i18n="f_brief_p">Start the day with the weather, real news headlines, a health tip and today's appointments.</span></div>
         <div class="row"><span class="n">06</span><span class="t" data-i18n="f_care_t">When you're not feeling well</span><span class="d" data-i18n="f_care_p">Describe how you feel, show a photo, or pick a condition you already know (with short explainer videos). You'll get plain-language guidance on what to do next and can find nearby clinics and pharmacies. Not a diagnosis.</span></div>
-        <div class="row"><span class="n">07</span><span class="t" data-i18n="f_games_t">Daily brain games</span><span class="d" data-i18n="f_games_p">Nine light puzzles — sudoku, crossword, solitaire, color sort, connect the dots, parking escape, make the number, geography quiz and nonogram — for a gentle daily workout for your mind.</span></div>
+        <div class="row"><span class="n">07</span><span class="t" data-i18n="f_games_t">Daily brain games</span><span class="d" data-i18n="f_games_p">Twelve light puzzles — sudoku, crossword, solitaire, FreeCell, minesweeper, color sort, connect the dots, parking escape, make the number, word wheel, geography quiz and nonogram — for a gentle daily workout for your mind. Word games come in English or Korean.</span></div>
         <div class="row"><span class="n">08</span><span class="t" data-i18n="f_hydra_t">Water &amp; activity</span><span class="d" data-i18n="f_hydra_p">Water reminders at the times you pick, a cup-by-cup water log, and simple activity tracking.</span></div>
         <div class="row"><span class="n">09</span><span class="t" data-i18n="f_health_t">Health app sync</span><span class="d" data-i18n="f_health_p">If you choose, Healthya reads sleep, steps, heart rate, blood pressure and more from Apple Health or Google Health Connect — read-only, and only when you turn it on.</span></div>
         <div class="row"><span class="n">10</span><span class="t" data-i18n="f_sos_t">Emergency help</span><span class="d" data-i18n="f_sos_p">Offline first-aid guides, and a big emergency button that opens your phone's dialer with the emergency number for where you are (911 in the US, 119 in Korea) — also one tap away on the home-screen widget. Healthya is not an emergency response service.</span></div>
         <div class="row"><span class="n">11</span><span class="t" data-i18n="f_checkup_t">Your checkup report, explained</span><span class="d" data-i18n="f_checkup_p">Take a photo of each page of your checkup report, or choose them from your photos. Healthya reads the numbers, explains them in plain words with everyday tips, and compares them year over year. Photos are deleted after 7 days. Not a diagnosis.</span></div>
         <div class="row"><span class="n">12</span><span class="t" data-i18n="f_trip_t">Korea Checkup Trip</span><span class="d" data-i18n="f_trip_p">Plan a one-week health checkup trip to Seoul: compare two checkup centers side by side, choose a course with a suggestion based on your records, and get dates that fit. Korean citizens can have a coordinator book the hospital and meet them there on checkup day. You pay the hospital directly — we take nothing from hospitals.</span></div>
-        <div class="row"><span class="n">13</span><span class="t" data-i18n="f_supp_t">Supplement guide</span><span class="d" data-i18n="f_supp_p">Easy-to-read information based on NIH sources, plus suggestions that take your medications and latest checkup into account. Not medical advice.</span></div>
+        <div class="row"><span class="n">13</span><span class="t" data-i18n="f_supp_t">Supplement guide</span><span class="d" data-i18n="f_supp_p">Easy-to-read information based on NIH sources, suggestions that take your medications and latest checkup into account, and a Nutrient of the day reminder. Not medical advice.</span></div>
         <div class="row"><span class="n">14</span><span class="t" data-i18n="f_lens_t">One camera for everything</span><span class="d" data-i18n="f_lens_p">Point it at a meal, a pill bottle, a sore spot, a sick pet, a checkup report or a sign. It figures out what it is and takes you to the right place — or reads and translates the text.</span></div>
         <div class="row"><span class="n">15</span><span class="t" data-i18n="f_pet_t">When your pet is unwell</span><span class="d" data-i18n="f_pet_p">Tell us what's wrong by voice, text or photo, and get guidance on how soon to see a vet, what to bring, and nearby animal hospitals. Not a diagnosis.</span></div>
         <div class="row"><span class="n">16</span><span class="t" data-i18n="f_workouts_t">Follow-along workouts</span><span class="d" data-i18n="f_workouts_p">Short videos by body area and difficulty, plus an easy 7-day plan.</span></div>
-        <div class="row"><span class="n">17</span><span class="t" data-i18n="f_stats_t">Health stats &amp; diary</span><span class="d" data-i18n="f_stats_p">Steps, exercise, sleep and blood pressure by day, week, month and year — plus a daily diary of your meals, medications, water, sleep and exercise.</span></div>
+        <div class="row"><span class="n">17</span><span class="t" data-i18n="f_stats_t">Health stats &amp; diary</span><span class="d" data-i18n="f_stats_p">Steps, exercise, sleep, heart rate, blood pressure, body composition and more by day, week, month and year, with a comparison to people your age — plus a diary that puts your schedule, meals, medications, water, exercise and sleep on one calendar.</span></div>
         <div class="row"><span class="n">18</span><span class="t" data-i18n="f_travel_t">Travel planner</span><span class="d" data-i18n="f_travel_p">An AI-built, day-by-day itinerary with estimated costs in your own currency — plus live Google Flights fares, right in the app.</span></div>
         <div class="row"><span class="n">19</span><span class="t" data-i18n="f_golf_t">Golf with friends</span><span class="d" data-i18n="f_golf_p">Invite friends by phone or QR code, share one scorecard, and let the app work out skins or stroke bets — no money changes hands in the app.</span></div>
         <div class="row"><span class="n">20</span><span class="t" data-i18n="f_watch_t">Watch &amp; widgets</span><span class="d" data-i18n="f_watch_p">Reminders ring on your Apple Watch or a Wear OS watch like Galaxy Watch, and you can answer right there. Home-screen widgets show today's plan and your 3-Day Wins.</span></div>
-        <div class="row"><span class="n">21</span><span class="t" data-i18n="f_rewards_t">Points &amp; badges</span><span class="d" data-i18n="f_rewards_p">Daily check-ins, meal photos, answered reminders, brain games and goals you keep all earn points — with levels and streak badges along the way.</span></div>
+        <div class="row"><span class="n">21</span><span class="t" data-i18n="f_rewards_t">Points &amp; badges</span><span class="d" data-i18n="f_rewards_p">Daily check-ins, meal photos, answered reminders, brain games, workouts, goals you keep and more all earn points — with levels and badges along the way.</span></div>
         <div class="row"><span class="n">22</span><span class="t" data-i18n="f_mbti_t">Personality type</span><span class="d" data-i18n="f_mbti_p">Take the in-app MBTI test or pick a type you already know, and the assistant adjusts how it talks with you. Family sees it only if you turn sharing on.</span></div>
       </div>
     </div>
@@ -985,16 +995,16 @@
       <div class="sh reveal">
         <span class="k" data-i18n="priv_k">07 — privacy &amp; safety</span>
         <h2><span data-i18n="priv_t">Health data, treated like it matters.</span></h2>
-        <p data-i18n="priv_s">Privacy is built in from the very first screen — clear consent, strong safeguards, and no ad business behind the scenes.</p>
+        <p data-i18n="priv_s">Privacy is built in from the very first screen — clear consent, strong safeguards, and secure storage.</p>
       </div>
       <div class="pgrid reveal">
-        <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p1_t">No ads, no data sales</h3><p data-i18n="p1_p">We never sell or share your personal information for advertising, and we don't work with data brokers.</p></div>
+        <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p1_t">Protected by your own phone</h3><p data-i18n="p1_p">You sign in with a code sent to your phone, and sensitive actions are confirmed with your phone's own lock. You can also lock the app itself.</p></div>
         <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p2_t">You decide what's shared</h3><p data-i18n="p2_p">Health activities, activity area, emergency location and personality type each have their own switch for each family member — set when you accept a link, and you can turn them off anytime.</p></div>
-        <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p3_t">Health-app data stays read-only</h3><p data-i18n="p3_p">Data from Apple Health or Google Health Connect is read-only — never sold, and never used for ads.</p></div>
+        <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p3_t">Health-app data stays read-only</h3><p data-i18n="p3_p">Data from Apple Health or Google Health Connect is read-only, and you can turn the connection off anytime.</p></div>
         <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p4_t">Encrypted and isolated</h3><p data-i18n="p4_p">Encrypted in transit and at rest, with row-level security isolating each person's data.</p></div>
         <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p5_t">Built around US privacy law</h3><p data-i18n="p5_p">Designed for CCPA / CPRA, Washington's My Health My Data Act, Illinois BIPA, and related state laws.</p></div>
         <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p7_t">Download your data</h3><p data-i18n="p7_p">Exercise your right to know: request a copy of your data from the Privacy Policy screen in the app — once every 30 days.</p></div>
-        <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p6_t">Delete anytime</h3><p data-i18n="p6_p">Delete your account in the app or on the web. Deletion is scheduled for 7 days later, and you can cancel anytime before then. After that, it's permanent.</p></div>
+        <div class="pitem"><div class="ck"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div><h3 data-i18n="p6_t">Delete anytime</h3><p data-i18n="p6_p">Delete your account in the app or on the web. Deletion is scheduled for 7 days later; until then you can cancel it in the app (or, for a web request, by contacting us). After that, it's permanent.</p></div>
       </div>
       <p class="pnote reveal" data-i18n="priv_note">Healthya supports daily well-being and is not a medical service or an emergency response service. It does not diagnose, treat, or replace professional medical care. In an emergency, call 911 or your local emergency number.</p>
     </div>
@@ -1088,7 +1098,7 @@
       hero_sub:"Healthya is a voice-first AI companion for everyday life. It doesn't wait for you to open it — it learns the rhythm of your day and shows up at the moment it matters: the pill at 8, a glass of water mid-afternoon, day three of a goal on the night you almost gave up.",
       hero_cta_1:"Get the app", hero_cta_2:"See a day →",
       hero_mock_note:"Illustration · not an actual app screen",
-      chip_ads:"No ads · no data sales", chip_consent:"You decide what's shared",
+      chip_ads:"Stored securely", chip_consent:"You decide what's shared",
       chip_us:"Encrypted · isolated per user", chip_ccpa:"CCPA / CPRA",
 
       day_k:"01 — an ordinary Tuesday",
@@ -1099,7 +1109,7 @@
       d3_t:"“I had bibimbap”", d3_p:"Say it or snap it. Healthya recognizes the food, estimates the nutrition, and suggests a balanced next meal.",
       d4_t:"Water, right on schedule", d4_p:"Tap “Done” right in the notification, or add a cup to your water log.",
       d5_t:"Day 3 on the hill", d5_p:"Near the top, the tone changes. Not “you missed twice” — “one more day and this hill is yours.”",
-      d6_t:"Four people in your room made it today", d6_p:"Just one line on your home screen — no push notification. If nothing happened in your room, nothing shows.",
+      d6_t:"Four people in your group made it today", d6_p:"No push notification — just one line on your goal, there when you open it. If no one has checked in yet, nothing shows.",
       d7_t:"Evening check-in", d7_p:"A few questions, one tap each. Then quiet until morning.",
 
       ins_k:"02 — insights",
@@ -1112,8 +1122,8 @@
       ins_m_k:"Meals · photo analysis", ins_m_b:"Photo or voice", ins_m_t:"One photo, read in detail",
       ins_m_f1:"bibimbap", ins_m_f2:"egg", ins_m_f3:"spinach", ins_m_f4:"gochujang",
       ins_m_q:"“You're a little low on protein today — how about eggs or tofu for dinner?”",
-      ins_o_k:"Monthly report", ins_o_t:"One page for your doctor",
-      ins_o_p:"Your month, condensed into a summary you can bring to an appointment — medication, meals, sleep, and the changes worth mentioning.",
+      ins_o_k:"Monthly report", ins_o_t:"Your month at a glance",
+      ins_o_p:"Your month, condensed into one summary — the story of your month, medication, meals and sleep, this month's key numbers, and the patterns we spotted.",
       ins_o_q:"“You've slept 41 minutes more a night since moving your walk earlier.”",
       ins_d_k:"Medication · scan", ins_d_t:"Just point at the bottle",
       ins_d_c1:"once daily", ins_d_c2:"after meals", ins_d_c3:"morning",
@@ -1136,16 +1146,16 @@
 
       tg_k:"04 — together",
       tg_t1:"Alone, it takes willpower.", tg_t2:"Together, it's just Tuesday.",
-      tg_s:"Start a room or join an open one — up to eight people keeping a similar promise. You can join until it starts; after that the group is set, so no one drops in halfway.",
+      tg_s:"Start a group or join an open one — up to eight people keeping a similar promise. You can join until it starts; after that the group is set, so no one drops in halfway.",
       tg_room:"Morning walk", tg_room_s:"6 walking · day 4",
       tg_m1:"Quiet Otter", tg_m2:"Kind Fox", tg_m3:"Steady Crane", tg_m4:"Easy Whale",
       tg_c1:"Kind Fox", tg_c2:"→ to you · “Another hill behind you.”",
       tg1_k:"Anonymous by design", tg1_t:"No names, ever",
-      tg1_p:"Nicknames are generated, not chosen. No one sees your real name or your goal's title — a room shows only what it's for.",
+      tg1_p:"Nicknames are generated, not chosen. No one sees your real name or your goal's title — a group shows only what it's for.",
       tg2_k:"35 prepared cheers", tg2_t:"No writing messages",
-      tg2_p:"Send one of 35 prepared cheers — or a sticker — to one person or the whole room. No free text, by design.",
+      tg2_p:"Send one of 35 prepared cheers — or a sticker — to one person or the whole group. No free text, by design.",
       tg3_k:"Quiet by default", tg3_t:"No feed, no leaderboard",
-      tg3_p:"No rankings, no public feed — just your room's check-ins and cheers, with members listed in the order they joined.",
+      tg3_p:"No rankings, no public feed — just your group's check-ins and cheers, with members listed in the order they joined.",
 
       feat_k:"05 — the rest of your day",
       feat_t:"Voice first — with chat and touch, too.",
@@ -1156,21 +1166,21 @@
       f_med_t:"Medication reminders", f_med_p:"Scan a pill bottle or prescription to look up the medicine, then get reminders and keep track of each day's doses.",
       f_brief_t:"Morning briefing", f_brief_p:"Start the day with the weather, real news headlines, a health tip and today's appointments.",
       f_care_t:"When you're not feeling well", f_care_p:"Describe how you feel, show a photo, or pick a condition you already know (with short explainer videos). You'll get plain-language guidance on what to do next and can find nearby clinics and pharmacies. Not a diagnosis.",
-      f_games_t:"Daily brain games", f_games_p:"Nine light puzzles — sudoku, crossword, solitaire, color sort, connect the dots, parking escape, make the number, geography quiz and nonogram — for a gentle daily workout for your mind.",
+      f_games_t:"Daily brain games", f_games_p:"Twelve light puzzles — sudoku, crossword, solitaire, FreeCell, minesweeper, color sort, connect the dots, parking escape, make the number, word wheel, geography quiz and nonogram — for a gentle daily workout for your mind. Word games come in English or Korean.",
       f_hydra_t:"Water & activity", f_hydra_p:"Water reminders at the times you pick, a cup-by-cup water log, and simple activity tracking.",
       f_health_t:"Health app sync", f_health_p:"If you choose, Healthya reads sleep, steps, heart rate, blood pressure and more from Apple Health or Google Health Connect — read-only, and only when you turn it on.",
       f_sos_t:"Emergency help", f_sos_p:"Offline first-aid guides, and a big emergency button that opens your phone's dialer with the emergency number for where you are (911 in the US, 119 in Korea) — also one tap away on the home-screen widget. Healthya is not an emergency response service.",
       f_checkup_t:"Your checkup report, explained", f_checkup_p:"Take a photo of each page of your checkup report, or choose them from your photos. Healthya reads the numbers, explains them in plain words with everyday tips, and compares them year over year. Photos are deleted after 7 days. Not a diagnosis.",
       f_trip_t:"Korea Checkup Trip", f_trip_p:"Plan a one-week health checkup trip to Seoul: compare two checkup centers side by side, choose a course with a suggestion based on your records, and get dates that fit. Korean citizens can have a coordinator book the hospital and meet them there on checkup day. You pay the hospital directly — we take nothing from hospitals.",
-      f_supp_t:"Supplement guide", f_supp_p:"Easy-to-read information based on NIH sources, plus suggestions that take your medications and latest checkup into account. Not medical advice.",
+      f_supp_t:"Supplement guide", f_supp_p:"Easy-to-read information based on NIH sources, suggestions that take your medications and latest checkup into account, and a Nutrient of the day reminder. Not medical advice.",
       f_lens_t:"One camera for everything", f_lens_p:"Point it at a meal, a pill bottle, a sore spot, a sick pet, a checkup report or a sign. It figures out what it is and takes you to the right place — or reads and translates the text.",
       f_pet_t:"When your pet is unwell", f_pet_p:"Tell us what's wrong by voice, text or photo, and get guidance on how soon to see a vet, what to bring, and nearby animal hospitals. Not a diagnosis.",
       f_workouts_t:"Follow-along workouts", f_workouts_p:"Short videos by body area and difficulty, plus an easy 7-day plan.",
-      f_stats_t:"Health stats & diary", f_stats_p:"Steps, exercise, sleep and blood pressure by day, week, month and year — plus a daily diary of your meals, medications, water, sleep and exercise.",
+      f_stats_t:"Health stats & diary", f_stats_p:"Steps, exercise, sleep, heart rate, blood pressure, body composition and more by day, week, month and year, with a comparison to people your age — plus a diary that puts your schedule, meals, medications, water, exercise and sleep on one calendar.",
       f_travel_t:"Travel planner", f_travel_p:"An AI-built, day-by-day itinerary with estimated costs in your own currency — plus live Google Flights fares, right in the app.",
       f_golf_t:"Golf with friends", f_golf_p:"Invite friends by phone or QR code, share one scorecard, and let the app work out skins or stroke bets — no money changes hands in the app.",
       f_watch_t:"Watch & widgets", f_watch_p:"Reminders ring on your Apple Watch or a Wear OS watch like Galaxy Watch, and you can answer right there. Home-screen widgets show today's plan and your 3-Day Wins.",
-      f_rewards_t:"Points & badges", f_rewards_p:"Daily check-ins, meal photos, answered reminders, brain games and goals you keep all earn points — with levels and streak badges along the way.",
+      f_rewards_t:"Points & badges", f_rewards_p:"Daily check-ins, meal photos, answered reminders, brain games, workouts, goals you keep and more all earn points — with levels and badges along the way.",
       f_mbti_t:"Personality type", f_mbti_p:"Take the in-app MBTI test or pick a type you already know, and the assistant adjusts how it talks with you. Family sees it only if you turn sharing on.",
 
       fam_k:"06 — optional", fam_t:"Close, without hovering.",
@@ -1183,14 +1193,14 @@
       fam_vt:"Mom is doing well today", fam_vd:"Breakfast logged · medication on track · active this morning",
 
       priv_k:"07 — privacy & safety", priv_t:"Health data, treated like it matters.",
-      priv_s:"Privacy is built in from the very first screen — clear consent, strong safeguards, and no ad business behind the scenes.",
-      p1_t:"No ads, no data sales", p1_p:"We never sell or share your personal information for advertising, and we don't work with data brokers.",
+      priv_s:"Privacy is built in from the very first screen — clear consent, strong safeguards, and secure storage.",
+      p1_t:"Protected by your own phone", p1_p:"You sign in with a code sent to your phone, and sensitive actions are confirmed with your phone's own lock. You can also lock the app itself.",
       p2_t:"You decide what's shared", p2_p:"Health activities, activity area, emergency location and personality type each have their own switch for each family member — set when you accept a link, and you can turn them off anytime.",
-      p3_t:"Health-app data stays read-only", p3_p:"Data from Apple Health or Google Health Connect is read-only — never sold, and never used for ads.",
+      p3_t:"Health-app data stays read-only", p3_p:"Data from Apple Health or Google Health Connect is read-only, and you can turn the connection off anytime.",
       p4_t:"Encrypted and isolated", p4_p:"Encrypted in transit and at rest, with row-level security isolating each person's data.",
       p5_t:"Built around US privacy law", p5_p:"Designed for CCPA / CPRA, Washington's My Health My Data Act, Illinois BIPA, and related state laws.",
       p7_t:"Download your data", p7_p:"Exercise your right to know: request a copy of your data from the Privacy Policy screen in the app — once every 30 days.",
-      p6_t:"Delete anytime", p6_p:"Delete your account in the app or on the web. Deletion is scheduled for 7 days later, and you can cancel anytime before then. After that, it's permanent.",
+      p6_t:"Delete anytime", p6_p:"Delete your account in the app or on the web. Deletion is scheduled for 7 days later; until then you can cancel it in the app (or, for a web request, by contacting us). After that, it's permanent.",
       priv_note:"Healthya supports daily well-being and is not a medical service or an emergency response service. It does not diagnose, treat, or replace professional medical care. In an emergency, call 911 or your local emergency number.",
 
       launch_t1:"It's", launch_t2:"Something's due.",
@@ -1219,7 +1229,7 @@
       hero_sub:"Healthya는 하루를 함께하는 음성 AI 동반자입니다. 앱을 열어 주기를 기다리지 않고, 내 하루의 흐름을 익혀 꼭 필요한 순간에 먼저 찾아옵니다. 아침 8시의 약, 오후의 물 한 잔, 그만두고 싶던 밤의 사흘째 목표까지.",
       hero_cta_1:"앱 다운로드", hero_cta_2:"하루 둘러보기 →",
       hero_mock_note:"예시 이미지이며 실제 앱 화면이 아닙니다",
-      chip_ads:"광고 없음 · 데이터 판매 없음", chip_consent:"공유는 내가 결정",
+      chip_ads:"안전하게 보관", chip_consent:"공유는 내가 결정",
       chip_us:"암호화 · 사용자별 분리 보관", chip_ccpa:"CCPA / CPRA",
 
       day_k:"01 — 평범한 어느 화요일",
@@ -1230,7 +1240,7 @@
       d3_t:"“비빔밥 먹었어”", d3_p:"말로 하거나 사진을 찍으면 음식을 알아보고 영양을 추정해, 균형 잡힌 다음 끼니를 제안합니다.",
       d4_t:"정해 둔 시간, 물 한 잔", d4_p:"알림에서 바로 「완료」를 누르거나, 물 기록에 한 잔을 더하세요.",
       d5_t:"고개 사흘째", d5_p:"정상이 가까워지면 말투가 달라집니다. “두 번 놓쳤어요”가 아니라 “하루만 더 하면 이 고개를 넘어요”.",
-      d6_t:"오늘 우리 방에서 네 명이 해냈어요", d6_p:"푸시 알림 없이 홈 화면에 한 줄로. 방에 별일이 없으면 아무것도 보이지 않습니다.",
+      d6_t:"오늘 그룹에서 네 명이 해냈어요", d6_p:"푸시 알림은 오지 않습니다. 목표를 열면 한 줄로 보이고, 아직 아무도 하지 않았으면 아무것도 보이지 않습니다.",
       d7_t:"저녁 점검", d7_p:"질문 몇 개에 눌러서 답하면 끝. 그다음엔 아침까지 조용합니다.",
 
       ins_k:"02 — 인사이트",
@@ -1243,8 +1253,8 @@
       ins_m_k:"식사 · 사진 분석", ins_m_b:"사진·음성", ins_m_t:"사진 한 장을 꼼꼼하게",
       ins_m_f1:"비빔밥", ins_m_f2:"달걀", ins_m_f3:"시금치", ins_m_f4:"고추장",
       ins_m_q:"“오늘은 단백질이 조금 부족해요 — 저녁에 달걀이나 두부는 어때요?”",
-      ins_o_k:"월간 리포트", ins_o_t:"진료실에 가져갈 한 장",
-      ins_o_p:"한 달을 진료 때 건넬 수 있는 요약으로 정리합니다 — 복약, 식사, 수면, 그리고 의사에게 말할 만한 변화까지.",
+      ins_o_k:"월간 리포트", ins_o_t:"한 달을 한눈에",
+      ins_o_p:"한 달을 한 장의 요약으로 정리합니다 — 이 달의 이야기, 복약·식사·수면, 이달의 주요 수치, 그리고 새로 알게 된 패턴까지.",
       ins_o_q:"“산책 시간을 앞당긴 뒤로 하루 수면이 41분 늘었어요.”",
       ins_d_k:"복약 · 스캔", ins_d_t:"약병을 비춰 보세요",
       ins_d_c1:"하루 1회", ins_d_c2:"식후", ins_d_c3:"아침",
@@ -1267,16 +1277,16 @@
 
       tg_k:"04 — 함께하기",
       tg_t1:"혼자면 의지가 필요하고,", tg_t2:"함께면 그냥 일상이 됩니다.",
-      tg_s:"방을 만들거나 열려 있는 방에 들어가세요. 비슷한 목표를 지키는 사람이 최대 8명까지 모입니다. 시작 전까지만 들어올 수 있고, 시작하면 멤버가 고정됩니다 — 중간에 끼어드는 사람은 없습니다.",
+      tg_s:"그룹을 만들거나 열려 있는 그룹에 들어가세요. 비슷한 목표를 지키는 사람이 최대 8명까지 모입니다. 시작 전까지만 들어올 수 있고, 시작하면 멤버가 고정됩니다 — 중간에 끼어드는 사람은 없습니다.",
       tg_room:"아침 산책", tg_room_s:"6명 참여 중 · 4일째",
       tg_m1:"고요한 수달", tg_m2:"다정한 여우", tg_m3:"단단한 두루미", tg_m4:"느긋한 고래",
       tg_c1:"다정한 여우", tg_c2:"→ 나에게 · “오늘도 고개 하나 넘었네요.”",
       tg1_k:"처음부터 익명", tg1_t:"이름은 끝까지 나오지 않습니다",
-      tg1_p:"별명은 직접 고르지 않고 자동으로 만들어집니다. 실명도 목표 제목도 아무에게 보이지 않고, 방에는 무엇을 위한 방인지만 표시됩니다.",
+      tg1_p:"별명은 직접 고르지 않고 자동으로 만들어집니다. 실명도 목표 제목도 아무에게 보이지 않고, 그룹에는 무엇을 위한 그룹인지만 표시됩니다.",
       tg2_k:"준비된 응원 35가지", tg2_t:"메시지는 직접 쓸 수 없습니다",
-      tg2_p:"준비된 응원 35가지 중 하나나 스티커를 한 사람 또는 방 전체에 보낼 수 있습니다. 직접 쓰는 글이 없는 건 의도한 것입니다.",
+      tg2_p:"준비된 응원 35가지 중 하나나 스티커를 한 사람 또는 그룹 전체에 보낼 수 있습니다. 직접 쓰는 글이 없는 건 의도한 것입니다.",
       tg3_k:"기본은 조용히", tg3_t:"피드도, 순위도 없습니다",
-      tg3_p:"순위도 공개 피드도 없습니다 — 우리 방의 체크인과 응원만, 멤버는 들어온 순서대로 보입니다.",
+      tg3_p:"순위도 공개 피드도 없습니다 — 우리 그룹의 체크인과 응원만, 멤버는 들어온 순서대로 보입니다.",
 
       feat_k:"05 — 그 밖의 하루",
       feat_t:"말로 하는 게 기본, 채팅과 터치도.",
@@ -1287,21 +1297,21 @@
       f_med_t:"복약 알림", f_med_p:"약병이나 처방전을 찍어 약 정보를 확인하고, 알림과 매일의 복용 기록까지 챙깁니다.",
       f_brief_t:"아침 브리핑", f_brief_p:"날씨, 실제 뉴스, 건강 상식, 오늘 일정으로 하루를 시작합니다.",
       f_care_t:"몸이 아플 때", f_care_p:"증상을 말하거나 사진을 보여 주거나 아는 병명을 고르면(짧은 설명 영상도 있습니다), 다음에 무엇을 하면 좋을지 쉬운 말로 안내하고 가까운 병원·약국을 찾아 드립니다. 진단은 아닙니다.",
-      f_games_t:"매일 두뇌 게임", f_games_p:"스도쿠, 가로세로 낱말퀴즈, 솔리테어, 색깔 정렬, 점 잇기, 주차장 탈출, 숫자 만들기, 지리 퀴즈, 노노그램 — 가볍게 즐기는 아홉 가지 두뇌 운동.",
+      f_games_t:"매일 두뇌 게임", f_games_p:"스도쿠, 가로세로 낱말퀴즈, 솔리테어, 프리셀, 지뢰찾기, 색깔 정렬, 점 잇기, 주차장 탈출, 숫자 만들기, 낱말 만들기, 지리 퀴즈, 노노그램 — 가볍게 즐기는 열두 가지 두뇌 운동. 낱말 게임은 한국어와 영어 중에서 고를 수 있습니다.",
       f_hydra_t:"물·운동", f_hydra_p:"정한 시간의 물 알림, 한 잔씩 적는 물 기록, 가벼운 활동 기록.",
       f_health_t:"건강 앱 연동", f_health_p:"원하면 Apple 건강이나 Google 헬스 커넥트에서 수면·걸음 수·심박수·혈압 등을 가져옵니다 — 읽기만 하며, 켠 경우에만 가져옵니다.",
       f_sos_t:"응급 도움", f_sos_p:"인터넷 없이도 볼 수 있는 응급처치 안내와, 지금 있는 나라의 응급 번호(한국 119 · 미국 911)로 전화 앱을 여는 큰 응급 버튼 — 홈 화면 위젯에서도 한 번에. Healthya는 응급 구조 서비스가 아닙니다.",
       f_checkup_t:"건강검진 결과 풀이", f_checkup_p:"결과지를 한 장씩 찍거나 앨범에서 고르면, 수치를 쉬운 말과 생활 습관 팁으로 풀어 드리고 해마다 비교해 드립니다. 사진은 7일 뒤 자동으로 지워지며, 진단은 아닙니다.",
       f_trip_t:"한국 건강검진 여행", f_trip_p:"서울에서 받는 일주일 건강검진 여행을 계획합니다. 두 검진 센터를 나란히 견주고, 기록에 맞춘 추천으로 코스를 고르고, 어울리는 날짜를 받아 보세요. 한국 국적 회원은 코디네이터가 병원 예약을 대신 잡고 검진 날 병원에서 함께합니다. 검진비는 병원에 직접 내시며, 당사는 병원에서 아무것도 받지 않습니다.",
-      f_supp_t:"영양제 백과·맞춤 추천", f_supp_p:"NIH 자료를 바탕으로 한 쉬운 설명과, 복용 중인 약과 최근 검진 결과를 고려한 추천. 의학적 조언은 아닙니다.",
+      f_supp_t:"영양제 백과·맞춤 추천", f_supp_p:"NIH 자료를 바탕으로 한 쉬운 설명, 복용 중인 약과 최근 검진 결과를 고려한 추천, 그리고 하루 한 가지 성분을 알려 주는 「오늘의 영양소」 알림. 의학적 조언은 아닙니다.",
       f_lens_t:"카메라 하나로", f_lens_p:"음식, 약, 아픈 곳, 아픈 반려동물, 검진 결과지, 글자 — 무엇인지 알아보고 알맞은 화면으로 이어 주거나, 글자를 읽어 번역합니다.",
       f_pet_t:"반려동물이 아플 때", f_pet_p:"말·글·사진으로 알려 주면 언제 병원에 가야 할지, 무엇을 챙겨 갈지, 가까운 동물병원까지 안내합니다. 진단은 아닙니다.",
       f_workouts_t:"따라 하는 운동", f_workouts_p:"부위·난이도별 짧은 영상과 무리 없는 7일 계획.",
-      f_stats_t:"건강 통계·다이어리", f_stats_p:"걸음 수·운동·수면·혈압을 일·주·월·연 단위로 보고, 하루의 식사·약·물·수면·운동을 다이어리로 모아 봅니다.",
+      f_stats_t:"건강 통계·다이어리", f_stats_p:"걸음 수·운동·수면·심박·혈압·체성분 등을 일·주·월·연 단위로 보고 또래와 견줘 봅니다. 다이어리에는 일정·식사·복약·물·운동·수면이 한 달력에 모입니다.",
       f_travel_t:"여행 플래너", f_travel_p:"AI가 짜 주는 날짜별 일정과 내 나라 통화로 본 예상 비용, 그리고 앱 안에서 바로 보는 Google 항공권 실시간 가격.",
-      f_golf_t:"친구와 골프", f_golf_p:"전화번호나 QR로 초대하고, 스코어카드를 함께 쓰고, 스킨스·타당 내기 정산까지 계산해 줍니다 — 실제 돈은 오가지 않습니다.",
+      f_golf_t:"친구와 골프", f_golf_p:"전화번호나 QR로 초대하고, 스코어카드를 함께 쓰고, Skins·스트로크 내기 정산까지 계산해 줍니다 — 실제 돈은 오가지 않습니다.",
       f_watch_t:"워치·위젯", f_watch_p:"Apple Watch나 갤럭시 워치 같은 Wear OS 워치에서 알림이 울리고, 그 자리에서 바로 답할 수 있습니다. 홈 화면 위젯에는 오늘 할 일과 작심삼일이 보입니다.",
-      f_rewards_t:"리워드", f_rewards_p:"매일 출석, 식사 사진, 알림 답하기, 두뇌 게임, 목표 실천으로 포인트를 모으고 레벨과 연속 출석 배지를 받습니다.",
+      f_rewards_t:"리워드", f_rewards_p:"매일 출석, 식사 사진, 알림 답하기, 두뇌 게임, 운동 따라하기, 목표 실천 등으로 포인트를 모으고 레벨과 배지를 받습니다.",
       f_mbti_t:"성격 유형", f_mbti_p:"앱에서 MBTI 검사를 하거나 이미 아는 유형을 고르면, 도우미가 내게 맞는 말투로 답합니다. 가족에게는 직접 공유를 켠 경우에만 보입니다.",
 
       fam_k:"06 — 선택", fam_t:"가까이, 하지만 감시하지 않게.",
@@ -1314,14 +1324,14 @@
       fam_vt:"어머니는 오늘 잘 지내세요", fam_vd:"아침 식사 기록 · 복약 순조 · 오전 활동",
 
       priv_k:"07 — 개인정보·안전", priv_t:"건강 데이터, 신중하게 다룹니다.",
-      priv_s:"첫 화면부터 개인정보 보호를 염두에 두고 만들었습니다 — 분명한 동의, 튼튼한 보호 장치, 그리고 뒤에 숨은 광고 사업은 없습니다.",
-      p1_t:"광고 없음, 데이터 판매 없음", p1_p:"광고 목적으로 개인정보를 팔거나 공유하지 않으며, 데이터 브로커와 거래하지 않습니다.",
+      priv_s:"첫 화면부터 개인정보 보호를 염두에 두고 만들었습니다 — 분명한 동의, 튼튼한 보호 장치, 그리고 안전한 보관.",
+      p1_t:"내 휴대폰으로 지키는 계정", p1_p:"휴대폰으로 받은 인증번호로 로그인하고, 중요한 작업은 휴대폰 자체 잠금으로 한 번 더 확인합니다. 앱에 잠금을 걸어 둘 수도 있습니다.",
       p2_t:"공유는 내가 결정", p2_p:"건강 활동·활동 범위·응급 위치·성격 유형은 가족마다 따로 켜고 끄는 스위치입니다 — 연결을 수락할 때 정하고, 언제든 끌 수 있습니다.",
-      p3_t:"건강 앱 데이터는 읽기만", p3_p:"Apple 건강이나 Google 헬스 커넥트의 데이터는 읽기만 하며, 판매하거나 광고에 쓰지 않습니다.",
+      p3_t:"건강 앱 데이터는 읽기만", p3_p:"Apple 건강이나 Google 헬스 커넥트의 데이터는 읽기만 하며, 연결은 언제든 끌 수 있습니다.",
       p4_t:"암호화와 분리 보관", p4_p:"전송할 때와 저장할 때 모두 암호화하고, 행 수준 보안으로 사용자마다 데이터를 분리합니다.",
       p5_t:"미국 개인정보 보호법에 맞춰 설계", p5_p:"CCPA / CPRA, 워싱턴주 My Health My Data Act, 일리노이주 BIPA와 관련 주법을 고려해 설계했습니다.",
       p7_t:"내 데이터 내려받기", p7_p:"알 권리를 행사하세요 — 앱의 개인정보처리방침 화면에서 내 데이터 사본을 요청할 수 있습니다. 30일에 한 번 내려받을 수 있습니다.",
-      p6_t:"언제든 삭제", p6_p:"앱이나 웹에서 계정을 삭제할 수 있습니다. 삭제는 7일 뒤로 예약되고 그 전까지는 언제든 취소할 수 있으며, 그 뒤에는 되돌릴 수 없습니다.",
+      p6_t:"언제든 삭제", p6_p:"앱이나 웹에서 계정을 삭제할 수 있습니다. 삭제는 7일 뒤로 예약되고 그 전까지는 앱에서 취소할 수 있으며(웹으로 요청했다면 문의로 취소), 그 뒤에는 되돌릴 수 없습니다.",
       priv_note:"Healthya는 일상 건강 관리를 돕는 서비스이며, 의료 서비스나 응급 구조 서비스가 아닙니다. 진단·치료를 하거나 전문 의료를 대신하지 않습니다. 응급 상황에서는 911이나 현지 응급 번호로 전화하세요.",
 
       launch_t1:"지금", launch_t2:"챙길 시간이에요.",
